@@ -1,6 +1,6 @@
 # projetoLA1
 
-## Elementos do grupo
+### Elementos do grupo
 
 - André Lucena Ribas Ferreira A94956
 - Carlos Eduardo Da Silva Machado A96936
