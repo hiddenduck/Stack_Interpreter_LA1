@@ -1,4 +1,4 @@
-# projetoLA1
+# ProjetoLA1
 
 ### Elementos do grupo
 
