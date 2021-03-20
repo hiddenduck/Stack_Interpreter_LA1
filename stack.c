@@ -1,4 +1,12 @@
-/*
+
+/*ola
+sad
+
+d
+adsadad
+a
+d
+a
  * stack
  *  pop
  * 
@@ -10,3 +18,4 @@
  *
  * PrintStack
  */
+
