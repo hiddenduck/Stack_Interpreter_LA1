@@ -1,4 +1,8 @@
 /*
+ * stack
+ *  pop
+ * 
+ * 
  * Se calhar também temos de inicializar a stack aqui:
  * Pop
  * Push
