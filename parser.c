@@ -38,3 +38,65 @@ void parse(char *input, STACK *stack){
                     case '+': {
                         long y = Pop(stack);
                         long x = Pop(stack);
+                        Push(x+y, stack);
+                        break;
+                    }
+                    case '-': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x-y, stack);
+                        break;
+                    }
+                    case '*': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x*y, stack);
+                        break;
+                    }
+                    case '/': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x / y, stack);
+                        break;
+                    }
+                    case '(': {
+                        long x = Pop(stack);
+                        Push(x-1, stack);
+                        break;
+                    }
+                    case ')': {
+                        long x = Pop(stack);
+                        Push(x+1, stack);
+                        break;
+                    }
+                    case '%': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x%y, stack);
+                        break;
+                    }
+                    case '#': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push((long)pow(x,y), stack);
+                        break;
+                    }
+                    case '&': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x&y, stack);
+                        break;
+                    }
+                    case '|': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x|y, stack);
+                        break;
+                    }
+                    case '^': {
+                        long y = Pop(stack);
+                        long x = Pop(stack);
+                        Push(x^y, stack);
+                        break;
+                    }
+                    case '~': {
