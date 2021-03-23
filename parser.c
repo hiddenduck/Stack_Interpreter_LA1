@@ -100,3 +100,14 @@ void parse(char *input, STACK *stack){
                         break;
                     }
                     case '~': {
+                        long x = Pop(stack);
+                        Push(~x, stack);
+                        break;
+                    }
+                }
+            }
+		}
+	}
+
+	PrintStack(stack);
+}
