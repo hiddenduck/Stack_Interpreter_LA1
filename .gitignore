@@ -1,0 +1,5 @@
+CMakeLists.txt
+cmake-build-debug/
+.idea/
+html/
+latex/
