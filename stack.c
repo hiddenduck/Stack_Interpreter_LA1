@@ -5,8 +5,7 @@
  */
 #include "stack.h"
 
-/**
- * \brief Função que devolve uma \a stack padrão
+/**\brief Função que devolve uma \a stack padrão
  *
  * sp é igual a -1 para simbolizar uma stack vazia.
  *
@@ -18,8 +17,7 @@ STACK CreateStack() {
     return s;
 }
 
-/**
- * \brief Função que devolve o elemento na posição sp da \a stack e decrementa sp.
+/**\brief Função que devolve o elemento na posição sp da \a stack e decrementa sp.
  *
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  * @return Inteiro do tipo long na posição do ponteiro do stack.
@@ -28,8 +26,7 @@ long Pop(STACK *stack) {
     return stack->array[(stack->sp)--];
 }
 
-/**
- * \brief Função que aumenta o sp da \a stack e coloca um elemento nessa posição.
+/**\brief Função que aumenta o sp da \a stack e coloca um elemento nessa posição.
  *
  * @param val Inteiro do tipo long a colocar na stack.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
@@ -39,3 +36,13 @@ void Push(long val, STACK *stack) {
 }
 
 /**
+ * \brief Função que imprime todos os elementos da \a stack até ao elemento na posição sp.
+ *
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ */
+void PrintStack(STACK *stack) {
+    for (int i = 0 ; i <= stack -> sp; i++){
+        printf("%ld" , stack -> array[i]);
+    }
+    putchar('\n');
+}
