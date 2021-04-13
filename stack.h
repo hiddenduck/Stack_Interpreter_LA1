@@ -65,3 +65,8 @@ CreateDataProto(LONG, long)
 CreateDataProto(DOUBLE, double)
 CreateDataProto(CHAR, char)
 CreateDataProto(STRING, char *)
+
+void DataToDOUBLE(Data *d1);
+void DataToLONG(Data *d1);
+
+Data DataDup(Data *target);

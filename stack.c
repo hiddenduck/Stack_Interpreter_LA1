@@ -179,7 +179,7 @@ void DataToLONG(Data *d) {
  * \brief Função que duplica um Data.
  *
  * @param target Endereço de um Data.
- * @return
+ * @return Devolve o duplo do Data.
  */
 Data DataDup(Data *target) {
     Data data;
