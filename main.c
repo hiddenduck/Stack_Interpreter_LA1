@@ -8,7 +8,7 @@
 /**
  * \brief Esta é a função inicial do programa que recebe o \a input.
  *
- *  É inicializada uma estrutura STACK através da função CreateStack(), provenientes de stack.h.
+ *  É inicializada uma estrutura Stack através da função CreateStack(), provenientes de stack.h.
  *
  *  O input é recebido através da função fgets() e guardada numa string de tamanho 10240,
  *  utilizando a função assert() para:\n
@@ -21,13 +21,13 @@
  * @return Devolve o valor 0.
  */
 int main(){
-    char input[10240];
+    char input[MAX_LENGTH_INPUT];
     
-    assert(fgets(input, 10240, stdin) != NULL);
+    assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    STACK stack = CreateStack();
+    Stack *stack = CreateStack();
 
-    parse(input, &stack);
+    parse(input, stack);
     return 0;
 }
