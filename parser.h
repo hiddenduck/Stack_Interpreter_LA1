@@ -1,11 +1,12 @@
 
 /**
- * @file
+ * @headerfile
  */
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include <math.h>
-#include "stack.h"
+#include "operations.h"
 
-void parse(char *input, STACK *stack);
+/**
+ * \brief Definição do tamanho máximo da line de input.
+ */
+#define MAX_LENGTH_INPUT 10240
+
+void parse(char *input, Stack *stack);
