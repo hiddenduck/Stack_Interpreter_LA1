@@ -3,3 +3,5 @@ cmake-build-debug/
 .idea/
 html/
 latex/
+Doxyfile
+xml/
