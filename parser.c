@@ -16,35 +16,19 @@ void operate(char *token, Stack *stack) {
     if(strlen(token)==1) {
         switch (token[0]) {
             case '+': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                soma(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(soma, stack);
                 break;
             }
             case '-': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                subtr(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(subtr, stack);
                 break;
             }
             case '*': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                mult(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(mult, stack);
                 break;
             }
             case '/': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                divi(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(divi, stack);
                 break;
             }
             case '(': {
@@ -60,43 +44,23 @@ void operate(char *token, Stack *stack) {
                 break;
             }
             case '%': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                modulo(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(modulo, stack);
                 break;
             }
             case '#': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                potencia(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(potencia, stack);
                 break;
             }
             case '&': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                and(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(and, stack);
                 break;
             }
             case '|': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                or(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(or, stack);
                 break;
             }
             case '^': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                xor(&x, &y);
-                Push(y, stack);
-                free(x.value);
+                DoisArgumentos(xor, stack);
                 break;
             }
             case '~': {

@@ -32,8 +32,16 @@ void _name(Data *d1, Data *d2) {                                                
     }                                                                                              \
 }
 
+void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
+    Data d1 = Pop(stack);
+    Data d2 = Pop(stack);
+    (*fun)(&d1, &d2);
+    Push(d2, stack);
+    free(d1.value);
+}
+
 /** Inicialização da função algorítmica soma. */
-CreateOpAlgebrica(soma, +)
+//CreateOpAlgebrica(soma, +)
 /** Inicialização da função algorítmica subtr. */
 CreateOpAlgebrica(subtr, -)
 /** Inicialização da função algorítmica mult. */

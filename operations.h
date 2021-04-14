@@ -9,6 +9,8 @@
 #define CreateOpAlgebricaProto(_name) \
 void _name(Data *d1, Data *d2);
 
+void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack);
+
 /** Declaração da função soma.*/
 CreateOpAlgebricaProto(soma)
 /** Declaração da função subtr.*/
