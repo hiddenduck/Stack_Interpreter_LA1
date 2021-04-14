@@ -55,13 +55,13 @@ void PrintStack(Stack *stack);
     _type *DataVal##_name(Data *val);    \
 
 /** Declaração da função DataValLONG.*/
-DataValProto(LONG, long);
+DataValProto(LONG, long)
 /** Declaração da função DataValDOUBLE.*/
-DataValProto(DOUBLE, double);
+DataValProto(DOUBLE, double)
 /** Declaração da função DataValCHAR.*/
-DataValProto(CHAR, char);
+DataValProto(CHAR, char)
 /** Declaração da função DataValSTRING.*/
-DataValProto(STRING, char);
+DataValProto(STRING, char)
 
 /** 
  * \brief Macro que assiste na declaração das funções CreateData.
