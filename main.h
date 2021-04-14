@@ -1,6 +1,6 @@
 
 /**
- * @file
+ * @headerfile
  */
 #include "parser.h"
 
