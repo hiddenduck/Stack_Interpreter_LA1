@@ -9,8 +9,6 @@
 #define CreateOpAlgebricaProto(_name) \
 void _name(Data *d1, Data *d2);
 
-void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack);
-
 /** Declaração da função soma.*/
 CreateOpAlgebricaProto(soma)
 /** Declaração da função subtr.*/
@@ -19,8 +17,6 @@ CreateOpAlgebricaProto(subtr)
 CreateOpAlgebricaProto(mult)
 /** Declaração da função divi.*/
 CreateOpAlgebricaProto(divi)
-
-void potencia(Data *d1, Data *d2);
 
 /** 
  * \brief Macro que assiste na declaração das Funções CreateOpIncremento.
@@ -47,4 +43,7 @@ CreateOpBitwiseProto(or)
 CreateOpBitwiseProto(xor)
 /** Declaração da função modulo.*/
 CreateOpBitwiseProto(modulo)
+
 void not(Data *d1);
+void potencia(Data *d1, Data *d2);
+void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack);

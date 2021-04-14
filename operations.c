@@ -32,41 +32,14 @@ void _name(Data *d1, Data *d2) {                                                
     }                                                                                              \
 }
 
-void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
-    Data d1 = Pop(stack);
-    Data d2 = Pop(stack);
-    (*fun)(&d1, &d2);
-    Push(d2, stack);
-    free(d1.value);
-}
-
 /** Inicialização da função algorítmica soma. */
-//CreateOpAlgebrica(soma, +)
+CreateOpAlgebrica(soma, +)
 /** Inicialização da função algorítmica subtr. */
 CreateOpAlgebrica(subtr, -)
 /** Inicialização da função algorítmica mult. */
 CreateOpAlgebrica(mult, *)
 /** Inicialização da função algorítmica divi. */
 CreateOpAlgebrica(divi, /)
-
-/**
- * \brief Função que calcula a potência de base Data d1 e expoente Data d2 e guarda o resultado no d2.
- * @param d1 Endereço da base.
- * @param d2 Endereço do expoente.
- */
-void potencia(Data *d1, Data *d2) {
-    DataToDOUBLE(d2);
-    switch (d1->tipo) {
-        case LONG:
-            *(DataValDOUBLE(d2)) = (pow(*(DataValLONG(d1)), *(DataValDOUBLE(d2))));
-            break;
-        case DOUBLE:
-            *(DataValDOUBLE(d2)) = (pow(*(DataValDOUBLE(d1)), *(DataValDOUBLE(d2))));
-            break;
-        default:
-            break;
-    }
-}
 
 /**
  * \brief Macro que assiste na inicialização das funções de incremento.
@@ -115,9 +88,40 @@ CreateOpBitwise(xor, ^)
 CreateOpBitwise(modulo, %)
 
 /**
+ * \brief Função que calcula a potência de base Data d1 e expoente Data d2 e guarda o resultado no d2.
+ * @param d1 Endereço da base.
+ * @param d2 Endereço do expoente.
+ */
+void potencia(Data *d1, Data *d2) {
+    DataToDOUBLE(d2);
+    switch (d1->tipo) {
+        case LONG:
+            *(DataValDOUBLE(d2)) = (pow(*(DataValLONG(d1)), *(DataValDOUBLE(d2))));
+            break;
+        case DOUBLE:
+            *(DataValDOUBLE(d2)) = (pow(*(DataValDOUBLE(d1)), *(DataValDOUBLE(d2))));
+            break;
+        default:
+            break;
+    }
+}
+
+/**
  * \brief Função que inverte os bits de um certo Data do Tipo LONG.
  * @param d Endereço de um Data do Tipo LONG.
 */
 void not(Data *d) {
     *DataValLONG(d) = ~*(DataValLONG(d));
+}
+/**
+ *
+ * @param fun
+ * @param stack
+ */
+void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
+    Data d1 = Pop(stack);
+    Data d2 = Pop(stack);
+    (*fun)(&d1, &d2);
+    Push(d2, stack);
+    free(d1.value);
 }
