@@ -6,6 +6,11 @@
  */
 #include "parser.h"
 
+/**
+ * \brief Função que executa um comando de acordo com o token
+ * @param token Endereço do token
+ * @param stack Endereço da stack responsável pelo armazenamento.
+ */
 void operate(char *token, Stack *stack) {
     if(strlen(token)==1) {
         switch (token[0]) {
