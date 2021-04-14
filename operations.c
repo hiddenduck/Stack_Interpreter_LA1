@@ -4,7 +4,11 @@
 #include "operations.h"
 
 /**
- * blanc
+ * \brief Macro que assiste na inicialização das funções algébricas.
+ * Este tipo de função recebe dois Data,
+ * converte-os para o tipo necessário,
+ * efetua a operação algébrica respetiva,
+ * e guarda o resultado no segundo Data.
 */
 #define CreateOpAlgebrica(_name, _op)                                                              \
 void _name(Data *d1, Data *d2) {                                                                   \
@@ -28,20 +32,17 @@ void _name(Data *d1, Data *d2) {                                                
     }                                                                                              \
 }
 
-/** blank */
+/** Inicialização da função algorítmica soma. */
 CreateOpAlgebrica(soma, +)
-
-/** blank */
+/** Inicialização da função algorítmica subtr. */
 CreateOpAlgebrica(subtr, -)
-
-/** blank */
+/** Inicialização da função algorítmica mult. */
 CreateOpAlgebrica(mult, *)
-
-/** blank */
+/** Inicialização da função algorítmica divi. */
 CreateOpAlgebrica(divi, /)
 
 /**
- * \brief Função que calcula a potência de base Data d1 e expoente Data d2.
+ * \brief Função que calcula a potência de base Data d1 e expoente Data d2 e guarda o resultado no d2.
  * @param d1 Endereço da base.
  * @param d2 Endereço do expoente.
  */
@@ -59,7 +60,11 @@ void potencia(Data *d1, Data *d2) {
     }
 }
 
-/** blank */
+/**
+ * \brief Macro que assiste na inicialização das funções de incremento.
+ * Este tipo de função recebe um Data,
+ * e efetua uma operação de incremento no valor desse Data.
+*/
 #define CreateOpIncremento(_name, _op)    \
 void _name(Data *d1) {                    \
     switch (d1->tipo) {                   \
@@ -76,24 +81,29 @@ void _name(Data *d1) {                    \
         }                                 \
 }
 
-/** blank */
+/** Inicialização da função de incremento incre. */
 CreateOpIncremento(incre, ++)
-/** blank */
+/** Inicialização da função de incremento decre. */
 CreateOpIncremento(decre, --)
 
-/** blank */
+/**
+ * \brief Macro que assiste na inicialização das funções de incremento.
+ * Este tipo de função recebe dois Data,
+ * efetua a operação bitwise respetiva entre eles,
+ * e guarda o resultado no segundo Data.
+*/
 #define CreateOpBitwise(_name, _op)                                  \
 void _name(Data *d1, Data *d2) {                                     \
     *(DataValLONG(d2)) = (*DataValLONG(d1) _op *DataValLONG(d2));    \
 }
 
-/** blank */
+/** Inicialização da função bitwise and. */
 CreateOpBitwise(and, &)
-/** blank */
+/** Inicialização da função bitwise or. */
 CreateOpBitwise(or, |)
-/** blank */
+/** Inicialização da função bitwise xor. */
 CreateOpBitwise(xor, ^)
-/** blank */
+/** Inicialização da função bitwise modulo. */
 CreateOpBitwise(modulo, %)
 
 /**

@@ -93,21 +93,28 @@ void PrintStack(Stack *stack) {
 }
 
 /**
- * \brief Macro que assiste na criação das funções DataVal.
- * place holder
- * 
+ * \brief Macro que assiste na inicialização das funções DataVal.
+ * Devolve um apontador para o valor convertido do void* respetivo ao data recebido.
  */
 #define DataVal(_name, _type)              \
     _type *DataVal##_name(Data *data) {    \
         return (_type*) data->value;       \
     }
 
+/** Inicialização da função DataValCHAR. */
 DataVal(CHAR, char)
+/** Inicialização da função algorítmica DataValLONG. */
 DataVal(LONG, long)
+/** Inicialização da função algorítmica DataValDOUBLE. */
 DataVal(DOUBLE, double)
+/** Inicialização da função algorítmica DataValSTRING. */
 DataVal(STRING, char)
 
-/** blank */
+/**
+ * \brief Macro que assiste na inicialização das funções CreateData.
+ * Devolve um Data com o argumento val guardado na memória de endereço void*,
+ * e com o tipo respetivo à função.
+ */
 #define CreateData(_name, _type)                       \
     Data CreateData##_name(_type val) {                \
         _type *vp = (_type*) malloc(sizeof(_type));    \
@@ -115,16 +122,16 @@ DataVal(STRING, char)
         Data op = {_name, vp};                         \
         return op;                                     \
     }
-/** blank */
+/** Inicialização da função algorítmica CreateDataCHAR. */
 CreateData(CHAR, char)
-/** blank */
+/** Inicialização da função algorítmica CreateDataLONG. */
 CreateData(LONG, long)
-/** blank */
+/** Inicialização da função algorítmica CreateDataDOUBLE. */
 CreateData(DOUBLE, double)
 
 /**
  * \brief Função que cria um Data com o Tipo STRING.
- * @param val Endereço de um char.
+ * @param val Endereço da string a se guardar.
  * @return devolve um Data do Tipo STRING.
  */
 Data CreateDataSTRING(char *val) {

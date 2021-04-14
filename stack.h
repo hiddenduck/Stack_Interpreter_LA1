@@ -14,27 +14,31 @@
 #define INCREMENTO_STACK 100
 
 /**
- * \brief São enunciados os tipos possiveis.
+ * \brief Declaração dos Tipos possíveis para os Data.
  */
 typedef enum {CHAR = 1, LONG = 2, DOUBLE = 4, STRING = 8} Tipo;
 
 /**
- * \brief É criado o tipo de dados Data.
+ * \brief Declaração da estrutura de dados Data.
  */
 typedef struct data {
+    /** Tipo de dados guardado. */
     Tipo tipo;
+    /** Apontador void para o valor guardado na Data. */
     void* value;
 }Data;
 
 /**
- * \brief É criado o tipo de dados Stack
+ * \brief Declaração da estrutura de dados Stack
  */
 typedef struct stack {
+    /** Array de Data */
     Data *array;
+    /** Tamanho do array da Stack */
     int size;
+    /** Apontador para o último elemento da Stack*/
     int sp;
 }Stack;
-
 
 Stack *CreateStack();
 
@@ -45,25 +49,33 @@ Data *Read(long deslocamento, Stack *stack);
 void PrintStack(Stack *stack);
 
 /** 
- * \brief Macro que assiste na inicialização das funcões DataVal. 
+ * \brief Macro que assiste na Declaração das funcões DataVal.
 */
 #define DataValProto(_name, _type)       \
     _type *DataVal##_name(Data *val);    \
 
-DataValProto(LONG, long)
-DataValProto(DOUBLE, double)
-DataValProto(CHAR, char)
-DataValProto(STRING, char)
+/** Declaração da função DataValLONG.*/
+DataValProto(LONG, long);
+/** Declaração da função DataValDOUBLE.*/
+DataValProto(DOUBLE, double);
+/** Declaração da função DataValCHAR.*/
+DataValProto(CHAR, char);
+/** Declaração da função DataValSTRING.*/
+DataValProto(STRING, char);
 
 /** 
- * \brief Macro que assiste na inicialização das funções CreateData. 
+ * \brief Macro que assiste na declaração das funções CreateData.
 */
 #define CreateDataProto(_name, _type)    \
     Data CreateData##_name(_type val);   \
 
+/** Declaração da função CreateDataLONG.*/
 CreateDataProto(LONG, long)
+/** Declaração da função CreateDataDOUBLE.*/
 CreateDataProto(DOUBLE, double)
+/** Declaração da função CreateDataCHAR.*/
 CreateDataProto(CHAR, char)
+/** Declaração da função CreateDataSTRING.*/
 CreateDataProto(STRING, char *)
 
 void DataToDOUBLE(Data *d1);
