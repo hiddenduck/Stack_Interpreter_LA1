@@ -6,12 +6,6 @@
  */
 #include "parser.h"
 
-/**
- * \brief Função que interpreta o input e altera a stack segundo esse input.
- *
- * @param input String com o \a input.
- * @param stack Endereço da \a stack responsável pelo armazenamento.
- */
 void operate(char *token, Stack *stack) {
     if(strlen(token)==1) {
         switch (token[0]) {
@@ -170,6 +164,12 @@ void operate(char *token, Stack *stack) {
     }
 }
 
+/**
+ * \brief Função que interpreta o input e altera a stack segundo esse input.
+ *
+ * @param input String com o \a input.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ */
 void parse(char *input, Stack *stack){
 	char *delims = " \t\n";
 	for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)){
