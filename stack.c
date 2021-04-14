@@ -121,7 +121,12 @@ CreateData(CHAR, char)
 CreateData(LONG, long)
 /** blank */
 CreateData(DOUBLE, double)
-/** blank */
+
+/**
+ * \brief Função que cria um Data com o Tipo STRING.
+ * @param val Endereço de um char.
+ * @return devolve um Data do Tipo STRING.
+ */
 Data CreateDataSTRING(char *val) {
     char *vp = strdup(val);
     Data op = {STRING, vp};
