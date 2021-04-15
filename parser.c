@@ -31,15 +31,11 @@ void operate(char *token, Stack *stack) {
                 break;
             }
             case '(': {
-                Data x = Pop(stack);
-                decre(&x);
-                Push(x, stack);
+                UmArgumento(decre,stack);
                 break;
             }
             case ')': {
-                Data x = Pop(stack);
-                incre(&x);
-                Push(x, stack);
+                UmArgumento(incre,stack);
                 break;
             }
             case '%': {
@@ -63,9 +59,7 @@ void operate(char *token, Stack *stack) {
                 break;
             }
             case '~': {
-                Data x = Pop(stack);
-                not(&x);
-                Push(x, stack);
+                UmArgumento(not,stack);
                 break;
             }
             case ';': {
@@ -104,10 +98,7 @@ void operate(char *token, Stack *stack) {
                 break;
             }
             case 'c': {
-                Data x = Pop(stack);
-                DataToLONG(&x);
-                x.tipo = CHAR;
-                Push(x, stack);
+                UmArgumento(DataToCHAR, stack);
                 break;
             }
             case 'l': {
@@ -118,15 +109,11 @@ void operate(char *token, Stack *stack) {
                 break;
             }
             case 'i': {
-                Data x = Pop(stack);
-                DataToLONG(&x);
-                Push(x, stack);
+                UmArgumento(DataToLONG,stack);
                 break;
             }
             case 'f':{
-                Data x = Pop(stack);
-                DataToDOUBLE(&x);
-                Push(x, stack);
+                UmArgumento(DataToDOUBLE,stack);
                 break;
             }
         }
