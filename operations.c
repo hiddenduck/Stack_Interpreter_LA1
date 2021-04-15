@@ -119,8 +119,8 @@ void not(Data *d) {
  * @param stack
  */
 void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
-    Data d1 = Pop(stack);
     Data d2 = Pop(stack);
+    Data d1 = Pop(stack);
     (*fun)(&d1, &d2);
     Push(d2, stack);
     free(d1.value);
