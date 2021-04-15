@@ -126,6 +126,11 @@ void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
     free(d1.value);
 }
 
+/**
+ *
+ * @param fun
+ * @param stack
+ */
 void UmArgumento(void (*fun)(Data *d1), Stack *stack) {
     Data d1 = Pop(stack);
     (*fun)(&d1);
