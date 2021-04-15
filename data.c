@@ -100,8 +100,17 @@ void DataToLONG(Data *d) {
 }
 
 void DataToCHAR(Data *d) {
-    DataToLONG(d);
-    d->tipo = CHAR;
+    switch (d->tipo) {
+        case STRING: {
+            *d = CreateDataCHAR(*DataValSTRING(d));
+            break;
+        }
+        default: {
+            DataToLONG(d);
+            d->tipo = CHAR;
+            break;
+        }
+    }
 }
 
 /**
