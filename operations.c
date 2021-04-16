@@ -3,6 +3,34 @@
  */
 #include "operations.h"
 
+void SemArgumentos(Operation operation, Stack *stack) {
+    operation(stack);
+}
+
+/**
+ *
+ * @param fun
+ * @param stack
+ */
+void UmArgumento(Operation operation, Stack *stack) {
+    Data d1 = Pop(stack);
+    (*operation)(&d1);
+    Push(d1, stack);
+}
+
+/**
+ *
+ * @param fun
+ * @param stack
+ */
+void DoisArgumentos(Operation operation, Stack *stack) {
+    Data d2 = Pop(stack);
+    Data d1 = Pop(stack);
+    (*operation)(&d1, &d2);
+    Push(d2, stack);
+    free(d1.value);
+}
+
 /**
  * \brief Macro que assiste na inicialização das funções algébricas.
  * Este tipo de função recebe dois Data,
@@ -114,26 +142,39 @@ void not(Data *d) {
     *DataValLONG(d) = ~*(DataValLONG(d));
 }
 
-/**
- *
- * @param fun
- * @param stack
- */
-void DoisArgumentos(void (*fun)(Data*, Data*), Stack *stack) {
-    Data d2 = Pop(stack);
-    Data d1 = Pop(stack);
-    (*fun)(&d1, &d2);
-    Push(d2, stack);
-    free(d1.value);
+void Underscore(Stack *stack) {
+    Data *x = Read(0, stack);
+    Data y = DataDup(x);
+    Push(y, stack);
 }
 
-/**
- *
- * @param fun
- * @param stack
- */
-void UmArgumento(void (*fun)(Data*), Stack *stack) {
-    Data d1 = Pop(stack);
-    (*fun)(&d1);
-    Push(d1, stack);
+void Swap(Stack *stack) {
+    Data y = Pop(stack);
+    Data x = Pop(stack);
+    Push(y, stack);
+    Push(x, stack);
+}
+
+void SwapThree(Stack *stack) {
+    Data z = Pop(stack);
+    Data y = Pop(stack);
+    Data x = Pop(stack);
+    Push(y, stack);
+    Push(z, stack);
+    Push(x, stack);
+}
+
+void DollarSign(Stack *stack) {
+    Data indice = Pop(stack);
+    Data *x = Read(*DataValLONG(&indice), stack);
+    Data y = DataDup(x);
+    Push(y, stack);
+    free(indice.value);
+}
+
+void ReadLine(Stack *stack) {
+    char linha[MAX_LENGTH_INPUT];
+    assert(fgets(linha, MAX_LENGTH_INPUT, stdin) != NULL);
+    assert(linha[strlen(linha) - 1] == '\n');
+    Push(CreateDataSTRING(linha), stack);
 }
