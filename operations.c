@@ -113,12 +113,13 @@ void potencia(Data *d1, Data *d2) {
 void not(Data *d) {
     *DataValLONG(d) = ~*(DataValLONG(d));
 }
+
 /**
  *
  * @param fun
  * @param stack
  */
-void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
+void DoisArgumentos(void (*fun)(Data*, Data*), Stack *stack) {
     Data d2 = Pop(stack);
     Data d1 = Pop(stack);
     (*fun)(&d1, &d2);
@@ -131,7 +132,7 @@ void DoisArgumentos(void (*fun)(Data *d1, Data *d2), Stack *stack) {
  * @param fun
  * @param stack
  */
-void UmArgumento(void (*fun)(Data *d1), Stack *stack) {
+void UmArgumento(void (*fun)(Data*), Stack *stack) {
     Data d1 = Pop(stack);
     (*fun)(&d1);
     Push(d1, stack);

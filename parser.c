@@ -6,30 +6,39 @@
  */
 #include "parser.h"
 
+#define NUMERO_OPERATIONS_DOISARGS 9
+
 /**
  * \brief Função que executa um comando de acordo com o token
  * @param token Endereço do token
  * @param stack Endereço da stack responsável pelo armazenamento.
  */
-void operate(char *token, Stack *stack) {
+void operate(char *token, Stack *stack, Operation *opDoisArgs) {
     if(strlen(token)==1) {
+        int i;
+        for (i = 0; opDoisArgs[i].simbolo != 0; i++) {
+            if (opDoisArgs[i].simbolo == token[0]) {
+                DoisArgumentos(opDoisArgs[i].dois, stack);
+                i = NUMERO_OPERATIONS_DOISARGS;
+            }
+        }
         switch (token[0]) {
-            case '+': {
-                DoisArgumentos(soma, stack);
-                break;
-            }
-            case '-': {
-                DoisArgumentos(subtr, stack);
-                break;
-            }
-            case '*': {
-                DoisArgumentos(mult, stack);
-                break;
-            }
-            case '/': {
-                DoisArgumentos(divi, stack);
-                break;
-            }
+            //case '+': {
+            //    DoisArgumentos(soma, stack);
+            //    break;
+            //}
+            //case '-': {
+            //    DoisArgumentos(subtr, stack);
+            //    break;
+            //}
+            //case '*': {
+            //    DoisArgumentos(mult, stack);
+            //    break;
+            //}
+            //case '/': {
+            //    DoisArgumentos(divi, stack);
+            //    break;
+            //}
             case '(': {
                 UmArgumento(decre,stack);
                 break;
@@ -38,26 +47,26 @@ void operate(char *token, Stack *stack) {
                 UmArgumento(incre,stack);
                 break;
             }
-            case '%': {
-                DoisArgumentos(modulo, stack);
-                break;
-            }
-            case '#': {
-                DoisArgumentos(potencia, stack);
-                break;
-            }
-            case '&': {
-                DoisArgumentos(and, stack);
-                break;
-            }
-            case '|': {
-                DoisArgumentos(or, stack);
-                break;
-            }
-            case '^': {
-                DoisArgumentos(xor, stack);
-                break;
-            }
+            //case '%': {
+            //    DoisArgumentos(modulo, stack);
+            //    break;
+            //}
+            //case '#': {
+            //    DoisArgumentos(potencia, stack);
+            //    break;
+            //}
+            //case '&': {
+            //    DoisArgumentos(and, stack);
+            //    break;
+            //}
+            //case '|': {
+            //    DoisArgumentos(or, stack);
+            //    break;
+            //}
+            //case '^': {
+            //    DoisArgumentos(xor, stack);
+            //    break;
+            //}
             case '~': {
                 UmArgumento(not,stack);
                 break;
@@ -128,6 +137,20 @@ void operate(char *token, Stack *stack) {
  */
 void parse(char *input, Stack *stack){
 	char *delims = " \t\n";
+
+	Operation opDoisArgs [] = {
+            {'+', soma},
+            {'-', subtr},
+            {'*', mult},
+            {'/', divi},
+            {'%', modulo},
+            {'#', potencia},
+            {'&', and},
+            {'|', or},
+            {'^', xor},
+            {0, NULL}
+	};
+
 	for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)){
 		char *resto;
 		/* Testar se o valor introduzido é do tipo long. */
@@ -147,7 +170,7 @@ void parse(char *input, Stack *stack){
 		    if (strlen(resto) ==  0)
 		        Push(CreateDataDOUBLE(vald), stack);
 		    else
-		        operate(token, stack);
+		        operate(token, stack, opDoisArgs);
 
 		}
 	}
