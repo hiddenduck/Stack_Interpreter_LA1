@@ -13,12 +13,12 @@
  * @param token Endereço do token
  * @param stack Endereço da stack responsável pelo armazenamento.
  */
-void operate(char *token, Stack *stack, OperationMap *opDoisArgs) {
+void operate(char *token, Stack *stack, Operation *opDoisArgs) {
     if(strlen(token)==1) {
         int i;
         for (i = 0; opDoisArgs[i].simbolo != 0; i++) {
             if (opDoisArgs[i].simbolo == token[0]) {
-                DoisArgumentos(opDoisArgs[i].fun, stack);
+                DoisArgumentos(opDoisArgs[i].dois, stack);
                 i = NUMERO_OPERATIONS_DOISARGS;
             }
         }
@@ -82,15 +82,19 @@ void operate(char *token, Stack *stack, OperationMap *opDoisArgs) {
                 break;
             }
             case '\\': {
-                Data x, y;
-                PopN(stack, 2, &y, &x);
-                PushN(stack, 2, y, x);
+                Data y = Pop(stack);
+                Data x = Pop(stack);
+                Push(y, stack);
+                Push(x, stack);
                 break;
             }
             case '@': {
-                Data x, y, z;
-                PopN(stack, 3, &z, &y, &x);
-                PushN(stack, 3, y, z, x);
+                Data z = Pop(stack);
+                Data y = Pop(stack);
+                Data x = Pop(stack);
+                Push(y, stack);
+                Push(z, stack);
+                Push(x, stack);
                 break;
             }
             case '$': {
@@ -134,7 +138,7 @@ void operate(char *token, Stack *stack, OperationMap *opDoisArgs) {
 void parse(char *input, Stack *stack){
 	char *delims = " \t\n";
 
-	OperationMap opDoisArgs [] = {
+	Operation opDoisArgs [] = {
             {'+', soma},
             {'-', subtr},
             {'*', mult},

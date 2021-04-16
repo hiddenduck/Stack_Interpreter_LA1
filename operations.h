@@ -47,16 +47,17 @@ CreateOpBitwiseProto(modulo)
 void not(Data *d1);
 void potencia(Data *d1, Data *d2);
 
-typedef void (*Operation)(int nArgs, ...);
-
 /**
  *
  */
 typedef struct op {
     char simbolo;
-    void (*fun)(Data*, Data*);
-}OperationMap;
-
+    void (*fun)(void);
+    union {
+        void (*um)(Data *);
+        void (*dois)(Data *, Data *);
+    };
+}Operation;
 
 void DoisArgumentos(void (*fun)(Data*, Data*), Stack *stack);
 void UmArgumento(void (*fun)(Data*), Stack *stack);
