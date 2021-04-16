@@ -31,6 +31,10 @@ Data Pop(Stack *stack) {
     return stack->array[(stack->sp)--];
 }
 
+void DecrementaSP(Stack *stack) {
+    free(stack->array[(stack->sp)--].value);
+}
+
 /**
  * \brief Função que aumenta o sp da \a stack e coloca um elemento nessa posição.
  *

@@ -26,6 +26,7 @@ typedef struct stack {
 Stack *CreateStack();
 
 Data Pop(Stack *stack);
+void DecrementaSP(Stack *stack);
 void Push(Data operando, Stack *stack);
 Data *Read(long deslocamento, Stack *stack);
 
