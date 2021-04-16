@@ -6,127 +6,24 @@
  */
 #include "parser.h"
 
-#define NUMERO_OPERATIONS_DOISARGS 9
-
 /**
  * \brief Função que executa um comando de acordo com o token
  * @param token Endereço do token
  * @param stack Endereço da stack responsável pelo armazenamento.
  */
-void operate(char *token, Stack *stack, Operation *opDoisArgs) {
+int operate(char *token, Stack *stack, OperationMap *operationMap, Operation operation) {
+    int r = 0;
     if(strlen(token)==1) {
         int i;
-        for (i = 0; opDoisArgs[i].simbolo != 0; i++) {
-            if (opDoisArgs[i].simbolo == token[0]) {
-                DoisArgumentos(opDoisArgs[i].fun, stack);
-                i = NUMERO_OPERATIONS_DOISARGS;
-            }
-        }
-        switch (token[0]) {
-            //case '+': {
-            //    DoisArgumentos(soma, stack);
-            //    break;
-            //}
-            //case '-': {
-            //    DoisArgumentos(subtr, stack);
-            //    break;
-            //}
-            //case '*': {
-            //    DoisArgumentos(mult, stack);
-            //    break;
-            //}
-            //case '/': {
-            //    DoisArgumentos(divi, stack);
-            //    break;
-            //}
-            case '(': {
-                UmArgumento(decre,stack);
-                break;
-            }
-            case ')': {
-                UmArgumento(incre,stack);
-                break;
-            }
-            //case '%': {
-            //    DoisArgumentos(modulo, stack);
-            //    break;
-            //}
-            //case '#': {
-            //    DoisArgumentos(potencia, stack);
-            //    break;
-            //}
-            //case '&': {
-            //    DoisArgumentos(and, stack);
-            //    break;
-            //}
-            //case '|': {
-            //    DoisArgumentos(or, stack);
-            //    break;
-            //}
-            //case '^': {
-            //    DoisArgumentos(xor, stack);
-            //    break;
-            //}
-            case '~': {
-                UmArgumento(not,stack);
-                break;
-            }
-            case ';': {
-                Pop(stack);
-                break;
-            }
-            case '_': {
-                Data *x = Read(0, stack);
-                Data y = DataDup(x);
-                Push(y, stack);
-                break;
-            }
-            case '\\': {
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                Push(y, stack);
-                Push(x, stack);
-                break;
-            }
-            case '@': {
-                Data z = Pop(stack);
-                Data y = Pop(stack);
-                Data x = Pop(stack);
-                Push(y, stack);
-                Push(z, stack);
-                Push(x, stack);
-                break;
-            }
-            case '$': {
-                Data indice = Pop(stack);
-                long deslocamento = *DataValLONG(&indice);
-                Data *x = Read(deslocamento, stack);
-                Data y = DataDup(x);
-                Push(y, stack);
-                free(indice.value);
-                break;
-            }
-            case 'c': {
-                UmArgumento(DataToCHAR, stack);
-                break;
-            }
-            case 'l': {
-                char linha[MAX_LENGTH_INPUT];
-                assert(fgets(linha, MAX_LENGTH_INPUT, stdin) != NULL);
-                assert(linha[strlen(linha) - 1] == '\n');
-                Push(CreateDataSTRING(linha), stack);
-                break;
-            }
-            case 'i': {
-                UmArgumento(DataToLONG,stack);
-                break;
-            }
-            case 'f':{
-                UmArgumento(DataToDOUBLE,stack);
+        for (i = 0; operationMap[i].simbolo != 0; i++) {
+            if (operationMap[i].simbolo == token[0]) {
+                (operation)(operationMap[i].op, stack);
+                r = 1;
                 break;
             }
         }
     }
+    return r;
 }
 
 /**
@@ -138,7 +35,25 @@ void operate(char *token, Stack *stack, Operation *opDoisArgs) {
 void parse(char *input, Stack *stack){
 	char *delims = " \t\n";
 
-	Operation opDoisArgs [] = {
+	OperationMap semArgs [] = {
+            {';', DecrementaSP},
+            {'_', Underscore},
+            {'\\', Swap},
+            {'@', SwapThree},
+            {'$', DollarSign},
+            {'l', ReadLine}
+	};
+
+	OperationMap opUmArgs [] = {
+            {'(', decre},
+            {')', incre},
+            {'~', not},
+            {'c', DataToCHAR},
+            {'i', DataToLONG},
+            {'f', DataToDOUBLE}
+	};
+
+	OperationMap opDoisArgs [] = {
             {'+', soma},
             {'-', subtr},
             {'*', mult},
@@ -169,9 +84,9 @@ void parse(char *input, Stack *stack){
 
 		    if (strlen(resto) ==  0)
 		        Push(CreateDataDOUBLE(vald), stack);
-		    else
-		        operate(token, stack, opDoisArgs);
-
+		    else if (operate(token, stack, opDoisArgs, DoisArgumentos) ||
+                     operate(token, stack, opUmArgs, UmArgumento) ||
+                     operate(token, stack, semArgs, SemArgumentos)) {}
 		}
 	}
 	PrintStack(stack);
