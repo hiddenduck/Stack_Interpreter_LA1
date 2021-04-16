@@ -35,25 +35,26 @@ int operate(char *token, Stack *stack, OperationMap *operationMap, Operation ope
 void parse(char *input, Stack *stack){
 	char *delims = " \t\n";
 
-	OperationMap semArgs [] = {
+    OperationMap semArgs[] = {
             {';', DecrementaSP},
             {'_', Underscore},
             {'\\', Swap},
             {'@', SwapThree},
             {'$', DollarSign},
-            {'l', ReadLine}
-	};
+            {'l', ReadLine},
+            {0, NULL}
+    };
 
-	OperationMap opUmArgs [] = {
+    OperationMap opUmArgs [] = {
             {'(', decre},
             {')', incre},
             {'~', not},
             {'c', DataToCHAR},
             {'i', DataToLONG},
             {'f', DataToDOUBLE}
-	};
+    };
 
-	OperationMap opDoisArgs [] = {
+    OperationMap opDoisArgs [] = {
             {'+', soma},
             {'-', subtr},
             {'*', mult},
@@ -64,8 +65,8 @@ void parse(char *input, Stack *stack){
             {'|', or},
             {'^', xor},
             {0, NULL}
-	};
-
+    };
+    
 	for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)){
 		char *resto;
 		/* Testar se o valor introduzido é do tipo long. */
