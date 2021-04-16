@@ -4,6 +4,7 @@
  */
 #include <assert.h>
 #include <math.h>
+#include <stdarg.h>
 #include "data.h"
 
 /**
@@ -26,7 +27,9 @@ typedef struct stack {
 Stack *CreateStack();
 
 Data Pop(Stack *stack);
-void Push(Data operando, Stack *stack);
+void PopN(Stack *stack, int nData, ...);
+void Push(Data data, Stack *stack);
+void PushN(Stack *stack, int nData, ...);
 Data *Read(long deslocamento, Stack *stack);
 
 void PrintStack(Stack *stack);

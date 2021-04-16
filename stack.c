@@ -32,6 +32,33 @@ Data Pop(Stack *stack) {
 }
 
 /**
+ *
+ * @param stack
+ * @param nData
+ * @param ...
+ */
+void PopN(Stack *stack, int nData, ...) {
+    va_list DataArgumentPointer;
+    va_start(DataArgumentPointer, nData);
+    int i;
+    for (i = 0; i < nData; i++)
+        *(va_arg(DataArgumentPointer, Data*)) = Pop(stack);
+    va_end(DataArgumentPointer);
+}
+
+/**
+ *
+ */
+void PushN(Stack *stack, int nData, ...) {
+    va_list DataArgumentPointer;
+    va_start(DataArgumentPointer, nData);
+    int i;
+    for (i = 0; i < nData; i++)
+        Push(va_arg(DataArgumentPointer, Data), stack);
+    va_end(DataArgumentPointer);
+}
+
+/**
  * \brief Função que aumenta o sp da \a stack e coloca um elemento nessa posição.
  *
  * @param data Elemento do tipo Data a colocar na \a stack.
