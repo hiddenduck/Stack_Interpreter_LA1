@@ -3,6 +3,25 @@
  */
 #include "stack.h"
 
+/**
+ * \brief Definição do tamanho máximo da line de input.
+ */
+#define MAX_LENGTH_INPUT 10240
+
+typedef void (*Operation)();
+
+/**
+ *
+ */
+typedef struct {
+    char simbolo;
+    Operation op;
+}OperationMap;
+
+void DoisArgumentos(Operation operation, Stack *stack);
+void UmArgumento(Operation operation, Stack *stack);
+void SemArgumentos(Operation operation, Stack *stack);
+
 /** 
  * \brief Macro que assiste na declaração das Funções CreateOpAlgebrica.
  */
@@ -47,13 +66,10 @@ CreateOpBitwiseProto(modulo)
 void not(Data *d1);
 void potencia(Data *d1, Data *d2);
 
-/**
- *
- */
-typedef struct op {
-    char simbolo;
-    void (*fun)(Data*, Data*);
-}Operation;
 
-void DoisArgumentos(void (*fun)(Data*, Data*), Stack *stack);
-void UmArgumento(void (*fun)(Data*), Stack *stack);
+/*Funções sem Macros coitadinhas*/
+void Underscore(Stack *stack);
+void Swap(Stack *stack);
+void SwapThree(Stack *stack);
+void DollarSign(Stack *stack);
+void ReadLine(Stack *stack);
