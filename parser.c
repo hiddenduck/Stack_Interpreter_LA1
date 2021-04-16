@@ -18,7 +18,7 @@ void operate(char *token, Stack *stack, Operation *opDoisArgs) {
         int i;
         for (i = 0; opDoisArgs[i].simbolo != 0; i++) {
             if (opDoisArgs[i].simbolo == token[0]) {
-                DoisArgumentos(opDoisArgs[i].dois, stack);
+                DoisArgumentos(opDoisArgs[i].fun, stack);
                 i = NUMERO_OPERATIONS_DOISARGS;
             }
         }

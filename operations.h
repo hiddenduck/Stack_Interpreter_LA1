@@ -52,11 +52,7 @@ void potencia(Data *d1, Data *d2);
  */
 typedef struct op {
     char simbolo;
-    void (*fun)(void);
-    union {
-        void (*um)(Data *);
-        void (*dois)(Data *, Data *);
-    };
+    void (*fun)(Data*, Data*);
 }Operation;
 
 void DoisArgumentos(void (*fun)(Data*, Data*), Stack *stack);
