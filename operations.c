@@ -33,7 +33,8 @@ void DoisArgumentos(Operation operation, Stack *stack) {
     Data d1 = Pop(stack);
     (*operation)(&d1, &d2);
     Push(d2, stack);
-    free(d1.value);
+    /*free(d1.value); O facto de sair do array pode fazer com que
+    d1 liberte o espaço dele que tem dentro o void* */
 }
 
 /**
