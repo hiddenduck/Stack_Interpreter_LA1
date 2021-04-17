@@ -10,14 +10,15 @@
  * \brief Função que executa um comando de acordo com o token
  * @param token Endereço do token
  * @param stack Endereço da stack responsável pelo armazenamento.
+ * @param operationMap
  */
-int operate(char *token, Stack *stack, OperationMap *operationMap, Operation operation) {
+int operate(char *token, Stack *stack, OperationMap *operationMap) {
     int r = 0;
     if(strlen(token)==1) {
         int i;
-        for (i = 0; operationMap[i].simbolo != 0; i++) {
+        for (i = 1; operationMap[i].simbolo != 0; i++) {
             if (operationMap[i].simbolo == token[0]) {
-                (operation)(operationMap[i].op, stack);
+                (operationMap[0].op)(operationMap[i].op, stack);
                 r = 1;
                 break;
             }
@@ -30,12 +31,13 @@ int operate(char *token, Stack *stack, OperationMap *operationMap, Operation ope
  * \brief Função que interpreta o input e altera a stack segundo esse input.
  *
  * @param input String com o \a input.
- * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
-void parse(char *input, Stack *stack){
+void parse(char *input){
 	char *delims = " \t\n";
+    Stack *stack = CreateStack();
 
     OperationMap semArgs[] = {
+            {' ', SemArgumentos},
             {';', DecrementaSP},
             {'_', Underscore},
             {'\\', Swap},
@@ -46,15 +48,18 @@ void parse(char *input, Stack *stack){
     };
 
     OperationMap opUmArgs [] = {
+            {' ', UmArgumento},
             {'(', decre},
             {')', incre},
             {'~', not},
             {'c', DataToCHAR},
             {'i', DataToLONG},
-            {'f', DataToDOUBLE}
+            {'f', DataToDOUBLE},
+            {0, NULL}
     };
 
     OperationMap opDoisArgs [] = {
+            {' ', DoisArgumentos},
             {'+', soma},
             {'-', subtr},
             {'*', mult},
@@ -85,9 +90,9 @@ void parse(char *input, Stack *stack){
 
 		    if (strlen(resto) ==  0)
 		        Push(CreateDataDOUBLE(vald), stack);
-		    else if (operate(token, stack, opDoisArgs, DoisArgumentos) ||
-                     operate(token, stack, opUmArgs, UmArgumento) ||
-                     operate(token, stack, semArgs, SemArgumentos)) {}
+		    else if (operate(token, stack, opDoisArgs) ||
+                     operate(token, stack, opUmArgs) ||
+                     operate(token, stack, semArgs)) {}
 		}
 	}
 	PrintStack(stack);
