@@ -12,19 +12,19 @@
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param operationMap
  */
-int operate(char *token, Stack *stack, OperationMap *operationMap) {
-    int r = 0;
+void operate(char *token, Stack *stack, OperationMap *operationMap) {
+    Operation operation = operationMap[0].op;
     if(strlen(token)==1) {
         int i;
         for (i = 1; operationMap[i].simbolo != 0; i++) {
+            if (operationMap[i].simbolo == ' ')
+                operation = operationMap[i].op;
             if (operationMap[i].simbolo == token[0]) {
-                (operationMap[0].op)(operationMap[i].op, stack);
-                r = 1;
+                (operation)(operationMap[i].op, stack);
                 break;
             }
         }
     }
-    return r;
 }
 
 /**
@@ -32,68 +32,24 @@ int operate(char *token, Stack *stack, OperationMap *operationMap) {
  *
  * @param input String com o \a input.
  */
-void parse(char *input){
-	char *delims = " \t\n";
-    Stack *stack = CreateStack();
+void parse(char *token, Stack *stack, OperationMap opMap[]){
 
-    OperationMap semArgs[] = {
-            {' ', SemArgumentos},
-            {';', DecrementaSP},
-            {'_', Underscore},
-            {'\\', Swap},
-            {'@', SwapThree},
-            {'$', DollarSign},
-            {'l', ReadLine},
-            {0, NULL}
-    };
+    char *resto;
 
-    OperationMap opUmArgs [] = {
-            {' ', UmArgumento},
-            {'(', decre},
-            {')', incre},
-            {'~', not},
-            {'c', DataToCHAR},
-            {'i', DataToLONG},
-            {'f', DataToDOUBLE},
-            {0, NULL}
-    };
+    /* Testar se o valor introduzido é do tipo long. */
+    long vall = strtol(token, &resto, 10);
 
-    OperationMap opDoisArgs [] = {
-            {' ', DoisArgumentos},
-            {'+', soma},
-            {'-', subtr},
-            {'*', mult},
-            {'/', divi},
-            {'%', modulo},
-            {'#', potencia},
-            {'&', and},
-            {'|', or},
-            {'^', xor},
-            {0, NULL}
-    };
-    
-	for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)){
-		char *resto;
-		/* Testar se o valor introduzido é do tipo long. */
-		long vall = strtol(token, &resto, 10);
-
-		if(strlen(resto) == 0){
-			Push(CreateDataLONG(vall), stack);
-		} else {
-		    /* Testar se o resto contém um double decimal e somar à parte inteira. */
-		    double vald = strtod(resto, &resto);
-		    
+    if (strlen(resto) == 0) {
+        Push(CreateDataLONG(vall), stack);
+    } else {
+        /* Testar se o resto contém um double decimal e somar à parte inteira. */
+        double vald = strtod(resto, &resto);
+        if (strlen(resto) ==  0) {
             if (vall < 0)
-                vald = vall - vald;
-		    else
-		        vald += vall;
-
-		    if (strlen(resto) ==  0)
-		        Push(CreateDataDOUBLE(vald), stack);
-		    else if (operate(token, stack, opDoisArgs) ||
-                     operate(token, stack, opUmArgs) ||
-                     operate(token, stack, semArgs)) {}
-		}
-	}
-	PrintStack(stack);
+                vald = -vald;
+            vald += vall;
+            Push(CreateDataDOUBLE(vald), stack);
+        } else
+            operate(token, stack, opMap);
+    }
 }
