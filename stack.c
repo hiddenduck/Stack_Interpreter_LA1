@@ -31,6 +31,10 @@ Data Pop(Stack *stack) {
     return stack->array[(stack->sp)--];
 }
 
+/**
+ *
+ * @param stack
+ */
 void DecrementaSP(Stack *stack) {
     free(stack->array[(stack->sp)--].value);
 }

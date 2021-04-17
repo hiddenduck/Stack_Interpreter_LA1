@@ -8,6 +8,9 @@
  */
 #define MAX_LENGTH_INPUT 10240
 
+/**
+ *
+ */
 typedef void (*Operation)();
 
 /**

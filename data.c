@@ -99,6 +99,10 @@ void DataToLONG(Data *d) {
     }
 }
 
+/**
+ *
+ * @param d
+ */
 void DataToCHAR(Data *d) {
     switch (d->tipo) {
         case STRING: {

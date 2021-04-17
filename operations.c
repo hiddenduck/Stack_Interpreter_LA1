@@ -3,13 +3,18 @@
  */
 #include "operations.h"
 
+/**
+ *
+ * @param operation
+ * @param stack
+ */
 void SemArgumentos(Operation operation, Stack *stack) {
     operation(stack);
 }
 
 /**
  *
- * @param fun
+ * @param operation
  * @param stack
  */
 void UmArgumento(Operation operation, Stack *stack) {
@@ -20,7 +25,7 @@ void UmArgumento(Operation operation, Stack *stack) {
 
 /**
  *
- * @param fun
+ * @param operation
  * @param stack
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
@@ -142,12 +147,20 @@ void not(Data *d) {
     *DataValLONG(d) = ~*(DataValLONG(d));
 }
 
+/**
+ *
+ * @param stack
+ */
 void Underscore(Stack *stack) {
     Data *x = Read(0, stack);
     Data y = DataDup(x);
     Push(y, stack);
 }
 
+/**
+ *
+ * @param stack
+ */
 void Swap(Stack *stack) {
     Data y = Pop(stack);
     Data x = Pop(stack);
@@ -155,6 +168,10 @@ void Swap(Stack *stack) {
     Push(x, stack);
 }
 
+/**
+ *
+ * @param stack
+ */
 void SwapThree(Stack *stack) {
     Data z = Pop(stack);
     Data y = Pop(stack);
@@ -164,6 +181,10 @@ void SwapThree(Stack *stack) {
     Push(x, stack);
 }
 
+/**
+ *
+ * @param stack
+ */
 void DollarSign(Stack *stack) {
     Data indice = Pop(stack);
     Data *x = Read(*DataValLONG(&indice), stack);
@@ -172,6 +193,10 @@ void DollarSign(Stack *stack) {
     free(indice.value);
 }
 
+/**
+ *
+ * @param stack
+ */
 void ReadLine(Stack *stack) {
     char linha[MAX_LENGTH_INPUT];
     assert(fgets(linha, MAX_LENGTH_INPUT, stdin) != NULL);
