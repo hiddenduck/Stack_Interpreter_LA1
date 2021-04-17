@@ -127,23 +127,19 @@ Data DataDup(Data *target) {
     Data data;
     switch (target->tipo) {
         case LONG: {
-            long val = *DataValLONG(target);
-            data = CreateDataLONG(val);
+            data = CreateDataLONG(*DataValLONG(target));
             break;
         }
         case DOUBLE: {
-            double val = *DataValDOUBLE(target);
-            data = CreateDataDOUBLE(val);
+            data = CreateDataDOUBLE(*DataValDOUBLE(target));
             break;
         }
         case CHAR: {
-            char val = *DataValCHAR(target);
-            data = CreateDataCHAR(val);
+            data = CreateDataCHAR(*DataValCHAR(target));
             break;
         }
         case STRING: {
-            char* val = DataValSTRING(target);
-            data = CreateDataSTRING(val);
+            data = CreateDataSTRING(DataValSTRING(target));
             break;
         }
     }
