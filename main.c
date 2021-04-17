@@ -22,10 +22,42 @@
  */
 int main(){
     char input[MAX_LENGTH_INPUT];
-    
+    Stack *stack = CreateStack();
+    OperationMap opMap[] = {
+            {' ', SemArgumentos},
+            {';', DecrementaSP},
+            {'_', Underscore},
+            {'\\', Swap},
+            {'@', SwapThree},
+            {'$', DollarSign},
+            {'l', ReadLine},
+            {' ', UmArgumento},
+            {'(', decre},
+            {')', incre},
+            {'~', not},
+            {'c', DataToCHAR},
+            {'i', DataToLONG},
+            {'f', DataToDOUBLE},
+            {' ', DoisArgumentos},
+            {'+', soma},
+            {'-', subtr},
+            {'*', mult},
+            {'/', divi},
+            {'%', modulo},
+            {'#', potencia},
+            {'&', and},
+            {'|', or},
+            {'^', xor},
+            {0, NULL}
+    };
+
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    parse(input);
+    char *delims = " \t\n";
+    for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
+        parse(token, stack, opMap);
+
+    PrintStack(stack);
     return 0;
 }
