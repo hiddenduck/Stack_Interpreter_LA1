@@ -1,6 +1,6 @@
 
 /**
- * @file
+ * @file stack.c
  * Ficheiro relativo à estrutura Stack e às funções correspondentes.
  */
 #include "stack.h"

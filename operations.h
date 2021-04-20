@@ -1,5 +1,5 @@
 /**
- * @headerfile
+ * @headerfile operations.h
  */
 #include "stack.h"
 

@@ -1,6 +1,6 @@
 
 /**
- * @file
+ * @file parser.c
  * Ficheiro que diz respeito ao interpretador.
  * Contém a função parse() que serve como interpretador.
  */

@@ -1,6 +1,6 @@
 
 /**
- * @file
+ * @file main.c
  * Ficheiro que diz respeito ao main.
  */
 #include "main.h"
