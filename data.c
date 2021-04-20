@@ -20,7 +20,7 @@ DataVal(LONG, long)
 /** Inicialização da função algorítmica DataValDOUBLE. */
 DataVal(DOUBLE, double)
 /** Inicialização da função algorítmica DataValSTRING. */
-DataVal(STRING, char)
+DataVal(STRING, char) //não faz nada diferente do DataValCHAR (lê o primeiro do array)
 
 /**
  * \brief Macro que assiste na inicialização das funções CreateData.
@@ -62,18 +62,19 @@ void DataToDOUBLE(Data *d) {
         case CHAR:
         case LONG:{
             val = (double) *(DataValLONG(d));
-            *d = CreateDataDOUBLE(val);
             break;
         }
         case STRING:{
             val = strtod(DataValCHAR(d), NULL);
-            *d = CreateDataDOUBLE(val);
             break;
         }
         default:
-            d->tipo = DOUBLE;
-            break;
+            return;
     }
+    double *vp = realloc(d->value, sizeof(double));
+    *vp = val;
+    d->value = vp;
+    d->tipo = DOUBLE;
 }
 
 /**
@@ -85,18 +86,19 @@ void DataToLONG(Data *d) {
     switch (d->tipo){
         case STRING:{
             val = strtol(DataValCHAR(d), NULL, 10);
-            *d = CreateDataLONG(val);
             break;
         }
         case DOUBLE: {
             val = (long) *(DataValDOUBLE(d));
-            *d = CreateDataLONG(val);
             break;
         }
         default:
-            d->tipo = LONG;
-            break;
+            return;
     }
+    long *vp = realloc(d->value, sizeof(long));
+    *vp = val;
+    d->value = vp;
+    d->tipo = LONG;
 }
 
 /**
@@ -106,7 +108,11 @@ void DataToLONG(Data *d) {
 void DataToCHAR(Data *d) {
     switch (d->tipo) {
         case STRING: {
-            *d = CreateDataCHAR(*DataValSTRING(d));
+            char val = *DataValCHAR(d);
+            char *vp = realloc(d->value, sizeof(char));
+            *vp = val;
+            d->value = vp;
+            d->tipo = CHAR;
             break;
         }
         default: {
