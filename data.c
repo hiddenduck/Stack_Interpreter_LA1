@@ -77,7 +77,7 @@ void DataToDOUBLE(Data *d) {
 }
 
 /**
- *\brief Função que converte um Data com qualquer Tipo num Data com Tipo LONG.
+ * \brief Função que converte um Data com qualquer Tipo num Data com Tipo LONG.
  * @param d Endereço de um Data
  */
 void DataToLONG(Data *d) {
