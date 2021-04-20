@@ -4,4 +4,6 @@
  */
 #include "operations.h"
 
-void parse(char *token, Stack *stack, OperationMap opMap[]);
+void Operator(char *token, Stack  *stack, OperationMap *operationMap);
+void InputParser(char *token, Stack *stack, OperationMap *opMap);
+void InputReader(Stack *stack);

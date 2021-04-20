@@ -4,6 +4,36 @@
 #include "stack.h"
 
 /**
+ * \brief Array com todas as operações implementadas
+ */
+#define  OPERATION_MAP {{' ', SemArgumentos}, \
+                {';', DecrementaSP}, \
+                {'_', Underscore},\
+                {'\\', Swap},\
+                {'@', SwapThree},\
+                {'$', DollarSign},\
+                {'l', ReadLine},\
+                {' ', UmArgumento},\
+                {'(', decre},\
+                {')', incre},\
+                {'~', not},\
+                {'c', DataToCHAR},\
+                {'i', DataToLONG},\
+                {'f', DataToDOUBLE},\
+                {' ', DoisArgumentos},\
+                {'+', soma},\
+                {'-', subtr},\
+                {'*', mult},\
+                {'/', divi},\
+                {'%', modulo},\
+                {'#', potencia},\
+                {'&', and},\
+                {'|', or},\
+                {'^', xor},\
+                {0, NULL} \
+                }
+
+/**
  * \brief Definição do tamanho máximo da line de input.
  */
 #define MAX_LENGTH_INPUT 10240

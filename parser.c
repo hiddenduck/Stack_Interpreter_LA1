@@ -12,7 +12,7 @@
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param operationMap Endereço do primeiro elemento do operationMap.
  */
-void operate(char *token, Stack *stack, OperationMap *operationMap) {
+void Operator(char *token, Stack *stack, OperationMap *operationMap) {
     Operation operation = operationMap[0].op;
     if(strlen(token)==1) {
         int i;
@@ -30,9 +30,11 @@ void operate(char *token, Stack *stack, OperationMap *operationMap) {
 /**
  * \brief Função que interpreta o input e altera a stack segundo esse input.
  *
- * @param input String com o \a input.
+ * @param token String com um fragmento do input
+ * @param stack Endereço da stack responsável pelo armazenamento.
+ * @param opMap Mapa com as operações
  */
-void parse(char *token, Stack *stack, OperationMap opMap[]){
+void InputParser(char *token, Stack *stack, OperationMap *opMap){
 
     char *resto;
 
@@ -50,6 +52,22 @@ void parse(char *token, Stack *stack, OperationMap opMap[]){
             vald += vall;
             Push(CreateDataDOUBLE(vald), stack);
         } else
-            operate(token, stack, opMap);
+            Operator(token, stack, opMap);
     }
+}
+
+/**
+ * \brief Função que recebe o input do utilizador e invoca o InputParser.
+ * @param stack Endereço da stack responsável pelo armazenamento.
+ */
+void InputReader(Stack *stack) {
+    char input[MAX_LENGTH_INPUT];
+
+    assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
+    assert(input[strlen(input) - 1] == '\n');
+    OperationMap opMap[] = OPERATION_MAP;
+
+    char *delims = " \t\n";
+    for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
+        InputParser(token, stack, opMap);
 }
