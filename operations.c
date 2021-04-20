@@ -5,7 +5,7 @@
 
 /**
  * \brief Função que auxilia funções sem argumentos.
- * @param operation 
+ * @param operation Endereço de uma função sem argumentos.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void SemArgumentos(Operation operation, Stack *stack) {
@@ -14,7 +14,7 @@ void SemArgumentos(Operation operation, Stack *stack) {
 
 /**
  * \brief Função que auxilia funções de um argumento.
- * @param operation
+ * @param operation Endereço de uma função com um argumento.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void UmArgumento(Operation operation, Stack *stack) {
@@ -24,8 +24,8 @@ void UmArgumento(Operation operation, Stack *stack) {
 }
 
 /**
- * \brief
- * @param operation Função que auxilia funções de dois argumentos.
+ * \brief Função que auxilia funções de dois argumentos.
+ * @param operation Endereço de uma função com dois argumentos.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
