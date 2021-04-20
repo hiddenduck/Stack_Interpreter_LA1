@@ -5,8 +5,8 @@
 
 /**
  *
- * @param operation
- * @param stack
+ * @param operation 
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void SemArgumentos(Operation operation, Stack *stack) {
     operation(stack);
@@ -15,7 +15,7 @@ void SemArgumentos(Operation operation, Stack *stack) {
 /**
  *
  * @param operation
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void UmArgumento(Operation operation, Stack *stack) {
     Data d1 = Pop(stack);
@@ -26,7 +26,7 @@ void UmArgumento(Operation operation, Stack *stack) {
 /**
  *
  * @param operation
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
     Data d2 = Pop(stack);
@@ -149,7 +149,7 @@ void not(Data *d) {
 
 /**
  *
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void Underscore(Stack *stack) {
     Data *x = Read(0, stack);
@@ -159,7 +159,7 @@ void Underscore(Stack *stack) {
 
 /**
  *
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void Swap(Stack *stack) {
     Data y = Pop(stack);
@@ -170,7 +170,7 @@ void Swap(Stack *stack) {
 
 /**
  *
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void SwapThree(Stack *stack) {
     Data z = Pop(stack);
@@ -183,7 +183,7 @@ void SwapThree(Stack *stack) {
 
 /**
  *
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DollarSign(Stack *stack) {
     Data indice = Pop(stack);
@@ -195,7 +195,7 @@ void DollarSign(Stack *stack) {
 
 /**
  *
- * @param stack
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void ReadLine(Stack *stack) {
     char linha[MAX_LENGTH_INPUT];
