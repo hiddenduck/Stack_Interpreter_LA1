@@ -7,10 +7,10 @@
 #include "parser.h"
 
 /**
- * \brief Função que executa um comando de acordo com o token
- * @param token Endereço do token
+ * \brief Função que executa um comando de acordo com o token.
+ * @param token Endereço do token.
  * @param stack Endereço da stack responsável pelo armazenamento.
- * @param operationMap
+ * @param operationMap Endereço do primeiro elemento do operationMap.
  */
 void operate(char *token, Stack *stack, OperationMap *operationMap) {
     Operation operation = operationMap[0].op;
