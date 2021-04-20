@@ -9,15 +9,17 @@
 #define MAX_LENGTH_INPUT 10240
 
 /**
- *
+ * \brief Tipo de dados que funciona como apontador para uma função operação.
  */
 typedef void (*Operation)();
 
 /**
- *
+ * \brief Tipo de dados que armazena um simbolo (tipo char) e uma função operação (Operation).
  */
 typedef struct {
+    /**char responsável pela identificação da operação*/
     char simbolo;
+    /** Apontador para uma função*/
     Operation op;
 }OperationMap;
 
