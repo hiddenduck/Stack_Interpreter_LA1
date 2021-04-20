@@ -100,8 +100,8 @@ void DataToLONG(Data *d) {
 }
 
 /**
- *
- * @param d
+ * \brief Função que converte um Data com qualquer Tipo num Data com Tipo CHAR.
+ * @param d Endereço de um data
  */
 void DataToCHAR(Data *d) {
     switch (d->tipo) {
