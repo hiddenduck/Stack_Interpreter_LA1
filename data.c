@@ -71,7 +71,7 @@ void DataToDOUBLE(Data *d) {
         default:
             return;
     }
-    double *vp = realloc(d->value, sizeof(double));
+    double *vp = (double *) realloc(d->value, sizeof(double));
     *vp = val;
     d->value = vp;
     d->tipo = DOUBLE;
@@ -95,7 +95,7 @@ void DataToLONG(Data *d) {
         default:
             return;
     }
-    long *vp = realloc(d->value, sizeof(long));
+    long *vp = (long *) realloc(d->value, sizeof(long));
     *vp = val;
     d->value = vp;
     d->tipo = LONG;
@@ -109,18 +109,17 @@ void DataToCHAR(Data *d) {
     switch (d->tipo) {
         case STRING: {
             char val = *DataValCHAR(d);
-            char *vp = realloc(d->value, sizeof(char));
+            char *vp = (char *) realloc(d->value, sizeof(char));
             *vp = val;
             d->value = vp;
-            d->tipo = CHAR;
             break;
         }
         default: {
             DataToLONG(d);
-            d->tipo = CHAR;
             break;
         }
     }
+    d->tipo = CHAR;
 }
 
 /**

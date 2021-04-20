@@ -65,6 +65,7 @@ void InputReader(Stack *stack) {
 
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
+
     OperationMap opMap[] = OPERATION_MAP;
 
     char *delims = " \t\n";

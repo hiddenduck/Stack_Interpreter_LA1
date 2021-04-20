@@ -6,7 +6,7 @@
 /**
  * \brief Array com todas as operações implementadas
  */
-#define  OPERATION_MAP {{' ', SemArgumentos}, \
+#define OPERATION_MAP {{' ', SemArgumentos}, \
                 {';', DecrementaSP}, \
                 {'_', Underscore},\
                 {'\\', Swap},\

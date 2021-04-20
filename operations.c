@@ -18,9 +18,8 @@ void SemArgumentos(Operation operation, Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void UmArgumento(Operation operation, Stack *stack) {
-    Data d1 = Pop(stack);
-    (*operation)(&d1);
-    Push(d1, stack);
+    Data *d1 = Read(0, stack);
+    (*operation)(d1);
 }
 
 /**
@@ -29,11 +28,9 @@ void UmArgumento(Operation operation, Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
-    Data d2 = Pop(stack);
-    Data d1 = Pop(stack);
-    (*operation)(&d1, &d2);
-    Push(d2, stack);
-    free(d1.value);
+    Data d2 = Pop(stack), *d1 = Read(0, stack);
+    (*operation)(d1, &d2);
+    free(d2.value);
 }
 
 /**
@@ -47,16 +44,16 @@ void DoisArgumentos(Operation operation, Stack *stack) {
 void _name(Data *d1, Data *d2) {                                                                   \
     switch ((d1->tipo)&(d2->tipo)) {                                                               \
         case LONG:                                                                                 \
-            *(DataValLONG(d2)) = ((*(DataValLONG(d1))) _op (*(DataValLONG(d2))));                  \
+            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) _op (*(DataValLONG(d2))));                  \
             break;                                                                                 \
         default:                                                                                   \
-            DataToDOUBLE(d2);                                                                      \
-            switch(d1->tipo) {                                                                     \
+            DataToDOUBLE(d1);                                                                      \
+            switch(d2->tipo) {                                                                     \
                 case LONG:                                                                         \
-                    *(DataValDOUBLE(d2)) = ((*(DataValLONG(d1))) _op (*(DataValDOUBLE(d2))));      \
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) _op (*(DataValLONG(d2))));      \
                     break;                                                                         \
                 case DOUBLE:                                                                       \
-                    *(DataValDOUBLE(d2)) = ((*(DataValDOUBLE(d1))) _op (*(DataValDOUBLE(d2))));    \
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) _op (*(DataValDOUBLE(d2))));    \
                     break;                                                                         \
                 default:                                                                           \
                     break;                                                                         \
@@ -108,7 +105,7 @@ CreateOpIncremento(decre, --)
 */
 #define CreateOpBitwise(_name, _op)                                  \
 void _name(Data *d1, Data *d2) {                                     \
-    *(DataValLONG(d2)) = (*DataValLONG(d1) _op *DataValLONG(d2));    \
+    *(DataValLONG(d1)) = (*DataValLONG(d1) _op *DataValLONG(d2));    \
 }
 
 /** Inicialização da função bitwise and. */
@@ -126,13 +123,13 @@ CreateOpBitwise(modulo, %)
  * @param d2 Endereço do expoente.
  */
 void potencia(Data *d1, Data *d2) {
-    DataToDOUBLE(d2);
-    switch (d1->tipo) {
+    DataToDOUBLE(d1);
+    switch (d2->tipo) {
         case LONG:
-            *(DataValDOUBLE(d2)) = (pow(*(DataValLONG(d1)), *(DataValDOUBLE(d2))));
+            *(DataValDOUBLE(d1)) = (pow(*(DataValDOUBLE(d1)), *(DataValLONG(d2))));
             break;
         case DOUBLE:
-            *(DataValDOUBLE(d2)) = (pow(*(DataValDOUBLE(d1)), *(DataValDOUBLE(d2))));
+            *(DataValDOUBLE(d1)) = (pow(*(DataValDOUBLE(d1)), *(DataValDOUBLE(d2))));
             break;
         default:
             break;
