@@ -148,7 +148,7 @@ void not(Data *d) {
 }
 
 /**
- *
+ * \brief Função que duplica o elemento no topo da \a stack.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void Underscore(Stack *stack) {
@@ -158,7 +158,7 @@ void Underscore(Stack *stack) {
 }
 
 /**
- *
+ * \brief Função que troca o elemento do topo da \a stack com o elemento na posição sp-1.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void Swap(Stack *stack) {
@@ -169,7 +169,7 @@ void Swap(Stack *stack) {
 }
 
 /**
- *
+ * \brief Função que troca o elemento do topo da \a stack, o da posição sp-1 e o da posição sp-2.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void SwapThree(Stack *stack) {
@@ -182,7 +182,7 @@ void SwapThree(Stack *stack) {
 }
 
 /**
- *
+ * \brief Função que coloca no topo da \a stack o elemento no indice n.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DollarSign(Stack *stack) {
@@ -194,7 +194,7 @@ void DollarSign(Stack *stack) {
 }
 
 /**
- *
+ * \brief Função que lê uma nova linha e coloca-a na \a stack.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void ReadLine(Stack *stack) {
