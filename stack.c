@@ -32,8 +32,8 @@ Data Pop(Stack *stack) {
 }
 
 /**
- *
- * @param stack
+ * \brief Função que decrementa o sp e liberta o Data que o stack pointer estava a apontar.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DecrementaSP(Stack *stack) {
     free(stack->array[(stack->sp)--].value);
