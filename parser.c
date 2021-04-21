@@ -20,6 +20,11 @@ void Operator(char *token, Stack *stack, OperationMap *operationMap) {
             if (operationMap[i].simbolo == ' ')
                 operation = operationMap[i].op;
             if (operationMap[i].simbolo == token[0]) {
+                //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
+                //elementos que estão na stack
+
+                //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
+
                 (operation)(operationMap[i].op, stack);
                 break;
             }
@@ -69,6 +74,14 @@ void InputReader(Stack *stack) {
     OperationMap opMap[] = OPERATION_MAP;
 
     char *delims = " \t\n";
-    for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims))
+    for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
+        //char *getToken(linha, resto)
+        //recebe a linha e faz sscanf(%s, %[^\n^])
+        //fazer um Reader que lê a linha, devolve o token com tudo que esteja entre dois delimitadores
+        //ver onde começa um [ e soma 1 a um long quando vê um ] subtrai 1 a um long
+        //quando esse long for 0 o array acabou
+
+        //função eval recebe a linha e a stack inicial e cria a stack se não existir (?)
+        //funciona como o parser e pode ser chamada recursivamente para os arrays
         InputParser(token, stack, opMap);
 }
