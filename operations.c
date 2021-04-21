@@ -123,15 +123,24 @@ CreateOpBitwise(modulo, %)
  * @param d2 Endereço do expoente.
  */
 void potencia(Data *d1, Data *d2) {
-    DataToDOUBLE(d1);
-    switch (d2->tipo) {
+    //cuidado em manter os dois tipos intactos se forem ambos long
+    switch (d1->tipo&d2->tipo) {
         case LONG:
-            *(DataValDOUBLE(d1)) = (pow(*(DataValDOUBLE(d1)), *(DataValLONG(d2))));
-            break;
-        case DOUBLE:
-            *(DataValDOUBLE(d1)) = (pow(*(DataValDOUBLE(d1)), *(DataValDOUBLE(d2))));
+            *(DataValLONG(d1)) = (long) pow(*DataValLONG(d1), *DataValLONG(d2));
             break;
         default:
+            DataToDOUBLE(d1);
+            double *p = DataValDOUBLE(d1);
+            switch (d2->tipo) {
+                case LONG:
+                    *p = pow(*p, *DataValLONG(d2));
+                    break;
+                case DOUBLE:
+                    *p = pow(*p, *DataValDOUBLE(d2));
+                    break;
+                default:
+                    break;
+            }
             break;
     }
 }
