@@ -62,13 +62,13 @@ void _name(Data *d1, Data *d2) {                                                
     }                                                                                              \
 }
 
-/** Inicialização da função algorítmica soma. */
+/** \brief Inicialização da função algorítmica soma. */
 CreateOpAlgebrica(soma, +)
-/** Inicialização da função algorítmica subtr. */
+/** \brief Inicialização da função algorítmica subtr. */
 CreateOpAlgebrica(subtr, -)
-/** Inicialização da função algorítmica mult. */
+/** \brief Inicialização da função algorítmica mult. */
 CreateOpAlgebrica(mult, *)
-/** Inicialização da função algorítmica divi. */
+/** \brief Inicialização da função algorítmica divi. */
 CreateOpAlgebrica(divi, /)
 
 /**
@@ -108,13 +108,13 @@ void _name(Data *d1, Data *d2) {                                     \
     *(DataValLONG(d1)) = (*DataValLONG(d1) _op *DataValLONG(d2));    \
 }
 
-/** Inicialização da função bitwise and. */
+/** \brief Inicialização da função bitwise and. */
 CreateOpBitwise(and, &)
-/** Inicialização da função bitwise or. */
+/** \brief Inicialização da função bitwise or. */
 CreateOpBitwise(or, |)
-/** Inicialização da função bitwise xor. */
+/** \brief Inicialização da função bitwise xor. */
 CreateOpBitwise(xor, ^)
-/** Inicialização da função bitwise modulo. */
+/** \brief Inicialização da função bitwise modulo. */
 CreateOpBitwise(modulo, %)
 
 /**

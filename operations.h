@@ -63,13 +63,13 @@ void SemArgumentos(Operation operation, Stack *stack);
 #define CreateOpAlgebricaProto(_name) \
 void _name(Data *d1, Data *d2);
 
-/** Declaração da função soma.*/
+/** \brief Declaração da função soma.*/
 CreateOpAlgebricaProto(soma)
-/** Declaração da função subtr.*/
+/** \brief Declaração da função subtr.*/
 CreateOpAlgebricaProto(subtr)
-/** Declaração da função mult.*/
+/** \brief Declaração da função mult.*/
 CreateOpAlgebricaProto(mult)
-/** Declaração da função divi.*/
+/** \brief Declaração da função divi.*/
 CreateOpAlgebricaProto(divi)
 
 /** 
@@ -78,9 +78,9 @@ CreateOpAlgebricaProto(divi)
 #define CreateOpIncrementoProto(_name) \
 void _name(Data *d1);
 
-/** Declaração da função incre.*/
+/** \brief Declaração da função incre.*/
 CreateOpIncrementoProto(incre)
-/** Declaração da função decre.*/
+/** \brief Declaração da função decre.*/
 CreateOpIncrementoProto(decre)
 
 /** 
@@ -89,13 +89,13 @@ CreateOpIncrementoProto(decre)
 #define CreateOpBitwiseProto(_name) \
 void _name(Data *d1, Data *d2);
 
-/** Declaração da função and.*/
+/** \brief Declaração da função and.*/
 CreateOpBitwiseProto(and)
-/** Declaração da função or.*/
+/** \brief Declaração da função or.*/
 CreateOpBitwiseProto(or)
-/** Declaração da função xor.*/
+/** \brief Declaração da função xor.*/
 CreateOpBitwiseProto(xor)
-/** Declaração da função modulo.*/
+/** \brief Declaração da função modulo.*/
 CreateOpBitwiseProto(modulo)
 
 void not(Data *d1);

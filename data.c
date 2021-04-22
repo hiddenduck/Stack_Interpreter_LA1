@@ -34,11 +34,11 @@ DataVal(STRING, char) //não faz nada diferente do DataValCHAR (lê o primeiro d
         Data op = {_name, vp};                         \
         return op;                                     \
     }
-/** Inicialização da função algorítmica CreateDataCHAR. */
+/** \brief Inicialização da função algorítmica CreateDataCHAR. */
 CreateData(CHAR, char)
-/** Inicialização da função algorítmica CreateDataLONG. */
+/** \brief Inicialização da função algorítmica CreateDataLONG. */
 CreateData(LONG, long)
-/** Inicialização da função algorítmica CreateDataDOUBLE. */
+/** \brief Inicialização da função algorítmica CreateDataDOUBLE. */
 CreateData(DOUBLE, double)
 
 /**
