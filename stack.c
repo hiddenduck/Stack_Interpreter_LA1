@@ -36,7 +36,8 @@ Data Pop(Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DecrementaSP(Stack *stack) {
-    free(stack->array[(stack->sp)--].value);
+    if (stack->sp != -1)
+        free(stack->array[(stack->sp)--].value);
 }
 
 /**
