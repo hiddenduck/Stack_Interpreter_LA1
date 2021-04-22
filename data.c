@@ -13,13 +13,13 @@
         return (_type*) data->value;       \
     }
 
-/** Inicialização da função DataValCHAR. */
+/** \brief Inicialização da função DataValCHAR. */
 DataVal(CHAR, char)
-/** Inicialização da função algorítmica DataValLONG. */
+/** \brief Inicialização da função algorítmica DataValLONG. */
 DataVal(LONG, long)
-/** Inicialização da função algorítmica DataValDOUBLE. */
+/** \brief Inicialização da função algorítmica DataValDOUBLE. */
 DataVal(DOUBLE, double)
-/** Inicialização da função algorítmica DataValSTRING. */
+/** \brief Inicialização da função algorítmica DataValSTRING. */
 DataVal(STRING, char) //não faz nada diferente do DataValCHAR (lê o primeiro do array)
 
 /**

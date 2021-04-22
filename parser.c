@@ -14,22 +14,21 @@
  */
 void Operator(char *token, Stack *stack, OperationMap *operationMap) {
     Operation operation = operationMap[0].op;
-    if(strlen(token)==1) {
-        int i;
-        for (i = 1; operationMap[i].simbolo != 0; i++) {
-            if (operationMap[i].simbolo == ' ')
-                operation = operationMap[i].op;
-            if (operationMap[i].simbolo == token[0]) {
-                //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
-                //elementos que estão na stack
+    int i;
+    for (i = 1; operationMap[i].simbolo != 0; i++) {
+        if (operationMap[i].simbolo[0] == ' ')
+            operation = operationMap[i].op;
+        if (strcmp(operationMap[i].simbolo, token) == 0) {
+            //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
+            //elementos que estão na stack
 
-                //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
+            //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
 
-                (operation)(operationMap[i].op, stack);
-                break;
-            }
+            (operation)(operationMap[i].op, stack);
+            break;
         }
     }
+
 }
 
 /**

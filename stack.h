@@ -1,3 +1,5 @@
+#ifndef STACK_H
+#define STACK_H
 
 /**
  * @headerfile stack.h
@@ -31,3 +33,5 @@ void Push(Data operando, Stack *stack);
 Data *Read(long deslocamento, Stack *stack);
 
 void PrintStack(Stack *stack);
+
+#endif

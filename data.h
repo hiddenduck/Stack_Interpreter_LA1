@@ -1,3 +1,5 @@
+#ifndef DATA_H
+#define DATA_H
 
 /**
  * @headerfile data.h
@@ -59,3 +61,5 @@ void DataToCHAR(Data *d1);
 Data DataDup(Data *target);
 
 void PrintData(Data *data);
+
+#endif
