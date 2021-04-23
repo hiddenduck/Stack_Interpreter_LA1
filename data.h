@@ -7,7 +7,7 @@
 #include <string.h>
 
 /**
- * \brief Declaração dos Tipos possíveis para os Data.
+ * \typedef Declaração dos Tipos possíveis para os Data.
  */
 typedef enum {CHAR = 1, LONG = 2, DOUBLE = 4, STRING = 8} Tipo;
 /**
