@@ -10,7 +10,6 @@
  * \brief Declaração dos Tipos possíveis para os Data.
  */
 typedef enum {CHAR = 1, LONG = 2, DOUBLE = 4, STRING = 8} Tipo;
-
 /**
  * \brief Declaração da estrutura de dados Data.
  */
@@ -27,13 +26,13 @@ typedef struct data {
 #define DataValProto(_name, _type)       \
     _type *DataVal##_name(Data *val);    \
 
-/** Declaração da função DataValLONG.*/
+/** \brief Declaração da função DataValLONG.*/
 DataValProto(LONG, long)
-/** Declaração da função DataValDOUBLE.*/
+/** \brief Declaração da função DataValDOUBLE.*/
 DataValProto(DOUBLE, double)
-/** Declaração da função DataValCHAR.*/
+/** \brief Declaração da função DataValCHAR.*/
 DataValProto(CHAR, char)
-/** Declaração da função DataValSTRING.*/
+/** \brief Declaração da função DataValSTRING.*/
 DataValProto(STRING, char)
 
 /**
@@ -42,13 +41,13 @@ DataValProto(STRING, char)
 #define CreateDataProto(_name, _type)    \
     Data CreateData##_name(_type val);   \
 
-/** Declaração da função CreateDataLONG.*/
+/** \brief Declaração da função CreateDataLONG.*/
 CreateDataProto(LONG, long)
-/** Declaração da função CreateDataDOUBLE.*/
+/** \brief Declaração da função CreateDataDOUBLE.*/
 CreateDataProto(DOUBLE, double)
-/** Declaração da função CreateDataCHAR.*/
+/** \brief Declaração da função CreateDataCHAR.*/
 CreateDataProto(CHAR, char)
-/** Declaração da função CreateDataSTRING.*/
+/** \brief Declaração da função CreateDataSTRING.*/
 CreateDataProto(STRING, char *)
 
 void DataToDOUBLE(Data *d1);
