@@ -12,10 +12,10 @@
  *
  * @return A Stack inicializada na função.
  */
-Stack *CreateStack() {
+Stack *CreateStack(int size) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
     assert(s != NULL);
-    s->size = INCREMENTO_STACK;
+    s->size = size;
     s->sp = -1;
     s->array = (Data *) calloc(s->size, sizeof(Data));
     return s;
@@ -36,7 +36,8 @@ Data Pop(Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DecrementaSP(Stack *stack) {
-    free(stack->array[(stack->sp)--].value);
+    if (stack->sp != -1)
+        free(stack->array[(stack->sp)--].value);
 }
 
 /**

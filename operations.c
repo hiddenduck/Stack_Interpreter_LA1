@@ -3,6 +3,9 @@
  */
 #include "operations.h"
 
+//acho que temos de alterar estas funções para serem auxiliares de algébricas
+//criar auxiliares para outros tipos, apesar de que as logicas podem usar estas na mesma
+
 /**
  * \brief Função que auxilia funções sem argumentos.
  * @param operation Endereço de uma função sem argumentos.
@@ -28,8 +31,9 @@ void UmArgumento(Operation operation, Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
-    Data d2 = Pop(stack), *d1 = Read(0, stack);
-    (*operation)(d1, &d2);
+    Data d2 = Pop(stack), d1 = Pop(stack);
+    (*operation)(&d1, &d2);
+    Push(d1, stack);
     free(d2.value);
 }
 
@@ -149,7 +153,7 @@ void potencia(Data *d1, Data *d2) {
  * \brief Função que inverte os bits de um certo Data do Tipo LONG.
  * @param d Endereço de um Data do Tipo LONG.
 */
-void not(Data *d) {
+void notBW(Data *d) {
     *DataValLONG(d) = ~*(DataValLONG(d));
 }
 
@@ -208,4 +212,11 @@ void ReadLine(Stack *stack) {
     assert(fgets(linha, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(linha[strlen(linha) - 1] == '\n');
     Push(CreateDataSTRING(linha), stack);
+}
+
+void TwoPoints (Stack *stack, Stack *vars, char token){
+    //limpar isto (MI)
+    Data *letter = Read(64 - token, vars);
+    Data *valor = Read(0,stack);
+    *letter = DataDup(valor);
 }

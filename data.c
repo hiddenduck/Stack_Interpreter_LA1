@@ -13,13 +13,13 @@
         return (_type*) data->value;       \
     }
 
-/** Inicialização da função DataValCHAR. */
+/** \brief Inicialização da função DataValCHAR. */
 DataVal(CHAR, char)
-/** Inicialização da função algorítmica DataValLONG. */
+/** \brief Inicialização da função algorítmica DataValLONG. */
 DataVal(LONG, long)
-/** Inicialização da função algorítmica DataValDOUBLE. */
+/** \brief Inicialização da função algorítmica DataValDOUBLE. */
 DataVal(DOUBLE, double)
-/** Inicialização da função algorítmica DataValSTRING. */
+/** \brief Inicialização da função algorítmica DataValSTRING. */
 DataVal(STRING, char) //não faz nada diferente do DataValCHAR (lê o primeiro do array)
 
 /**
@@ -93,6 +93,7 @@ void DataToLONG(Data *d) {
             break;
         }
         default:
+            d->tipo = LONG;
             return;
     }
     long *vp = (long *) realloc(d->value, sizeof(long));
@@ -114,6 +115,8 @@ void DataToCHAR(Data *d) {
             d->value = vp;
             break;
         }
+        case CHAR:
+            break;
         default: {
             DataToLONG(d);
             break;
@@ -153,7 +156,6 @@ Data DataDup(Data *target) {
 
 /**
  * \brief Função que imprime um certo elemento de acordo com o seu Tipo.
- *
  * @param data Elemento a imprimir.
  */
 void PrintData(Data *data) {
@@ -171,4 +173,14 @@ void PrintData(Data *data) {
             printf("%s", (char*)data->value);
             break;
     }
+}
+
+/** \brief Função que Troca dois Datas.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+*/  
+void swapData (Data *d1, Data *d2){
+    Data temp = *d1;
+    *d1 = *d2;
+    *d2 = temp; 
 }

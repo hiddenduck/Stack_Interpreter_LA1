@@ -1,3 +1,5 @@
+#ifndef STACK_H
+#define STACK_H
 
 /**
  * @headerfile stack.h
@@ -23,7 +25,7 @@ typedef struct stack {
     int sp;
 }Stack;
 
-Stack *CreateStack();
+Stack *CreateStack(int size);
 
 Data Pop(Stack *stack);
 void DecrementaSP(Stack *stack);
@@ -31,3 +33,5 @@ void Push(Data operando, Stack *stack);
 Data *Read(long deslocamento, Stack *stack);
 
 void PrintStack(Stack *stack);
+
+#endif

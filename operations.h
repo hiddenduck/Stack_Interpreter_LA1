@@ -1,35 +1,48 @@
 /**
  * @headerfile operations.h
  */
+#ifndef OPERATIONS_H
+#define OPERATIONS_H
+
 #include "stack.h"
+#include "logic.h"
 
 /**
  * \brief Array com todas as operações implementadas
  */
-#define OPERATION_MAP {{' ', SemArgumentos}, \
-                {';', DecrementaSP}, \
-                {'_', Underscore},\
-                {'\\', Swap},\
-                {'@', SwapThree},\
-                {'$', DollarSign},\
-                {'l', ReadLine},\
-                {' ', UmArgumento},\
-                {'(', decre},\
-                {')', incre},\
-                {'~', not},\
-                {'c', DataToCHAR},\
-                {'i', DataToLONG},\
-                {'f', DataToDOUBLE},\
-                {' ', DoisArgumentos},\
-                {'+', soma},\
-                {'-', subtr},\
-                {'*', mult},\
-                {'/', divi},\
-                {'%', modulo},\
-                {'#', potencia},\
-                {'&', and},\
-                {'|', or},\
-                {'^', xor},\
+#define OPERATION_MAP {{" ", SemArgumentos}, \
+                {";", DecrementaSP}, \
+                {"_", Underscore},\
+                {"\\", Swap},\
+                {"@", SwapThree},\
+                {"$", DollarSign},\
+                {"l", ReadLine},            \
+                {"?", ifThenElse},           \
+                {" ", UmArgumento},          \
+                {"!", notLG},\
+                {"(", decre},\
+                {")", incre},\
+                {"~", notBW},\
+                {"c", DataToCHAR},\
+                {"i", DataToLONG},\
+                {"f", DataToDOUBLE},\
+                {" ", DoisArgumentos},   \
+                {"e<", LesserBetweenTwo},   \
+                {"e>", GreaterBetweenTwo},   \
+                {"e&", andWithShortcut},     \
+                {"e|", orWithShortcut},      \
+                {"=", equals},               \
+                {"<", lesser},               \
+                {">", greater},\
+                {"+", soma},\
+                {"-", subtr},\
+                {"*", mult},\
+                {"/", divi},\
+                {"%", modulo},\
+                {"#", potencia},\
+                {"&", and},\
+                {"|", or},\
+                {"^", xor},\
                 {0, NULL} \
                 }
 
@@ -47,8 +60,8 @@ typedef void (*Operation)();
  * \brief Tipo de dados que armazena um simbolo (tipo char) e uma função operação (Operation).
  */
 typedef struct {
-    /**char responsável pela identificação da operação*/
-    char simbolo;
+    /** char responsável pela identificação da operação*/
+    char *simbolo;
     /** Apontador para uma função*/
     Operation op;
 }OperationMap;
@@ -98,7 +111,7 @@ CreateOpBitwiseProto(xor)
 /** \brief Declaração da função modulo.*/
 CreateOpBitwiseProto(modulo)
 
-void not(Data *d1);
+void notBW(Data *d);
 void potencia(Data *d1, Data *d2);
 
 
@@ -108,3 +121,6 @@ void Swap(Stack *stack);
 void SwapThree(Stack *stack);
 void DollarSign(Stack *stack);
 void ReadLine(Stack *stack);
+void TwoPoints (Stack *stack, Stack *vars, char token);
+
+#endif
