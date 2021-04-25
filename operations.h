@@ -16,6 +16,8 @@
                 {"\\", Swap},\
                 {"@", SwapThree},\
                 {"$", DollarSign},\
+                {"e<", LesserBetweenTwo},   \
+                {"e>", GreaterBetweenTwo},            \
                 {"l", ReadLine},            \
                 {"?", ifThenElse},           \
                 {" ", UmArgumento},          \

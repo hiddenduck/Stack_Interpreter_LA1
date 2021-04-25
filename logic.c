@@ -73,17 +73,125 @@ void ifThenElse(Stack *stack){
     Data logicValue = Pop(stack);
     switch(logicValue.tipo){
         case LONG:
-            if(*DataValLONG(&logicValue))
+            if(*DataValLONG(&logicValue)){
                 Push(thenOperator, stack);
-            else
+                free(elseOperator.value);
+                free(logicValue.value);
+            }
+            else{
                 Push(elseOperator, stack);
+                free(thenOperator.value);
+                free(logicValue.value);
+            }
             break;
         case DOUBLE:
-            if(*DataValDOUBLE(&logicValue))
+            if(*DataValDOUBLE(&logicValue)){
                 Push(thenOperator, stack);
-            else
+                free(elseOperator.value);
+                free(logicValue.value);
+            }
+            else{
                 Push(elseOperator, stack);
+                free(thenOperator.value);
+                free(logicValue.value);
+            }
         default:
+            break;
+    }
+}
+
+/** \brief
+*
+*/
+void LesserBetweenTwo(Stack *stack){
+    Data d2 = Pop(stack);
+    Data d1 = Pop(stack);
+    switch (d1.tipo&d2.tipo) {
+        case LONG:
+            if(*DataValLONG(&d1)>*DataValLONG(&d2)){
+                Push(d2, stack);
+                free(d1.value);
+            }
+            else{
+                Push(d1, stack);
+                free(d2.value);
+            }
+            break;
+        default:
+            DataToDOUBLE(&d1);
+            double *p = DataValDOUBLE(&d1);
+            switch (d2.tipo) {
+                case LONG:
+                    if(*p>*DataValLONG(&d2)){
+                        Push(d2, stack);
+                        free(d1.value);
+                    }
+                    else{
+                        Push(d1, stack);
+                        free(d2.value);
+                        }
+                    break;
+                case DOUBLE:
+                    if(*p>*DataValDOUBLE(&d2)){
+                        Push(d2, stack);
+                        free(d1.value);
+                    }
+                    else{
+                        Push(d1, stack);
+                        free(d2.value);
+                    }
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
+}
+
+/** \brief
+*
+*/
+void GreaterBetweenTwo(Stack *stack){
+    Data d2 = Pop(stack);
+    Data d1 = Pop(stack);
+    switch (d1.tipo&d2.tipo) {
+        case LONG:
+            if(*DataValLONG(&d1)<*DataValLONG(&d2)){
+                Push(d2, stack);
+                free(d1.value);
+            }
+            else{
+                Push(d1, stack);
+                free(d2.value);
+            }
+            break;
+        default:
+            DataToDOUBLE(&d1);
+            double *p = DataValDOUBLE(&d1);
+            switch (d2.tipo) {
+                case LONG:
+                    if(*p<*DataValLONG(&d2)){
+                        Push(d2, stack);
+                        free(d1.value);
+                    }
+                    else{
+                        Push(d1, stack);
+                        free(d2.value);
+                        }
+                    break;
+                case DOUBLE:
+                    if(*p<*DataValDOUBLE(&d2)){
+                        Push(d2, stack);
+                        free(d1.value);
+                    }
+                    else{
+                        Push(d1, stack);
+                        free(d2.value);
+                    }
+                    break;
+                default:
+                    break;
+            }
             break;
     }
 }

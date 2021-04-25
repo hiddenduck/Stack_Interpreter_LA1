@@ -9,5 +9,6 @@ void lesser(Data *d1, Data *d2);
 void greater(Data *d1, Data *d2);
 void notLG(Data *d1);
 void ifThenElse(Stack *stack);
-
+void LesserBetweenTwo(Stack *stack);
+void GreaterBetweenTwo(Stack *stack);
 #endif
