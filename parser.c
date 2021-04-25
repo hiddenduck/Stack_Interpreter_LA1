@@ -57,9 +57,10 @@ void InputParser(char *token, Stack *stack, OperationMap *opMap, Stack *vars){
             vald += vall;
             Push(CreateDataDOUBLE(vald), stack);
         } else if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
+            //limpar isto (MI)
             Data *letter = Read(64 - token[0], vars);
-            Push(*letter, stack);
-        }else
+            Push(DataDup(letter), stack);
+        } else
             Operator(token, stack, opMap, vars);
     }
 }

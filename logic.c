@@ -68,6 +68,7 @@ void notLG(Data *d1) {
  *  \param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void ifThenElse(Stack *stack){
+    //limpar isto !!!!(MI)
     Data elseOperator = Pop(stack);
     Data thenOperator = Pop(stack);
     Data logicValue = Pop(stack);
