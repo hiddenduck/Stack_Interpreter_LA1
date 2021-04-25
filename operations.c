@@ -31,8 +31,9 @@ void UmArgumento(Operation operation, Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
-    Data d2 = Pop(stack), *d1 = Read(0, stack);
-    (*operation)(d1, &d2);
+    Data d2 = Pop(stack), d1 = Pop(stack);
+    (*operation)(&d1, &d2);
+    Push(d1, stack);
     free(d2.value);
 }
 

@@ -100,98 +100,26 @@ void ifThenElse(Stack *stack){
     }
 }
 
-/** \brief
-*
+/** \brief Função que coloca o menor dos 2 valores na stack.
+*   @param d1 Endereço de um Data.
+*   @param d2 Endereço de um Data.
 */
-void LesserBetweenTwo(Stack *stack){
-    Data d2 = Pop(stack);
-    Data d1 = Pop(stack);
-    switch (d1.tipo&d2.tipo) {
-        case LONG:
-            if(*DataValLONG(&d1)>*DataValLONG(&d2)){
-                Push(d2, stack);
-                free(d1.value);
-            }
-            else{
-                Push(d1, stack);
-                free(d2.value);
-            }
-            break;
-        default:
-            DataToDOUBLE(&d1);
-            double *p = DataValDOUBLE(&d1);
-            switch (d2.tipo) {
-                case LONG:
-                    if(*p>*DataValLONG(&d2)){
-                        Push(d2, stack);
-                        free(d1.value);
-                    }
-                    else{
-                        Push(d1, stack);
-                        free(d2.value);
-                        }
-                    break;
-                case DOUBLE:
-                    if(*p>*DataValDOUBLE(&d2)){
-                        Push(d2, stack);
-                        free(d1.value);
-                    }
-                    else{
-                        Push(d1, stack);
-                        free(d2.value);
-                    }
-                    break;
-                default:
-                    break;
-            }
-            break;
-    }
+void LesserBetweenTwo(Data *d1, Data *d2){
+    double a,b;
+    LogicTestD1;
+    LogicTestD2;
+    if(a>b)
+        swapData(d1,d2);
 }
 
-/** \brief
-*
-*/
-void GreaterBetweenTwo(Stack *stack){
-    Data d2 = Pop(stack);
-    Data d1 = Pop(stack);
-    switch (d1.tipo&d2.tipo) {
-        case LONG:
-            if(*DataValLONG(&d1)<*DataValLONG(&d2)){
-                Push(d2, stack);
-                free(d1.value);
-            }
-            else{
-                Push(d1, stack);
-                free(d2.value);
-            }
-            break;
-        default:
-            DataToDOUBLE(&d1);
-            double *p = DataValDOUBLE(&d1);
-            switch (d2.tipo) {
-                case LONG:
-                    if(*p<*DataValLONG(&d2)){
-                        Push(d2, stack);
-                        free(d1.value);
-                    }
-                    else{
-                        Push(d1, stack);
-                        free(d2.value);
-                        }
-                    break;
-                case DOUBLE:
-                    if(*p<*DataValDOUBLE(&d2)){
-                        Push(d2, stack);
-                        free(d1.value);
-                    }
-                    else{
-                        Push(d1, stack);
-                        free(d2.value);
-                    }
-                    break;
-                default:
-                    break;
-            }
-            break;
-    }
+/** \brief Função que coloca o maior dos 2 valores na stack
+*   @param d1 Endereço de um Data.
+*   @param d2 Endereço de uma Data
+*/  
+void GreaterBetweenTwo(Data *d1, Data *d2){
+    double a,b;
+    LogicTestD1;
+    LogicTestD2;
+    if(a<b)
+        swapData(d1,d2);
 }
