@@ -71,37 +71,18 @@ void notLG(Data *d1) {
  *  \param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void ifThenElse(Stack *stack){
-    //limpar isto !!!!(MI)
     Data elseOperator = Pop(stack);
     Data thenOperator = Pop(stack);
-    Data logicValue = Pop(stack);
-    switch(logicValue.tipo){
-        case LONG:
-            if(*DataValLONG(&logicValue)){
-                Push(thenOperator, stack);
-                free(elseOperator.value);
-                free(logicValue.value);
-            }
-            else{
-                Push(elseOperator, stack);
-                free(thenOperator.value);
-                free(logicValue.value);
-            }
-            break;
-        case DOUBLE:
-            if(*DataValDOUBLE(&logicValue)){
-                Push(thenOperator, stack);
-                free(elseOperator.value);
-                free(logicValue.value);
-            }
-            else{
-                Push(elseOperator, stack);
-                free(thenOperator.value);
-                free(logicValue.value);
-            }
-        default:
-            break;
-    }
+    Data *d1 = Read(0, stack);
+    double a;
+    LogicTestD1
+        if(a)
+            swapData(d1, &thenOperator);
+        else
+            swapData(d1, &elseOperator);
+
+    free(elseOperator.value);
+    free(thenOperator.value);
 }
 
 /** \brief Função que coloca o menor dos 2 valores na stack.
