@@ -112,9 +112,9 @@ void LesserBetweenTwo(Data *d1, Data *d2){
         swapData(d1,d2);
 }
 
-/** \brief Função que coloca o maior dos 2 valores na stack
+/** \brief Função que coloca o maior dos 2 valores na stack.
 *   @param d1 Endereço de um Data.
-*   @param d2 Endereço de uma Data
+*   @param d2 Endereço de uma Data.
 */  
 void GreaterBetweenTwo(Data *d1, Data *d2){
     double a,b;
@@ -122,4 +122,26 @@ void GreaterBetweenTwo(Data *d1, Data *d2){
     LogicTestD2;
     if(a<b)
         swapData(d1,d2);
+}
+
+/** \brief Função que realiza o E lógico com shortcut.
+ *  @param d1 Endereço de um data.
+ *  @param d2 Endereço de um data.
+ */
+void andWithShortcut(Data *d1, Data *d2){
+    double a;
+    LogicTestD1;
+    if(a)
+        swapData(d1, d2);
+}
+
+/** \brief Função que realiza o OU lógico com shortcut.
+ *  @param d1 Endereço de um data.
+ *  @param d2 Endereço de um data.
+ */
+void orWithShortcut(Data *d1, Data *d2){
+    double a;
+    LogicTestD1;
+    if(!a)
+        swapData(d1, d2);
 }

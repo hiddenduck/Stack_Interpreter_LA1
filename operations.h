@@ -29,6 +29,8 @@
                 {" ", DoisArgumentos},   \
                 {"e<", LesserBetweenTwo},   \
                 {"e>", GreaterBetweenTwo},  \
+                {"e&", andWithShortcut},     \
+                {"e|", orWithShortcut},      \
                 {"=", equals},               \
                 {"<", lesser},               \
                 {">", greater},\
