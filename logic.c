@@ -7,7 +7,6 @@
         a = *DataValLONG(d1);\
     else {\
         a = *DataValDOUBLE(d1);\
-        DataToLONG(d1);\
     }               \
 
 /** \brief Macro para conseguir o valor de d2 */
@@ -27,6 +26,7 @@ void equals(Data *d1, Data *d2) {
     double a,b;
     LogicTestD1
     LogicTestD2
+    DataToLONG(d1);
     *DataValLONG(d1) = (long) (a == b);
 }
 
@@ -39,6 +39,7 @@ void lesser(Data *d1, Data *d2) {
     double a,b;
     LogicTestD1
     LogicTestD2
+    DataToLONG(d1);
     *DataValLONG(d1) = (long) (a < b);
 }
 
@@ -51,6 +52,7 @@ void greater(Data *d1, Data *d2) {
     double a,b;
     LogicTestD1
     LogicTestD2
+    DataToLONG(d1);
     *DataValLONG(d1) = (long) (a > b);
 }
 
@@ -61,6 +63,7 @@ void greater(Data *d1, Data *d2) {
 void notLG(Data *d1) {
     double a;
     LogicTestD1
+    DataToLONG(d1);
     *DataValLONG(d1) = (long) !a;
 }
 

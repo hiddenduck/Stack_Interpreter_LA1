@@ -93,6 +93,7 @@ void DataToLONG(Data *d) {
             break;
         }
         default:
+            d->tipo = LONG;
             return;
     }
     long *vp = (long *) realloc(d->value, sizeof(long));
@@ -114,6 +115,8 @@ void DataToCHAR(Data *d) {
             d->value = vp;
             break;
         }
+        case CHAR:
+            break;
         default: {
             DataToLONG(d);
             break;
