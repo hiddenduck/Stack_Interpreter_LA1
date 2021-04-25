@@ -11,6 +11,7 @@
  * @param token Endereço do token.
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param operationMap Endereço do primeiro elemento do operationMap.
+ * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
 void Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars) {
     Operation operation = operationMap[0].op;
@@ -35,9 +36,10 @@ void Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars
 /**
  * \brief Função que interpreta o input e altera a stack segundo esse input.
  *
- * @param token String com um fragmento do input
+ * @param token String com um fragmento do input.
  * @param stack Endereço da stack responsável pelo armazenamento.
- * @param opMap Mapa com as operações
+ * @param opMap Mapa com as operações.
+ * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
 void InputParser(char *token, Stack *stack, OperationMap *opMap, Stack *vars){
 
@@ -68,6 +70,7 @@ void InputParser(char *token, Stack *stack, OperationMap *opMap, Stack *vars){
 /**
  * \brief Função que recebe o input do utilizador e invoca o InputParser.
  * @param stack Endereço da stack responsável pelo armazenamento.
+ * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
 void InputReader(Stack *stack, Stack *vars) {
     char input[MAX_LENGTH_INPUT];
@@ -91,6 +94,9 @@ void InputReader(Stack *stack, Stack *vars) {
         InputParser(token, stack, opMap, vars);
 }
 
+/** \brief Função que atribui os valores por omissão das variáveis.
+ *  @param vars Endereço da vars responsável pelo armazenamento de variáveis.
+ */
 void Omissions(Stack *vars){
     int i;
     for(i=1; i<=6; i++){

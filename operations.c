@@ -214,6 +214,11 @@ void ReadLine(Stack *stack) {
     Push(CreateDataSTRING(linha), stack);
 }
 
+/** \brief Função que copia o topo da stack à variável.
+ *  @param stack Endereço da \a stack responsável pelo armazenamento.
+ *  @param vars Endereço da \a vars responsável pelo armazenamento das variáveis.
+ *  @param token Char correspondente à variável.
+*/
 void TwoPoints (Stack *stack, Stack *vars, char token){
     //limpar isto (MI)
     Data *letter = Read(64 - token, vars);
