@@ -108,8 +108,8 @@ CreateOpIncremento(decre, --)
  * Este tipo de função recebe dois Data,
  * efetua a operação bitwise respetiva entre eles,
  * e guarda o resultado no segundo Data.
- * @param _name Nome da função.
- * @param _op Operador da função.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
 */
 #define CreateOpBitwise(_name, _op)                                  \
 void _name(Data *d1, Data *d2) {                                     \
