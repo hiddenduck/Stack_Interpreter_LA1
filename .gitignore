@@ -2,7 +2,7 @@ CMakeLists.txt
 cmake-build-debug/
 .idea/
 html/
-.exe
+*.exe
 latex/
 Doxyfile
 xml/
