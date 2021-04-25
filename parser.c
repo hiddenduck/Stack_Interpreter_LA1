@@ -92,13 +92,12 @@ void InputReader(Stack *stack, Stack *vars) {
 
 void Omissions(Stack *vars){
     int i;
-    for(i=1; i<6; i++){
-        vars->sp++;
-        *Read(i, vars) = CreateDataLONG(9+i);
+    for(i=1; i<=6; i++){
+        *Read(-i, vars) = CreateDataLONG(9+i);
     }
-    *Read(14, vars) = CreateDataCHAR('\n');
-    *Read(20, vars) = CreateDataCHAR(' ');
-    *Read(25, vars) = CreateDataLONG(' ');
-    *Read(26, vars) = CreateDataLONG('\n');
-    *Read(27, vars) = CreateDataLONG('\n');
+    *Read(-14, vars) = CreateDataCHAR('\n');
+    *Read(-19, vars) = CreateDataCHAR(' ');
+    *Read(-24, vars) = CreateDataLONG(0);
+    *Read(-25, vars) = CreateDataLONG(1);
+    *Read(-26, vars) = CreateDataLONG(2);
 }
