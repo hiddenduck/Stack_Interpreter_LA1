@@ -63,3 +63,27 @@ void notLG(Data *d1) {
     LogicTestD1
     *DataValLONG(d1) = (long) !a;
 }
+
+/** \brief Função
+ *  \param stack Endereço da \a stack responsável pelo armazenamento.
+ */
+void ifThenElse(Stack *stack){
+    Data elseOperator = Pop(stack);
+    Data thenOperator = Pop(stack);
+    Data logicValue = Pop(stack);
+    switch(logicValue.tipo){
+        case LONG:
+            if(*DataValLONG(&logicValue))
+                Push(thenOperator, stack);
+            else
+                Push(elseOperator, stack);
+            break;
+        case DOUBLE:
+            if(*DataValDOUBLE(&logicValue))
+                Push(thenOperator, stack);
+            else
+                Push(elseOperator, stack);
+        default:
+            break;
+    }
+}

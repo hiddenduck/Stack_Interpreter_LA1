@@ -17,6 +17,7 @@
                 {"@", SwapThree},\
                 {"$", DollarSign},\
                 {"l", ReadLine},            \
+                {"?", ifThenElse},           \
                 {" ", UmArgumento},          \
                 {"!", notLG},\
                 {"(", decre},\
