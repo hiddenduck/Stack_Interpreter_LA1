@@ -79,6 +79,8 @@ CreateOpAlgebrica(divi, /)
  * \brief Macro que assiste na inicialização das funções de incremento.
  * Este tipo de função recebe um Data,
  * e efetua uma operação de incremento no valor desse Data.
+ * @param _name Nome da função.
+ * @param _op Operador da função.
 */
 #define CreateOpIncremento(_name, _op)    \
 void _name(Data *d1) {                    \
@@ -106,6 +108,8 @@ CreateOpIncremento(decre, --)
  * Este tipo de função recebe dois Data,
  * efetua a operação bitwise respetiva entre eles,
  * e guarda o resultado no segundo Data.
+ * @param _name Nome da função.
+ * @param _op Operador da função.
 */
 #define CreateOpBitwise(_name, _op)                                  \
 void _name(Data *d1, Data *d2) {                                     \

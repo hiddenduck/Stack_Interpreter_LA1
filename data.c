@@ -26,6 +26,8 @@ DataVal(STRING, char) //não faz nada diferente do DataValCHAR (lê o primeiro d
  * \brief Macro que assiste na inicialização das funções CreateData.
  * Devolve um Data com o argumento val guardado na memória de endereço void*,
  * e com o tipo respetivo à função.
+ * @param _name Tipo da função algorítmica.
+ * @param _type tipo da val.
  */
 #define CreateData(_name, _type)                       \
     Data CreateData##_name(_type val) {                \

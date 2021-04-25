@@ -87,6 +87,7 @@ CreateOpAlgebricaProto(divi)
 
 /** 
  * \brief Macro que assiste na declaração das Funções CreateOpIncremento.
+ * @param _name Nome da função.
  */
 #define CreateOpIncrementoProto(_name) \
 void _name(Data *d1);
@@ -98,6 +99,7 @@ CreateOpIncrementoProto(decre)
 
 /** 
  *  \brief Macro que assiste na declaração das Funções CreateOpBitwise.
+ *  @param _name Nome da função.
  */
 #define CreateOpBitwiseProto(_name) \
 void _name(Data *d1, Data *d2);
