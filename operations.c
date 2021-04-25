@@ -213,3 +213,9 @@ void ReadLine(Stack *stack) {
     assert(linha[strlen(linha) - 1] == '\n');
     Push(CreateDataSTRING(linha), stack);
 }
+
+void TwoPoints (Stack *stack, Stack *vars, char token){
+    Data *letter = Read(64 - token, vars);
+    Data *valor = Read(0,stack);
+    *letter = DataDup(valor);
+}

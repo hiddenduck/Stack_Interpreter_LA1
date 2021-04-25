@@ -12,7 +12,7 @@
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param operationMap Endereço do primeiro elemento do operationMap.
  */
-void Operator(char *token, Stack *stack, OperationMap *operationMap) {
+void Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars) {
     Operation operation = operationMap[0].op;
     int i;
     for (i = 1; operationMap[i].simbolo != 0; i++) {
@@ -28,7 +28,8 @@ void Operator(char *token, Stack *stack, OperationMap *operationMap) {
             break;
         }
     }
-
+    if(token[0]==':')
+        TwoPoints(stack, vars, token[1]);
 }
 
 /**
@@ -38,7 +39,7 @@ void Operator(char *token, Stack *stack, OperationMap *operationMap) {
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param opMap Mapa com as operações
  */
-void InputParser(char *token, Stack *stack, OperationMap *opMap){
+void InputParser(char *token, Stack *stack, OperationMap *opMap, Stack *vars){
 
     char *resto;
 
@@ -55,8 +56,11 @@ void InputParser(char *token, Stack *stack, OperationMap *opMap){
                 vald = -vald;
             vald += vall;
             Push(CreateDataDOUBLE(vald), stack);
-        } else
-            Operator(token, stack, opMap);
+        } else if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
+            Data *letter = Read(64 - token[0], vars);
+            Push(*letter, stack);
+        }else
+            Operator(token, stack, opMap, vars);
     }
 }
 
@@ -64,13 +68,14 @@ void InputParser(char *token, Stack *stack, OperationMap *opMap){
  * \brief Função que recebe o input do utilizador e invoca o InputParser.
  * @param stack Endereço da stack responsável pelo armazenamento.
  */
-void InputReader(Stack *stack) {
+void InputReader(Stack *stack, Stack *vars) {
     char input[MAX_LENGTH_INPUT];
 
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
     OperationMap opMap[] = OPERATION_MAP;
+
 
     char *delims = " \t\n";
     for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
@@ -82,5 +87,18 @@ void InputReader(Stack *stack) {
 
         //função eval recebe a linha e a stack inicial e cria a stack se não existir (?)
         //funciona como o parser e pode ser chamada recursivamente para os arrays
-        InputParser(token, stack, opMap);
+        InputParser(token, stack, opMap, vars);
+}
+
+void Omissions(Stack *vars){
+    int i;
+    for(i=1; i<6; i++){
+        vars->sp++;
+        *Read(i, vars) = CreateDataLONG(9+i);
+    }
+    *Read(14, vars) = CreateDataCHAR('\n');
+    *Read(20, vars) = CreateDataCHAR(' ');
+    *Read(25, vars) = CreateDataLONG(' ');
+    *Read(26, vars) = CreateDataLONG('\n');
+    *Read(27, vars) = CreateDataLONG('\n');
 }

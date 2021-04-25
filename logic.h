@@ -13,4 +13,5 @@ void LesserBetweenTwo(Data *d1, Data *d2);
 void GreaterBetweenTwo(Data *d1, Data *d2);
 void andWithShortcut(Data *d1, Data *d2);
 void orWithShortcut(Data *d1, Data *d2);
+
 #endif

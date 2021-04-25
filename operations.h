@@ -28,7 +28,7 @@
                 {"f", DataToDOUBLE},\
                 {" ", DoisArgumentos},   \
                 {"e<", LesserBetweenTwo},   \
-                {"e>", GreaterBetweenTwo},  \
+                {"e>", GreaterBetweenTwo},   \
                 {"e&", andWithShortcut},     \
                 {"e|", orWithShortcut},      \
                 {"=", equals},               \
@@ -121,5 +121,6 @@ void Swap(Stack *stack);
 void SwapThree(Stack *stack);
 void DollarSign(Stack *stack);
 void ReadLine(Stack *stack);
+void TwoPoints (Stack *stack, Stack *vars, char token);
 
 #endif

@@ -153,7 +153,6 @@ Data DataDup(Data *target) {
 
 /**
  * \brief Função que imprime um certo elemento de acordo com o seu Tipo.
- *
  * @param data Elemento a imprimir.
  */
 void PrintData(Data *data) {
