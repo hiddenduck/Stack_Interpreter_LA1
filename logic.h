@@ -1,7 +1,7 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
-#include "data.h"
+#include "stack.h"
 #define LOGIC_MAP {}
 
 void equals(Data *d1, Data *d2);
