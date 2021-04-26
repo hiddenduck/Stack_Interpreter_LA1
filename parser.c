@@ -108,3 +108,47 @@ void Omissions(Stack *vars){
     *Read(-25, vars) = CreateDataLONG(1);
     *Read(-26, vars) = CreateDataLONG(2);
 }
+
+/**
+*
+*/
+char *getToken(char *linha, char **resto) {
+    int i;
+    for (i = 0; linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t' && linha[i] != '\0'; i++);
+    if (linha[i] != '\0') {
+        linha[i] = '\0';
+        *resto = linha+i+1;
+    }
+    return linha;
+}
+/**
+ *
+ * @param line
+ * @param seps
+ * @param rest
+ * @return
+ */
+char *get_delimited(char *line, char *seps, char **rest) {
+    char end;
+    char *start = " ";
+    if (seps[1] != '\0') {
+        start[0] = seps[0];
+        end = seps[1];
+    } else {
+        end = seps[0];
+    }
+
+    int i = 0, count = 1;
+    line++;
+    while (count) {
+        if (line[i] == end)
+            count--;
+        if (start != NULL && line[i] == start[0])
+            count++;
+        i++;
+    }
+    line[i-1] = '\0';
+
+    *rest = line+i+1;
+    return line;
+}
