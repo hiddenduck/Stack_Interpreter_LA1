@@ -8,12 +8,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-/**
- * \brief Declaração dos Tipos possíveis para os Data.
- *
- */
-typedef enum {CHAR = 1, LONG = 2, DOUBLE = 4, STRING = 8} Tipo;
+/** \brief Declaração dos Tipos possíveis para os Data. */
+typedef enum {CHAR = 1, LONG = 2, DOUBLE = 4, STRING = 8, STACK = 16} Tipo;
 
+/** \brief Declaração dos Tipos possíveis para os Data. */
+typedef enum {INTEIROS = CHAR | LONG, NUMERO = LONG | DOUBLE} Mask;
 //tratar os arrays como "mini-stacks"
 //o value de um array passava a ser Stack*
 

@@ -109,9 +109,12 @@ void Omissions(Stack *vars){
     *Read(-26, vars) = CreateDataLONG(2);
 }
 
-/** "545 +"
-*
-*/
+/**
+ * 
+ * @param linha
+ * @param resto
+ * @return
+ */
 char *getToken(char *linha, char **resto) {
     int i;
     for (i = 0; linha[i] == ' ' || linha[i] == '\n' || linha[i] == '\t'; i++);
@@ -131,9 +134,6 @@ char *getToken(char *linha, char **resto) {
  * @param seps
  * @param rest
  * @return
- *  " ddd "
- *  "ddd"
- *  [ 2 3 4 " 3 2 " ]
  */
 char *get_delimited(char *line, char *seps, char **rest) {
     char end, start = '\0';
