@@ -80,18 +80,18 @@ void InputReader(Stack *stack, Stack *vars) {
 
     OperationMap opMap[] = OPERATION_MAP;
 
-
-    char *delims = " \t\n";
-    for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
-        //char *getToken(linha, resto)
-        //recebe a linha e faz sscanf(%s, %[^\n^])
-        //fazer um Reader que lê a linha, devolve o token com tudo que esteja entre dois delimitadores
-        //ver onde começa um [ e soma 1 a um long quando vê um ] subtrai 1 a um long
-        //quando esse long for 0 o array acabou
-
-        //função eval recebe a linha e a stack inicial e cria a stack se não existir (?)
-        //funciona como o parser e pode ser chamada recursivamente para os arrays
-        InputParser(token, stack, opMap, vars);
+    eval(input, stack);
+    //char *delims = " \t\n";
+    //for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
+    //    //char *getToken(linha, resto)
+    //    //recebe a linha e faz sscanf(%s, %[^\n^])
+    //    //fazer um Reader que lê a linha, devolve o token com tudo que esteja entre dois delimitadores
+    //    //ver onde começa um [ e soma 1 a um long quando vê um ] subtrai 1 a um long
+    //    //quando esse long for 0 o array acabou
+//
+    //    //função eval recebe a linha e a stack inicial e cria a stack se não existir (?)
+    //    //funciona como o parser e pode ser chamada recursivamente para os arrays
+    //    InputParser(token, stack, opMap, vars);
 }
 
 /** \brief Função que atribui os valores por omissão das variáveis.
@@ -109,24 +109,31 @@ void Omissions(Stack *vars){
     *Read(-26, vars) = CreateDataLONG(2);
 }
 
-/**
+/** "545 +"
 *
 */
 char *getToken(char *linha, char **resto) {
     int i;
-    for (i = 0; linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t' && linha[i] != '\0'; i++);
+    for (i = 0; linha[i] == ' ' || linha[i] == '\n' || linha[i] == '\t'; i++);
+    for (i; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
     if (linha[i] != '\0') {
         linha[i] = '\0';
         *resto = linha+i+1;
     }
+    else
+        *resto = NULL;
     return linha;
 }
+
 /**
  *
  * @param line
  * @param seps
  * @param rest
  * @return
+ *  " ddd "
+ *  "ddd"
+ *  [ 2 3 4 " 3 2 " ]
  */
 char *get_delimited(char *line, char *seps, char **rest) {
     char end, start = '\0';
@@ -137,17 +144,41 @@ char *get_delimited(char *line, char *seps, char **rest) {
         end = seps[0];
     }
 
-    int i = 0, count = 1;
-    line++;
-    while (count) {
+    int i, count;
+    for (i = 0, count = 1, line++; count; i++) {
         if (line[i] == end)
             count--;
-        if (start != '\0' && line[i] == start)
+        else if (start != '\0' && line[i] == start)
             count++;
-        i++;
     }
+
     line[i-1] = '\0';
 
     *rest = line+i+1;
     return line;
+}
+
+/**
+ *
+ * @param line
+ * @param stack_ini
+ * @return
+ */
+Stack *eval(char *line, Stack *stack_ini /*leva o vars?*/) {
+    if (stack_ini == NULL)
+        stack_ini = CreateStack(INCREMENTO_STACK);
+
+    while (line[0] != '\0') {
+        char *token = getToken(line, &line);
+
+        if (token[1] == '\0' && token[0] == '\"')
+            Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
+        else if (token[1] == '\0' && token[0] == '[')
+            Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL)), stack_ini);
+
+        else if (PushTokenParser(token, stack_ini)) {}
+        else if (Operator(token))
+    }
+
+    return stack_ini;
 }
