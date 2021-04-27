@@ -129,10 +129,9 @@ char *getToken(char *linha, char **resto) {
  * @return
  */
 char *get_delimited(char *line, char *seps, char **rest) {
-    char end;
-    char *start = " ";
+    char end, start = '\0';
     if (seps[1] != '\0') {
-        start[0] = seps[0];
+        start = seps[0];
         end = seps[1];
     } else {
         end = seps[0];
@@ -143,7 +142,7 @@ char *get_delimited(char *line, char *seps, char **rest) {
     while (count) {
         if (line[i] == end)
             count--;
-        if (start != NULL && line[i] == start[0])
+        if (start != '\0' && line[i] == start[0])
             count++;
         i++;
     }
