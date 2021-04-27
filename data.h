@@ -27,35 +27,26 @@ typedef struct data {
     void* value;
 }Data;
 
-/**
- * \brief Macro que assiste na Declaração das funcões DataVal.
-*/
-#define DataValProto(_name, _type)       \
-    _type *DataVal##_name(Data *val);    \
+/**\brief Inicialização da função DataValCHAR.*/
+#define DataValCHAR(data) \
+    (char *) (data)->value
 
-/** \brief Declaração da função DataValLONG.*/
-DataValProto(LONG, long)
-/** \brief Declaração da função DataValDOUBLE.*/
-DataValProto(DOUBLE, double)
-/** \brief Declaração da função DataValCHAR.*/
-DataValProto(CHAR, char)
-/** \brief Declaração da função DataValSTRING.*/
-DataValProto(STRING, char)
+/**\brief Inicialização da função DataValLONG.*/
+#define DataValLONG(data) \
+    (long *) (data)->value
 
-/**
- * \brief Macro que assiste na declaração das funções CreateData.
-*/
-#define CreateDataProto(_name, _type)    \
-    Data CreateData##_name(_type val);   \
+/**\brief Inicialização da função DataValDOUBLE.*/
+#define DataValDOUBLE(data) \
+    (double *) (data)->value
 
-/** \brief Declaração da função CreateDataLONG.*/
-CreateDataProto(LONG, long)
-/** \brief Declaração da função CreateDataDOUBLE.*/
-CreateDataProto(DOUBLE, double)
-/** \brief Declaração da função CreateDataCHAR.*/
-CreateDataProto(CHAR, char)
-/** \brief Declaração da função CreateDataSTRING.*/
-CreateDataProto(STRING, char *)
+/** \brief Inicialização da função DataValSTRING.*/
+#define DataValSTRING(data) \
+    (char *) (data)->value
+
+Data CreateDataLONG(long val);
+Data CreateDataDOUBLE(double val);
+Data CreateDataCHAR(char val);
+Data CreateDataSTRING(char* val);
 
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);

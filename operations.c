@@ -38,92 +38,179 @@ void DoisArgumentos(Operation operation, Stack *stack) {
 }
 
 /**
- * \brief Macro que assiste na inicialização das funções algébricas.
- * Este tipo de função recebe dois Data,
- * converte-os para o tipo necessário,
- * efetua a operação algébrica respetiva,
- * e guarda o resultado no segundo Data.
-*/
-#define CreateOpAlgebrica(_name, _op)                                                              \
-void _name(Data *d1, Data *d2) {                                                                   \
-    switch ((d1->tipo)&(d2->tipo)) {                                                               \
-        case LONG:                                                                                 \
-            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) _op (*(DataValLONG(d2))));                  \
-            break;                                                                                 \
-        default:                                                                                   \
-            DataToDOUBLE(d1);                                                                      \
-            switch(d2->tipo) {                                                                     \
-                case LONG:                                                                         \
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) _op (*(DataValLONG(d2))));      \
-                    break;                                                                         \
-                case DOUBLE:                                                                       \
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) _op (*(DataValDOUBLE(d2))));    \
-                    break;                                                                         \
-                default:                                                                           \
-                    break;                                                                         \
-            }                                                                                      \
-        break;                                                                                     \
-    }                                                                                              \
+ *
+ * @param d1
+ * @param d2
+ */
+void soma(Data *d1, Data *d2) {
+    switch ((d1->tipo)&(d2->tipo)) {
+        case LONG:
+            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) + (*(DataValLONG(d2))));
+            break;
+        default:
+            DataToDOUBLE(d1);
+            switch(d2->tipo) {
+                case LONG:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) + (*(DataValLONG(d2))));
+                    break;
+                case DOUBLE:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) + (*(DataValDOUBLE(d2))));
+                    break;
+                default:
+                    break;
+            }
+        break;
+    }
 }
-
-/** \brief Inicialização da função algorítmica soma. */
-CreateOpAlgebrica(soma, +)
-/** \brief Inicialização da função algorítmica subtr. */
-CreateOpAlgebrica(subtr, -)
-/** \brief Inicialização da função algorítmica mult. */
-CreateOpAlgebrica(mult, *)
-/** \brief Inicialização da função algorítmica divi. */
-CreateOpAlgebrica(divi, /)
 
 /**
- * \brief Macro que assiste na inicialização das funções de incremento.
- * Este tipo de função recebe um Data,
- * e efetua uma operação de incremento no valor desse Data.
- * @param _name Nome da função.
- * @param _op Operador da função.
-*/
-#define CreateOpIncremento(_name, _op)    \
-void _name(Data *d1) {                    \
-    switch (d1->tipo) {                   \
-        case LONG:                        \
-            (*DataValLONG(d1))_op;        \
-            break;                        \
-        case DOUBLE:                      \
-            (*DataValDOUBLE(d1))_op;      \
-            break;                        \
-        case CHAR:                        \
-            (*DataValCHAR(d1))_op;        \
-        default:                          \
-            break;                        \
-        }                                 \
+ *
+ * @param d1
+ * @param d2
+ */
+void subtr(Data *d1, Data *d2) {
+    switch ((d1->tipo)&(d2->tipo)) {
+        case LONG:
+            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) - (*(DataValLONG(d2))));
+            break;
+        default:
+            DataToDOUBLE(d1);
+            switch(d2->tipo) {
+                case LONG:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) - (*(DataValLONG(d2))));
+                    break;
+                case DOUBLE:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) - (*(DataValDOUBLE(d2))));
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
 }
-
-/** Inicialização da função de incremento incre. */
-CreateOpIncremento(incre, ++)
-/** Inicialização da função de incremento decre. */
-CreateOpIncremento(decre, --)
 
 /**
- * \brief Macro que assiste na inicialização das funções de incremento.
- * Este tipo de função recebe dois Data,
- * efetua a operação bitwise respetiva entre eles,
- * e guarda o resultado no segundo Data.
- * @param d1 Endereço de um Data.
- * @param d2 Endereço de um Data.
-*/
-#define CreateOpBitwise(_name, _op)                                  \
-void _name(Data *d1, Data *d2) {                                     \
-    *(DataValLONG(d1)) = (*DataValLONG(d1) _op *DataValLONG(d2));    \
+ *
+ * @param d1
+ * @param d2
+ */
+void mult(Data *d1, Data *d2) {
+    switch ((d1->tipo)&(d2->tipo)) {
+        case LONG:
+            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) * (*(DataValLONG(d2))));
+            break;
+        default:
+            DataToDOUBLE(d1);
+            switch(d2->tipo) {
+                case LONG:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) * (*(DataValLONG(d2))));
+                    break;
+                case DOUBLE:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) * (*(DataValDOUBLE(d2))));
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
 }
 
-/** \brief Inicialização da função bitwise and. */
-CreateOpBitwise(and, &)
-/** \brief Inicialização da função bitwise or. */
-CreateOpBitwise(or, |)
-/** \brief Inicialização da função bitwise xor. */
-CreateOpBitwise(xor, ^)
-/** \brief Inicialização da função bitwise modulo. */
-CreateOpBitwise(modulo, %)
+/**
+ *
+ * @param d1
+ * @param d2
+ */
+void divi(Data *d1, Data *d2) {
+    switch ((d1->tipo)&(d2->tipo)) {
+        case LONG:
+            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) / (*(DataValLONG(d2))));
+            break;
+        default:
+            DataToDOUBLE(d1);
+            switch(d2->tipo) {
+                case LONG:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) / (*(DataValLONG(d2))));
+                    break;
+                case DOUBLE:
+                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) / (*(DataValDOUBLE(d2))));
+                    break;
+                default:
+                    break;
+            }
+            break;
+    }
+}
+
+/**
+ *
+ * @param d1
+ */
+void incre(Data *d1) {
+    switch (d1->tipo) {
+        case LONG:
+            (*DataValLONG(d1))++;
+            break;
+        case DOUBLE:
+            (*DataValDOUBLE(d1))++;
+            break;
+        case CHAR:
+            (*DataValCHAR(d1))++;
+        default:
+            break;
+        }
+}
+
+/**
+ *
+ * @param d1
+ */
+void decre(Data *d1) {
+    switch (d1->tipo) {
+        case LONG:
+            (*DataValLONG(d1))--;
+            break;
+        case DOUBLE:
+            (*DataValDOUBLE(d1))--;
+            break;
+        case CHAR:
+            (*DataValCHAR(d1))--;
+        default:
+            break;
+    }
+}
+
+/**
+ *
+ * @param d1
+ * @param d2
+ */
+void and(Data *d1, Data *d2) {
+    *(DataValLONG(d1)) = (*DataValLONG(d1) & *DataValLONG(d2));
+}
+/**
+ *
+ * @param d1
+ * @param d2
+ */
+void or(Data *d1, Data *d2) {
+    *(DataValLONG(d1)) = (*DataValLONG(d1) | *DataValLONG(d2));
+}
+/**
+ *
+ * @param d1
+ * @param d2
+ */
+void xor(Data *d1, Data *d2) {
+    *(DataValLONG(d1)) = (*DataValLONG(d1) ^ *DataValLONG(d2));
+}
+/** \brief Inicialização da função modulo.
+ *
+ * @param d1
+ * @param d2
+ */
+void modulo(Data *d1, Data *d2) {
+    *(DataValLONG(d1)) = (*DataValLONG(d1) % *DataValLONG(d2));
+}
 
 /**
  * \brief Função que calcula a potência de base Data d1 e expoente Data d2 e guarda o resultado no d2.
@@ -201,7 +288,7 @@ void SwapThree(Stack *stack) {
  */
 void DollarSign(Stack *stack) {
     Data indice = Pop(stack);
-    Data *x = Read(*DataValLONG(&indice), stack);
+    Data *x = Read(*(DataValLONG(&indice)), stack);
     Data y = DataDup(x);
     Push(y, stack);
     free(indice.value);
