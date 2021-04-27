@@ -64,5 +64,5 @@ void DataToCHAR(Data *d1);
 Data DataDup(Data *target);
 
 void PrintData(Data *data);
-void swapData (Data *d1, Data *d2);
+void SwapDataPointers (Data *d1, Data *d2);
 #endif

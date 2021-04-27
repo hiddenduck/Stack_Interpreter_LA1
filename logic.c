@@ -76,10 +76,10 @@ void ifThenElse(Stack *stack){
     Data *d1 = Read(0, stack);
     double a;
     LogicTestD1
-        if(a)
-            swapData(d1, &thenOperator);
-        else
-            swapData(d1, &elseOperator);
+    if(a)
+        SwapDataPointers(d1, &thenOperator);
+    else
+        SwapDataPointers(d1, &elseOperator);
 
     free(elseOperator.value);
     free(thenOperator.value);
@@ -94,7 +94,7 @@ void LesserBetweenTwo(Data *d1, Data *d2){
     LogicTestD1;
     LogicTestD2;
     if(a>b)
-        swapData(d1,d2);
+        SwapDataPointers(d1, d2);
 }
 
 /** \brief Função que coloca o maior dos 2 valores na stack.
@@ -106,7 +106,7 @@ void GreaterBetweenTwo(Data *d1, Data *d2){
     LogicTestD1;
     LogicTestD2;
     if(a<b)
-        swapData(d1,d2);
+        SwapDataPointers(d1, d2);
 }
 
 /** \brief Função que realiza o E lógico com shortcut.
@@ -117,7 +117,7 @@ void andWithShortcut(Data *d1, Data *d2){
     double a;
     LogicTestD1;
     if(a)
-        swapData(d1, d2);
+        SwapDataPointers(d1, d2);
 }
 
 /** \brief Função que realiza o OU lógico com shortcut.
@@ -128,5 +128,5 @@ void orWithShortcut(Data *d1, Data *d2){
     double a;
     LogicTestD1;
     if(!a)
-        swapData(d1, d2);
+        SwapDataPointers(d1, d2);
 }

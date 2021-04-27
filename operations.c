@@ -224,7 +224,6 @@ void ReadLine(Stack *stack) {
  *  @param token Char correspondente à variável.
 */
 void TwoPoints (Stack *stack, Stack *vars, char token){
-    //limpar isto (MI)
     Data *letter = Read(64 - token, vars);
     Data *valor = Read(0,stack);
     *letter = DataDup(valor);

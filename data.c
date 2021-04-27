@@ -177,11 +177,11 @@ void PrintData(Data *data) {
     }
 }
 
-/** \brief Função que Troca dois Datas.
+/** \brief Função que Troca dois apontadores de Datas.
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
 */  
-void swapData (Data *d1, Data *d2){
+void SwapDataPointers (Data *d1, Data *d2){
     Data temp = *d1;
     *d1 = *d2;
     *d2 = temp; 
