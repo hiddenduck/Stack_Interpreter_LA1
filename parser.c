@@ -110,7 +110,7 @@ void Omissions(Stack *vars){
 }
 
 /**
- * 
+ *
  * @param linha
  * @param resto
  * @return
