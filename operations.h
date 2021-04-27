@@ -70,54 +70,22 @@ void DoisArgumentos(Operation operation, Stack *stack);
 void UmArgumento(Operation operation, Stack *stack);
 void SemArgumentos(Operation operation, Stack *stack);
 
-/** 
- * \brief Macro que assiste na declaração das Funções CreateOpAlgebrica.
- */
-#define CreateOpAlgebricaProto(_name) \
-void _name(Data *d1, Data *d2);
+void soma(Data *d1, Data *d2);
+void subtr(Data *d1, Data *d2);
+void mult(Data *d1, Data *d2);
+void divi(Data *d1, Data *d2);
 
-/** \brief Declaração da função soma.*/
-CreateOpAlgebricaProto(soma)
-/** \brief Declaração da função subtr.*/
-CreateOpAlgebricaProto(subtr)
-/** \brief Declaração da função mult.*/
-CreateOpAlgebricaProto(mult)
-/** \brief Declaração da função divi.*/
-CreateOpAlgebricaProto(divi)
+void incre(Data *d1);
+void decre(Data *d1);
 
-/** 
- * \brief Macro que assiste na declaração das Funções CreateOpIncremento.
- * @param _name Nome da função.
- */
-#define CreateOpIncrementoProto(_name) \
-void _name(Data *d1);
-
-/** \brief Declaração da função incre.*/
-CreateOpIncrementoProto(incre)
-/** \brief Declaração da função decre.*/
-CreateOpIncrementoProto(decre)
-
-/** 
- *  \brief Macro que assiste na declaração das Funções CreateOpBitwise.
- *  @param _name Nome da função.
- */
-#define CreateOpBitwiseProto(_name) \
-void _name(Data *d1, Data *d2);
-
-/** \brief Declaração da função and.*/
-CreateOpBitwiseProto(and)
-/** \brief Declaração da função or.*/
-CreateOpBitwiseProto(or)
-/** \brief Declaração da função xor.*/
-CreateOpBitwiseProto(xor)
-/** \brief Declaração da função modulo.*/
-CreateOpBitwiseProto(modulo)
+void and(Data *d1, Data *d2);
+void or(Data *d1, Data *d2);
+void xor(Data *d1, Data *d2);
+void modulo(Data *d1, Data *d2);
 
 void notBW(Data *d);
 void potencia(Data *d1, Data *d2);
 
-
-/*Funções sem Macros coitadinhas*/
 void Underscore(Stack *stack);
 void Swap(Stack *stack);
 void SwapThree(Stack *stack);

@@ -4,44 +4,39 @@
  */
 #include "data.h"
 
-/**
- * \brief Macro que assiste na inicialização das funções DataVal.
- * Devolve um apontador para o valor convertido do void* respetivo ao data recebido.
+/** \brief Inicialização da função CreateDataCHAR.
+ *
+ * @param val Valor char a colocar no Data.
+ * @return Data criado com o valor.
  */
-#define DataVal(_name, _type)              \
-    _type *DataVal##_name(Data *data) {    \
-        return (_type*) data->value;       \
-    }
-
-/** \brief Inicialização da função DataValCHAR. */
-DataVal(CHAR, char)
-/** \brief Inicialização da função algorítmica DataValLONG. */
-DataVal(LONG, long)
-/** \brief Inicialização da função algorítmica DataValDOUBLE. */
-DataVal(DOUBLE, double)
-/** \brief Inicialização da função algorítmica DataValSTRING. */
-DataVal(STRING, char) //não faz nada diferente do DataValCHAR (lê o primeiro do array)
-
-/**
- * \brief Macro que assiste na inicialização das funções CreateData.
- * Devolve um Data com o argumento val guardado na memória de endereço void*,
- * e com o tipo respetivo à função.
- * @param _name Tipo da função algorítmica.
- * @param _type tipo da val.
+Data CreateDataCHAR(char val) {
+        char *vp = (char*) malloc(sizeof(char));
+        *vp = val;
+        Data op = {CHAR, vp};
+        return op;
+}
+/** \brief Inicialização da função CreateDataLONG.
+ *
+ * @param val Valor long a colocar no Data.
+ * @return Data criado com o valor.
  */
-#define CreateData(_name, _type)                       \
-    Data CreateData##_name(_type val) {                \
-        _type *vp = (_type*) malloc(sizeof(_type));    \
-        *vp = val;                                     \
-        Data op = {_name, vp};                         \
-        return op;                                     \
-    }
-/** \brief Inicialização da função algorítmica CreateDataCHAR. */
-CreateData(CHAR, char)
-/** \brief Inicialização da função algorítmica CreateDataLONG. */
-CreateData(LONG, long)
-/** \brief Inicialização da função algorítmica CreateDataDOUBLE. */
-CreateData(DOUBLE, double)
+Data CreateDataLONG(long val) {
+    long *vp = (long*) malloc(sizeof(long));
+    *vp = val;
+    Data op = {LONG, vp};
+    return op;
+}
+/** \brief Inicialização da função CreateDataDOUBLE.
+ *
+ * @param val Valor double a colocar no Data.
+ * @return Data criado com o valor.
+ */
+Data CreateDataDOUBLE(double val) {
+    double *vp = (double*) malloc(sizeof(double));
+    *vp = val;
+    Data op = {DOUBLE, vp};
+    return op;
+}
 
 /**
  * \brief Função que cria um Data com o Tipo STRING.
