@@ -1,7 +1,7 @@
 
 #include "logic.h"
 
-/** \brief Macro para preparar o d1 para receber resultados*/
+/** \brief Macro para conseguir o valor de d2*/
 #define LogicTestD1 \
     if (d1->tipo == LONG)\
         a = *DataValLONG(d1);\
