@@ -12,20 +12,25 @@
  * \brief Declaração dos Tipos possíveis para os Data.
  */
 typedef enum {
-    /** */
+    /** Tipo para Data com o valor char*/
     CHAR = 1,
-    /** */
+    /** Tipo para Data com o valor long*/
     LONG = 2,
-    /** */
+    /** Tipo para Data com o valor double*/
     DOUBLE = 4,
-    /** */
+    /** Tipo para Data com o valor string*/
     STRING = 8,
-    /** */
+    /** Tipo para Data com o valor stack*/
     STACK = 16
 } Tipo;
 
 /** \brief Declaração dos Tipos possíveis para os Data. */
-typedef enum {INTEIRO = CHAR | LONG, NUMERO = LONG | DOUBLE} Mask;
+typedef enum {
+    /** Máscara com o valor char ou long*/
+    INTEIRO = CHAR | LONG,
+    /** Máscara com o valor long ou double*/
+    NUMERO = LONG | DOUBLE
+} Mask;
 //tratar os arrays como "mini-stacks"
 //o value de um array passava a ser Stack*
 
