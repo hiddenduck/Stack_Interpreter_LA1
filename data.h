@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "stack.h"
 
 /**
  * \brief Declaração dos Tipos possíveis para os Data.
@@ -64,6 +65,7 @@ Data CreateDataLONG(long val);
 Data CreateDataDOUBLE(double val);
 Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
+Data CreateDataSTACK(Stack *stack);
 
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);

@@ -50,6 +50,16 @@ Data CreateDataSTRING(char *val) {
 }
 
 /**
+ *
+ * @param stack
+ * @return
+ */
+Data CreateDataSTACK(Stack *stack) {
+    Data op = {STACK, stack};
+    return op;
+}
+
+/**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo DOUBLE.
  * @param d Endereço de um Data.
  */

@@ -78,9 +78,14 @@ void InputReader(Stack *stack, Stack *vars) {
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    OperationMap opMap[] = OPERATION_MAP;
+    OperationMap aritMap[] = OPERATION_MAP,
+                logicMap[] = LOGIC_MAP,
+                stringMap[] = STRING_MAP,
+                arrayMap[] = ARRAY_MAP;
 
-    eval(input, stack);
+    ColectionOperationMaps collec[] = {{aritMap},{logicMap},{stringMap},{arrayMap}};
+
+    eval(input, stack, vars, aritMap);
     //char *delims = " \t\n";
     //for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
     //    //char *getToken(linha, resto)
@@ -164,7 +169,7 @@ char *get_delimited(char *line, char *seps, char **rest) {
  * @param stack_ini
  * @return
  */
-Stack *eval(char *line, Stack *stack_ini /*leva o vars?*/) {
+Stack *eval(char *line, Stack *stack_ini, Stack *vars, OperationMap *opMap) {
     if (stack_ini == NULL)
         stack_ini = CreateStack(INCREMENTO_STACK);
 
@@ -174,7 +179,7 @@ Stack *eval(char *line, Stack *stack_ini /*leva o vars?*/) {
         if (token[1] == '\0' && token[0] == '\"')
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
-            Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL)), stack_ini);
+            Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, opMap)), stack_ini);
 
         else if (PushTokenParser(token, stack_ini)) {}
         else if (Operator(token))

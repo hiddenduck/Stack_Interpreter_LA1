@@ -7,6 +7,7 @@
 #include "stack.h"
 #include "logic.h"
 
+
 /**
  * \brief Array com todas as operações implementadas
  */
@@ -65,6 +66,13 @@ typedef struct {
     /** Apontador para uma função*/
     Operation op;
 }OperationMap;
+
+typedef struct OPMAPS {
+    OperationMap *Arit;
+    OperationMap *Logic;
+    OperationMap *String;
+    OperationMap *Array;
+}ColectionOperationMaps;
 
 void DoisArgumentos(Operation operation, Stack *stack);
 void UmArgumento(Operation operation, Stack *stack);
