@@ -16,7 +16,6 @@ if (d2->tipo == LONG)\
 else\
     b = *DataValDOUBLE(d2);\
 
-
 /** \brief Função que verifica se o valor de dois Data é igual.
  *
  * @param d1 Data que guarda o resultado
