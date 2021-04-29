@@ -175,7 +175,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
             Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, vars, Handle_Aritm) && TwoPoints(stack_ini, vars, token[1]);
+        PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, Handle_Aritm) && TwoPoints(stack_ini, vars, token[1]);
     }
 
     return stack_ini;
