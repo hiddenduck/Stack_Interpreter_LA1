@@ -15,9 +15,9 @@ char *get_delimited(char *line, char *seps, char **rest);
 Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *collec);
 
 int Handle_Aritm(int n, Stack *stack);
-int Handle_Logic();
+int Handle_Logic(int n);
 int Handle_String(int n, Stack *stack);
 int Handle_Array(int n, Stack *stack);
-int Handle_Manip();
+int Handle_Manip(int n);
 
 #endif

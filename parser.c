@@ -189,7 +189,6 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
     return stack_ini;
 }
 
-
 int Handle_Aritm(int n, Stack *stack) {
     int i;
     long r = 1;
@@ -198,8 +197,8 @@ int Handle_Aritm(int n, Stack *stack) {
     return r;
 }
 
-int Handle_Logic() {
-    return 1;
+int Handle_Logic(int n) {
+    return n;
 }
 
 int Handle_String(int n, Stack *stack) {
@@ -218,6 +217,6 @@ int Handle_Array(int n, Stack *stack) {
     return r;
 }
 
-int Handle_Manip() {
-    return 1;
+int Handle_Manip(int n) {
+    return n;
 }
