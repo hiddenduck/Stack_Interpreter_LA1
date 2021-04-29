@@ -61,8 +61,7 @@ void greater(Data *d1, Data *d2) {
  * @param d1 Data que guarda o resultado
  */
 void notLG(Data *d1) {
-    double a;
-    LogicTestD1
+    long a = GetBoolFromData(d1);
     DataToLONG(d1);
     *DataValLONG(d1) = (long) !a;
 }

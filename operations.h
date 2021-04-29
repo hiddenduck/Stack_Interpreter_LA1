@@ -11,14 +11,11 @@
  * \brief Array com todas as operações implementadas
  */
 #define ARIT_MAP {{" ", UmArgumento},          \
-                {"!", notLG},\
                 {"(", decre},\
                 {")", incre},\
                 {" ", DoisArgumentos},   \
                 {"e<", LesserBetweenTwo},   \
                 {"e>", GreaterBetweenTwo},   \
-                {"e&", andWithShortcut},     \
-                {"e|", orWithShortcut},      \
                 {"=", equals},               \
                 {"<", lesser},               \
                 {">", greater},\

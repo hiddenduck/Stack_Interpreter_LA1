@@ -16,10 +16,14 @@
 {"@", SwapThree},\
 {"l", ReadLine},            \
 {"?", ifThenElse},  \
-{" ", UmArgumento},\
+{" ", UmArgumento}, \
+{"!", notLG},\
 {"c", DataToCHAR},\
 {"i", DataToLONG},\
 {"f", DataToDOUBLE},\
+{" ", DoisArgumentos},\
+{"e&", andWithShortcut},     \
+{"e|", orWithShortcut},      \
 {0, NULL}\
 };
 
