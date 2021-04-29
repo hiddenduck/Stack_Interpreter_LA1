@@ -78,9 +78,9 @@ void InputReader(Stack *stack, Stack *vars) {
                     stringMap[] = STRING_MAP,
                     arrayMap[]  = ARRAY_MAP;
 
-    ColectionOperationMaps collec[] = {{aritMap},{logicMap},{stringMap},{arrayMap}};
+    ColectionOperationMaps collec = {aritMap, logicMap, stringMap, arrayMap};
 
-    eval(input, stack, vars, collec);
+    eval(input, stack, vars, &collec);
     //char *delims = " \t\n";
     //for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
     //    //char *getToken(linha, resto)
