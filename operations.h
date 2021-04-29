@@ -14,17 +14,26 @@
 #define MAX_LENGTH_INPUT 10240
 
 /**
+ *
+ */
+#define STACK_MANIPULATION {{" ", DefaultOperate}, \
+{";", DecrementaSP},                               \
+{"_", Underscore},                                 \
+{"\\", Swap},                                      \
+{"@", SwapThree},                                  \
+{"$", DollarSign},                                 \
+{"l", ReadLine},                                   \
+{"?", ifThenElse},                                 \
+{" ", UmArgumento},\
+{"f", DataToDOUBLE}, \
+{"c", DataToCHAR}, \
+{"i", DataToLONG},\
+{0,NULL}}
+
+/**
  * \brief Array com todas as operações implementadas
  */
-#define OPERATION_MAP {{" ", DefaultOperate}, \
-                {";", DecrementaSP}, \
-                {"_", Underscore},\
-                {"\\", Swap},\
-                {"@", SwapThree},\
-                {"$", DollarSign},\
-                {"l", ReadLine},            \
-                {"?", ifThenElse},           \
-                {" ", UmArgumento},          \
+#define OPERATION_MAP {{" ", UmArgumento},          \
                 {"!", notLG},\
                 {"(", decre},\
                 {")", incre},\
@@ -73,6 +82,8 @@ typedef struct OPMAP{
  *
  */
 typedef struct COLLEC {
+    /** */
+    OperationMap *StackManip;
     /** */
     OperationMap *Arit;
     /** */

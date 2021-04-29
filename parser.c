@@ -73,12 +73,13 @@ void InputReader(Stack *stack, Stack *vars) {
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    OperationMap    aritMap[]   = OPERATION_MAP,
+    OperationMap    stackMap[] = STACK_MANIPULATION,
+                    aritMap[]   = OPERATION_MAP,
                     logicMap[]  = LOGIC_MAP,
                     stringMap[] = STRING_MAP,
                     arrayMap[]  = ARRAY_MAP;
 
-    ColectionOperationMaps collec = {aritMap, logicMap, stringMap, arrayMap};
+    ColectionOperationMaps collec = {stackMap, aritMap, logicMap, stringMap, arrayMap};
 
     eval(input, stack, vars, &collec);
     //char *delims = " \t\n";
@@ -177,6 +178,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
             Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
         if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             PushTokenParser(token, stack_ini, vars) &&
+            Operator(token, stack_ini, collec->StackManip, Handle_Manip) &&
             Operator(token, stack_ini, collec->Arit,    Handle_Aritm) &&
             Operator(token, stack_ini, collec->Logic,   Handle_Logic) &&
             Operator(token, stack_ini, collec->Array,   Handle_Array) &&
@@ -214,4 +216,8 @@ int Handle_Array(int n, Stack *stack) {
     for (i = n; i>0 && r; i--)
         r = STACK & Read(i-1, stack)->tipo;
     return r;
+}
+
+int Handle_Manip(int n, Stack *stack) {
+    return 1;
 }

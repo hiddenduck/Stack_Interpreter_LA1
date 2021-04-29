@@ -2,11 +2,7 @@
 #ifndef STRINGOP_H
 #define STRINGOP_H
 
-#define STRING_MAP {    {" ", UmArgumento},\
-                        {"f", DataToDOUBLE}, \
-                        {"c", DataToCHAR}, \
-                        {"i", DataToLONG},\
-                        {0, NULL}          \
+#define STRING_MAP {    {0, NULL}          \
 }
 
 

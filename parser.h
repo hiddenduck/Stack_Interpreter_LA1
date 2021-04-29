@@ -18,5 +18,6 @@ int Handle_Aritm(int n, Stack *stack);
 int Handle_Logic();
 int Handle_String(int n, Stack *stack);
 int Handle_Array(int n, Stack *stack);
+int Handle_Manip(int n, Stack *stack);
 
 #endif
