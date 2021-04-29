@@ -29,9 +29,6 @@
                 {"(", decre},\
                 {")", incre},\
                 {"~", notBW},\
-                {"c", DataToCHAR},\
-                {"i", DataToLONG},\
-                {"f", DataToDOUBLE},\
                 {" ", DoisArgumentos},   \
                 {"e<", LesserBetweenTwo},   \
                 {"e>", GreaterBetweenTwo},   \

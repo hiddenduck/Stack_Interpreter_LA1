@@ -3,6 +3,7 @@
  * @file data.c
  */
 #include "data.h"
+#include "stack.h"
 
 /** \brief Inicialização da função CreateDataCHAR.
  *
@@ -150,7 +151,8 @@ Data DataDup(Data *target) {
             break;
         }
         case STACK: {
-            //alguém que faça
+            data = CreateDataSTACK(DataValSTACK(target));
+            break;
         }
     }
     return data;
