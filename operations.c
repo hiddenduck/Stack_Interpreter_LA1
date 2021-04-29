@@ -38,9 +38,9 @@ void DoisArgumentos(Operation operation, Stack *stack) {
 }
 
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que realiza a soma de dois Datas.
+ * @param d1 Endereço de um operando.
+ * @param d2 Endereço de um operando.
  */
 void soma(Data *d1, Data *d2) {
     switch ((d1->tipo)&(d2->tipo)) {
@@ -64,9 +64,9 @@ void soma(Data *d1, Data *d2) {
 }
 
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que realiza a subtração de dois Datas.
+ * @param d1 Endereço de um operando.
+ * @param d2 Endereço de um operando.
  */
 void subtr(Data *d1, Data *d2) {
     switch ((d1->tipo)&(d2->tipo)) {
@@ -90,9 +90,9 @@ void subtr(Data *d1, Data *d2) {
 }
 
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que realiza a multiplicação de dois Datas.
+ * @param d1 Endereço de um operando.
+ * @param d2 Endereço de um operando.
  */
 void mult(Data *d1, Data *d2) {
     switch ((d1->tipo)&(d2->tipo)) {
@@ -116,9 +116,9 @@ void mult(Data *d1, Data *d2) {
 }
 
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que realiza a divisão de dois Datas.
+ * @param d1 Endereço do dividendo.
+ * @param d2 Endereço do divisor.
  */
 void divi(Data *d1, Data *d2) {
     switch ((d1->tipo)&(d2->tipo)) {
@@ -142,8 +142,8 @@ void divi(Data *d1, Data *d2) {
 }
 
 /**
- *
- * @param d1
+ * \brief Função que incrementa um Data por 1.
+ * @param d1 Endereço de um Data cujo valor vai ser incrementado.
  */
 void incre(Data *d1) {
     switch (d1->tipo) {
@@ -161,8 +161,8 @@ void incre(Data *d1) {
 }
 
 /**
- *
- * @param d1
+ * \brief Função que decrementa um Data por 1.
+ * @param d1 Endereço de um Data cujo valor vai ser decrementado.
  */
 void decre(Data *d1) {
     switch (d1->tipo) {
@@ -180,33 +180,33 @@ void decre(Data *d1) {
 }
 
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que faz o E Bitwise.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
  */
 void and(Data *d1, Data *d2) {
     *(DataValLONG(d1)) = (*DataValLONG(d1) & *DataValLONG(d2));
 }
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que faz o OU Bitwise.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
  */
 void or(Data *d1, Data *d2) {
     *(DataValLONG(d1)) = (*DataValLONG(d1) | *DataValLONG(d2));
 }
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que faz o XOR Bitwise.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
  */
 void xor(Data *d1, Data *d2) {
     *(DataValLONG(d1)) = (*DataValLONG(d1) ^ *DataValLONG(d2));
 }
 /** \brief Inicialização da função modulo.
  *
- * @param d1
- * @param d2
+ * @param d1 Endereço do Dividendo.
+ * @param d2 Endereço do divisor.
  */
 void modulo(Data *d1, Data *d2) {
     *(DataValLONG(d1)) = (*DataValLONG(d1) % *DataValLONG(d2));
