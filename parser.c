@@ -53,7 +53,7 @@ int PushTokenParser(char *token, Stack *stack, Stack *vars) {
             vald += vall;
             Push(CreateDataDOUBLE(vald), stack);
             r = 0;
-        } else if (strlen(token) == 1 && token[0] >= 'A' && token[0] <= 'Z') {
+        } else if (token[1] == '\0' && token[0] >= 'A' && token[0] <= 'Z') {
             //limpar isto (MI)
             Data *letter = Read(64 - token[0], vars);
             Push(DataDup(letter), stack);
@@ -175,7 +175,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
             Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, Handle_Aritm) && TwoPoints(stack_ini, vars, token[1]);
+        (token[0] != ':' || TwoPoints(stack_ini, vars, token[1]) && PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, Handle_Aritm);
     }
 
     return stack_ini;
