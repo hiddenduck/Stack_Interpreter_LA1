@@ -60,8 +60,7 @@ void greater(Data *d1, Data *d2) {
  * @param d1 Data que guarda o resultado
  */
 void notLG(Data *d1) {
-    double a;
-    LogicTestD1
+    long a = GetBoolFromData(d1);
     DataToLONG(d1);
     *DataValLONG(d1) = (long) !a;
 }
@@ -73,8 +72,7 @@ void ifThenElse(Stack *stack){
     Data elseOperator = Pop(stack);
     Data thenOperator = Pop(stack);
     Data *d1 = Read(0, stack);
-    double a;
-    LogicTestD1
+    long a = GetBoolFromData(d1);
     if(a)
         SwapDataPointers(d1, &thenOperator);
     else
@@ -113,8 +111,7 @@ void GreaterBetweenTwo(Data *d1, Data *d2){
  *  @param d2 Endereço de um data.
  */
 void andWithShortcut(Data *d1, Data *d2){
-    double a;
-    LogicTestD1;
+    long a = GetBoolFromData(d1);
     if(a)
         SwapDataPointers(d1, d2);
 }
@@ -124,8 +121,7 @@ void andWithShortcut(Data *d1, Data *d2){
  *  @param d2 Endereço de um data.
  */
 void orWithShortcut(Data *d1, Data *d2){
-    double a;
-    LogicTestD1;
+    long a = GetBoolFromData(d1);
     if(!a)
         SwapDataPointers(d1, d2);
 }

@@ -118,7 +118,7 @@ void Omissions(Stack *vars){
 char *getToken(char *linha, char **resto) {
     int i;
     for (i = 0; linha[i] == ' ' || linha[i] == '\n' || linha[i] == '\t'; i++);
-    for (i; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
+    for (; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
     if (linha[i] != '\0') {
         linha[i] = '\0';
         *resto = linha+i+1;
@@ -175,13 +175,42 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
             Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        (token[0] != ':' || TwoPoints(stack_ini, vars, token[1]) && PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, Handle_Aritm);
+        (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
+            PushTokenParser(token, stack_ini, vars) &&
+            Operator(token, stack_ini, collec->Arit,    Handle_Aritm) &&
+            Operator(token, stack_ini, collec->Logic,   Handle_Logic) &&
+            Operator(token, stack_ini, collec->Array,   Handle_Array) &&
+            Operator(token, stack_ini, collec->String,  Handle_String);
     }
 
     return stack_ini;
 }
 
 
-int Handle_Aritm() {
+int Handle_Aritm(int n, Stack *stack) {
+    int i;
+    long r = 1;
+    for (i = n; i>0 && r; i--)
+        r = NUMERO & Read(i-1, stack)->tipo;
+    return r;
+}
+
+int Handle_Logic() {
     return 1;
+}
+
+int Handle_String(int n, Stack *stack) {
+    int i;
+    long r = 1;
+    for (i = n; i>0 && r; i--)
+        r = TEXTO & Read(i-1, stack)->tipo;
+    return r;
+}
+
+int Handle_Array(int n, Stack *stack) {
+    int i;
+    long r = 1;
+    for (i = n; i>0 && r; i--)
+        r = STACK & Read(i-1, stack)->tipo;
+    return r;
 }

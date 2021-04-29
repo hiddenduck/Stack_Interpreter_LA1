@@ -11,7 +11,7 @@
  * @param operation Endereço de uma função sem argumentos.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
-void SemArgumentos(Operation operation, Stack *stack) {
+void DefaultOperate(Operation operation, Stack *stack) {
     operation(stack);
 }
 
@@ -20,9 +20,12 @@ void SemArgumentos(Operation operation, Stack *stack) {
  * @param operation Endereço de uma função com um argumento.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
-void UmArgumento(Operation operation, Stack *stack) {
-    Data *d1 = Read(0, stack);
-    (*operation)(d1);
+void UmArgumento(Operation operation, Stack *stack, Handle handle, int *res) {
+    *res = handle(1);
+    if (*res) {
+        Data *d1 = Read(0, stack);
+        (*operation)(d1);
+    }
 }
 
 /**
@@ -32,7 +35,7 @@ void UmArgumento(Operation operation, Stack *stack) {
  */
 void DoisArgumentos(Operation operation, Stack *stack, Handle handle, int *res) {
     *res = handle(2);
-    if(!(*res)) {
+    if((*res)) {
         Data d2 = Pop(stack), d1 = Pop(stack);
         (*operation)(&d1, &d2);
         Push(d1, stack);

@@ -2,8 +2,9 @@
 #define LOGIC_H
 
 #include "stack.h"
+
 /** \brief Mapa logico */
-#define LOGIC_MAP {}
+#define LOGIC_MAP {{0, NULL}}
 
 void equals(Data *d1, Data *d2);
 void lesser(Data *d1, Data *d2);

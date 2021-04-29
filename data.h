@@ -30,7 +30,9 @@ typedef enum {
     /** Máscara com o valor char ou long*/
     INTEIRO = CHAR | LONG,
     /** Máscara com o valor long ou double*/
-    NUMERO = LONG | DOUBLE
+    NUMERO = LONG | DOUBLE,
+    /** */
+    TEXTO = CHAR | STRING
 } Mask;
 //tratar os arrays como "mini-stacks"
 //o value de um array passava a ser Stack*
@@ -79,4 +81,6 @@ Data DataDup(Data *target);
 
 void PrintData(Data *data);
 void SwapDataPointers (Data *d1, Data *d2);
+
+int GetBoolFromData (Data *d1);
 #endif

@@ -4,8 +4,9 @@
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
-#include "stack.h"
 #include "logic.h"
+#include "array.h"
+#include "stringOp.h"
 
 /**
  * \brief Definição do tamanho máximo da line de input.
@@ -15,7 +16,7 @@
 /**
  * \brief Array com todas as operações implementadas
  */
-#define OPERATION_MAP {{" ", SemArgumentos}, \
+#define OPERATION_MAP {{" ", DefaultOperate}, \
                 {";", DecrementaSP}, \
                 {"_", Underscore},\
                 {"\\", Swap},\
@@ -85,9 +86,9 @@ typedef struct COLLEC {
     OperationMap *Array;
 } ColectionOperationMaps;
 
-void DoisArgumentos(Operation operation, Stack *stack);
-void UmArgumento(Operation operation, Stack *stack);
-void SemArgumentos(Operation operation, Stack *stack);
+void DoisArgumentos(Operation operation, Stack *stack, Handle handle, int *res);
+void UmArgumento(Operation operation, Stack *stack, Handle handle, int *res);
+void DefaultOperate(Operation operation, Stack *stack);
 
 void soma(Data *d1, Data *d2);
 void subtr(Data *d1, Data *d2);
