@@ -100,7 +100,8 @@ void InputReader(Stack *stack, Stack *vars) {
 
     OperationMap aritMap[] = ARIT_MAP;
     OperationMap stackMap[] = STACK_MAP;
-    ColectionOperationMaps collec = {stackMap,aritMap,aritMap,aritMap,aritMap};
+    OperationMap inteiroMap[] = INTEIRO_MAP;
+    ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,aritMap,aritMap};
     eval(input,stack,vars,&collec);
 }
 
@@ -135,7 +136,8 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
         if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
             Operator(token, stack_ini, collec->Arit) &&
-            Operator(token, stack_ini, collec->StackManip)) {}
+            Operator(token, stack_ini, collec->StackManip) &&
+            Operator(token, stack_ini, collec->Inteiro)) {}
 
         //if (token[1] == '\0' && token[0] == '\"')
         //    Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);

@@ -14,7 +14,6 @@
                 {"!", notLG},\
                 {"(", decre},\
                 {")", incre},\
-                {"~", notBW},\
                 {"c", DataToCHAR},\
                 {"i", DataToLONG},\
                 {"f", DataToDOUBLE},\
@@ -32,9 +31,7 @@
                 {"/", divi},\
                 {"%", modulo},\
                 {"#", potencia},\
-                {"&", and},\
-                {"|", or},\
-                {"^", xor},\
+                \
                 {0, NULL} \
                 }
 
@@ -64,7 +61,7 @@ typedef struct COLLEC {
     /** */
     OperationMap *Arit;
     /** */
-    OperationMap *Logic;
+    OperationMap *Inteiro;
     /** */
     OperationMap *String;
     /** */

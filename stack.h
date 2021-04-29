@@ -19,6 +19,17 @@
             {"?", ifThenElse},       \
 };
 
+#define INTEIRO_MAP { \
+{" ", SemArgumentos}, \
+{"$", DollarSign},    \
+{" ", UmArgumento},\
+{"~", notBW},         \
+{" ", DoisArgumentos},\
+{"&", and},\
+{"|", or},\
+{"^", xor},\
+};
+
 /**
  * \brief Definição do incremento da stack.
  */
