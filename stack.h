@@ -9,14 +9,13 @@
 #include "data.h"
 
 #define STACK_MAP { \
-            {" ", SemArgumentos}, \
-            {";", DecrementaSP}, \
-            {"_", Underscore},\
-            {"\\", Swap},\
-            {"@", SwapThree},\
-            {"$", DollarSign},\
-            {"l", ReadLine},            \
-            {"?", ifThenElse},       \
+{" ", SemArgumentos}, \
+{";", DecrementaSP}, \
+{"_", Underscore},\
+{"\\", Swap},\
+{"@", SwapThree},\
+{"l", ReadLine},            \
+{"?", ifThenElse},       \
 };
 
 #define INTEIRO_MAP { \
