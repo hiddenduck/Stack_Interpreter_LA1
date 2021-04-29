@@ -15,21 +15,20 @@
  */
 int Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars, Handle handle) {
     Operation operation = operationMap[0].op;
-    int i, r;
+    int i, manhoso = -1;
     for (i = 1; operationMap[i].simbolo != 0; i++) {
         if (operationMap[i].simbolo[0] == ' ')
             operation = operationMap[i].op;
         if (strcmp(operationMap[i].simbolo, token) == 0) {
-            //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
-            //elementos que estão na stack
-            //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
-            (operation)(operationMap[i].op, stack);
+            (operation)(operationMap[i].op, stack, handle, &manhoso);
             break;
         }
     }
-    if(token[0]==':')
+    if(manhoso==-1 && token[2] == '\0' && token[0]==':') {
         TwoPoints(stack, vars, token[1]);
-    return r;
+        manhoso = 0;
+    }
+    return manhoso;
 }
 
 /**
@@ -181,7 +180,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
             Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        int z = PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, vars, Handle_Aritm);
+        PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, vars, Handle_Aritm);
     }
 
     return stack_ini;

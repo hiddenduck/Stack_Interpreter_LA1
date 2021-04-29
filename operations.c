@@ -30,11 +30,14 @@ void UmArgumento(Operation operation, Stack *stack) {
  * @param operation Endereço de uma função com dois argumentos.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
-void DoisArgumentos(Operation operation, Stack *stack) {
-    Data d2 = Pop(stack), d1 = Pop(stack);
-    (*operation)(&d1, &d2);
-    Push(d1, stack);
-    free(d2.value);
+void DoisArgumentos(Operation operation, Stack *stack, Handle handle, int *res) {
+    *res = handle(2);
+    if(!(*res)) {
+        Data d2 = Pop(stack), d1 = Pop(stack);
+        (*operation)(&d1, &d2);
+        Push(d1, stack);
+        free(d2.value);
+    }
 }
 
 /**
