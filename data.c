@@ -56,6 +56,7 @@ Data CreateDataSTRING(char *val) {
  * @return
  */
 Data CreateDataSTACK(Stack *stack) {
+    //talvez seja preciso fazer um stack dup, ter cuidado com a existência destas
     Data op = {stack, STACK};
     return op;
 }
@@ -185,7 +186,7 @@ void PrintData(Data *data) {
             printf("%c", *((char*)(data->value)));
             break;
         case STRING:
-            printf("%s", (char*)data->value);
+            printf("%s", DataValSTRING(data));
             break;
         case STACK:
             PrintStack(DataValSTACK(data));

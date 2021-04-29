@@ -95,6 +95,7 @@ char *getToken(char *linha, char **resto) {
  * @return
  */
 char *get_delimited(char *line, char *seps, char **rest) {
+    //ver este get delimited que não funciona
     char end, start = '\0';
     if (seps[1] != '\0') {
         start = seps[0];
@@ -110,10 +111,11 @@ char *get_delimited(char *line, char *seps, char **rest) {
         else if (start != '\0' && line[i] == start)
             count++;
     }
-
     line[i-1] = '\0';
-
-    *rest = line+i+1;
+    if (line[i] != '\0')
+        *rest = line+i+1;
+    else
+        *rest = NULL;
     return line;
 }
 
@@ -131,7 +133,8 @@ void InputReader(Stack *stack, Stack *vars) {
     OperationMap aritMap[] = ARIT_MAP;
     OperationMap stackMap[] = STACK_MAP;
     OperationMap inteiroMap[] = INTEIRO_MAP;
-    ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,aritMap,aritMap};
+    OperationMap stringMap[] = STRING_MAP;
+    ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,stringMap,aritMap};
     eval(input,stack,vars,&collec);
 }
 
@@ -160,16 +163,17 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
     if (stack_ini == NULL)
         stack_ini = CreateStack(INCREMENTO_STACK);
 
-    while (line[0] != '\0') {
+    while (line != NULL) {
         char *token = getToken(line, &line);
 
-        if (token[1] == '\0' && token[0] == '\"')
-            Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
+        if (token[0] == '\"')
+            Push(CreateDataSTRING(get_delimited(token, "\"", &line)), stack_ini);
         else if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
             Operator(token, stack_ini, collec->Arit) &&
             Operator(token, stack_ini, collec->StackManip) &&
-            Operator(token, stack_ini, collec->Inteiro)) {}
+            Operator(token, stack_ini, collec->Inteiro) &&
+            Operator(token, stack_ini, collec->String)) {}
 
         //if (token[1] == '\0' && token[0] == '\"')
         //    Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);

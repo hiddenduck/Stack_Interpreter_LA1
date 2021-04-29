@@ -6,6 +6,7 @@
 
 #include "stack.h"
 #include "logic.h"
+#include "string_op.h"
 
 /**
  * \brief Array com todas as operações implementadas
