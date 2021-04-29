@@ -19,9 +19,7 @@ typedef enum {
     /**Tipo de um data com o tipo de dado double*/
     DOUBLE = 4,
     /**Tipo de um data com o tipo de dado string*/
-    STRING = 8,
-    /**Tipo de um data com o tipo Stack*/
-    STACK = 16
+    STRING = 8
 } Tipo;
 
 //tratar os arrays como "mini-stacks"
