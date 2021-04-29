@@ -218,6 +218,6 @@ int Handle_Array(int n, Stack *stack) {
     return r;
 }
 
-int Handle_Manip(int n, Stack *stack) {
+int Handle_Manip() {
     return 1;
 }
