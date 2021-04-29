@@ -12,15 +12,15 @@
  * \brief Declaração dos Tipos possíveis para os Data.
  */
 typedef enum {
-    /** */
+    /**Tipo de um data com o tipo de dado char*/
     CHAR = 1,
-    /** */
+    /**Tipo de um data com o tipo de dado long*/
     LONG = 2,
-    /** */
+    /**Tipo de um data com o tipo de dado double*/
     DOUBLE = 4,
-    /** */
+    /**Tipo de um data com o tipo de dado string*/
     STRING = 8,
-    /** */
+    /**Tipo de um data com o tipo Stack*/
     STACK = 16
 } Tipo;
 
