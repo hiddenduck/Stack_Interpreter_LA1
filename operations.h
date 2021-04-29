@@ -110,6 +110,6 @@ void Swap(Stack *stack);
 void SwapThree(Stack *stack);
 void DollarSign(Stack *stack);
 void ReadLine(Stack *stack);
-void TwoPoints (Stack *stack, Stack *vars, char token);
+int TwoPoints (Stack *stack, Stack *vars, char token);
 
 #endif
