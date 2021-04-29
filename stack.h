@@ -8,6 +8,17 @@
 #include <math.h>
 #include "data.h"
 
+#define STACK_MAP { \
+            {" ", SemArgumentos}, \
+            {";", DecrementaSP}, \
+            {"_", Underscore},\
+            {"\\", Swap},\
+            {"@", SwapThree},\
+            {"$", DollarSign},\
+            {"l", ReadLine},            \
+            {"?", ifThenElse},       \
+};
+
 /**
  * \brief Definição do incremento da stack.
  */

@@ -10,15 +10,7 @@
 /**
  * \brief Array com todas as operações implementadas
  */
-#define OPERATION_MAP {{" ", SemArgumentos}, \
-                {";", DecrementaSP}, \
-                {"_", Underscore},\
-                {"\\", Swap},\
-                {"@", SwapThree},\
-                {"$", DollarSign},\
-                {"l", ReadLine},            \
-                {"?", ifThenElse},           \
-                {" ", UmArgumento},          \
+#define ARIT_MAP {{" ", UmArgumento},          \
                 {"!", notLG},\
                 {"(", decre},\
                 {")", incre},\

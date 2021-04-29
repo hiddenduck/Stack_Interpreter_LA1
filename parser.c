@@ -98,8 +98,9 @@ void InputReader(Stack *stack, Stack *vars) {
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    OperationMap opMap[] = OPERATION_MAP;
-    ColectionOperationMaps collec = {opMap,opMap,opMap,opMap,opMap};
+    OperationMap aritMap[] = ARIT_MAP;
+    OperationMap stackMap[] = STACK_MAP;
+    ColectionOperationMaps collec = {stackMap,aritMap,aritMap,aritMap,aritMap};
     eval(input,stack,vars,&collec);
 }
 
@@ -133,7 +134,8 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
 
         if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
-            Operator(token,stack_ini,collec->Arit)) {}
+            Operator(token, stack_ini, collec->Arit) &&
+            Operator(token, stack_ini, collec->StackManip)) {}
 
         //if (token[1] == '\0' && token[0] == '\"')
         //    Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
