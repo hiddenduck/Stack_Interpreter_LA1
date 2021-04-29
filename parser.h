@@ -4,7 +4,7 @@
  */
 #include "operations.h"
 
-int Operator(char *token, Stack  *stack, OperationMap *operationMap, Stack *vars, Handle handle);
+int Operator(char *token, Stack  *stack, OperationMap *operationMap, Handle handle);
 int PushTokenParser(char *token, Stack *stack, Stack *vars);
 void InputReader(Stack *stack, Stack *vars);
 void Omissions(Stack *vars);
