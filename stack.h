@@ -25,7 +25,7 @@
 {"e&", andWithShortcut},     \
 {"e|", orWithShortcut},      \
 {0, NULL}\
-};
+}
 
 #define INTEIRO_MAP { \
 {" ", SemArgumentos}, \
@@ -37,7 +37,7 @@
 {"|", or},\
 {"^", xor},           \
 {0,NULL}\
-};
+}
 
 /**
  * \brief Definição do incremento da stack.
