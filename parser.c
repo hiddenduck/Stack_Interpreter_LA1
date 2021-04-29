@@ -16,13 +16,11 @@
 int Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars, Handle handle) {
     Operation operation = operationMap[0].op;
     int i, manhoso = -1;
-    for (i = 1; operationMap[i].simbolo != 0; i++) {
+    for (i = 1; operationMap[i].simbolo != 0 && manhoso == -1; i++) {
         if (operationMap[i].simbolo[0] == ' ')
             operation = operationMap[i].op;
-        if (strcmp(operationMap[i].simbolo, token) == 0) {
+        if (strcmp(operationMap[i].simbolo, token) == 0)
             (operation)(operationMap[i].op, stack, handle, &manhoso);
-            break;
-        }
     }
     if(manhoso==-1 && token[2] == '\0' && token[0]==':') {
         TwoPoints(stack, vars, token[1]);
