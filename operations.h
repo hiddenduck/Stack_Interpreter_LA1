@@ -88,7 +88,7 @@ typedef struct COLLEC {
 
 void DoisArgumentos(Operation operation, Stack *stack, int *res, Handle handle);
 void UmArgumento(Operation operation, Stack *stack, int *res, Handle handle);
-void DefaultOperate(Operation operation, Stack *stack, int *res);
+void DefaultOperate(Operation operation, Stack *stack, int *res, Handle handle);
 
 void soma(Data *d1, Data *d2);
 void subtr(Data *d1, Data *d2);

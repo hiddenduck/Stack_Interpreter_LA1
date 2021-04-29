@@ -11,7 +11,7 @@
  * @param operation Endereço de uma função sem argumentos.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
-void DefaultOperate(Operation operation, Stack *stack, int *res) {
+void DefaultOperate(Operation operation, Stack *stack, int *res, Handle handle) {
     *res = 0;
     operation(stack);
 }
