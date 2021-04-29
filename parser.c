@@ -13,24 +13,23 @@
  * @param operationMap Endereço do primeiro elemento do operationMap.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-void Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars) {
+int Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars, Handle handle) {
     Operation operation = operationMap[0].op;
-    int i;
+    int i, r;
     for (i = 1; operationMap[i].simbolo != 0; i++) {
         if (operationMap[i].simbolo[0] == ' ')
             operation = operationMap[i].op;
         if (strcmp(operationMap[i].simbolo, token) == 0) {
             //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
             //elementos que estão na stack
-
             //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
-
             (operation)(operationMap[i].op, stack);
             break;
         }
     }
     if(token[0]==':')
         TwoPoints(stack, vars, token[1]);
+    return r;
 }
 
 /**
@@ -41,8 +40,8 @@ void Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars
  * @param opMap Mapa com as operações.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-void InputParser(char *token, Stack *stack, OperationMap *opMap, Stack *vars){
-
+int PushTokenParser(char *token, Stack *stack, Stack *vars) {
+    int r = 1;
     char *resto;
 
     /* Testar se o valor introduzido é do tipo long. */
@@ -50,23 +49,25 @@ void InputParser(char *token, Stack *stack, OperationMap *opMap, Stack *vars){
 
     if (strlen(resto) == 0) {
         Push(CreateDataLONG(vall), stack);
+        r = 0;
     } else {
         /* Testar se o resto contém um double decimal e somar à parte inteira. */
         double vald = strtod(resto, &resto);
-        if (strlen(resto) ==  0) {
+        if (strlen(resto) == 0) {
             if (vall < 0)
                 vald = -vald;
             vald += vall;
             Push(CreateDataDOUBLE(vald), stack);
-        } else if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
+            r = 0;
+        } else if (strlen(token) == 1 && token[0] >= 'A' && token[0] <= 'Z') {
             //limpar isto (MI)
             Data *letter = Read(64 - token[0], vars);
             Push(DataDup(letter), stack);
-        } else
-            Operator(token, stack, opMap, vars);
+            r = 0;
+        }
     }
+    return r;
 }
-
 /**
  * \brief Função que recebe o input do utilizador e invoca o InputParser.
  * @param stack Endereço da stack responsável pelo armazenamento.
@@ -85,7 +86,7 @@ void InputReader(Stack *stack, Stack *vars) {
 
     ColectionOperationMaps collec[] = {{aritMap},{logicMap},{stringMap},{arrayMap}};
 
-    eval(input, stack, vars, aritMap);
+    eval(input, stack, vars, collec);
     //char *delims = " \t\n";
     //for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
     //    //char *getToken(linha, resto)
@@ -169,7 +170,7 @@ char *get_delimited(char *line, char *seps, char **rest) {
  * @param stack_ini
  * @return
  */
-Stack *eval(char *line, Stack *stack_ini, Stack *vars, OperationMap *opMap) {
+Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *collec) {
     if (stack_ini == NULL)
         stack_ini = CreateStack(INCREMENTO_STACK);
 
@@ -179,11 +180,14 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, OperationMap *opMap) {
         if (token[1] == '\0' && token[0] == '\"')
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
-            Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, opMap)), stack_ini);
-
-        else if (PushTokenParser(token, stack_ini)) {}
-        else if (Operator(token))
+            Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
+        int z = PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, vars, Handle_Aritm);
     }
 
     return stack_ini;
+}
+
+
+int Handle_Aritm() {
+    return 1;
 }

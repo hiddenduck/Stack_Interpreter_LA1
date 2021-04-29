@@ -7,6 +7,10 @@
 #include "stack.h"
 #include "logic.h"
 
+/**
+ * \brief Definição do tamanho máximo da line de input.
+ */
+#define MAX_LENGTH_INPUT 10240
 
 /**
  * \brief Array com todas as operações implementadas
@@ -48,31 +52,38 @@
                 }
 
 /**
- * \brief Definição do tamanho máximo da line de input.
- */
-#define MAX_LENGTH_INPUT 10240
-
-/**
  * \brief Tipo de dados que funciona como apontador para uma função operação.
  */
 typedef void (*Operation)();
 
 /**
+ *
+ */
+typedef int (*Handle)();
+
+/**
  * \brief Tipo de dados que armazena um simbolo (tipo char) e uma função operação (Operation).
  */
-typedef struct {
+typedef struct OPMAP{
     /** char responsável pela identificação da operação*/
     char *simbolo;
     /** Apontador para uma função*/
     Operation op;
-}OperationMap;
+} OperationMap;
 
-typedef struct OPMAPS {
+/**
+ *
+ */
+typedef struct COLLEC {
+    /** */
     OperationMap *Arit;
+    /** */
     OperationMap *Logic;
+    /** */
     OperationMap *String;
+    /** */
     OperationMap *Array;
-}ColectionOperationMaps;
+} ColectionOperationMaps;
 
 void DoisArgumentos(Operation operation, Stack *stack);
 void UmArgumento(Operation operation, Stack *stack);

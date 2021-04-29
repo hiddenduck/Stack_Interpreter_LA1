@@ -39,10 +39,10 @@ typedef enum {
  * \brief Declaração da estrutura de dados Data.
  */
 typedef struct data {
-    /** Tipo de dados guardado. */
-    Tipo tipo;
     /** Apontador void para o valor guardado na Data. */
     void* value;
+    /** Tipo de dados guardado. */
+    Tipo tipo;
 }Data;
 
 /**\brief Inicialização da função DataValCHAR.*/
@@ -60,6 +60,10 @@ typedef struct data {
 /** \brief Inicialização da função DataValSTRING.*/
 #define DataValSTRING(data) \
     (char *) (data)->value
+
+/** */
+#define DataValSTACK(data) \
+    (Stack *) (data)->value
 
 Data CreateDataLONG(long val);
 Data CreateDataDOUBLE(double val);
