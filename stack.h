@@ -34,4 +34,9 @@ Data *Read(long deslocamento, Stack *stack);
 
 void PrintStack(Stack *stack);
 
+/** */
+#define DataValSTACK(data) \
+    (Stack *) (data)->value
+
+Data CreateDataSTACK(Stack *stack);
 #endif

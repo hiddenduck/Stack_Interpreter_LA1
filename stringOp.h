@@ -4,4 +4,4 @@
 
 #define STRING_MAP {{0, NULL}}
 
-#endif //PROJETOLAI_STRINGOP_H
+#endif //STRINGOP_H

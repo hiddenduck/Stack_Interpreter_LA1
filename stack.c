@@ -78,3 +78,13 @@ void PrintStack(Stack *stack) {
     }
     putchar('\n');
 }
+
+/**
+ *
+ * @param stack
+ * @return
+ */
+Data CreateDataSTACK(Stack *stack) {
+    Data op = {stack, STACK};
+    return op;
+}

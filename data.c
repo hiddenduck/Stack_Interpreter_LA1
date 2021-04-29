@@ -50,16 +50,6 @@ Data CreateDataSTRING(char *val) {
 }
 
 /**
- *
- * @param stack
- * @return
- */
-Data CreateDataSTACK(Stack *stack) {
-    Data op = {stack, STACK};
-    return op;
-}
-
-/**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo DOUBLE.
  * @param d Endereço de um Data.
  */
@@ -200,30 +190,4 @@ void SwapDataPointers (Data *d1, Data *d2){
     *d2 = temp; 
 }
 
-/**
- *
- * @param d1
- * @return
- */
-int GetBoolFromData (Data *d1) {
-    long r;
-    switch (d1->tipo) {
-        case LONG:
-            r = (*DataValLONG(d1) != 0);
-            break;
-        case CHAR:
-            r = (*DataValCHAR(d1) != 0);
-            break;
-        case DOUBLE:
-            r = (*DataValDOUBLE(d1) != 0);
-            break;
-        case STRING:
-            r = (strcmp(DataValSTRING(d1), ""));
-            break;
-        case STACK:
-            r = ((*DataValSTACK(d1)).sp != -1);
-            break;
-    }
-    return r;
-}
 
