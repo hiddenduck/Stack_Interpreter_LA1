@@ -88,6 +88,36 @@ char *getToken(char *linha, char **resto) {
 }
 
 /**
+ *
+ * @param line
+ * @param seps
+ * @param rest
+ * @return
+ */
+char *get_delimited(char *line, char *seps, char **rest) {
+    char end, start = '\0';
+    if (seps[1] != '\0') {
+        start = seps[0];
+        end = seps[1];
+    } else {
+        end = seps[0];
+    }
+
+    int i, count;
+    for (i = 0, count = 1, line++; count; i++) {
+        if (line[i] == end)
+            count--;
+        else if (start != '\0' && line[i] == start)
+            count++;
+    }
+
+    line[i-1] = '\0';
+
+    *rest = line+i+1;
+    return line;
+}
+
+/**
  * \brief Função que recebe o input do utilizador e invoca o InputParser.
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
@@ -133,7 +163,9 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
     while (line[0] != '\0') {
         char *token = getToken(line, &line);
 
-        if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
+        if (token[1] == '\0' && token[0] == '\"')
+            Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
+        else if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
             Operator(token, stack_ini, collec->Arit) &&
             Operator(token, stack_ini, collec->StackManip) &&

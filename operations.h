@@ -28,6 +28,11 @@
                 {0, NULL} \
                 }
 
+#define STRING_MAP {{" ", UmArgumento}, \
+                    {",", StringLength},         \
+                    {0, NULL}\
+}
+
 /**
  * \brief Definição do tamanho máximo da line de input.
  */
