@@ -76,8 +76,8 @@ int InputParser(char *token, Stack *stack, Stack *vars){
  */
 char *getToken(char *linha, char **resto) {
     int i;
-    for (i = 0; linha[i] == ' ' || linha[i] == '\n' || linha[i] == '\t'; i++);
-    for (; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
+    for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
+    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
     if (linha[i] != '\0') {
         linha[i] = '\0';
         *resto = linha+i+1;

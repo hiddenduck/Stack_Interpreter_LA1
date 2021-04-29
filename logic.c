@@ -74,12 +74,11 @@ void ifThenElse(Stack *stack){
     Data elseOperator = Pop(stack);
     Data thenOperator = Pop(stack);
     Data *d1 = Read(0, stack);
-    double a;
-    LogicTestD1
-        if(a)
-            swapData(d1, &thenOperator);
-        else
-            swapData(d1, &elseOperator);
+    long a = GetBoolFromData(d1);
+    if(a)
+        swapData(d1, &thenOperator);
+    else
+        swapData(d1, &elseOperator);
 
     free(elseOperator.value);
     free(thenOperator.value);
@@ -114,8 +113,7 @@ void GreaterBetweenTwo(Data *d1, Data *d2){
  *  @param d2 Endereço de um data.
  */
 void andWithShortcut(Data *d1, Data *d2){
-    double a;
-    LogicTestD1;
+    long a = GetBoolFromData(d1);
     if(a)
         swapData(d1, d2);
 }
@@ -125,8 +123,7 @@ void andWithShortcut(Data *d1, Data *d2){
  *  @param d2 Endereço de um data.
  */
 void orWithShortcut(Data *d1, Data *d2){
-    double a;
-    LogicTestD1;
+    long a = GetBoolFromData(d1);
     if(!a)
         swapData(d1, d2);
 }

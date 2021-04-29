@@ -181,3 +181,27 @@ void swapData (Data *d1, Data *d2){
     *d1 = *d2;
     *d2 = temp; 
 }
+
+/**
+ *
+ * @param d1
+ * @return
+ */
+int GetBoolFromData (Data *d1) {
+    long r = 0;
+    switch (d1->tipo) {
+        case LONG:
+            r = (*DataValLONG(d1) != 0);
+            break;
+        case CHAR:
+            r = (*DataValCHAR(d1) != 0);
+            break;
+        case DOUBLE:
+            r = (*DataValDOUBLE(d1) != 0);
+            break;
+        case STRING:
+            r = (strcmp(DataValSTRING(d1), ""));
+            break;
+    }
+    return r;
+}
