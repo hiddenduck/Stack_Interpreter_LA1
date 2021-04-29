@@ -20,7 +20,7 @@ int Operator(char *token, Stack *stack, OperationMap *operationMap, Handle handl
         if (operationMap[i].simbolo[0] == ' ')
             operation = operationMap[i].op;
         if (strcmp(operationMap[i].simbolo, token) == 0)
-            (operation)(operationMap[i].op, stack, handle, &manhoso);
+            (operation)(operationMap[i].op, stack, &manhoso, handle);
     }
 
     return manhoso;

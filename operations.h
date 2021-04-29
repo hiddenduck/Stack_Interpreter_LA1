@@ -86,9 +86,9 @@ typedef struct COLLEC {
     OperationMap *Array;
 } ColectionOperationMaps;
 
-void DoisArgumentos(Operation operation, Stack *stack, Handle handle, int *res);
-void UmArgumento(Operation operation, Stack *stack, Handle handle, int *res);
-void DefaultOperate(Operation operation, Stack *stack);
+void DoisArgumentos(Operation operation, Stack *stack, int *res, Handle handle);
+void UmArgumento(Operation operation, Stack *stack, int *res, Handle handle);
+void DefaultOperate(Operation operation, Stack *stack, int *res);
 
 void soma(Data *d1, Data *d2);
 void subtr(Data *d1, Data *d2);
