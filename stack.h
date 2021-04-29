@@ -15,7 +15,12 @@
 {"\\", Swap},\
 {"@", SwapThree},\
 {"l", ReadLine},            \
-{"?", ifThenElse},       \
+{"?", ifThenElse},  \
+{" ", UmArgumento},\
+{"c", DataToCHAR},\
+{"i", DataToLONG},\
+{"f", DataToDOUBLE},\
+{0, NULL}\
 };
 
 #define INTEIRO_MAP { \
@@ -26,7 +31,8 @@
 {" ", DoisArgumentos},\
 {"&", and},\
 {"|", or},\
-{"^", xor},\
+{"^", xor},           \
+{0,NULL}\
 };
 
 /**

@@ -14,9 +14,6 @@
                 {"!", notLG},\
                 {"(", decre},\
                 {")", incre},\
-                {"c", DataToCHAR},\
-                {"i", DataToLONG},\
-                {"f", DataToDOUBLE},\
                 {" ", DoisArgumentos},   \
                 {"e<", LesserBetweenTwo},   \
                 {"e>", GreaterBetweenTwo},   \
@@ -31,7 +28,6 @@
                 {"/", divi},\
                 {"%", modulo},\
                 {"#", potencia},\
-                \
                 {0, NULL} \
                 }
 
