@@ -3,6 +3,7 @@
  * @file data.c
  */
 #include "data.h"
+#include "stack.h"
 
 /** \brief Inicialização da função CreateDataCHAR.
  *
@@ -12,7 +13,7 @@
 Data CreateDataCHAR(char val) {
         char *vp = (char*) malloc(sizeof(char));
         *vp = val;
-        Data op = {CHAR, vp};
+        Data op = {vp, CHAR};
         return op;
 }
 /** \brief Inicialização da função CreateDataLONG.
@@ -23,7 +24,7 @@ Data CreateDataCHAR(char val) {
 Data CreateDataLONG(long val) {
     long *vp = (long*) malloc(sizeof(long));
     *vp = val;
-    Data op = {LONG, vp};
+    Data op = {vp, LONG};
     return op;
 }
 /** \brief Inicialização da função CreateDataDOUBLE.
@@ -34,7 +35,7 @@ Data CreateDataLONG(long val) {
 Data CreateDataDOUBLE(double val) {
     double *vp = (double*) malloc(sizeof(double));
     *vp = val;
-    Data op = {DOUBLE, vp};
+    Data op = {vp, DOUBLE};
     return op;
 }
 
@@ -45,7 +46,17 @@ Data CreateDataDOUBLE(double val) {
  */
 Data CreateDataSTRING(char *val) {
     char *vp = strdup(val);
-    Data op = {STRING, vp};
+    Data op = {vp, STRING};
+    return op;
+}
+
+/**
+ * \brief
+ * @param stack
+ * @return
+ */
+Data CreateDataSTACK(Stack *stack) {
+    Data op = {stack, STACK};
     return op;
 }
 
@@ -81,6 +92,10 @@ void DataToDOUBLE(Data *d) {
 void DataToLONG(Data *d) {
     long val;
     switch (d->tipo){
+        case CHAR: {
+            d->tipo = LONG;
+            return;
+        }
         case STRING:{
             val = strtol(DataValCHAR(d), NULL, 10);
             break;
@@ -90,7 +105,6 @@ void DataToLONG(Data *d) {
             break;
         }
         default:
-            d->tipo = LONG;
             return;
     }
     long *vp = (long *) realloc(d->value, sizeof(long));
@@ -147,6 +161,10 @@ Data DataDup(Data *target) {
             data = CreateDataSTRING(DataValSTRING(target));
             break;
         }
+        case STACK: {
+            data = CreateDataSTACK(DataValSTACK(target));
+            break;
+        }
     }
     return data;
 }
@@ -168,6 +186,9 @@ void PrintData(Data *data) {
             break;
         case STRING:
             printf("%s", (char*)data->value);
+            break;
+        case STACK:
+            PrintStack(DataValSTACK(data));
             break;
     }
 }
@@ -201,6 +222,9 @@ int GetBoolFromData (Data *d1) {
             break;
         case STRING:
             r = (strcmp(DataValSTRING(d1), ""));
+            break;
+        case STACK:
+            r = ((*DataValSTACK(d1)).sp != -1);
             break;
     }
     return r;

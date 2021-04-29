@@ -8,6 +8,9 @@
 #include <math.h>
 #include "data.h"
 
+/**
+ *
+ */
 #define STACK_MAP { \
 {" ", SemArgumentos}, \
 {";", DecrementaSP}, \
@@ -27,6 +30,9 @@
 {0, NULL}\
 }
 
+/**
+ *
+ */
 #define INTEIRO_MAP { \
 {" ", SemArgumentos}, \
 {"$", DollarSign},    \

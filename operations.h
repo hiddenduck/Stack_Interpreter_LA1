@@ -48,6 +48,9 @@ typedef struct {
     Operation op;
 }OperationMap;
 
+/**
+ *
+ */
 typedef struct COLLEC {
     /** */
     OperationMap *StackManip;

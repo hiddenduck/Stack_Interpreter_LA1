@@ -19,7 +19,9 @@ typedef enum {
     /**Tipo de um data com o tipo de dado double*/
     DOUBLE = 4,
     /**Tipo de um data com o tipo de dado string*/
-    STRING = 8
+    STRING = 8,
+    /** */
+    STACK = 16
 } Tipo;
 
 //tratar os arrays como "mini-stacks"
@@ -29,10 +31,10 @@ typedef enum {
  * \brief Declaração da estrutura de dados Data.
  */
 typedef struct data {
-    /** Tipo de dados guardado. */
-    Tipo tipo;
     /** Apontador void para o valor guardado na Data. */
     void* value;
+    /** Tipo de dados guardado. */
+    Tipo tipo;
 }Data;
 
 /**\brief Inicialização da função DataValCHAR.*/
@@ -51,10 +53,15 @@ typedef struct data {
 #define DataValSTRING(data) \
     (char *) (data)->value
 
+/** */
+#define DataValSTACK(data) \
+    (Stack *) (data)->value
+
 Data CreateDataLONG(long val);
 Data CreateDataDOUBLE(double val);
 Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
+//Data CreateDataSTACK(Stack *stack); não funciona até o stack.h estiver aqui
 
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);
