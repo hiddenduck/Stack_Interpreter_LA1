@@ -73,10 +73,10 @@ void InputReader(Stack *stack, Stack *vars) {
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    OperationMap aritMap[] = OPERATION_MAP,
-                logicMap[] = LOGIC_MAP,
-                stringMap[] = STRING_MAP,
-                arrayMap[] = ARRAY_MAP;
+    OperationMap    aritMap[]   = OPERATION_MAP,
+                    logicMap[]  = LOGIC_MAP,
+                    stringMap[] = STRING_MAP,
+                    arrayMap[]  = ARRAY_MAP;
 
     ColectionOperationMaps collec[] = {{aritMap},{logicMap},{stringMap},{arrayMap}};
 

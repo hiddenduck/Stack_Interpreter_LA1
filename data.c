@@ -83,7 +83,7 @@ void DataToLONG(Data *d) {
     switch (d->tipo){
         case CHAR:
             d->tipo = LONG;
-            break;
+           return;
         case STRING:{
             val = strtol(DataValCHAR(d), NULL, 10);
             break;

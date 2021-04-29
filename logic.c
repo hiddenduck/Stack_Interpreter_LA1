@@ -132,7 +132,7 @@ void orWithShortcut(Data *d1, Data *d2){
  * @return
  */
 int GetBoolFromData (Data *d1) {
-    long r;
+    long r = 0;
     switch (d1->tipo) {
         case LONG:
             r = (*DataValLONG(d1) != 0);
