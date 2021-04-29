@@ -13,7 +13,7 @@
  * @param operationMap Endereço do primeiro elemento do operationMap.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-int Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars, Handle handle) {
+int Operator(char *token, Stack *stack, OperationMap *operationMap, Handle handle) {
     Operation operation = operationMap[0].op;
     int i, manhoso = -1;
     for (i = 1; operationMap[i].simbolo != 0 && manhoso == -1; i++) {
@@ -22,11 +22,7 @@ int Operator(char *token, Stack *stack, OperationMap *operationMap, Stack *vars,
         if (strcmp(operationMap[i].simbolo, token) == 0)
             (operation)(operationMap[i].op, stack, handle, &manhoso);
     }
-    manhoso = manhoso && 
-    if(manhoso==-1 && token[2] == '\0' && token[0]==':') {
-        TwoPoints(stack, vars, token[1]);
-        manhoso = 0;
-    }
+
     return manhoso;
 }
 
@@ -179,7 +175,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
             Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
         else if (token[1] == '\0' && token[0] == '[')
             Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, vars, Handle_Aritm);
+        PushTokenParser(token, stack_ini, vars) && Operator(token, stack_ini, collec->Arit, vars, Handle_Aritm) && TwoPoints(stack_ini, vars, token[1]);
     }
 
     return stack_ini;
