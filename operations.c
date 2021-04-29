@@ -12,7 +12,7 @@
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DefaultOperate(Operation operation, Stack *stack, int *res, Handle handle) {
-    *res = 0;
+    *res = !handle(0);
     operation(stack);
 }
 
