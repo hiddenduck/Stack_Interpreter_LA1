@@ -3,7 +3,6 @@
  * @file data.c
  */
 #include "data.h"
-#include "stack.h"
 
 /** \brief Inicialização da função CreateDataCHAR.
  *

@@ -2,7 +2,7 @@
 #ifndef STRING_OP_H
 #define STRING_OP_H
 
-#include "stack.h"
+#include "data.h"
 
 void StringLength(Data *d1);
 

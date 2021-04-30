@@ -77,13 +77,9 @@ int InputParser(char *token, Stack *stack, Stack *vars){
 char *getToken(char *linha, char **resto) {
     int i;
     for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
-    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
-    if (linha[i] != '\0') {
-        linha[i] = '\0';
-        *resto = linha+i+1;
-    }
-    else
-        *resto = NULL;
+    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t' &&
+                linha[i] != '\"' && linha[i] != '['; i++);
+    *resto = linha+i+1;
     return linha;
 }
 
@@ -94,7 +90,7 @@ char *getToken(char *linha, char **resto) {
  * @param rest
  * @return
  */
-char *get_delimited(char *line, char *seps, char **rest) {
+char *get_delimited(char *line, char *seps, char **resto) {
     //ver este get delimited que não funciona
     char end, start = '\0';
     if (seps[1] != '\0') {
@@ -105,17 +101,15 @@ char *get_delimited(char *line, char *seps, char **rest) {
     }
 
     int i, count;
-    for (i = 0, count = 1, line++; count; i++) {
+    for (i = 0, count = 1; count; i++) {
         if (line[i] == end)
             count--;
         else if (start != '\0' && line[i] == start)
             count++;
     }
     line[i-1] = '\0';
-    if (line[i] != '\0')
-        *rest = line+i+1;
-    else
-        *rest = NULL;
+    *resto = line+i;
+
     return line;
 }
 
@@ -163,12 +157,13 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
     if (stack_ini == NULL)
         stack_ini = CreateStack(INCREMENTO_STACK);
 
-    while (line != NULL) {
+    while (*line != '\0') {
         char *token = getToken(line, &line);
 
         if (token[0] == '\"')
-            Push(CreateDataSTRING(get_delimited(token, "\"", &line)), stack_ini);
-        else if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
+            Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
+        else if (token[0] != '\0' &&
+            (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
             Operator(token, stack_ini, collec->Arit) &&
             Operator(token, stack_ini, collec->StackManip) &&

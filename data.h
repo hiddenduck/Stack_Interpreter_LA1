@@ -4,9 +4,14 @@
 /**
  * @headerfile data.h
  */
-#include <stdio.h>
-#include <stdlib.h>
+#include "stack.h"
 #include <string.h>
+#include <stdlib.h>
+#include <assert.h>
+#include <stdio.h>
+#include <math.h>
+
+typedef struct stack Stack;
 
 /**
  * \brief Declaração dos Tipos possíveis para os Data.
@@ -61,7 +66,7 @@ Data CreateDataLONG(long val);
 Data CreateDataDOUBLE(double val);
 Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
-//Data CreateDataSTACK(Stack *stack); não funciona até o stack.h estiver aqui
+Data CreateDataSTACK(Stack *stack); //não funciona até o stack.h estiver aqui
 
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);

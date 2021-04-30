@@ -1,7 +1,8 @@
 #ifndef LOGIC_H
 #define LOGIC_H
 
-#include "stack.h"
+#include "data.h"
+
 /** \brief Mapa logico */
 #define LOGIC_MAP {}
 

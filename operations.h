@@ -4,9 +4,10 @@
 #ifndef OPERATIONS_H
 #define OPERATIONS_H
 
+#include "data.h"
 #include "stack.h"
-#include "logic.h"
 #include "string_op.h"
+#include "logic.h"
 
 /**
  * \brief Array com todas as operações implementadas
