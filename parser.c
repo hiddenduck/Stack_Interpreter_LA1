@@ -14,22 +14,39 @@
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
 int Operator(char *token, Stack *stack, OperationMap *operationMap) {
-    Operation operation = operationMap[0].op;
+    Operation handle = operationMap[0].op;
     int i, r = 1;
-    for (i = 1; operationMap[i].simbolo != 0; i++) {
+    for (i = 1; operationMap[i].simbolo != 0 && r; i++) {
         if (operationMap[i].simbolo[0] == ' ')
-            operation = operationMap[i].op;
+            handle = operationMap[i].op;
         if (strcmp(operationMap[i].simbolo, token) == 0) {
             //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
             //elementos que estão na stack
             //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
-            (operation)(operationMap[i].op, stack);
-            r = 0;
+
+            (handle)(operationMap[i].mask, operationMap[i].op, stack, &r);
             break;
         }
     }
     return r;
 }
+
+void HandleOne(int mask, Operation op, Stack *stack, int *r) {
+    if (Read(0, stack)->tipo & mask) {
+        UmArgumento(op, stack);
+        *r = 0;
+    } else
+        *r = -1;
+}
+
+void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
+    if ((Read(0, stack)->tipo & mask) && (Read(1, stack)->tipo & mask)) {
+        DoisArgumentos(op, stack);
+        *r = 0;
+    } else
+        *r = -1;
+}
+
 
 /**
  * \brief Função que interpreta o input e altera a stack segundo esse input.

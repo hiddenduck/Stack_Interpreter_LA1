@@ -12,10 +12,10 @@
 /**
  * \brief Array com todas as operações implementadas
  */
-#define ARIT_MAP {{" ", 0, UmArgumento},          \
+#define ARIT_MAP {{" ", 0, HandleOne},          \
                 {"(", NUMEROS, decre},\
                 {")",NUMEROS, incre},\
-                {" ", 0, DoisArgumentos},   \
+                {" ", 0, HandleTwo},   \
                 {"e<", NUMEROS, LesserBetweenTwo},   \
                 {"e>", NUMEROS, GreaterBetweenTwo},   \
                 {"=", NUMEROS, equals},           \
@@ -42,12 +42,12 @@
 {"@", ANY, SwapThree},\
 {"l", ANY, ReadLine},            \
 {"?", ANY, ifThenElse},  \
-{" ", 0, UmArgumento}, \
+{" ", 0, HandleOne}, \
 {"!", ANY, notLG},\
 {"c", (NUMEROS | CHAR), DataToCHAR},\
 {"i", (NUMEROS | CHAR), DataToLONG},\
 {"f", (NUMEROS | CHAR), DataToDOUBLE},\
-{" ", 0, DoisArgumentos},\
+{" ", 0, HandleTwo},\
 {"e&", ANY, andWithShortcut},     \
 {"e|", ANY, orWithShortcut},      \
 {0, 0, NULL}\
@@ -59,9 +59,9 @@
 #define INTEIRO_MAP { \
 {" ", 0, SemArgumentos}, \
 {"$", INTEIROS, DollarSign},    \
-{" ", 0, UmArgumento},\
+{" ", 0, HandleOne},\
 {"~", INTEIROS, notBW},         \
-{" ", 0, DoisArgumentos},\
+{" ", 0, HandleTwo},\
 {"&", INTEIROS, and},\
 {"|", INTEIROS, or},\
 {"^", INTEIROS, xor},           \
@@ -71,10 +71,12 @@
 /**
  *
  */
-#define STRING_MAP {{" ", 0, UmArgumento}, \
+#define STRING_MAP {{" ", 0, HandleOne}, \
                     {",", STRING, StringLength}, \
-                    {" ", 0, DoisArgumentos},\
-                    {"=", STRING, strComp},               \
+                    {" ", 0, HandleTwo},\
+                    {"=", STRING, strComp}, \
+                    {"<", STRING, strComp},\
+                    {">", STRING, strComp},\
                     {0, 0, NULL}\
 }
 
