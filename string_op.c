@@ -9,21 +9,21 @@ void StringLength(Data *d1) {
 }
 
 void strEqual(Data *d1, Data *d2) {
-    long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
+    GET_BOOL
     Data d3 = CreateDataLONG(!bool);
     free(d1->value);
     swapData(d1, &d3);
 }
 
 void strLesser(Data *d1, Data *d2){
-    long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
+    GET_BOOL
     Data d3 = CreateDataLONG(bool<0);
     free(d1->value);
     swapData(d1, &d3);
 }
 
 void strGreater(Data *d1, Data *d2){
-    long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
+    GET_BOOL
     Data d3 = CreateDataLONG(bool>0);
     free(d1->value);
     swapData(d1, &d3);
@@ -68,7 +68,6 @@ void strRemoveLast (Data *d1, Stack *stack){
     Push(newC, stack);
 }
 
-//
 void strHashtag (Data *d1, Data *d2){
     int result = -1;
     char *r = strstr(DataValSTRING(d1), DataValSTRING(d2));
@@ -78,3 +77,20 @@ void strHashtag (Data *d1, Data *d2){
     swapData(d1, &d3);
     free(d3.value);
 }
+
+void strEMenor (Data *d1, Data *d2){
+    GET_BOOL
+    if(bool>0)
+        swapData(d1, d2);
+}
+
+void strEMaior (Data *d1, Data *d2){
+    GET_BOOL
+    if(bool<0)
+        swapData(d1, d2);
+}
+/*
+void strGetInd (Data *d1, Data *d2){
+
+}
+*/

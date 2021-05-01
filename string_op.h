@@ -9,6 +9,8 @@
  */
 #define MAX_LENGTH_INPUT 10240
 
+#define GET_BOOL long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
+
 void StringLength(Data *d1);
 void strEqual(Data *d1, Data *d2);
 void strLesser(Data *d1, Data *d2);
@@ -20,4 +22,6 @@ void strAll (Stack *stack);
 void strRemoveFirst (Data *d1, Stack *stack);
 void strRemoveLast (Data *d1, Stack *stack);
 void strHashtag (Data *d1, Data *d2);
+void strEMenor (Data *d1, Data *d2);
+void strEMaior (Data *d1, Data *d2);
 #endif //TRING_OP_H

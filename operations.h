@@ -84,6 +84,8 @@
                     {"+", STRING, strConcat}, \
                     {"/", STRING, strBar}, \
                     {"#", STRING, strHashtag}, \
+                    {"e<", STRING, strEMenor},  \
+                    {"e>", STRING, strEMaior},  \
                     {0, 0, NULL}\
 }
 
