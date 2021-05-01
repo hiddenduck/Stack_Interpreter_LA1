@@ -287,7 +287,7 @@ void SwapThree(Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DollarSign(Data *d1, Stack *stack) {
-    Data *x = Read(*(DataValLONG(d1)), stack);
+    Data *x = Read(*(DataValLONG(d1))+1, stack);
     Data y = DataDup(x);
     free(d1->value);
     swapData(d1, &y);
