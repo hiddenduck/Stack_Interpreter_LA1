@@ -41,6 +41,7 @@
 {"\\", ANY, Swap},\
 {"@", ANY, SwapThree},\
 {"l", ANY, ReadLine},            \
+{"t", ANY, strAll}, \
 {"?", ANY, ifThenElse},  \
 {" ", 0, HandleOne}, \
 {"!", ANY, notLG},\
@@ -69,21 +70,19 @@
 }
 
 /**
- *
+ * 
  */
 #define STRING_MAP {{" ", 0, HandleOne}, \
                     {",", STRING, StringLength}, \
                     {" ", 0, HandleTwo},\
-                    {"=", STRING, strComp}, \
-                    {"<", STRING, strComp},\
-                    {">", STRING, strComp},\
+                    {"=", STRING, strEqual}, \
+                    {"<", STRING, strLesser},\
+                    {">", STRING, strGreater},\
+                    {"*", (STRING | INTEIROS), strMult}, \
+                    {"+", STRING, strConcat}, \
+                    {"/", STRING, strBar}, \
                     {0, 0, NULL}\
 }
-
-/**
- * \brief Definição do tamanho máximo da line de input.
- */
-#define MAX_LENGTH_INPUT 10240
 
 /**
  * \brief Tipo de dados que funciona como apontador para uma função operação.
