@@ -12,27 +12,70 @@
 /**
  * \brief Array com todas as operações implementadas
  */
-#define ARIT_MAP {{" ", UmArgumento},          \
-                {"(", decre},\
-                {")", incre},\
-                {" ", DoisArgumentos},   \
-                {"e<", LesserBetweenTwo},   \
-                {"e>", GreaterBetweenTwo},   \
-                {"=", equals},               \
-                {"<", lesser},               \
-                {">", greater},\
-                {"+", soma},\
-                {"-", subtr},\
-                {"*", mult},\
-                {"/", divi},\
-                {"%", modulo},\
-                {"#", potencia},\
-                {0, NULL} \
+#define ARIT_MAP {{" ", 0, UmArgumento},          \
+                {"(", NUMEROS, decre},\
+                {")",NUMEROS, incre},\
+                {" ", 0, DoisArgumentos},   \
+                {"e<", NUMEROS, LesserBetweenTwo},   \
+                {"e>", NUMEROS, GreaterBetweenTwo},   \
+                {"=", NUMEROS, equals},           \
+                {"<", NUMEROS, lesser},               \
+                {">", NUMEROS, greater},\
+                {"+", NUMEROS, soma},\
+                {"-", NUMEROS, subtr},\
+                {"*", NUMEROS, mult},\
+                {"/", NUMEROS, divi},\
+                {"%", NUMEROS, modulo},\
+                {"#", NUMEROS, potencia},\
+                {0, 0, NULL} \
                 }
 
-#define STRING_MAP {{" ", UmArgumento}, \
-                    {",", StringLength},         \
-                    {0, NULL}\
+
+/**
+ *
+ */
+#define STACK_MAP { \
+{" ", 0, SemArgumentos}, \
+{";", ANY, DecrementaSP}, \
+{"_", ANY, Underscore},\
+{"\\", ANY, Swap},\
+{"@", ANY, SwapThree},\
+{"l", ANY, ReadLine},            \
+{"?", ANY, ifThenElse},  \
+{" ", 0, UmArgumento}, \
+{"!", ANY, notLG},\
+{"c", (NUMEROS | CHAR), DataToCHAR},\
+{"i", (NUMEROS | CHAR), DataToLONG},\
+{"f", (NUMEROS | CHAR), DataToDOUBLE},\
+{" ", 0, DoisArgumentos},\
+{"e&", ANY, andWithShortcut},     \
+{"e|", ANY, orWithShortcut},      \
+{0, 0, NULL}\
+}
+
+/**
+ *
+ */
+#define INTEIRO_MAP { \
+{" ", 0, SemArgumentos}, \
+{"$", INTEIROS, DollarSign},    \
+{" ", 0, UmArgumento},\
+{"~", INTEIROS, notBW},         \
+{" ", 0, DoisArgumentos},\
+{"&", INTEIROS, and},\
+{"|", INTEIROS, or},\
+{"^", INTEIROS, xor},           \
+{0, 0, NULL}\
+}
+
+/**
+ *
+ */
+#define STRING_MAP {{" ", 0, UmArgumento}, \
+                    {",", STRING, StringLength}, \
+                    {" ", 0, DoisArgumentos},\
+                    {"=", STRING, strComp},               \
+                    {0, 0, NULL}\
 }
 
 /**
@@ -51,6 +94,8 @@ typedef void (*Operation)();
 typedef struct {
     /** char responsável pela identificação da operação*/
     char *simbolo;
+    /** */
+    int mask;
     /** Apontador para uma função*/
     Operation op;
 }OperationMap;

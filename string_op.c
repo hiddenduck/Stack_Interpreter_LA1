@@ -7,3 +7,10 @@ void StringLength(Data *d1) {
     free(d1->value);
     swapData(d1, &d2);
 }
+
+void strComp(Data *d1, Data *d2) {
+    long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
+    Data d3 = CreateDataLONG(bool);
+    free(d1->value);
+    swapData(d1, &d3);
+}

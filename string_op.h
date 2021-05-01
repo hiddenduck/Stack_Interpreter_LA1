@@ -5,5 +5,6 @@
 #include "data.h"
 
 void StringLength(Data *d1);
+void strComp(Data *d1, Data *d2);
 
 #endif //TRING_OP_H

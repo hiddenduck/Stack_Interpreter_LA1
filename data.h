@@ -29,6 +29,16 @@ typedef enum {
     STACK = 16
 } Tipo;
 
+/** */
+typedef enum {
+    /** */
+    NUMEROS = (LONG | DOUBLE),
+    /** */
+    INTEIROS = (LONG | CHAR),
+    /** */
+    ANY = (CHAR | LONG | DOUBLE | STRING | STACK)
+} Mask;
+
 //tratar os arrays como "mini-stacks"
 //o value de um array passava a ser Stack*
 

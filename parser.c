@@ -73,12 +73,13 @@ int InputParser(char *token, Stack *stack, Stack *vars){
  * @param linha
  * @param resto
  * @return
+ * 3 4
  */
 char *getToken(char *linha, char **resto) {
     int i;
     for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
-    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t' &&
-                linha[i] != '\"' && linha[i] != '['; i++);
+    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
+    linha[i] = '\0';
     *resto = linha+i+1;
     return linha;
 }
@@ -89,27 +90,21 @@ char *getToken(char *linha, char **resto) {
  * @param seps
  * @param rest
  * @return
+ *
+ * "aaa"
  */
 char *get_delimited(char *line, char *seps, char **resto) {
     //ver este get delimited que não funciona
-    char end, start = '\0';
-    if (seps[1] != '\0') {
-        start = seps[0];
-        end = seps[1];
-    } else {
-        end = seps[0];
-    }
 
     int i, count;
-    for (i = 0, count = 1; count; i++) {
-        if (line[i] == end)
+    for (i = 0, count = 1, line++; count; i++) {
+        if (line[i] == seps[1])
             count--;
-        else if (start != '\0' && line[i] == start)
+        else if (line[i] == seps[0])
             count++;
     }
     line[i-1] = '\0';
-    *resto = line+i;
-
+    *resto = line+i+1;
     return line;
 }
 
@@ -161,7 +156,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
         char *token = getToken(line, &line);
 
         if (token[0] == '\"')
-            Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
+            Push(CreateDataSTRING(get_delimited(token, "\"\"", &line)), stack_ini);
         else if (token[0] != '\0' &&
             (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&

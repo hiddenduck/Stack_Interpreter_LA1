@@ -11,43 +11,6 @@
 typedef struct data Data;
 
 /**
- *
- */
-#define STACK_MAP { \
-{" ", SemArgumentos}, \
-{";", DecrementaSP}, \
-{"_", Underscore},\
-{"\\", Swap},\
-{"@", SwapThree},\
-{"l", ReadLine},            \
-{"?", ifThenElse},  \
-{" ", UmArgumento}, \
-{"!", notLG},\
-{"c", DataToCHAR},\
-{"i", DataToLONG},\
-{"f", DataToDOUBLE},\
-{" ", DoisArgumentos},\
-{"e&", andWithShortcut},     \
-{"e|", orWithShortcut},      \
-{0, NULL}\
-}
-
-/**
- *
- */
-#define INTEIRO_MAP { \
-{" ", SemArgumentos}, \
-{"$", DollarSign},    \
-{" ", UmArgumento},\
-{"~", notBW},         \
-{" ", DoisArgumentos},\
-{"&", and},\
-{"|", or},\
-{"^", xor},           \
-{0,NULL}\
-}
-
-/**
  * \brief Definição do incremento da stack.
  */
 #define INCREMENTO_STACK 100
