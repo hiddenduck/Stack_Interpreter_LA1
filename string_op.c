@@ -17,14 +17,14 @@ void strEqual(Data *d1, Data *d2) {
 
 void strLesser(Data *d1, Data *d2){
     long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
-    Data d3 = CreateDataLONG(!(bool+1));
+    Data d3 = CreateDataLONG(bool<0);
     free(d1->value);
     swapData(d1, &d3);
 }
 
 void strGreater(Data *d1, Data *d2){
     long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
-    Data d3 = CreateDataLONG(!(bool-1));
+    Data d3 = CreateDataLONG(bool>0);
     free(d1->value);
     swapData(d1, &d3);
 }
