@@ -13,8 +13,8 @@
  * \brief Array com todas as operações implementadas
  */
 #define ARIT_MAP {{" ", 0, HandleOne},          \
-                {"(", (NUMEROS | CHAR), decre},\
-                {")", (NUMEROS | CHAR), incre},\
+                {"(", NUMEROS, decre},\
+                {")", NUMEROS, incre},\
                 {" ", 0, HandleTwo},   \
                 {"e<", NUMEROS, LesserBetweenTwo},   \
                 {"e>", NUMEROS, GreaterBetweenTwo},   \

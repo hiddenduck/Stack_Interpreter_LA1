@@ -32,7 +32,7 @@ typedef enum {
 /** */
 typedef enum {
     /** */
-    NUMEROS = (LONG | DOUBLE),
+    NUMEROS = (LONG | DOUBLE | CHAR),
     /** */
     INTEIROS = (LONG | CHAR),
     /** */
