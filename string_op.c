@@ -68,7 +68,7 @@ void strRemoveLast (Data *d1, Stack *stack){
     Push(newC, stack);
 }
 
-//barracos, esta função está como no args porque a outra # é Inteiros, nunca se encontram
+//
 void strHashtag (Data *d1, Data *d2){
     int result = -1;
     char *r = strstr(DataValSTRING(d1), DataValSTRING(d2));
