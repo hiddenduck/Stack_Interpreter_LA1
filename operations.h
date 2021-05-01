@@ -72,8 +72,12 @@
 /**
  * 
  */
-#define STRING_MAP {{" ", 0, HandleOne}, \
+#define STRING_MAP {{" ", 0, HandleNoArgs}, \
+                    {"#", ANY, strHashtag}, \
+                    {" ", 0, HandleOne}, \
                     {",", STRING, StringLength}, \
+                    {"(", STRING, strRemoveFirst}, \
+                    {")", STRING, strRemoveLast}, \
                     {" ", 0, HandleTwo},\
                     {"=", STRING, strEqual}, \
                     {"<", STRING, strLesser},\

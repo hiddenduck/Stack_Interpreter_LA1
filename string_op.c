@@ -52,3 +52,29 @@ void strAll (Stack *stack){
     while(fgets(linha, MAX_LENGTH_INPUT, stdin)!=NULL);
     Push(CreateDataSTRING(linha), stack);
 }
+
+// Funções barracadas
+void strRemoveFirst (Data *d1, Stack *stack){ // (
+    Data newC = CreateDataCHAR(*DataValSTRING(d1));
+    //DataValSTRING(d1)++; ideia
+    *d1 = CreateDataSTRING(DataValSTRING(d1)+1); // realidade :(
+    Push(newC, stack);
+}
+
+void strRemoveLast (Data *d1, Stack *stack){
+    int len = strlen(DataValSTRING(d1)) -1;
+    Data newC = CreateDataCHAR(*(DataValSTRING(d1) + len));
+    *(DataValSTRING(d1)+len)= '\0';
+    Push(newC, stack);
+}
+
+//barracos, esta função está como no args porque a outra # é Inteiros, nunca se encontram
+void strHashtag (Stack *stack){
+    Data d2 = Pop(stack);
+    Data d1 = Pop(stack);
+    int result = -1;
+    char *r = strstr(((char *) d1.value), ((char *)d2.value));
+    if (r != NULL)
+        result = ((char *) d1.value) - r;
+    Push(CreateDataLONG(result), stack);
+}

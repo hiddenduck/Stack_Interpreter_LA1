@@ -17,4 +17,7 @@ void strMult (Data *d1, Data *d2);
 void strConcat (Data *d1, Data *d2);
 void strBar (Data *d1, Data *d2);
 void strAll (Stack *stack);
+void strRemoveFirst (Data *d1, Stack *stack);
+void strRemoveLast (Data *d1, Stack *stack);
+void strHashtag (Stack *stack);
 #endif //TRING_OP_H
