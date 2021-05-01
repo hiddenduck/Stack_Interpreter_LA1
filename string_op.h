@@ -19,5 +19,5 @@ void strBar (Data *d1, Data *d2);
 void strAll (Stack *stack);
 void strRemoveFirst (Data *d1, Stack *stack);
 void strRemoveLast (Data *d1, Stack *stack);
-void strHashtag (Stack *stack);
+void strHashtag (Data *d1, Data *d2);
 #endif //TRING_OP_H

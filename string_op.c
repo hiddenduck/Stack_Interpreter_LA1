@@ -69,12 +69,12 @@ void strRemoveLast (Data *d1, Stack *stack){
 }
 
 //barracos, esta função está como no args porque a outra # é Inteiros, nunca se encontram
-void strHashtag (Stack *stack){
-    Data d2 = Pop(stack);
-    Data d1 = Pop(stack);
+void strHashtag (Data *d1, Data *d2){
     int result = -1;
-    char *r = strstr(((char *) d1.value), ((char *)d2.value));
+    char *r = strstr(DataValSTRING(d1), DataValSTRING(d2));
     if (r != NULL)
-        result = ((char *) d1.value) - r;
-    Push(CreateDataLONG(result), stack);
+        result = r - DataValSTRING(d1);
+    Data d3 = CreateDataLONG(result);
+    swapData(d1, &d3);
+    free(d3.value);
 }
