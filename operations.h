@@ -35,7 +35,7 @@
  *
  */
 #define STACK_MAP { \
-{" ", 0, SemArgumentos}, \
+{" ", 0, HandleNoArgs}, \
 {";", ANY, DecrementaSP}, \
 {"_", ANY, Underscore},\
 {"\\", ANY, Swap},\
@@ -57,9 +57,9 @@
  *
  */
 #define INTEIRO_MAP { \
-{" ", 0, SemArgumentos}, \
-{"$", INTEIROS, DollarSign},    \
+{" ", 0, HandleNoArgs}, \
 {" ", 0, HandleOne},\
+{"$", INTEIROS, DollarSign},    \
 {"~", INTEIROS, notBW},         \
 {" ", 0, HandleTwo},\
 {"&", INTEIROS, and},\
@@ -141,7 +141,7 @@ void potencia(Data *d1, Data *d2);
 void Underscore(Stack *stack);
 void Swap(Stack *stack);
 void SwapThree(Stack *stack);
-void DollarSign(Stack *stack);
+void DollarSign(Data *d1, Stack *stack);
 void ReadLine(Stack *stack);
 int TwoPoints (Stack *stack, Stack *vars, char token);
 

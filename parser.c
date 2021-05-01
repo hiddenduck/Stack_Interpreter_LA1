@@ -31,6 +31,14 @@ int Operator(char *token, Stack *stack, OperationMap *operationMap) {
     return r;
 }
 
+void HandleNoArgs (int mask, Operation op, Stack *stack, int *r){
+    if(mask == ANY){
+        SemArgumentos(op, stack);
+        *r = 0;
+    }
+    *r = -1;
+}
+
 void HandleOne(int mask, Operation op, Stack *stack, int *r) {
     if (Read(0, stack)->tipo & mask) {
         UmArgumento(op, stack);
