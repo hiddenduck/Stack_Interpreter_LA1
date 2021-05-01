@@ -77,6 +77,7 @@
                     {"(", STRING, strRemoveFirst}, \
                     {")", STRING, strRemoveLast}, \
                     {" ", 0, HandleTwo},\
+                    {"=", (STRING | INTEIROS), strGetInd}, \
                     {"=", STRING, strEqual}, \
                     {"<", STRING, strLesser},\
                     {">", STRING, strGreater},\

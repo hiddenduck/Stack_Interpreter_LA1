@@ -89,8 +89,9 @@ void strEMaior (Data *d1, Data *d2){
     if(bool<0)
         swapData(d1, d2);
 }
-/*
-void strGetInd (Data *d1, Data *d2){
 
+void strGetInd (Data *d1, Data *d2){
+    Data dvalor = CreateDataCHAR(*(DataValSTRING(d1)+*DataValLONG(d2)));
+    swapData(d1, &dvalor);
+    free(dvalor.value);
 }
-*/
