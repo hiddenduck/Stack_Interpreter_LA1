@@ -89,4 +89,6 @@ void swapData (Data *d1, Data *d2);
 
 int GetBoolFromData (Data *d1);
 
+void swapDataFree(Data *d1, Data *d2);
+
 #endif
