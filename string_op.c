@@ -4,29 +4,25 @@
 void StringLength(Data *d1) {
     long len = strlen(DataValSTRING(d1));
     Data d2 = CreateDataLONG(len);
-    free(d1->value);
-    swapData(d1, &d2);
+    swapDataFree(d1, &d2);
 }
 
 void strEqual(Data *d1, Data *d2) {
     GET_BOOL
     Data d3 = CreateDataLONG(!bool);
-    free(d1->value);
-    swapData(d1, &d3);
+    swapDataFree(d1, &d3);
 }
 
 void strLesser(Data *d1, Data *d2){
     GET_BOOL
     Data d3 = CreateDataLONG(bool<0);
-    free(d1->value);
-    swapData(d1, &d3);
+    swapDataFree(d1, &d3);
 }
 
 void strGreater(Data *d1, Data *d2){
     GET_BOOL
     Data d3 = CreateDataLONG(bool>0);
-    free(d1->value);
-    swapData(d1, &d3);
+    swapDataFree(d1, &d3);
 }
 
 void strMult (Data *d1, Data *d2){ // d1 é long obrigatório?
@@ -51,10 +47,11 @@ void strAll (Stack *stack){
 
 // Funções barracadas
 void strRemoveFirst (Data *d1, Stack *stack){ // (
+    //tens de criar o Char que vai ser posto na stack
     Data newC = CreateDataCHAR(*DataValSTRING(d1));
-    //DataValSTRING(d1)++; ideia
-    *d1 = CreateDataSTRING(DataValSTRING(d1)+1); // realidade :(
-    Push(newC, stack);
+    Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar que é a nova string
+    swapDataFree(d1, (&d2)); //trocas as strings
+    Push(newC, stack); //metes a char na stack
 }
 
 void strRemoveLast (Data *d1, Stack *stack){
@@ -70,8 +67,7 @@ void strHashtag (Data *d1, Data *d2){
     if (r != NULL)
         result = r - DataValSTRING(d1);
     Data d3 = CreateDataLONG(result);
-    swapData(d1, &d3);
-    free(d3.value);
+    swapDataFree(d1, &d3);
 }
 
 void strEMenor (Data *d1, Data *d2){
@@ -88,8 +84,7 @@ void strEMaior (Data *d1, Data *d2){
 
 void strGetInd (Data *d1, Data *d2){
     Data dvalor = CreateDataCHAR(*(DataValSTRING(d1)+*DataValLONG(d2)));
-    swapData(d1, &dvalor);
-    free(dvalor.value);
+    swapDataFree(d1, &dvalor);
 }
 
 void strConcat(Data *d1, Data *d2){
