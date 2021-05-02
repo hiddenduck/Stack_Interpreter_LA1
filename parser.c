@@ -137,8 +137,7 @@ char *getToken(char *linha, char **resto) {
     int i;
     for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
     if (*linha=='\"'){
-        get_delimited(linha, "\"\"", &linha);
-        *resto = linha+1;
+        linha = get_delimited(linha, "\"\"", resto);
     }
     else{
         for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
