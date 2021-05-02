@@ -22,7 +22,7 @@ void SemArgumentos(Operation operation, Stack *stack) {
  */
 void UmArgumento(Operation operation, Stack *stack) {
     Data *d1 = Read(0, stack);
-    (*operation)(d1);
+    (*operation)(d1, stack);
 }
 
 /**
@@ -286,12 +286,11 @@ void SwapThree(Stack *stack) {
  * \brief Função que coloca no topo da \a stack o elemento no indice n.
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
-void DollarSign(Stack *stack) {
-    Data indice = Pop(stack);
-    Data *x = Read(*(DataValLONG(&indice)), stack);
+void DollarSign(Data *d1, Stack *stack) {
+    Data *x = Read(*(DataValLONG(d1))+1, stack);
     Data y = DataDup(x);
-    Push(y, stack);
-    free(indice.value);
+    free(d1->value);
+    swapData(d1, &y);
 }
 
 /**
@@ -310,9 +309,9 @@ void ReadLine(Stack *stack) {
  *  @param vars Endereço da \a vars responsável pelo armazenamento das variáveis.
  *  @param token Char correspondente à variável.
 */
-void TwoPoints (Stack *stack, Stack *vars, char token){
-    //limpar isto (MI)
+int TwoPoints (Stack *stack, Stack *vars, char token){
     Data *letter = Read(64 - token, vars);
     Data *valor = Read(0,stack);
     *letter = DataDup(valor);
+    return 1;
 }

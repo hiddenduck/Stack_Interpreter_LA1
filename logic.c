@@ -61,8 +61,7 @@ void greater(Data *d1, Data *d2) {
  * @param d1 Data que guarda o resultado
  */
 void notLG(Data *d1) {
-    double a;
-    LogicTestD1
+    long a = GetBoolFromData(d1);
     DataToLONG(d1);
     *DataValLONG(d1) = (long) !a;
 }
@@ -73,16 +72,16 @@ void notLG(Data *d1) {
 void ifThenElse(Stack *stack){
     Data elseOperator = Pop(stack);
     Data thenOperator = Pop(stack);
-    Data *d1 = Read(0, stack);
-    double a;
-    LogicTestD1
-        if(a)
-            swapData(d1, &thenOperator);
-        else
-            swapData(d1, &elseOperator);
-
-    free(elseOperator.value);
-    free(thenOperator.value);
+    Data *d1 = Read(2, stack);
+    long a = GetBoolFromData(d1);
+    if(a) {
+        swapDataFree(d1, &thenOperator);
+        free(elseOperator.value);
+    }
+    else {
+        swapDataFree(d1, &elseOperator);
+        free(thenOperator.value);
+    }
 }
 
 /** \brief Função que coloca o menor dos 2 valores na stack.
@@ -114,8 +113,7 @@ void GreaterBetweenTwo(Data *d1, Data *d2){
  *  @param d2 Endereço de um data.
  */
 void andWithShortcut(Data *d1, Data *d2){
-    double a;
-    LogicTestD1;
+    long a = GetBoolFromData(d1);
     if(a)
         swapData(d1, d2);
 }
@@ -125,8 +123,7 @@ void andWithShortcut(Data *d1, Data *d2){
  *  @param d2 Endereço de um data.
  */
 void orWithShortcut(Data *d1, Data *d2){
-    double a;
-    LogicTestD1;
+    long a = GetBoolFromData(d1);
     if(!a)
         swapData(d1, d2);
 }

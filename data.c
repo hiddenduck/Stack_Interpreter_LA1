@@ -12,7 +12,7 @@
 Data CreateDataCHAR(char val) {
         char *vp = (char*) malloc(sizeof(char));
         *vp = val;
-        Data op = {CHAR, vp};
+        Data op = {vp, CHAR};
         return op;
 }
 /** \brief Inicialização da função CreateDataLONG.
@@ -23,7 +23,7 @@ Data CreateDataCHAR(char val) {
 Data CreateDataLONG(long val) {
     long *vp = (long*) malloc(sizeof(long));
     *vp = val;
-    Data op = {LONG, vp};
+    Data op = {vp, LONG};
     return op;
 }
 /** \brief Inicialização da função CreateDataDOUBLE.
@@ -34,7 +34,7 @@ Data CreateDataLONG(long val) {
 Data CreateDataDOUBLE(double val) {
     double *vp = (double*) malloc(sizeof(double));
     *vp = val;
-    Data op = {DOUBLE, vp};
+    Data op = {vp, DOUBLE};
     return op;
 }
 
@@ -45,7 +45,18 @@ Data CreateDataDOUBLE(double val) {
  */
 Data CreateDataSTRING(char *val) {
     char *vp = strdup(val);
-    Data op = {STRING, vp};
+    Data op = {vp, STRING};
+    return op;
+}
+
+/**
+ * \brief
+ * @param stack
+ * @return
+ */
+Data CreateDataSTACK(Stack *stack) {
+    //talvez seja preciso fazer um stack dup, ter cuidado com a existência destas
+    Data op = {stack, STACK};
     return op;
 }
 
@@ -81,16 +92,19 @@ void DataToDOUBLE(Data *d) {
 void DataToLONG(Data *d) {
     long val;
     switch (d->tipo){
+        case CHAR: {
+            val = *DataValCHAR(d);
+            break;
+        }
         case STRING:{
             val = strtol(DataValCHAR(d), NULL, 10);
             break;
         }
         case DOUBLE: {
-            val = (long) *(DataValDOUBLE(d));
+            val = *(DataValDOUBLE(d));
             break;
         }
         default:
-            d->tipo = LONG;
             return;
     }
     long *vp = (long *) realloc(d->value, sizeof(long));
@@ -147,6 +161,10 @@ Data DataDup(Data *target) {
             data = CreateDataSTRING(DataValSTRING(target));
             break;
         }
+        case STACK: {
+            data = CreateDataSTACK(DataValSTACK(target));
+            break;
+        }
     }
     return data;
 }
@@ -167,7 +185,10 @@ void PrintData(Data *data) {
             printf("%c", *((char*)(data->value)));
             break;
         case STRING:
-            printf("%s", (char*)data->value);
+            printf("%s", DataValSTRING(data));
+            break;
+        case STACK:
+            PrintStack(DataValSTACK(data));
             break;
     }
 }
@@ -180,4 +201,37 @@ void swapData (Data *d1, Data *d2){
     Data temp = *d1;
     *d1 = *d2;
     *d2 = temp; 
+}
+
+/**
+ *
+ * @param d1
+ * @return
+ */
+int GetBoolFromData (Data *d1) {
+    long r = 0;
+    switch (d1->tipo) {
+        case LONG:
+            r = (*DataValLONG(d1) != 0);
+            break;
+        case CHAR:
+            r = (*DataValCHAR(d1) != 0);
+            break;
+        case DOUBLE:
+            r = (*DataValDOUBLE(d1) != 0);
+            break;
+        case STRING:
+            r = (strcmp(DataValSTRING(d1), ""));
+            break;
+        case STACK:
+            r = ((*DataValSTACK(d1)).sp != -1);
+            break;
+    }
+    return r;
+}
+
+void swapDataFree(Data *d1, Data *d2) {
+    free(d1->value);
+    //d1->DATA d2(d1)->DATA
+    *d1 = *d2;
 }

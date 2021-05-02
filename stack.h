@@ -4,9 +4,11 @@
 /**
  * @headerfile stack.h
  */
-#include <assert.h>
-#include <math.h>
+
 #include "data.h"
+
+/** forward declaration */
+typedef struct data Data;
 
 /**
  * \brief Definição do incremento da stack.
