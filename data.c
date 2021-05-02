@@ -93,15 +93,15 @@ void DataToLONG(Data *d) {
     long val;
     switch (d->tipo){
         case CHAR: {
-            d->tipo = LONG;
-            return;
+            val = *DataValCHAR(d);
+            break;
         }
         case STRING:{
             val = strtol(DataValCHAR(d), NULL, 10);
             break;
         }
         case DOUBLE: {
-            val = (long) *(DataValDOUBLE(d));
+            val = *(DataValDOUBLE(d));
             break;
         }
         default:
