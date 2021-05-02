@@ -47,6 +47,14 @@ void HandleOne(int mask, Operation op, Stack *stack, int *r) {
         *r = -1;
 }
 
+void HandleTwoDiff(int mask, Operation op, Stack *stack, int *r){
+    if(((mask ^ Read(0, stack)->tipo) ^ Read(1, stack)->tipo) == 0){
+        DoisArgumentos(op, stack);
+        *r = 0;
+    } else
+        *r = -1;
+}
+
 void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
     if ((Read(0, stack)->tipo & mask) && (Read(1, stack)->tipo & mask)) {
         DoisArgumentos(op, stack);

@@ -51,6 +51,8 @@
 {" ", 0, HandleTwo},\
 {"e&", ANY, andWithShortcut},     \
 {"e|", ANY, orWithShortcut},      \
+{" ", 0, HandleTwoDiff}, \
+{"=", (STRING | LONG), strGetInd}, \
 {0, 0, NULL}\
 }
 
@@ -77,7 +79,6 @@
                     {"(", STRING, strRemoveFirst}, \
                     {")", STRING, strRemoveLast}, \
                     {" ", 0, HandleTwo},\
-                    {"=", (STRING | INTEIROS), strGetInd}, \
                     {"=", STRING, strEqual}, \
                     {"<", STRING, strLesser},\
                     {">", STRING, strGreater},\
