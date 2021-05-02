@@ -136,15 +136,14 @@ char *get_delimited(char *line, char *seps, char **resto) {
 char *getToken(char *linha, char **resto) {
     int i;
     for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
-    if (*linha=='\"'){
+    if (*linha=='\"') {
         linha = get_delimited(linha, "\"\"", resto);
     }
-    else{
+    else {
         for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
         linha[i] = '\0';
         *resto = linha+i+1;
-        }
-
+    }
     return linha;
 }
 
