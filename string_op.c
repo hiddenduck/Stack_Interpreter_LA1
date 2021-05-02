@@ -92,6 +92,5 @@ void strConcat(Data *d1, Data *d2){
     strcpy(s3, DataValSTRING(d1));
     strcat(s3, DataValSTRING(d2));
     Data d3 = CreateDataSTRING(s3);
-    swapData(d1, &d3);
-    free(d3.value);
+    swapDataFree(d1, &d3);
 }
