@@ -103,22 +103,6 @@ int InputParser(char *token, Stack *stack, Stack *vars){
 
 /**
  *
- * @param linha
- * @param resto
- * @return
- * 3 4
- */
-char *getToken(char *linha, char **resto) {
-    int i;
-    for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
-    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
-    linha[i] = '\0';
-    *resto = linha+i+1;
-    return linha;
-}
-
-/**
- *
  * @param line
  * @param seps
  * @param rest
@@ -130,15 +114,39 @@ char *get_delimited(char *line, char *seps, char **resto) {
     //ver este get delimited que não funciona
 
     int i, count;
-    for (i = 0, count = 1, line++; count; i++) {
+    for (i = 0, count = 2; count; i++) {
         if (line[i] == seps[1])
             count--;
         else if (line[i] == seps[0])
             count++;
     }
+
     line[i-1] = '\0';
     *resto = line+i+1;
     return line;
+}
+
+/**
+ *
+ * @param linha
+ * @param resto
+ * @return
+ * 3 4
+ */
+char *getToken(char *linha, char **resto) {
+    int i;
+    for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
+    if (*linha=='\"'){
+        get_delimited(linha, "\"\"", &linha);
+        *resto = linha+1;
+    }
+    else{
+        for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
+        linha[i] = '\0';
+        *resto = linha+i+1;
+        }
+
+    return linha;
 }
 
 /**
@@ -189,7 +197,7 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
         char *token = getToken(line, &line);
 
         if (token[0] == '\"')
-            Push(CreateDataSTRING(get_delimited(token, "\"\"", &line)), stack_ini);
+            Push(CreateDataSTRING(++token), stack_ini);
         else if (token[0] != '\0' &&
             (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
