@@ -16,7 +16,6 @@ void strEqual(Data *d1, Data *d2);
 void strLesser(Data *d1, Data *d2);
 void strGreater(Data *d1, Data *d2);
 void strMult (Data *d1, Data *d2);
-void strConcat (Data *d1, Data *d2);
 void strBar (Data *d1, Data *d2);
 void strAll (Stack *stack);
 void strRemoveFirst (Data *d1, Stack *stack);
@@ -25,4 +24,5 @@ void strHashtag (Data *d1, Data *d2);
 void strEMenor (Data *d1, Data *d2);
 void strEMaior (Data *d1, Data *d2);
 void strGetInd (Data *d1, Data *d2);
+void strConcat(Data *d1, Data *d2);
 #endif //TRING_OP_H

@@ -36,10 +36,6 @@ void strMult (Data *d1, Data *d2){ // d1 é long obrigatório?
     free(temp);
 }
 
-void strConcat (Data *d1, Data *d2){ //manhoso?
-    *DataValSTRING(d1) = *strcat(DataValSTRING(d1), DataValSTRING(d2));
-}
-
 void strBar (Data *d1, Data *d2){ // É mAU?
     char *new = strstr(DataValSTRING(d1), DataValSTRING(d2));
     *new = '\0';
@@ -94,4 +90,13 @@ void strGetInd (Data *d1, Data *d2){
     Data dvalor = CreateDataCHAR(*(DataValSTRING(d1)+*DataValLONG(d2)));
     swapData(d1, &dvalor);
     free(dvalor.value);
+}
+
+void strConcat(Data *d1, Data *d2){
+    char s3[strlen(DataValSTRING(d1))+strlen(DataValSTRING(d2))];
+    strcpy(s3, DataValSTRING(d1));
+    strcat(s3, DataValSTRING(d2));
+    Data d3 = CreateDataSTRING(s3);
+    swapData(d1, &d3);
+    free(d3.value);
 }

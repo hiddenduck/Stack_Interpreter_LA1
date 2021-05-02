@@ -88,6 +88,7 @@
                     {"#", STRING, strHashtag}, \
                     {"e<", STRING, strEMenor},  \
                     {"e>", STRING, strEMaior},  \
+                    {"+", STRING, strConcat},    \
                     {0, 0, NULL}\
 }
 
