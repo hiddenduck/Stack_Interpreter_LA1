@@ -203,10 +203,10 @@ void swapData (Data *d1, Data *d2){
     *d2 = temp; 
 }
 
-/**
+/** \brief Função que devolve um valor booleano correspondente ao valor do Data dado.
  *
- * @param d1
- * @return
+ * @param d1 Endereço de um Data.
+ * @return Inteiro booleano.
  */
 int GetBoolFromData (Data *d1) {
     long r = 0;
@@ -230,6 +230,11 @@ int GetBoolFromData (Data *d1) {
     return r;
 }
 
+/** \brief Função que prepara o retorno de Datas ao libertar o espaço do primeiro e colocar nele o conteúdo do segundo.
+ *
+ * @param d1 Data que serve como espaço a se colocar.
+ * @param d2 Data a ser guardado.
+ */
 void swapDataFree(Data *d1, Data *d2) {
     free(d1->value);
     //d1->DATA d2(d1)->DATA
