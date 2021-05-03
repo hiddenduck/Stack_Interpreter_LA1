@@ -76,11 +76,11 @@ void ifThenElse(Stack *stack){
     long a = GetBoolFromData(d1);
     if(a) {
         swapDataFree(d1, &thenOperator);
-        Free(elseOperator.value);
+        Free(&elseOperator);
     }
     else {
         swapDataFree(d1, &elseOperator);
-        Free(thenOperator.value);
+        Free(&thenOperator);
     }
 }
 

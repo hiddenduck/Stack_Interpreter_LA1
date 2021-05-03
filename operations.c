@@ -289,7 +289,7 @@ void SwapThree(Stack *stack) {
 void DollarSign(Data *d1, Stack *stack) {
     Data *x = Read(*(DataValLONG(d1))+1, stack);
     Data y = DataDup(x);
-    Free(d1->value);
+    Free(d1);
     swapData(d1, &y);
 }
 

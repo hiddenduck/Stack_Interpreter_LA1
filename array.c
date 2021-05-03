@@ -31,8 +31,13 @@ void til(Data *d1, Stack *stack){
  *  [ 1 2 3 != 1 2 3 == 1 2 3 ]
  */
 void concatArray(Data *d1, Data *d2){
-    for(int i=0; i<=(*DataValSTACK(d2)).sp; i++)
-        Push(DataDup(&(*DataValSTACK(d2)).array[i]), DataValSTACK(d1));
+    switch (d1->tipo & d2->tipo) {
+        case STACK: {
+            for(int i=0; i<=(*DataValSTACK(d2)).sp; i++)
+                Push(DataDup(&(*DataValSTACK(d2)).array[i]), DataValSTACK(d1));
+            
+        }
+    }
 }
 
 /**

@@ -37,7 +37,7 @@ Data Pop(Stack *stack) {
  */
 void DecrementaSP(Stack *stack) {
     if (stack->sp != -1)
-        Free(stack->array[(stack->sp)--].value);
+        Free(&stack->array[(stack->sp)--]);
 }
 
 /**
