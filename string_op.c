@@ -73,7 +73,9 @@ void strBar (Data *d1, Data *d2){ // É mAU?
  */
 void strAll (Stack *stack){
     char linha[MAX_LENGTH_INPUT];
-    while(fgets(linha, MAX_LENGTH_INPUT, stdin)!=NULL);
+    char *aux = linha;
+    while(fgets(aux, MAX_LENGTH_INPUT, stdin)!=NULL)
+        aux += strlen(aux);
     Push(CreateDataSTRING(linha), stack);
 }
 
