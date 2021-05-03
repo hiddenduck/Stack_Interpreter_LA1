@@ -37,7 +37,7 @@ Data Pop(Stack *stack) {
  */
 void DecrementaSP(Stack *stack) {
     if (stack->sp != -1)
-        free(stack->array[(stack->sp)--].value);
+        Free(stack->array[(stack->sp)--].value);
 }
 
 /**
@@ -76,5 +76,21 @@ Data *Read(long deslocamento, Stack *stack) {
 void PrintStack(Stack *stack) {
     for (int i = 0 ; i <= stack -> sp; i++){
         PrintData(&stack->array[i]);
+    }
+}
+
+void Free(Data *data) {
+    switch (data->tipo) {
+        case STACK: {
+            int i;
+            for (i = 0; i<=(DataValSTACK(data))->sp; i++)
+                Free(&(DataValSTACK(data))->array[i]);
+            free(data->value);
+            break;
+        }
+        default: {
+            free(data->value);
+            break;
+        }
     }
 }

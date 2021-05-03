@@ -34,7 +34,7 @@ void DoisArgumentos(Operation operation, Stack *stack) {
     Data d2 = Pop(stack), d1 = Pop(stack);
     (*operation)(&d1, &d2, stack);
     Push(d1, stack);
-    free(d2.value);
+    Free(&d2);
 }
 
 /**
@@ -289,7 +289,7 @@ void SwapThree(Stack *stack) {
 void DollarSign(Data *d1, Stack *stack) {
     Data *x = Read(*(DataValLONG(d1))+1, stack);
     Data y = DataDup(x);
-    free(d1->value);
+    Free(d1->value);
     swapData(d1, &y);
 }
 

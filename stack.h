@@ -36,4 +36,6 @@ Data *Read(long deslocamento, Stack *stack);
 
 void PrintStack(Stack *stack);
 
+void Free (Data *data);
+
 #endif

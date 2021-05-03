@@ -26,15 +26,22 @@ void til(Data *d1, Stack *stack){
  *  \brief Função que concatena duas stacks.
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
+ *
+ *  [ 1 2 3 ] 3 *
+ *  [ 1 2 3 != 1 2 3 == 1 2 3 ]
  */
 void concatArray(Data *d1, Data *d2){
     for(int i=0; i<=(*DataValSTACK(d2)).sp; i++)
-        Push((*DataValSTACK(d2)).array[i], DataValSTACK(d1));
+        Push(DataDup(&(*DataValSTACK(d2)).array[i]), DataValSTACK(d1));
 }
 
+/**
+ *
+ * @param d1
+ * @param d2
+ */
 void multArray(Data *d1, Data *d2){
-    Data temp = DataDup(d1);
+    Data d3 = DataDup(d1);
     for(int i=1; i<*DataValLONG(d2); i++)
-        concatArray(&temp, d1);
-    swapDataFree(d1, &temp);
+        concatArray(d1, &d3);
 }

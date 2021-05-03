@@ -239,7 +239,7 @@ int GetBoolFromData (Data *d1) {
  * @param d2 Data a ser guardado.
  */
 void swapDataFree(Data *d1, Data *d2) {
-    free(d1->value);
+    Free(d1->value);
     //d1->DATA d2(d1)->DATA
     *d1 = *d2;
 }
