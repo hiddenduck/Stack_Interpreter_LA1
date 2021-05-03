@@ -4,5 +4,4 @@
 #include "data.h"
 
 void range(Data *d1);
-
 #endif //ARRAY_H

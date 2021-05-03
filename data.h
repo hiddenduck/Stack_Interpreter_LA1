@@ -28,11 +28,13 @@ typedef enum {
     DOUBLE = 4,
     /**Tipo de um data com o tipo de dado string*/
     STRING = 8,
-    /** */
+    /**Tipo de um data com o tipo de dado Stack */
     STACK = 16
 } Tipo;
 
-/** */
+/**
+ * \brief Declaração das masks possíveis para os Tipos.
+ */
 typedef enum {
     /**Máscara para NUMEROS, ou seja, LONG, CHAR e DOUBLE */
     NUMEROS = (LONG | DOUBLE | CHAR),
@@ -71,7 +73,7 @@ typedef struct data {
 #define DataValSTRING(data) \
     (char *) (data)->value
 
-/** */
+/**\brief Inicialização da função DataValStack*/
 #define DataValSTACK(data) \
     (Stack *) (data)->value
 
