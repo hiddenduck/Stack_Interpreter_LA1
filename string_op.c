@@ -169,3 +169,15 @@ void strGetXStart (Data *d1, Data *d2, Stack *stack){
     Data d3 = CreateDataCHAR(*DataValSTRING(d1));
     swapDataFree(d1, &d3);
 }
+
+/**
+ * \brief Função que vai buscar X chars no fim de um Data STRING.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
+ */
+void strGetXEnd (Data *d1, Data *d2, Stack *stack){
+    for(int i=0; i<*DataValLONG(d2)-1; i++)
+        strRemoveLast(d1, stack);
+    Data d3 = CreateDataCHAR(*(DataValSTRING(d1) + strlen(DataValSTRING(d1))));
+    swapDataFree(d1, &d3);
+}

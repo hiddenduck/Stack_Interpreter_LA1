@@ -71,6 +71,7 @@
 {"^", INTEIROS, xor},           \
 {" ", 0, HandleTwoDiff}, \
 {"<", (STRING | LONG), strGetXStart},   \
+{">", (STRING | LONG), strGetXEnd}, \
 {0, 0, NULL}\
 } \
 
