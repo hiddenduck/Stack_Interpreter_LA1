@@ -101,10 +101,13 @@
 /**
  * \brief Array com todas as operações implementadas.
  */
-#define ARRAY_MAP {{ " ", 0, HandleOne}, \
-{",", STACK, range},\
-{"~", STACK, til},   \
-{0, 0, NULL}} \
+#define ARRAY_MAP   {{ " ", 0, HandleOne}, \
+                    {",", STACK, range},\
+                    {"~", STACK, til},   \
+                    {" ", 0, HandleTwo}, \
+                    {"+", STACK, concatArray}, \
+                    {0, 0, NULL} \
+} \
 
 /**
  * \brief Tipo de dados que funciona como apontador para uma função operação.

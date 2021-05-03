@@ -21,3 +21,14 @@ void til(Data *d1, Stack *stack){
     Data d2 = (*DataValSTACK(d1)).array[0];
     swapDataFree(d1, &d2);
 }
+
+/**
+ *  \brief Função que concatena duas stacks.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ */
+void concatArray(Data *d1, Data *d2){
+    int i;
+    for(i=0; i<=(*DataValSTACK(d2)).sp; i++)
+        Push((*DataValSTACK(d2)).array[i], DataValSTACK(d1));
+}
