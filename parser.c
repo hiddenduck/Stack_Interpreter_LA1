@@ -121,8 +121,7 @@ int InputParser(char *token, Stack *stack, Stack *vars){
             r = 0;
         } else if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
             //limpar isto (MI)
-            Data *letter = Read(64 - token[0], vars);
-            Push(DataDup(letter), stack);
+            Push(DataDup(Read(64 - token[0], vars)), stack);
             r = 0;
         }
     }
