@@ -29,5 +29,4 @@ void strEMaior (Data *d1, Data *d2);
 void strGetInd (Data *d1, Data *d2);
 void strConcat(Data *d1, Data *d2);
 void strGetXStart (Data *d1, Data *d2, Stack *stack);
-void strGetXEnd (Data *d1, Data *d2, Stack *stack);
 #endif //TRING_OP_H

@@ -92,6 +92,11 @@ void strRemoveFirst (Data *d1, Stack *stack){ // (
     Push(newC, stack); //metes a char na stack
 }
 
+/**
+ * \brief Função que remove o último char de um Data STRING.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
+ */
 void strRemoveLast (Data *d1, Stack *stack){
     int len = strlen(DataValSTRING(d1)) -1;
     Data newC = CreateDataCHAR(*(DataValSTRING(d1) + len));

@@ -31,6 +31,13 @@ int Operator(char *token, Stack *stack, OperationMap *operationMap) {
     return r;
 }
 
+/**
+ * \brief Função que auxilia a função sem argumentos.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
 void HandleNoArgs (int mask, Operation op, Stack *stack, int *r){
     if(mask == ANY){
         SemArgumentos(op, stack);
@@ -39,6 +46,13 @@ void HandleNoArgs (int mask, Operation op, Stack *stack, int *r){
     *r = -1;
 }
 
+/**
+ * \brief Função que auxilia a função um argumento.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
 void HandleOne(int mask, Operation op, Stack *stack, int *r) {
     if (Read(0, stack)->tipo & mask) {
         UmArgumento(op, stack);
@@ -47,6 +61,13 @@ void HandleOne(int mask, Operation op, Stack *stack, int *r) {
         *r = -1;
 }
 
+/**
+ * \brief Função que auxilia a função dois argumentos com tipos diferentes.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
 void HandleTwoDiff(int mask, Operation op, Stack *stack, int *r){
     if(((mask ^ Read(0, stack)->tipo) ^ Read(1, stack)->tipo) == 0){
         DoisArgumentos(op, stack);
@@ -55,6 +76,13 @@ void HandleTwoDiff(int mask, Operation op, Stack *stack, int *r){
         *r = -1;
 }
 
+/**
+ * \brief Função que auxilia a função dois argumentos com tipos iguais.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
 void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
     if ((Read(0, stack)->tipo & mask) && (Read(1, stack)->tipo & mask)) {
         DoisArgumentos(op, stack);
