@@ -8,6 +8,7 @@
 #include "stack.h"
 #include "string_op.h"
 #include "logic.h"
+#include "array.h"
 
 /**
  * \brief Array com todas as operações implementadas
@@ -28,7 +29,7 @@
                 {"%", NUMEROS, modulo},\
                 {"#", NUMEROS, potencia},\
                 {0, 0, NULL} \
-                }
+                } \
 
 
 /**
@@ -54,7 +55,7 @@
 {" ", 0, HandleTwoDiff}, \
 {"=", (STRING | LONG), strGetInd}, \
 {0, 0, NULL}\
-}
+} \
 
 /**
  *
@@ -68,8 +69,10 @@
 {"&", INTEIROS, and},\
 {"|", INTEIROS, or},\
 {"^", INTEIROS, xor},           \
+{" ", 0, HandleTwoDiff}, \
+{"<", (STRING | LONG), strGetXStart},   \
 {0, 0, NULL}\
-}
+} \
 
 /**
  * 
@@ -83,14 +86,18 @@
                     {"<", STRING, strLesser},\
                     {">", STRING, strGreater},\
                     {"*", (STRING | INTEIROS), strMult}, \
-                    {"+", STRING, strConcat}, \
+                    {"+", (STRING | CHAR), strConcat}, \
                     {"/", STRING, strBar}, \
                     {"#", STRING, strHashtag}, \
                     {"e<", STRING, strEMenor},  \
                     {"e>", STRING, strEMaior},  \
                     {"+", STRING, strConcat},    \
                     {0, 0, NULL}\
-}
+} \
+
+#define ARRAY_MAP {{ " ", 0, HandleOne}, \
+{",", STACK, range},\
+{0, 0, NULL}} \
 
 /**
  * \brief Tipo de dados que funciona como apontador para uma função operação.

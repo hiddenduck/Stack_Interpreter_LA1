@@ -107,14 +107,12 @@ int InputParser(char *token, Stack *stack, Stack *vars){
  * @param seps
  * @param rest
  * @return
- *
- * "aaa"
  */
 char *get_delimited(char *line, char *seps, char **resto) {
     //ver este get delimited que não funciona
 
     int i, count;
-    for (i = 0, count = 2; count; i++) {
+    for (i = 1, count = 1; count; i++) {
         if (line[i] == seps[1])
             count--;
         else if (line[i] == seps[0])
@@ -138,8 +136,9 @@ char *getToken(char *linha, char **resto) {
     for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
     if (*linha=='\"') {
         linha = get_delimited(linha, "\"\"", resto);
-    }
-    else {
+    } else if (*linha == '[') {
+        linha = get_delimited(linha, "[]", resto);
+    } else {
         for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
         linha[i] = '\0';
         *resto = linha+i+1;
@@ -162,7 +161,8 @@ void InputReader(Stack *stack, Stack *vars) {
     OperationMap stackMap[] = STACK_MAP;
     OperationMap inteiroMap[] = INTEIRO_MAP;
     OperationMap stringMap[] = STRING_MAP;
-    ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,stringMap,aritMap};
+    OperationMap arrayMap[] = ARRAY_MAP;
+    ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,stringMap,arrayMap};
     eval(input,stack,vars,&collec);
 }
 
@@ -196,13 +196,16 @@ Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *c
 
         if (token[0] == '\"')
             Push(CreateDataSTRING(++token), stack_ini);
+        else if (token[0] == '[')
+            Push(CreateDataSTACK(eval(++token, NULL, vars, collec)), stack_ini);
         else if (token[0] != '\0' &&
             (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
             Operator(token, stack_ini, collec->Arit) &&
             Operator(token, stack_ini, collec->StackManip) &&
             Operator(token, stack_ini, collec->Inteiro) &&
-            Operator(token, stack_ini, collec->String)) {}
+            Operator(token, stack_ini, collec->String) &&
+            Operator(token, stack_ini, collec->Array)) {}
 
         //if (token[1] == '\0' && token[0] == '\"')
         //    Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);

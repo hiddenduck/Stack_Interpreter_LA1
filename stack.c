@@ -76,5 +76,4 @@ void PrintStack(Stack *stack) {
     for (int i = 0 ; i <= stack -> sp; i++){
         PrintData(&stack->array[i]);
     }
-    putchar('\n');
 }

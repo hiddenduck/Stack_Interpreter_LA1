@@ -72,7 +72,7 @@ void notLG(Data *d1) {
 void ifThenElse(Stack *stack){
     Data elseOperator = Pop(stack);
     Data thenOperator = Pop(stack);
-    Data *d1 = Read(2, stack);
+    Data *d1 = Read(0, stack);
     long a = GetBoolFromData(d1);
     if(a) {
         swapDataFree(d1, &thenOperator);

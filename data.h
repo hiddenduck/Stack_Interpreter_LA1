@@ -11,6 +11,9 @@
 #include <stdio.h>
 #include <math.h>
 
+/**
+ * \brief Declaraçção de um stack.
+ */
 typedef struct stack Stack;
 
 /**
@@ -31,11 +34,11 @@ typedef enum {
 
 /** */
 typedef enum {
-    /** */
+    /**Máscara para NUMEROS, ou seja, LONG, CHAR e DOUBLE */
     NUMEROS = (LONG | DOUBLE | CHAR),
-    /** */
+    /**Máscara para  INTEIROS, ou seja, LONG e CHAR*/
     INTEIROS = (LONG | CHAR),
-    /** */
+    /**Máscara para todos os Tipos */
     ANY = (CHAR | LONG | DOUBLE | STRING | STACK)
 } Mask;
 
