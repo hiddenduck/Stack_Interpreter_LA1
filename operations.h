@@ -11,7 +11,7 @@
 #include "array.h"
 
 /**
- * \brief Array com todas as operações implementadas
+ * \brief Array com todas as operações implementadas.
  */
 #define ARIT_MAP {{" ", 0, HandleOne},          \
                 {"(", NUMEROS, decre},\
@@ -33,7 +33,7 @@
 
 
 /**
- *
+ *  \brief Array com todas as operações implementadas.
  */
 #define STACK_MAP { \
 {" ", 0, HandleNoArgs}, \
@@ -58,7 +58,7 @@
 } \
 
 /**
- *
+ *  \brief Array com todas as operações implementadas.
  */
 #define INTEIRO_MAP { \
 {" ", 0, HandleNoArgs}, \
@@ -75,7 +75,7 @@
 } \
 
 /**
- * 
+ * \brief Array com todas as operações implementadas.
  */
 #define STRING_MAP {{" ", 0, HandleOne}, \
                     {",", STRING, StringLength}, \
@@ -95,6 +95,9 @@
                     {0, 0, NULL}\
 } \
 
+/**
+ * \brief Array com todas as operações implementadas.
+ */
 #define ARRAY_MAP {{ " ", 0, HandleOne}, \
 {",", STACK, range},\
 {0, 0, NULL}} \
@@ -110,25 +113,25 @@ typedef void (*Operation)();
 typedef struct {
     /** char responsável pela identificação da operação*/
     char *simbolo;
-    /** */
+    /** inteiros responsável pela identificação da máscara */
     int mask;
     /** Apontador para uma função*/
     Operation op;
 }OperationMap;
 
 /**
- *
+ *  \brief Tipo que guarda todos os mapas.
  */
 typedef struct COLLEC {
-    /** */
+    /**Mapa de Stacks */
     OperationMap *StackManip;
-    /** */
+    /**Mapa aritmético */
     OperationMap *Arit;
-    /** */
+    /**Mapa de inteiros */
     OperationMap *Inteiro;
-    /** */
+    /**Mapa de strings */
     OperationMap *String;
-    /** */
+    /**Mapa de arrays */
     OperationMap *Array;
 } ColectionOperationMaps;
 
