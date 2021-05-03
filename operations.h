@@ -81,7 +81,9 @@
 #define STRING_MAP {{" ", 0, HandleOne}, \
                     {",", STRING, StringLength}, \
                     {"(", STRING, strRemoveFirst}, \
-                    {")", STRING, strRemoveLast}, \
+                    {")", STRING, strRemoveLast},\
+                    {"S/", STRING, strWhiteSpace}, \
+                    {"N/", STRING, strNewLine},\
                     {" ", 0, HandleTwo},\
                     {"=", STRING, strEqual}, \
                     {"<", STRING, strLesser},\

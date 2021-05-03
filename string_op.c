@@ -184,16 +184,46 @@ void strGetXEnd (Data *d1, Data *d2, Stack *stack){
  * @param d2 Endereço de um Data.
  */
 void strBar (Data *d1, Data *d2){
-    char *new = strstr(DataValSTRING(d1), DataValSTRING(d2));
-    *new = '\0';
+    //"abcqqxyzqqola" "qq"
+    int i, j;
+    Stack *new = CreateStack(10);
+    for (i = 0; (DataValSTRING(d1))[i] != '\0'; i++) {
+        if ((DataValSTRING(d1))[i] == *DataValSTRING(d2)) {
+            //enquanto que o primeiro for diferente de 0 e igual ao segundo...
+            for (j = 1; ((DataValSTRING(d1))[i+j]) != '\0' && ((DataValSTRING(d1))[i+j]) == ((DataValSTRING(d2))[j]); j++);
+            if ((DataValSTRING(d2))[j] == '\0') {
+                (DataValSTRING(d1))[i] = '\0';
+                Push(CreateDataSTRING(DataValSTRING(d1)), new);
+                
+            }
+        }
+    }
 }
 
-/*
-void strWhiteSpace (Data *d1){
 
+void strWhiteSpace (Data *d1){
+    //"abc xyz ola"
+    Stack *new = CreateStack(10);
+    //yikes
+    char *token = strtok(DataValSTRING(d1), " ");
+    while(token != NULL) {
+        Push(CreateDataSTRING(token), new);
+        token = strtok(NULL, " ");
+    }
+    Data d3 = CreateDataSTACK(new);
+    swapDataFree(d1, &d3);
 }
 
 void strNewLine (Data *d1){
-
+    //"abc xyz ola"
+    Stack *new = CreateStack(10);
+    //yikes
+    char *token = strtok(DataValSTRING(d1), "\n");
+    while(token != NULL) {
+        Push(CreateDataSTRING(token), new);
+        token = strtok(NULL, "\n");
+    }
+    Data d3 = CreateDataSTACK(new);
+    swapDataFree(d1, &d3);
 }
-*/
+

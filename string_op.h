@@ -30,4 +30,6 @@ void strGetInd (Data *d1, Data *d2);
 void strConcat(Data *d1, Data *d2);
 void strGetXStart (Data *d1, Data *d2, Stack *stack);
 void strGetXEnd (Data *d1, Data *d2, Stack *stack);
+void strWhiteSpace (Data *d1);
+void strNewLine (Data *d1);
 #endif //TRING_OP_H

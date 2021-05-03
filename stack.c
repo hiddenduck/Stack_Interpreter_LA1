@@ -48,7 +48,8 @@ void DecrementaSP(Stack *stack) {
  */
 void Push(Data data, Stack *stack) {
     if(stack->size == (stack->sp)-1) {
-        stack->size +=INCREMENTO_STACK;
+        //não sei se importa poupar este espaço (strWhiteSpace e assins)
+        stack->size +=(stack->size/2);
         stack->array = (Data *) realloc(stack->array, stack->size * sizeof(Data));
     }
     stack->sp++;
