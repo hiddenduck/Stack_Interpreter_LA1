@@ -104,6 +104,8 @@
 #define ARRAY_MAP   {{ " ", 0, HandleOne}, \
                     {",", STACK, range},\
                     {"~", STACK, til},   \
+                    {" ", 0, HandleTwoDiff}, \
+                    {"*", (STACK | LONG), multArray}, \
                     {" ", 0, HandleTwo}, \
                     {"+", STACK, concatArray}, \
                     {0, 0, NULL} \

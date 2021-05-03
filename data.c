@@ -162,7 +162,10 @@ Data DataDup(Data *target) {
             break;
         }
         case STACK: {
-            data = CreateDataSTACK(DataValSTACK(target));
+            Stack *stack = CreateStack(((*DataValSTACK(target)).sp)+1);
+            for(int i=0; i<=(*DataValSTACK(target)).sp; i++)
+                Push(DataDup(&(*DataValSTACK(target)).array[i]), stack);
+            data = CreateDataSTACK(stack);
             break;
         }
     }

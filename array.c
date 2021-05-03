@@ -31,3 +31,10 @@ void concatArray(Data *d1, Data *d2){
     for(int i=0; i<=(*DataValSTACK(d2)).sp; i++)
         Push((*DataValSTACK(d2)).array[i], DataValSTACK(d1));
 }
+
+void multArray(Data *d1, Data *d2){
+    Data temp = DataDup(d1);
+    for(int i=1; i<*DataValLONG(d2); i++)
+        concatArray(&temp, d1);
+    swapDataFree(d1, &temp);
+}
