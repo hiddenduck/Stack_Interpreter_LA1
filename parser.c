@@ -107,10 +107,6 @@ int InputParser(char *token, Stack *stack, Stack *vars){
  * @param seps
  * @param rest
  * @return
- *
- * count = 2
- * "aaa"...
- * [ 1 2 3 ]...
  */
 char *get_delimited(char *line, char *seps, char **resto) {
     //ver este get delimited que não funciona
