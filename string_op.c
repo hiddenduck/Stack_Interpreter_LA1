@@ -186,6 +186,12 @@ void strBar (Data *d1, Data *d2){
     *new = '\0';
 }
 
+/*
 void strWhiteSpace (Data *d1){
 
 }
+
+void strNewLine (Data *d1){
+
+}
+*/
