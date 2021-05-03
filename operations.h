@@ -107,7 +107,7 @@
                     {" ", 0, HandleTwoDiff}, \
                     {"*", (STACK | LONG), multArray}, \
                     {" ", 0, HandleTwo}, \
-                    {"+", STACK, concatArray}, \
+                    {"+", ANY, concatArray}, \
                     {0, 0, NULL} \
 } \
 
