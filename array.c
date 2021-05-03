@@ -30,7 +30,7 @@ void til(Data *d1, Stack *stack){
  */
 void concatArray(Data *d1, Data *d2){
     if (d2->tipo != STACK) {
-        Push(*d1, DataValSTACK(d2));
+        Push(DataDup(d2), DataValSTACK(d1));
     } else {
         if (d1->tipo != STACK) {
             Stack *temp = CreateStack((DataValSTACK(d2))->sp + 1);
