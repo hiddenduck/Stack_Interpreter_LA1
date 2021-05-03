@@ -15,5 +15,6 @@ int main(){
     Omissions(vars);
     InputReader(stack, vars);
     PrintStack(stack);
+    putchar('\n');
     return 0;
 }
