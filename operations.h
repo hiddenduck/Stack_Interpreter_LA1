@@ -83,7 +83,7 @@
                     {"<", STRING, strLesser},\
                     {">", STRING, strGreater},\
                     {"*", (STRING | INTEIROS), strMult}, \
-                    {"+", STRING, strConcat}, \
+                    {"+", (STRING | CHAR), strConcat}, \
                     {"/", STRING, strBar}, \
                     {"#", STRING, strHashtag}, \
                     {"e<", STRING, strEMenor},  \
