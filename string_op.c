@@ -57,16 +57,6 @@ void strMult (Data *d1, Data *d2){
 }
 
 /**
- * \brief Função que procura uma substring numa string e devolve o índice.
- * @param d1 Endereço de um Data.
- * @param d2 Endereço de um Data.
- */
-void strBar (Data *d1, Data *d2){ // É mAU?
-    char *new = strstr(DataValSTRING(d1), DataValSTRING(d2));
-    *new = '\0';
-}
-
-/**
  * \brief Função que lê todo o input.
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
@@ -176,8 +166,26 @@ void strGetXStart (Data *d1, Data *d2, Stack *stack){
  * @param d2 Endereço de um Data.
  */
 void strGetXEnd (Data *d1, Data *d2, Stack *stack){
-    for(int i=0; i<*DataValLONG(d2)-1; i++)
-        strRemoveLast(d1, stack);
-    Data d3 = CreateDataCHAR(*(DataValSTRING(d1) + strlen(DataValSTRING(d1))));
+    long len = strlen(DataValSTRING(d1)), i;
+    for(i=0; i<*DataValLONG(d2)-1; i++){
+        Push(CreateDataCHAR(*DataValSTRING(d1)), stack);
+        *DataValSTRING(d1) = '\0';
+        *d1 = CreateDataSTRING((DataValSTRING(d1)-1));
+    }
+    Data d3 = CreateDataCHAR(*(DataValSTRING(d1)+len-i));
     swapDataFree(d1, &d3);
+}
+
+/**
+ * \brief Função que procura uma substring numa string e devolve o índice.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
+ */
+void strBar (Data *d1, Data *d2){
+    char *new = strstr(DataValSTRING(d1), DataValSTRING(d2));
+    *new = '\0';
+}
+
+void strWhiteSpace (Data *d1){
+
 }
