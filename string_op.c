@@ -187,14 +187,15 @@ void strBar (Data *d1, Data *d2){
     //"abcqqxyzqqola" "qq"
     int i, j;
     Stack *new = CreateStack(10);
-    for (i = 0; (DataValSTRING(d1))[i] != '\0'; i++) {
-        if ((DataValSTRING(d1))[i] == *DataValSTRING(d2)) {
+    char *s = DataValSTRING(d1);
+    for (i = 0; s[i] != '\0'; i++) {
+        if (s[i] == *DataValSTRING(d2)) {
             //enquanto que o primeiro for diferente de 0 e igual ao segundo...
-            for (j = 1; ((DataValSTRING(d1))[i+j]) != '\0' && ((DataValSTRING(d1))[i+j]) == ((DataValSTRING(d2))[j]); j++);
+            for (j = 1; (s[i+j]) != '\0' && (s[i+j]) == ((DataValSTRING(d2))[j]); j++);
             if ((DataValSTRING(d2))[j] == '\0') {
-                (DataValSTRING(d1))[i] = '\0';
-                Push(CreateDataSTRING(DataValSTRING(d1)), new);
-                
+                Push(CreateDataSTRING(s), new);
+                s += i+j;
+                i += j-1;
             }
         }
     }
