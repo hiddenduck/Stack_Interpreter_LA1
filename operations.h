@@ -103,6 +103,7 @@
  */
 #define ARRAY_MAP {{ " ", 0, HandleOne}, \
 {",", STACK, range},\
+{"~", STACK, til},   \
 {0, 0, NULL}} \
 
 /**
