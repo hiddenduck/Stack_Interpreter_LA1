@@ -94,3 +94,10 @@ void strConcat(Data *d1, Data *d2){
     Data d3 = CreateDataSTRING(s3);
     swapDataFree(d1, &d3);
 }
+
+
+void strGetXStart (Data *d1, Data *d2, Stack *stack){
+    *(DataValSTRING(d1)+*DataValLONG(d2)) = '\0';
+    while(*DataValLONG(d1)!='\0')
+        strRemoveFirst(d1, stack);
+}

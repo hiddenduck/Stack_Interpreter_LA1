@@ -32,7 +32,7 @@ void UmArgumento(Operation operation, Stack *stack) {
  */
 void DoisArgumentos(Operation operation, Stack *stack) {
     Data d2 = Pop(stack), d1 = Pop(stack);
-    (*operation)(&d1, &d2);
+    (*operation)(&d1, &d2, stack);
     Push(d1, stack);
     free(d2.value);
 }

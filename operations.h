@@ -69,6 +69,7 @@
 {"&", INTEIROS, and},\
 {"|", INTEIROS, or},\
 {"^", INTEIROS, xor},           \
+{"<", (STRING | LONG), strGetXStart},   \
 {0, 0, NULL}\
 } \
 
