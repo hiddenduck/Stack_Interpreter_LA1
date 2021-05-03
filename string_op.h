@@ -9,6 +9,9 @@
  */
 #define MAX_LENGTH_INPUT 10240
 
+/**
+ * \brief Pega um bool através do strcmp de duas strings.
+ */
 #define GET_BOOL long bool = strcmp(DataValSTRING(d1), DataValSTRING(d2));
 
 void StringLength(Data *d1);
