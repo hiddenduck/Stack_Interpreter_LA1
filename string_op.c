@@ -224,16 +224,8 @@ void strBar (Data *d1, Data *d2){
  * @param d2 Endereço de um Data.
  */
 void strWhiteSpace (Data *d1){
-    //"abc xyz ola"
-    Stack *new = CreateStack(10);
-    //yikes
-    char *token = strtok(DataValSTRING(d1), " ");
-    while(token != NULL) {
-        Push(CreateDataSTRING(token), new);
-        token = strtok(NULL, " ");
-    }
-    Data d3 = CreateDataSTACK(new);
-    swapDataFree(d1, &d3);
+    Data str = CreateDataSTRING(" ");
+    strBar(d1, &str);
 }
 
 /**
@@ -242,15 +234,7 @@ void strWhiteSpace (Data *d1){
  * @param d2 Endereço de um Data.
  */
 void strNewLine (Data *d1){
-    //"abc xyz ola"
-    Stack *new = CreateStack(10);
-    //yikes
-    char *token = strtok(DataValSTRING(d1), "\n");
-    while(token != NULL) {
-        Push(CreateDataSTRING(token), new);
-        token = strtok(NULL, "\n");
-    }
-    Data d3 = CreateDataSTACK(new);
-    swapDataFree(d1, &d3);
+    Data str = CreateDataSTRING("\n");
+    strBar(d1, &str);
 }
 
