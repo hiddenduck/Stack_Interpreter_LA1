@@ -92,6 +92,41 @@ void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
 }
 
 
+/** \brief Função que consiste em testar se o resto contém um double decimal e somar à parte inteira.
+ *  @param vall Endereço de um inteiro.
+ *  @param resto Endereço de um char.
+ *  @param stack Endereço da stack.
+ */
+int InputPaserDouble(long *vall, char *resto, Stack *stack){
+    int r = 0;
+    double vald = strtod(resto, &resto);
+    if (strlen(resto) ==  0) {
+        if (*vall < 0)
+            vald = -vald;
+        vald += *vall;
+        Push(CreateDataDOUBLE(vald), stack);
+        r = 1;
+    }
+
+    return r;
+}
+
+/** \brief Função que verifica se o token é uma variável.
+ *  @param token Endereço de um char.
+ *  @param vars Endereço de uma stack vars.
+ *  @param stack Endereço da stack.
+ *  @return inteiro bool.
+ */
+int InputParserVars(char* token, Stack *vars, Stack *stack){
+    int r = 0;
+    if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
+                Push(DataDup(Read(64 - token[0], vars)), stack);
+        r = 1;
+    }
+    
+    return r;
+}
+
 /**
  * \brief Função que interpreta o input e altera a stack segundo esse input.
  *
@@ -99,6 +134,7 @@ void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param opMap Mapa com as operações.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
+ * @return inteiro bool.
  */
 int InputParser(char *token, Stack *stack, Stack *vars){
     int r = 1;
@@ -106,25 +142,12 @@ int InputParser(char *token, Stack *stack, Stack *vars){
 
     /* Testar se o valor introduzido é do tipo long. */
     long vall = strtol(token, &resto, 10);
-
     if (strlen(resto) == 0) {
         Push(CreateDataLONG(vall), stack);
         r = 0;
-    } else {
-        /* Testar se o resto contém um double decimal e somar à parte inteira. */
-        double vald = strtod(resto, &resto);
-        if (strlen(resto) ==  0) {
-            if (vall < 0)
-                vald = -vald;
-            vald += vall;
-            Push(CreateDataDOUBLE(vald), stack);
-            r = 0;
-        } else if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
-            //limpar isto (MI)
-            Push(DataDup(Read(64 - token[0], vars)), stack);
-            r = 0;
-        }
-    }
+    } else if (InputPaserDouble(&vall, resto, stack) || InputParserVars(token, vars, stack))
+        r = 0;
+
     return r;
 }
 
