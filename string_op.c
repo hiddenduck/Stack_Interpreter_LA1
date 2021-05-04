@@ -194,8 +194,8 @@ void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
         Push(CreateDataSTRING(str), stack);
 }
 
-void barAux2(char *str, Stack *stack, int N){
-    for(long i=0; i<N; i++)
+void barAux2(char *str, Stack *stack){
+    for(int i=0; str[i]!='\0'; i++)
         Push(CreateDataCHAR(str[i]), stack);
 }
 
@@ -208,11 +208,10 @@ void strBar (Data *d1, Data *d2){
     Stack *new = CreateStack(10);
     char *s = strdup(DataValSTRING(d1));
     char *delim = strdup(DataValSTRING(d2));
-    int delim_tamanho = strlen(delim);
-    if(delim_tamanho!=0)
-        barAux(s, delim, delim_tamanho, new);
+    if(strlen(DataValSTRING(d2))!=0)
+        barAux(s, delim, strlen(delim), new);
     else
-        barAux2(s, new, strlen(s));
+        barAux2(s, new);
     Data d3 = CreateDataSTACK(new);
     swapDataFree(d1, &d3);
     free(delim);
