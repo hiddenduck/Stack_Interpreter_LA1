@@ -188,7 +188,8 @@ void strGetXEnd (Data *d1, Data *d2, Stack *stack){
  * @param d2 Endereço de um Data.
  */
 void strBar (Data *d1, Data *d2){
-    //ta tudo mal
+    //ta tudo mal - bora la es capaz tu não vais desistir
+    //acreditar é lutar mesmo se caíres
     //"abcqqxyzqqola" "qq"
     int i, j;
     Stack *new = CreateStack(10);
