@@ -59,9 +59,9 @@ void concatArray(Data *d1, Data *d2){
 }
 
 /**
- *
- * @param d1
- * @param d2
+ * \brief Função que repete um Data STACK n vezes.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
  */
 void multArray(Data *d1, Data *d2){
     Data d3 = DataDup(d1);
