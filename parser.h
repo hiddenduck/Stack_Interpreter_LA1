@@ -9,8 +9,6 @@ void HandleOne(int mask, Operation op, Stack *stack, int *r);
 void HandleTwo(int mask, Operation op, Stack *stack, int *r);
 void HandleTwoDiff(int mask, Operation op, Stack *stack, int *r);
 int InputParser(char *token, Stack *stack, Stack *vars);
-int InputPaserDouble(long *vall, char *resto, Stack *stack);
-int InputParserVars(char* token, Stack *vars, Stack *stack);
 void InputReader(Stack *stack, Stack *vars);
 void Omissions(Stack *vars);
 char *getToken(char *linha, char **resto);
