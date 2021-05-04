@@ -62,7 +62,8 @@
  */
 #define INTEIRO_MAP { \
 {" ", 0, HandleNoArgs}, \
-{" ", 0, HandleOne},\
+{" ", 0, HandleOne},  \
+{",", INTEIROS, range},\
 {"$", INTEIROS, DollarSign},    \
 {"~", INTEIROS, notBW},         \
 {" ", 0, HandleTwo},\
@@ -102,7 +103,7 @@
  * \brief Array com todas as operações implementadas.
  */
 #define ARRAY_MAP   {{ " ", 0, HandleOne}, \
-                    {",", STACK, range},\
+                    {",", STACK, ArrayLength},\
                     {"~", STACK, til},   \
                     {" ", 0, HandleTwoDiff}, \
                     {"*", (STACK | LONG), multArray}, \

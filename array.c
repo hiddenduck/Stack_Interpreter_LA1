@@ -3,10 +3,22 @@
 
 /**
  *  \brief Função que calcula o tamanho de um array.
- *  @param d1 Endereço de um Data.
+ *  @param d1 Endereço de um Data do tipo STACK.
  */
-void range(Data *d1) {
+void ArrayLength(Data *d1) {
     Data d2 = CreateDataLONG((*(DataValSTACK(d1))).sp + 1);
+    swapDataFree(d1, &d2);
+}
+
+/**
+ * \brief Função que cria um array com todos os números de 0 até o valor de d1
+ *
+ * @param d1 Endereço do Data do tipo INTEIRO que gera o array.
+ */
+void range(Data *d1){
+    Data d2 = CreateDataSTACK(CreateStack(*DataValLONG(d1)));
+    for(int i=0; i<*DataValLONG(d1); i++)
+        Push(CreateDataLONG(i), DataValSTACK(&d2));
     swapDataFree(d1, &d2);
 }
 
@@ -17,8 +29,8 @@ void range(Data *d1) {
  */
 void til(Data *d1, Stack *stack){
     for(int i=1; i<(*DataValSTACK(d1)).sp+1; i++)
-        Push((*DataValSTACK(d1)).array[i], stack);
-    Data d2 = (*DataValSTACK(d1)).array[0];
+        Push((DataValSTACK(d1))->array[i], stack);
+    Data d2 = (DataValSTACK(d1))->array[0];
     swapDataFree(d1, &d2);
 }
 
