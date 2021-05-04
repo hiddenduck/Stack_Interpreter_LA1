@@ -97,3 +97,24 @@ void arrayGetInd (Data *d1, Data *d2){
     Data dvalor = DataDup(Read((DataValSTACK(d1))->sp - *DataValLONG(d2), DataValSTACK(d1)));
     swapDataFree(d1, &dvalor);
 }
+
+/**
+ * \brief Função que vai buscar X chars no inicio de um Data STRING.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
+ */
+void arrayGetXStart (Data *d1, Data *d2, Stack *stack){
+    int i;
+    for(i = 0; i<*DataValLONG(d2)-1; i++)
+        Push(DataDup(Read((DataValSTACK(d1))->sp - i, DataValSTACK(d1))), stack);
+    Data d3 = DataDup(Read((DataValSTACK(d1))->sp - i, DataValSTACK(d1)));
+    swapDataFree(d1, &d3);
+}
+
+void arrayGetXEnd (Data *d1, Data *d2, Stack *stack){
+    int i;
+    for(i = 0; i<*DataValLONG(d2)-1; i++)
+        Push(Pop(DataValSTACK(d1)), stack);
+    Data d3 = Pop(DataValSTACK(d1));
+    swapDataFree(d1, &d3);
+}
