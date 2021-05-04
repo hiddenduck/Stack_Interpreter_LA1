@@ -224,8 +224,16 @@ void strBar (Data *d1, Data *d2){
  * @param d2 Endereço de um Data.
  */
 void strWhiteSpace (Data *d1){
-    Data str = CreateDataSTRING(" ");
-    strBar(d1, &str);
+    //"abc xyz ola"
+    Stack *new = CreateStack(10);
+    //yikes
+    char *token = strtok(DataValSTRING(d1), " \n");
+    while(token != NULL) {
+        Push(CreateDataSTRING(token), new);
+        token = strtok(NULL, " \n");
+    }
+    Data d3 = CreateDataSTACK(new);
+    swapDataFree(d1, &d3);
 }
 
 /**
