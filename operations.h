@@ -102,7 +102,7 @@
 /**
  * \brief Array com todas as operações implementadas.
  */
-#define ARRAY_MAP   {{ " ", 0, HandleOne}, \
+#define ARRAY_MAP   {{" ", 0, HandleOne}, \
                     {",", STACK, ArrayLength},\
                     {"~", STACK, til},     \
                     {"(", STACK, arrayRemoveFirst}, \

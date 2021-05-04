@@ -21,8 +21,9 @@ void SemArgumentos(Operation operation, Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void UmArgumento(Operation operation, Stack *stack) {
-    Data *d1 = Read(0, stack);
-    (*operation)(d1, stack);
+    Data d1 = Pop(stack);
+    (*operation)(&d1, stack);
+    Push(d1, stack);
 }
 
 /**

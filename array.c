@@ -17,7 +17,8 @@ void ArrayLength(Data *d1) {
  */
 void range(Data *d1){
     Data d2 = CreateDataSTACK(CreateStack(*DataValLONG(d1)));
-    for(int i=0; i<*DataValLONG(d1); i++)
+    int i;
+    for(i=0; i<*DataValLONG(d1); i++)
         Push(CreateDataLONG(i), DataValSTACK(&d2));
     //CleanupStack(DataValSTACK(&d2)); Apenas onde necessário
     swapDataFree(d1, &d2);
@@ -28,14 +29,14 @@ void range(Data *d1){
  *  @param d1 Endereço de um Data.
  *  @param stack Endereço da stack.
  */
-void til(Data *d1, Stack *stack){
-    for(int i=1; i<(DataValSTACK(d1))->sp+1; i++)
-        Push((DataValSTACK(d1))->array[i], stack);
-    Data d2 = (DataValSTACK(d1))->array[0];
-    //queremos é perder a armatura da Stack ANTES do swap
-    free(DataValSTACK(d1));
-    //não deve poder ser o free porque se não perdem-se os elementos do d1
-    swapData(d1, &d2);
+void til(Data *d1, Stack *stack) {
+    int i = (DataValSTACK(d1))->sp;
+    for (; i>0; i--) {
+        Data temp = DataDup(Read(i, DataValSTACK(d1)));
+        Push(temp, stack);
+    }
+    Data d2 = DataDup(Read(i, DataValSTACK(d1)));
+    swapDataFree(d1, &d2);
 }
 
 /**
