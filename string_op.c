@@ -78,8 +78,8 @@ void strRemoveFirst (Data *d1, Stack *stack){ // (
     //tens de criar o Char que vai ser posto na stack
     Data newC = CreateDataCHAR(*DataValSTRING(d1));
     Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar que é a nova string
-    swapDataFree(d1, (&d2)); //trocas as strings
-    Push(newC, stack); //metes a char na stack
+    Push(d2, stack); //trocas as strings
+    swapDataFree(d1, &newC); //metes a char na stack
 }
 
 /**
@@ -91,6 +91,7 @@ void strRemoveLast (Data *d1, Stack *stack){
     int len = strlen(DataValSTRING(d1)) -1;
     Data newC = CreateDataCHAR(*(DataValSTRING(d1) + len));
     *(DataValSTRING(d1)+len)= '\0';
+    swapData(d1, &newC);
     Push(newC, stack);
 }
 
