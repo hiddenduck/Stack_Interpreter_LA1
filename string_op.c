@@ -184,6 +184,7 @@ void strGetXEnd (Data *d1, Data *d2, Stack *stack){
  * @param d2 Endereço de um Data.
  */
 void strBar (Data *d1, Data *d2){
+    //ta tudo mal
     //"abcqqxyzqqola" "qq"
     int i, j;
     Stack *new = CreateStack(10);
@@ -200,24 +201,6 @@ void strBar (Data *d1, Data *d2){
     }
 }
 
-/*
-void strBar (Data *d1, Data *d2){
-    //"abcqqxyzqqola" "qq"
-    int i, j;
-    Stack *new = CreateStack(10);
-    for (i = 0; (DataValSTRING(d1))[i] != '\0'; i++) {
-        if ((DataValSTRING(d1))[i] == *DataValSTRING(d2)) {
-            //enquanto que o primeiro for diferente de 0 e igual ao segundo...
-            for (j = 1; ((DataValSTRING(d1))[i+j]) != '\0' && ((DataValSTRING(d1))[i+j]) == ((DataValSTRING(d2))[j]); j++);
-            if ((DataValSTRING(d2))[j] == '\0') {
-                (DataValSTRING(d1))[i] = '\0';
-                Push(CreateDataSTRING(DataValSTRING(d1)), new);
-
-            }
-        }
-    }
-}
-*/
 /**
  * \brief Função que procura espaços numa string e um array de strings.
  * @param d1 Endereço de um Data.

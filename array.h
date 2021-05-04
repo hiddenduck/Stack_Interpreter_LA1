@@ -8,4 +8,6 @@ void range(Data *d1);
 void til(Data *d1, Stack *stack);
 void concatArray(Data *d1, Data *d2);
 void multArray(Data *d1, Data *d2);
+void arrayRemoveFirst (Data *d1, Stack *stack);
+void arrayRemoveLast (Data *d1, Stack *stack);
 #endif //ARRAY_H

@@ -29,10 +29,13 @@ void range(Data *d1){
  *  @param stack Endereço da stack.
  */
 void til(Data *d1, Stack *stack){
-    for(int i=1; i<(*DataValSTACK(d1)).sp+1; i++)
+    for(int i=1; i<(DataValSTACK(d1))->sp+1; i++)
         Push((DataValSTACK(d1))->array[i], stack);
     Data d2 = (DataValSTACK(d1))->array[0];
-    swapDataFree(d1, &d2);
+    //queremos é perder a armatura da Stack ANTES do swap
+    free(DataValSTACK(d1));
+    //não deve poder ser o free porque se não perdem-se os elementos do d1
+    swapData(d1, &d2);
 }
 
 /**
@@ -52,8 +55,8 @@ void concatArray(Data *d1, Data *d2){
             Data d3 = CreateDataSTACK(temp);
             swapDataFree(d1, &d3);
         }
-        for(int i=0; i<=(*DataValSTACK(d2)).sp; i++)
-            Push(DataDup(&(*DataValSTACK(d2)).array[i]), DataValSTACK(d1));
+        for(int i=0; i<=(DataValSTACK(d2))->sp; i++)
+            Push(DataDup(&(DataValSTACK(d2))->array[i]), DataValSTACK(d1));
         //CleanupStack(DataValSTACK(d2));
     }
 }
@@ -67,4 +70,22 @@ void multArray(Data *d1, Data *d2){
     Data d3 = DataDup(d1);
     for(int i=1; i<*DataValLONG(d2); i++)
         concatArray(d1, &d3);
+}
+
+void arrayRemoveFirst (Data *d1, Stack *stack){
+    //referenciar a Data que vai acabar na stack
+    Data *newD = Read((DataValSTACK(d1))->sp, DataValSTACK(d1));
+    //alterar a stack do d1 para remover o primeiro elemento
+    Stack *original = (DataValSTACK(d1));
+    original->array++;
+    original->sp--;
+    original->size--;
+    //por o Data lido na stack
+    Push(*newD, stack);
+}
+
+void arrayRemoveLast (Data *d1, Stack *stack){
+    Data newD = Pop(DataValSTACK(d1));
+    //por o Data lido na stack
+    Push(newD, stack);
 }

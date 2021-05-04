@@ -104,7 +104,9 @@
  */
 #define ARRAY_MAP   {{ " ", 0, HandleOne}, \
                     {",", STACK, ArrayLength},\
-                    {"~", STACK, til},   \
+                    {"~", STACK, til},     \
+                    {"(", STACK, arrayRemoveFirst}, \
+                    {")", STACK, arrayRemoveLast},\
                     {" ", 0, HandleTwoDiff}, \
                     {"*", (STACK | LONG), multArray}, \
                     {" ", 0, HandleTwo}, \
