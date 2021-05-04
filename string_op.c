@@ -191,14 +191,19 @@ void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
         r = strstr(str, delim);
     }
     if(strlen(str)!=0)
-        Push(CreateDataSTRING(str), stack); // "olaqq" "qq" / , é 2, ou seja, tá a meter lá ar e vento temos de meter strlen
+        Push(CreateDataSTRING(str), stack);
 }
 
 void barAux2(char *str, Stack *stack, int N){
     for(long i=0; i<N; i++)
         Push(CreateDataCHAR(str[i]), stack);
-} 
+}
 
+/**
+ * \brief Função que procura uma substring numa string e um array de strings.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
+ */
 void strBar (Data *d1, Data *d2){
     Stack *new = CreateStack(10);
     char *s = strdup(DataValSTRING(d1));
