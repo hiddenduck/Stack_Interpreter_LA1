@@ -182,6 +182,12 @@ void strGetXEnd (Data *d1, Data *d2, Stack *stack){
     swapDataFree(d1, &d3);
 }
 
+/** \brief Função que auxilia a função strBar criando um array com strings.
+ *  @param str Endereço da string a ser dividia e colocada no array.
+ *  @param delim Endereço da string correspondente aos delimitadores.
+ *  @param delim_tamanho Inteiro com o tamanho da string dos delimitadores.
+ *  @param stack Endereço da stack.
+ */
 void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
     char *r = strstr(str, delim);
     while(r!=NULL && *str!='\0'){
