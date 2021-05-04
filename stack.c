@@ -79,6 +79,10 @@ void PrintStack(Stack *stack) {
     }
 }
 
+/**
+ * \brief Função que liberta um Data.
+ * @param data Endereço de um Data.
+ */
 void Free(Data *data) {
     switch (data->tipo) {
         case STACK: {
