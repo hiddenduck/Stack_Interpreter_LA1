@@ -137,7 +137,7 @@ void DataToCHAR(Data *d) {
 }
 
 void DataToSTRING(Data *d) {
-    char buffer[256];
+    char buffer[MAX_LENGTH_INPUT];
     switch (d->tipo) {
         case LONG: {
             sprintf(buffer, "%ld", *DataValLONG(d));
@@ -153,7 +153,11 @@ void DataToSTRING(Data *d) {
         }
         case STACK: {
             int i;
-            for(i=0; i<= (DataValSTACK(d))->sp; i++)
+            for(i=0; i<= (DataValSTACK(d))->sp; i++) {
+                Data d1 = (DataValSTACK(d))->array[i];
+                DataToSTRING(&d1);
+                strcat(buffer, DataValSTRING(&d1));
+            }
             break;
         }
         default:
