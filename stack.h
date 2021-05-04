@@ -13,7 +13,7 @@ typedef struct data Data;
 /**
  * \brief Definição do incremento da stack.
  */
-#define INCREMENTO_STACK 100
+#define INCREMENTO_STACK 50
 
 /**
  * \brief Declaração da estrutura de dados Stack
@@ -37,5 +37,6 @@ Data *Read(long deslocamento, Stack *stack);
 void PrintStack(Stack *stack);
 
 void Free (Data *data);
+void CleanupStack(Stack *stack);
 
 #endif

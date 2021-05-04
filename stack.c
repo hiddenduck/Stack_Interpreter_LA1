@@ -49,7 +49,7 @@ void DecrementaSP(Stack *stack) {
 void Push(Data data, Stack *stack) {
     if(stack->size == (stack->sp)-1) {
         //não sei se importa poupar este espaço (strWhiteSpace e assins)
-        stack->size +=(stack->size/2);
+        stack->size += INCREMENTO_STACK;
         stack->array = (Data *) realloc(stack->array, stack->size * sizeof(Data));
     }
     stack->sp++;
@@ -96,5 +96,18 @@ void Free(Data *data) {
             free(data->value);
             break;
         }
+    }
+}
+
+/**
+ * \brief Função que liberta o espaço não usado no fim de uma Stack.
+ * @param stack Endereço da Stack a libertar.
+ */
+void CleanupStack(Stack *stack) {
+    Data *temp = stack->array + stack->size-1;
+    while(temp != (stack->array + stack->sp)) {
+        Free(temp);
+        free(temp);
+        temp--;
     }
 }

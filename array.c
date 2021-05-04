@@ -19,6 +19,7 @@ void range(Data *d1){
     Data d2 = CreateDataSTACK(CreateStack(*DataValLONG(d1)));
     for(int i=0; i<*DataValLONG(d1); i++)
         Push(CreateDataLONG(i), DataValSTACK(&d2));
+    //CleanupStack(DataValSTACK(&d2)); Apenas onde necessário
     swapDataFree(d1, &d2);
 }
 
@@ -43,6 +44,7 @@ void til(Data *d1, Stack *stack){
 void concatArray(Data *d1, Data *d2){
     if (d2->tipo != STACK) {
         Push(DataDup(d2), DataValSTACK(d1));
+        CleanupStack(DataValSTACK(d1));
     } else {
         if (d1->tipo != STACK) {
             Stack *temp = CreateStack((DataValSTACK(d2))->sp + 1);
@@ -52,6 +54,7 @@ void concatArray(Data *d1, Data *d2){
         }
         for(int i=0; i<=(*DataValSTACK(d2)).sp; i++)
             Push(DataDup(&(*DataValSTACK(d2)).array[i]), DataValSTACK(d1));
+        //CleanupStack(DataValSTACK(d2));
     }
 }
 
