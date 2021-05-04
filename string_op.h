@@ -4,10 +4,6 @@
 
 #include "data.h"
 
-/**
- * \brief Definição do tamanho máximo da line de input.
- */
-#define MAX_LENGTH_INPUT 10240
 
 /**
  * \brief Pega um bool através do strcmp de duas strings.

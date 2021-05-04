@@ -136,6 +136,39 @@ void DataToCHAR(Data *d) {
     d->tipo = CHAR;
 }
 
+void DataToSTRING(Data *d) {
+    char buffer[MAX_LENGTH_INPUT];
+    switch (d->tipo) {
+        case LONG: {
+            sprintf(buffer, "%ld", *DataValLONG(d));
+            break;
+        }
+        case DOUBLE: {
+            sprintf(buffer, "%f", *DataValDOUBLE(d));
+            break;
+        }
+        case CHAR: {
+            buffer[0] = *DataValCHAR(d);
+            break;
+        }
+        case STACK: {
+            int i;
+            for(i=0; i<= (DataValSTACK(d))->sp; i++) {
+                Data d1 = (DataValSTACK(d))->array[i];
+                DataToSTRING(&d1);
+                strcat(buffer, DataValSTRING(&d1));
+            }
+            break;
+        }
+        default:
+            return;
+    }
+    char *value;
+    value = strdup(buffer);
+    d->value = value;
+    d->tipo = STRING;
+}
+
 /**
  * \brief Função que duplica um Data.
  *

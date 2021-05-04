@@ -77,7 +77,7 @@ void strAll (Stack *stack){
 void strRemoveFirst (Data *d1, Stack *stack){ // (
     //tens de criar o Char que vai ser posto na stack
     Data newC = CreateDataCHAR(*DataValSTRING(d1));
-    Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar que é a nova string
+    Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar  strinque é a novag
     Push(d2, stack);
     swapDataFree(d1, &newC); //metes a char na stack
 }
@@ -182,28 +182,40 @@ void strGetXEnd (Data *d1, Data *d2, Stack *stack){
     swapDataFree(d1, &d3);
 }
 
+void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
+    char *r = strstr(str, delim);
+    while(r!=NULL && *str!='\0'){
+        str[r-str] = '\0';
+        Push(CreateDataSTRING(str), stack);
+        str = str + (r-str) + delim_tamanho;
+        r = strstr(str, delim);
+    }
+    if(strlen(str)!=0)
+        Push(CreateDataSTRING(str), stack);
+}
+
+void barAux2(char *str, Stack *stack){
+    for(int i=0; str[i]!='\0'; i++)
+        Push(CreateDataCHAR(str[i]), stack);
+}
+
 /**
  * \brief Função que procura uma substring numa string e um array de strings.
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
 void strBar (Data *d1, Data *d2){
-    //ta tudo mal - bora la es capaz tu não vais desistir
-    //acreditar é lutar mesmo se caíres
-    //"abcqqxyzqqola" "qq"
-    int i, j;
     Stack *new = CreateStack(10);
-    char *s = DataValSTRING(d1);
-    for (i = 0; (DataValSTRING(d1))[i] != '\0'; i++) {
-        if ((DataValSTRING(d1))[i] == *DataValSTRING(d2)) {
-            //enquanto que o primeiro for diferente de 0 e igual ao segundo...
-            for (j = 1; ((DataValSTRING(d1))[i+j]) != '\0' && ((DataValSTRING(d1))[i+j]) == ((DataValSTRING(d2))[j]); j++);
-            if ((DataValSTRING(d2))[j] == '\0') {
-                Push(CreateDataSTRING(s), new);
-                s++;
-            }
-        }
-    }
+    char *s = strdup(DataValSTRING(d1));
+    char *delim = strdup(DataValSTRING(d2));
+    if(strlen(DataValSTRING(d2))!=0)
+        barAux(s, delim, strlen(delim), new);
+    else
+        barAux2(s, new);
+    Data d3 = CreateDataSTACK(new);
+    swapDataFree(d1, &d3);
+    free(delim);
+    free(s);
 }
 
 /**
@@ -215,10 +227,10 @@ void strWhiteSpace (Data *d1){
     //"abc xyz ola"
     Stack *new = CreateStack(10);
     //yikes
-    char *token = strtok(DataValSTRING(d1), " ");
+    char *token = strtok(DataValSTRING(d1), " \n");
     while(token != NULL) {
         Push(CreateDataSTRING(token), new);
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " \n");
     }
     Data d3 = CreateDataSTACK(new);
     swapDataFree(d1, &d3);
@@ -230,15 +242,7 @@ void strWhiteSpace (Data *d1){
  * @param d2 Endereço de um Data.
  */
 void strNewLine (Data *d1){
-    //"abc xyz ola"
-    Stack *new = CreateStack(10);
-    //yikes
-    char *token = strtok(DataValSTRING(d1), "\n");
-    while(token != NULL) {
-        Push(CreateDataSTRING(token), new);
-        token = strtok(NULL, "\n");
-    }
-    Data d3 = CreateDataSTACK(new);
-    swapDataFree(d1, &d3);
+    Data str = CreateDataSTRING("\n");
+    strBar(d1, &str);
 }
 

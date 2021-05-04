@@ -80,15 +80,15 @@ void multArray(Data *d1, Data *d2){
  */
 void arrayRemoveFirst (Data *d1, Stack *stack){
     //referenciar a Data que vai acabar na stack
-    Data *newD = Read((DataValSTACK(d1))->sp, DataValSTACK(d1));
+    Data newD = *Read((DataValSTACK(d1))->sp, DataValSTACK(d1));
     //alterar a stack do d1 para remover o primeiro elemento
-    Stack *original = (DataValSTACK(d1));
-    original->array++;
-    original->sp--;
-    original->size--;
+    (DataValSTACK(d1))->array++;
+    (DataValSTACK(d1))->sp--;
+    Data newStack = DataDup(d1);
+
     //por o Data lido na stack
-    swapData(d1, newD);
-    Push(*newD, stack);
+    swapDataFree(d1, &newD);
+    Push(newStack, stack);
 }
 
 /**
