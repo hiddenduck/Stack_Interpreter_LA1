@@ -12,6 +12,11 @@
 #include <math.h>
 
 /**
+ * \brief Definição do tamanho máximo da line de input.
+ */
+#define MAX_LENGTH_INPUT 10240
+
+/**
  * \brief Declaraçção de um stack.
  */
 typedef struct stack Stack;
