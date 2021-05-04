@@ -114,7 +114,7 @@ int InputPaserDouble(long *vall, char *resto, Stack *stack){
  *  @param token Endereço de um char.
  *  @param vars Endereço de uma stack vars.
  *  @param stack Endereço da stack.
- *  @return inteiro bool.
+ * @return inteiro bool.
  */
 int InputParserVars(char* token, Stack *vars, Stack *stack){
     int r = 0;
