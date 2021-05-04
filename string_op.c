@@ -182,28 +182,34 @@ void strGetXEnd (Data *d1, Data *d2, Stack *stack){
     swapDataFree(d1, &d3);
 }
 
-/**
- * \brief Função que procura uma substring numa string e um array de strings.
- * @param d1 Endereço de um Data.
- * @param d2 Endereço de um Data.
- */
-void strBar (Data *d1, Data *d2){
-    //ta tudo mal - bora la es capaz tu não vais desistir
-    //acreditar é lutar mesmo se caíres
-    //"abcqqxyzqqola" "qq"
-    int i, j;
-    Stack *new = CreateStack(10);
-    char *s = DataValSTRING(d1);
-    for (i = 0; (DataValSTRING(d1))[i] != '\0'; i++) {
-        if ((DataValSTRING(d1))[i] == *DataValSTRING(d2)) {
-            //enquanto que o primeiro for diferente de 0 e igual ao segundo...
-            for (j = 1; ((DataValSTRING(d1))[i+j]) != '\0' && ((DataValSTRING(d1))[i+j]) == ((DataValSTRING(d2))[j]); j++);
-            if ((DataValSTRING(d2))[j] == '\0') {
-                Push(CreateDataSTRING(s), new);
-                s++;
-            }
-        }
+void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
+    char *r = strstr(str, delim);
+    while(r!=NULL && *str!='\0'){
+        str[r-str] = '\0';
+        Push(CreateDataSTRING(str), stack);
+        str = str + (r-str) + delim_tamanho;
+        r = strstr(str, delim);
     }
+    Push(CreateDataSTRING(str), stack);
+}
+
+void barAux2(char *str, Stack *stack, int N){
+    for(long i=0; i<N; i++)
+        Push(CreateDataCHAR(str[i]), stack);
+} 
+
+void strBar (Data *d1, Data *d2){
+    Stack *new = CreateStack(10);
+    char *s = strdup(DataValSTRING(d1));
+    char *delim = strdup(DataValSTRING(d2));
+    int delim_tamanho = strlen(delim);
+    if(delim_tamanho!=0)
+        barAux(s, delim, delim_tamanho, new);
+    else
+        barAux2(s, new, strlen(s));
+    Data d3 = CreateDataSTACK(new);
+    swapDataFree(d1, &d3);
+    free(delim);
 }
 
 /**
