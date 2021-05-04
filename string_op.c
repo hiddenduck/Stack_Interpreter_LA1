@@ -211,6 +211,7 @@ void strBar (Data *d1, Data *d2){
     Data d3 = CreateDataSTACK(new);
     swapDataFree(d1, &d3);
     free(delim);
+    free(s);
 }
 
 /**
