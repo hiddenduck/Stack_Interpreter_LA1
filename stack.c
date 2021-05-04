@@ -70,7 +70,6 @@ Data *Read(long deslocamento, Stack *stack) {
 
 /**
  * \brief Função que imprime todos os elementos da \a stack até ao elemento na posição sp.
- *
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void PrintStack(Stack *stack) {
@@ -79,6 +78,10 @@ void PrintStack(Stack *stack) {
     }
 }
 
+/**
+ * \brief Função que liberta um Data.
+ * @param data Endereço de um Data.
+ */
 void Free(Data *data) {
     switch (data->tipo) {
         case STACK: {
