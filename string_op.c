@@ -78,7 +78,7 @@ void strRemoveFirst (Data *d1, Stack *stack){ // (
     //tens de criar o Char que vai ser posto na stack
     Data newC = CreateDataCHAR(*DataValSTRING(d1));
     Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar que é a nova string
-    Push(d2, stack); //trocas as strings
+    Push(d2, stack); 
     swapDataFree(d1, &newC); //metes a char na stack
 }
 
@@ -160,8 +160,12 @@ void strConcat(Data *d1, Data *d2){
  * @param d2 Endereço de um Data.
  */
 void strGetXStart (Data *d1, Data *d2, Stack *stack){
-    for(int i = 0; i<*DataValLONG(d2)-1; i++)
-        strRemoveFirst(d1, stack);
+    int i;
+    Data temp = DataDup(d1);
+    for(i = 0; i<*DataValLONG(d2)-1; i++) {
+        strRemoveFirst(&temp, stack);
+
+    }
     Data d3 = CreateDataCHAR(*DataValSTRING(d1));
     swapDataFree(d1, &d3);
 }

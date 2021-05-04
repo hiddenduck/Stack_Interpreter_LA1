@@ -109,6 +109,7 @@
                     {")", STACK, arrayRemoveLast},\
                     {" ", 0, HandleTwoDiff}, \
                     {"*", (STACK | LONG), multArray}, \
+                    {"=", (STACK | LONG), arrayGetInd},\
                     {" ", 0, HandleTwo}, \
                     {"+", ANY, concatArray}, \
                     {0, 0, NULL} \

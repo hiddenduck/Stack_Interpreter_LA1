@@ -82,11 +82,18 @@ void arrayRemoveFirst (Data *d1, Stack *stack){
     original->sp--;
     original->size--;
     //por o Data lido na stack
+    swapData(d1, newD);
     Push(*newD, stack);
 }
 
 void arrayRemoveLast (Data *d1, Stack *stack){
     Data newD = Pop(DataValSTACK(d1));
     //por o Data lido na stack
+    swapData(d1, &newD);
     Push(newD, stack);
+}
+
+void arrayGetInd (Data *d1, Data *d2){
+    Data dvalor = DataDup(Read((DataValSTACK(d1))->sp - *DataValLONG(d2), DataValSTACK(d1)));
+    swapDataFree(d1, &dvalor);
 }
