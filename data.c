@@ -136,6 +136,10 @@ void DataToCHAR(Data *d) {
     d->tipo = CHAR;
 }
 
+/**
+ * \brief Função que converte um Data com qualquer Tipo num Data com Tipo STRING.
+ * @param d Endereço de um data
+ */
 void DataToSTRING(Data *d) {
     char buffer[MAX_LENGTH_INPUT];
     switch (d->tipo) {
