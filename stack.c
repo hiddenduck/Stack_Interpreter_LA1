@@ -107,6 +107,10 @@ void CleanupStack(Stack *stack) {
     stack->array = (Data *) realloc(stack->array, stack->size * sizeof(Data));
 }
 
+/**
+ * \brief Função que duplica uma stack.
+ * @param target Endereço de uma stack.
+ */
 Stack *DupStack (Stack *target) {
     Stack *stack = CreateStack(((target)->sp)+1);
     for(int i=0; i<=(target)->sp; i++)
