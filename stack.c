@@ -106,3 +106,10 @@ void CleanupStack(Stack *stack) {
     stack->size = stack->sp + 1;
     stack->array = (Data *) realloc(stack->array, stack->size * sizeof(Data));
 }
+
+Stack *DupStack (Stack *target) {
+    Stack *stack = CreateStack(((target)->sp)+1);
+    for(int i=0; i<=(target)->sp; i++)
+        Push(DataDup(&(target)->array[i]), stack);
+    return stack;
+}
