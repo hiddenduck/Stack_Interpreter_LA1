@@ -200,6 +200,10 @@ void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
         Push(CreateDataSTRING(str), stack);
 }
 
+/** \brief Função que auxilia a função strBar criando um array com chars.
+ *  @param str Endereço da string a ser dividia e colocada no array.
+ *  @param stack Endereço da stack.
+ */
 void barAux2(char *str, Stack *stack){
     for(int i=0; str[i]!='\0'; i++)
         Push(CreateDataCHAR(str[i]), stack);

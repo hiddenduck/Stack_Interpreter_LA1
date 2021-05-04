@@ -28,4 +28,6 @@ void strGetXStart (Data *d1, Data *d2, Stack *stack);
 void strGetXEnd (Data *d1, Data *d2, Stack *stack);
 void strWhiteSpace (Data *d1);
 void strNewLine (Data *d1);
+void barAux(char *str, char *delim, int delim_tamanho, Stack *stack);
+void barAux2(char *str, Stack *stack);
 #endif //TRING_OP_H
