@@ -190,7 +190,8 @@ void barAux(char *str, char *delim, int delim_tamanho, Stack *stack){
         str = str + (r-str) + delim_tamanho;
         r = strstr(str, delim);
     }
-    Push(CreateDataSTRING(str), stack); // "olaqq" "qq" / , é 2, ou seja, tá a meter lá ar e vento
+    if(strlen(str)!=0)
+        Push(CreateDataSTRING(str), stack); // "olaqq" "qq" / , é 2, ou seja, tá a meter lá ar e vento temos de meter strlen
 }
 
 void barAux2(char *str, Stack *stack, int N){
