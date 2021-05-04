@@ -47,7 +47,7 @@ void DecrementaSP(Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void Push(Data data, Stack *stack) {
-    if(stack->size == (stack->sp)-1) {
+    if(stack->size == (stack->sp)+1) {
         //não sei se importa poupar este espaço (strWhiteSpace e assins)
         stack->size += INCREMENTO_STACK;
         stack->array = (Data *) realloc(stack->array, stack->size * sizeof(Data));
@@ -104,10 +104,6 @@ void Free(Data *data) {
  * @param stack Endereço da Stack a libertar.
  */
 void CleanupStack(Stack *stack) {
-    Data *temp = stack->array + stack->size-1;
-    while(temp != (stack->array + stack->sp)) {
-        Free(temp);
-        free(temp);
-        temp--;
-    }
+    stack->size = stack->sp + 1;
+    stack->array = (Data *) realloc(stack->array, stack->size * sizeof(Data));
 }
