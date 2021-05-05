@@ -118,6 +118,8 @@
                     {0, 0, NULL} \
 } \
 
+#define BLOCK_MAP {{0,0,NULL}}\
+
 /**
  * \brief Tipo de dados que funciona como apontador para uma função operação.
  */
@@ -149,6 +151,8 @@ typedef struct COLLEC {
     OperationMap *String;
     /**Mapa de arrays */
     OperationMap *Array;
+    /**Mapa de Blocos */
+    OperationMap *Block;
 } ColectionOperationMaps;
 
 void DoisArgumentos(Operation operation, Stack *stack);

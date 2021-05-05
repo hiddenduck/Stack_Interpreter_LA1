@@ -34,7 +34,9 @@ typedef enum {
     /**Tipo de um data com o tipo de dado string*/
     STRING = 8,
     /**Tipo de um data com o tipo de dado Stack */
-    STACK = 16
+    STACK = 16,
+    /** */
+    BLOCK = 32
 } Tipo;
 
 /**
@@ -87,7 +89,7 @@ Data CreateDataDOUBLE(double val);
 Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
 Data CreateDataSTACK(Stack *stack); //não funciona até o stack.h estiver aqui
-
+Data CreateDataBLOCK(char *val);
 
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);
