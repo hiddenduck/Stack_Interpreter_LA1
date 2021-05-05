@@ -136,6 +136,10 @@ void DataToCHAR(Data *d) {
     d->tipo = CHAR;
 }
 
+/** \brief Função que auxilia o DataToSTRING.
+ *  @param buffer Endereço do buffer.
+ *  @param d Endereço do Data a ser convertido.
+ */
 char *DataToSTRINGaux (char *buffer, Data *d) {
     int i;
     for(i=0; i<= (DataValSTACK(d))->sp; i++) {
