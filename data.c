@@ -282,7 +282,7 @@ int GetBoolFromData (Data *d1) {
             r = (strcmp(DataValSTRING(d1), ""));
             break;
         case STACK:
-            r = ((*DataValSTACK(d1)).sp != -1);
+            r = ((DataValSTACK(d1))->sp != -1);
             break;
         default:
             r = 1;

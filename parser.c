@@ -176,11 +176,12 @@ char *getToken(char *linha, char **resto) {
         linha = get_delimited(linha, "[]", resto);
     } else if (*linha == '{') {
         linha = get_delimited(linha, "{}", resto);
-    } else {
+    } else if (*linha != '\0'){
         for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
         linha[i] = '\0';
         *resto = linha+i+1;
-    }
+    } else
+        *resto = linha;
     return linha;
 }
 
