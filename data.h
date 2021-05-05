@@ -88,9 +88,12 @@ Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
 Data CreateDataSTACK(Stack *stack); //não funciona até o stack.h estiver aqui
 
+
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);
 void DataToCHAR(Data *d1);
+void DataToSTRING(Data *d);
+char *DataToSTRINGaux (char *buffer, Data *d);
 
 Data DataDup(Data *target);
 

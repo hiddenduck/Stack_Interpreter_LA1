@@ -48,7 +48,8 @@
 {"!", ANY, notLG},\
 {"c", ANY, DataToCHAR},\
 {"i", ANY, DataToLONG},\
-{"f", ANY, DataToDOUBLE},\
+{"f", ANY, DataToDOUBLE}, \
+{"s", ANY, DataToSTRING},\
 {" ", 0, HandleTwo},\
 {"e&", ANY, andWithShortcut},     \
 {"e|", ANY, orWithShortcut},      \

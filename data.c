@@ -136,6 +136,16 @@ void DataToCHAR(Data *d) {
     d->tipo = CHAR;
 }
 
+char *DataToSTRINGaux (char *buffer, Data *d) {
+    int i;
+    for(i=0; i<= (DataValSTACK(d))->sp; i++) {
+        Data d1 = (DataValSTACK(d))->array[i];
+        DataToSTRING(&d1);
+        strcat(buffer, DataValSTRING(&d1));
+    }
+    return buffer;
+}
+
 /**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo STRING.
  * @param d Endereço de um data
@@ -156,12 +166,7 @@ void DataToSTRING(Data *d) {
             break;
         }
         case STACK: {
-            int i;
-            for(i=0; i<= (DataValSTACK(d))->sp; i++) {
-                Data d1 = (DataValSTACK(d))->array[i];
-                DataToSTRING(&d1);
-                strcat(buffer, DataValSTRING(&d1));
-            }
+            strcpy(buffer, DataToSTRINGaux(buffer, d));
             break;
         }
         default:
@@ -172,6 +177,8 @@ void DataToSTRING(Data *d) {
     d->value = value;
     d->tipo = STRING;
 }
+
+
 
 /**
  * \brief Função que duplica um Data.
