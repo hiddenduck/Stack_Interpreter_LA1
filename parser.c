@@ -189,7 +189,7 @@ char *getToken(char *linha, char **resto) {
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-void InputReader(Stack *stack, Stack *vars) {
+void InputReader(Stack *stack) {
     char input[MAX_LENGTH_INPUT];
 
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
@@ -202,7 +202,8 @@ void InputReader(Stack *stack, Stack *vars) {
     OperationMap arrayMap[] = ARRAY_MAP;
     OperationMap blockMap[] = BLOCK_MAP;
     ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,stringMap,arrayMap, blockMap};
-    eval(input,stack,vars,&collec);
+    stack->collec = collec;
+    eval(input,stack);
 }
 
 /** \brief Função que atribui os valores por omissão das variáveis.
@@ -226,41 +227,35 @@ void Omissions(Stack *vars){
  * @param stack_ini
  * @return
  */
-Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *collec) {
-    if (stack_ini == NULL)
+Stack *eval(char *line, Stack *stack_ini) {
+    Stack *vars = stack_ini->vars;
+    ColectionOperationMaps collec = stack_ini->collec;
+    if (stack_ini->array == NULL) {
         stack_ini = CreateStack(INCREMENTO_STACK);
+        stack_ini->collec = collec;
+        stack_ini->vars = vars;
+    }
 
     while (*line != '\0') {
         char *token = getToken(line, &line);
 
         if (token[0] == '\"')
             Push(CreateDataSTRING(++token), stack_ini);
-        else if (token[0] == '[')
-            Push(CreateDataSTACK(eval(++token, NULL, vars, collec)), stack_ini);
+        else if (token[0] == '[') {
+            Stack *temp = CreateStack(0);
+            Push(CreateDataSTACK(eval(++token, temp)), stack_ini);
+        }
         else if (token[0] == '{')
             Push(CreateDataBLOCK(++token), stack_ini);
         else if (token[0] != '\0' &&
             (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
-            Operator(token, stack_ini, collec->Arit) &&
-            Operator(token, stack_ini, collec->StackManip) &&
-            Operator(token, stack_ini, collec->Inteiro) &&
-            Operator(token, stack_ini, collec->String) &&
-            Operator(token, stack_ini, collec->Array) &&
-            Operator(token, stack_ini, collec->Block)) {}
-
-        //if (token[1] == '\0' && token[0] == '\"')
-        //    Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
-        //else if (token[1] == '\0' && token[0] == '[')
-        //    Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        //if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
-        //    PushTokenParser(token, stack_ini, vars) &&
-        //    Operator(token, stack_ini, collec->StackManip, Handle_Manip) &&
-        //    Operator(token, stack_ini, collec->Arit,    Handle_Aritm) &&
-        //    Operator(token, stack_ini, collec->Logic,   Handle_Logic) &&
-        //    Operator(token, stack_ini, collec->Array,   Handle_Array) &&
-        //    Operator(token, stack_ini, collec->String,  Handle_String))
-        //{}
+            Operator(token, stack_ini, collec.Arit) &&
+            Operator(token, stack_ini, collec.StackManip) &&
+            Operator(token, stack_ini, collec.Inteiro) &&
+            Operator(token, stack_ini, collec.String) &&
+            Operator(token, stack_ini, collec.Array) &&
+            Operator(token, stack_ini, collec.Block)) {}
     }
 
     return stack_ini;
