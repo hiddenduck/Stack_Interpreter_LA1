@@ -53,7 +53,6 @@
 {"e&", ANY, andWithShortcut},     \
 {"e|", ANY, orWithShortcut},      \
 {" ", 0, HandleTwoDiff}, \
-{"=", (STRING | LONG), strGetInd}, \
 {0, 0, NULL}\
 } \
 
@@ -72,7 +71,8 @@
 {"^", INTEIROS, xor},           \
 {" ", 0, HandleTwoDiff}, \
 {"<", (STRING | LONG), strGetXStart},   \
-{">", (STRING | LONG), strGetXEnd}, \
+{">", (STRING | LONG), strGetXEnd},     \
+{"=", (STRING | LONG), strGetInd}, \
 {0, 0, NULL}\
 } \
 
