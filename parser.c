@@ -91,6 +91,18 @@ void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
         *r = -1;
 }
 
+/** \brief Função que ajuda o parser em dar push às vars
+ *  @param token Endereço do token.
+ *  @param stack Endereço da stack.
+ *  @param vars Endereço das vars.
+ *  @param r Endereço do inteiro.
+ */
+void PaserVars(char *token, Stack *stack, Stack *vars, int *r){
+    if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
+        Push(DataDup(Read(64 - token[0], vars)), stack);
+        *r = 0;
+    }
+}
 
 /**
  * \brief Função que interpreta o input e altera a stack segundo esse input.
@@ -119,11 +131,8 @@ int InputParser(char *token, Stack *stack, Stack *vars){
             vald += vall;
             Push(CreateDataDOUBLE(vald), stack);
             r = 0;
-        } else if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
-            //limpar isto (MI)
-            Push(DataDup(Read(64 - token[0], vars)), stack);
-            r = 0;
-        }
+        } else 
+            PaserVars(token, stack, vars, &r);
     }
     return r;
 }
