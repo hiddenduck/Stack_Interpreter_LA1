@@ -73,6 +73,11 @@ void multArray(Data *d1, Data *d2){
         concatArray(d1, &d3);
 }
 
+/**
+ * \brief Função que remove o primeiro elemento de uma STACK.
+ * @param d1 Endereço de um Data.
+ * @param stack Endereço da stack.
+ */
 void arrayRemoveFirst (Data *d1, Stack *stack){
     //referenciar a Data que vai acabar na stack
     Data newD = *Read((DataValSTACK(d1))->sp, DataValSTACK(d1));
@@ -86,6 +91,11 @@ void arrayRemoveFirst (Data *d1, Stack *stack){
     Push(newStack, stack);
 }
 
+/**
+ * \brief Função que remove o último elemento de uma STACK.
+ * @param d1 Endereço de um Data.
+ * @param stack Endereço da stack.
+ */
 void arrayRemoveLast (Data *d1, Stack *stack){
     Data newD = Pop(DataValSTACK(d1));
     //por o Data lido na stack
@@ -93,13 +103,18 @@ void arrayRemoveLast (Data *d1, Stack *stack){
     Push(newD, stack);
 }
 
+/**
+ * \brief Função que vai buscar o elemento de acordo com o índice.
+ * @param d1 Endereço de um Data.
+ * @param stack Endereço da stack.
+ */
 void arrayGetInd (Data *d1, Data *d2){
     Data dvalor = DataDup(Read((DataValSTACK(d1))->sp - *DataValLONG(d2), DataValSTACK(d1)));
     swapDataFree(d1, &dvalor);
 }
 
 /**
- * \brief Função que vai buscar X chars no inicio de um Data STRING.
+ * \brief Função que vai buscar X chars no inicio de um Data STACK.
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
@@ -112,10 +127,10 @@ void arrayGetXStart (Data *d1, Data *d2, Stack *stack){
 }
 
 /**
- *
- * @param d1
- * @param d2
- * @param stack
+ * \brief Função que vai buscar X chars no inicio de um Data STACK.
+ * @param d1 Endereço de um Data.
+ * @param d2 Endereço de um Data.
+ * @param stack Endereço da stack.
  * 012 2 >
  * sp = 2, d2 = 2, i = 1
  *
