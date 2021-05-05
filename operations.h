@@ -118,7 +118,8 @@
                     {0, 0, NULL} \
 } \
 
-#define BLOCK_MAP {{0,0,NULL}}\
+#define BLOCK_MAP {{" ", 0, HandleOne}, \
+{0,0,NULL}}\
 
 void DoisArgumentos(Operation operation, Stack *stack);
 void UmArgumento(Operation operation, Stack *stack);
