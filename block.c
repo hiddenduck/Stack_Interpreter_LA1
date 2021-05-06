@@ -46,6 +46,7 @@ void MapBlockString(Data *d1, Data *d2, Stack *stack){
         Push(temp, DataValSTACK(&newStack));
         eval(DataValSTRING(d2), DataValSTACK(&newStack));
     }
+    DataToSTRING(&newStack);
     swapDataFree(d1, &newStack);
 }
 
@@ -83,10 +84,47 @@ void Fold(Data *d1, Data *d2, Stack *stack){
 //
 //}
 
-void SortByArray(Data *d1, Data *d2) {
-    
+void createInd (Stack *stack, int ind[]){
+    int i, j, min, tmp, N = stack->sp;
+    for(i=0; i<=N; i++)
+        ind[i] = i;
+    for(i=0; i<=N; i++){
+        min = i;
+        for(j=i+1; j<=N; j++)
+            if(CompareDataNUMERO(Read(N-ind[j], stack),
+                                 Read(N-ind[min], stack)) < 0)
+                min = j;
+
+        tmp = ind[i]; //swap
+        ind[i] = ind[min];
+        ind[min] = tmp;
+    }
 }
 
-void SortBy(Data *d1, Data *d2, Stack *stack) {
+/**
+ *
+ * @param d1
+ * @param ind
+ */
+void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
+    int len = (DataValSTACK(d2))->sp, i;
+    for (i = 0; i<=len; i++)
+        Push(DataDup(Read(len-ind[i], (DataValSTACK(d2)))), DataValSTACK(d1));
+}
+
+void SortByArray(Data *d1, Data *d2) {
+    Data temp = DataDup(d1);
+    MapBlockArray(&temp, d2); //aqui o temp é o data com os valores a comparar
+    int ind[(DataValSTACK(&temp))->sp+1];
+    createInd(DataValSTACK(&temp), ind); //função que ordene o temp e coloque essa ordenação no ind
+    Free(&temp);
+
+    Data aux = CreateDataSTACK(DumpStack(DataValSTACK(d1)));
+    SortArrayByInd(d1, &aux, ind);
+    Free(&aux);
+    //função que, pelo ind, cria um novo Data que vai substituir o d1
+}
+
+void SortBy(Data *d1, Data *d2) {
     SortByArray(d1, d2);
 }

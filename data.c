@@ -318,3 +318,17 @@ void NullifyData(Data *d1) {
     Free(d1);
     d1 = NULL;
 }
+
+int CompareDataNUMERO(Data *d1, Data *d2) {
+    double a, b;
+    if (d1->tipo == LONG)\
+        a = *DataValLONG(d1);
+    else {
+        a = *DataValDOUBLE(d1);
+    }
+    if (d2->tipo == LONG)
+        b = *DataValLONG(d2);
+    else
+        b = *DataValDOUBLE(d2);
+    return (a-b);
+}
