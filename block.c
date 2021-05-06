@@ -80,10 +80,10 @@ void Fold(Data *d1, Data *d2, Stack *stack){
     swapDataFree(d1, &d3);
 }
 
-//void SortByString(Data *d1, Data *d2, Stack *stack) {
-//
-//}
-
+/** \brief Função que cria os indices ordenados a partir de um array que teve o bloco aplicado.
+ *  @param stack Endereço do array.
+ *  @param ind Endereço do array de indices.
+ */
 void createInd (Stack *stack, int ind[]){
     int i, j, min, tmp, N = stack->sp;
     for(i=0; i<=N; i++)
@@ -101,10 +101,10 @@ void createInd (Stack *stack, int ind[]){
     }
 }
 
-/**
- *
- * @param d1
- * @param ind
+/** \brief Função que ordena o array de acordo com o indice.
+ *  @param d1 Endereço do array original que foi destruido.
+ *  @param d2 Endereço da cópia dos valores do array original.
+ *  @param ind Endereço do array com os indices ordenados.
  */
 void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
     int len = (DataValSTACK(d2))->sp, i;
@@ -112,6 +112,10 @@ void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
         Push(DataDup(Read(len-ind[i], (DataValSTACK(d2)))), DataValSTACK(d1));
 }
 
+/** \brief Função que auxilia o Sortby em arrays.
+ *  @param d1 Endereço do array.
+ *  @param d2 Endereço do bloco.
+ */
 void SortByArray(Data *d1, Data *d2) {
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2); //aqui o temp é o data com os valores a comparar
@@ -125,6 +129,10 @@ void SortByArray(Data *d1, Data *d2) {
     //função que, pelo ind, cria um novo Data que vai substituir o d1
 }
 
+/** \brief Função que ordena um array/string de acordo com um bloco.
+ *  @param d1 Endereço do array/string.
+ *  @param d2 Endereço do bloco.
+ */
 void SortBy(Data *d1, Data *d2) {
     SortByArray(d1, d2);
 }

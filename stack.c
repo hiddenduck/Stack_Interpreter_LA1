@@ -124,6 +124,9 @@ Stack *DupStack (Stack *target) {
     return stack;
 }
 
+/** \brief Função que destroi uma stack e copia o seu conteudo para outra.
+ *  @param target Endereço da stack a ser destruida.
+ */
 Stack *DumpStack (Stack *target) {
     Stack *stack = DupStack(target);
     for(int i=(target)->sp; i>=0; i--)
