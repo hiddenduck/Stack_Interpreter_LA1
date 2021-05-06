@@ -144,6 +144,7 @@ void filterArray(Data *d1, Data *d2){
     Data new = CreateDataSTACK(stack);
     swapDataFree(d1, &new);
     Free(&new);
+    Free(&temp);
 }
 
 void filter(Data *d1, Data *d2){
