@@ -86,10 +86,10 @@ void Fold(Data *d1, Data *d2){
     Free(&newStack);
 }
 
-//void SortByString(Data *d1, Data *d2, Stack *stack) {
-//
-//}
-
+/** \brief Função que cria os indices ordenados a partir de um array que teve o bloco aplicado.
+ *  @param stack Endereço do array.
+ *  @param ind Endereço do array de indices.
+ */
 void createInd (Stack *stack, int ind[]){
     int i, j, min, tmp, N = stack->sp;
     for(i=0; i<=N; i++)
@@ -107,10 +107,10 @@ void createInd (Stack *stack, int ind[]){
     }
 }
 
-/**
- *
- * @param d1
- * @param ind
+/** \brief Função que ordena o array de acordo com o indice.
+ *  @param d1 Endereço do array original que foi destruido.
+ *  @param d2 Endereço da cópia dos valores do array original.
+ *  @param ind Endereço do array com os indices ordenados.
  */
 void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
     int len = (DataValSTACK(d2))->sp, i;
@@ -118,6 +118,10 @@ void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
         Push(DataDup(Read(len-ind[i], (DataValSTACK(d2)))), DataValSTACK(d1));
 }
 
+/** \brief Função auxiliar do SortBy que ordena um array de acordo com um bloco.
+ *  @param d1 Endereço do array.
+ *  @param d2 Endereço do bloco.
+ */
 void SortByArray(Data *d1, Data *d2) {
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2); //aqui o temp é o data com os valores a comparar
@@ -131,6 +135,40 @@ void SortByArray(Data *d1, Data *d2) {
     //função que, pelo ind, cria um novo Data que vai substituir o d1
 }
 
+/** \brief Função que ordena um array/string de acordo com um bloco.
+ *  @param d1 Endereço do array/string.
+ *  @param d2 Endereço do bloco.
+ */
 void SortBy(Data *d1, Data *d2) {
     SortByArray(d1, d2);
+}
+//void filterString(Data *d1, Data *d2){
+//
+//}
+
+/** \brief Função auxiliar do filter que filtra um array.
+ *  @param d1 Endereço do array.
+ *  @param d2 Endereço do bloco.
+ */
+void filterArray(Data *d1, Data *d2){
+    Data temp = DataDup(d1);
+    MapBlockArray(&temp, d2);
+    Stack *stack = DumpStack(DataValSTACK(d1));
+    for (int i = stack->sp; i>=0; i--) {
+        if(GetBoolFromData(Read(i, DataValSTACK(&temp))))
+            Push(DataDup(Read(i, stack)), DataValSTACK(d1));
+    }
+    CleanupStack(DataValSTACK(d1));
+    Free(&temp);
+}
+
+/** \brief Função que filtra um array/string.
+ *  @param d1 Endereço do array/string.
+ *  @param d2 Endereço do bloco.
+ */
+void filter(Data *d1, Data *d2){
+    if(d1->tipo == STACK)
+        filterArray(d1, d2);
+    //else
+    //    filterString(d1, d2);
 }
