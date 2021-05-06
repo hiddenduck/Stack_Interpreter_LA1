@@ -2,7 +2,7 @@
 #include "block.h"
 
 /** \brief Função que executa um bloco.
- *  @param d1 Endereço de um data.
+ *  @param d1 Endereço de um Data.
  *  @param stack Endereço da stack.
  */
 void ExecuteBlock(Data *d1, Stack *stack) {
@@ -50,8 +50,8 @@ void MapBlockString(Data *d1, Data *d2, Stack *stack){
 }
 
 /** \brief Função que realiza o map de blocos.
- *  @param d1 Endereço de um data.
- *  @param d2 Endereço de um data.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
  *  @param stack Endereço da stack.
  */
 void MapBlock(Data *d1, Data *d2, Stack *stack) {
@@ -61,6 +61,11 @@ void MapBlock(Data *d1, Data *d2, Stack *stack) {
         MapBlockArray(d1, d2);
 }
 
+/** \brief Função que realiza o fold de blocos.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ *  @param stack Endereço da stack.
+ */
 void Fold(Data *d1, Data *d2, Stack *stack){
     int i = (DataValSTACK(d1))->sp;
     Data first = DataDup(Read(i, DataValSTACK(d1)));
