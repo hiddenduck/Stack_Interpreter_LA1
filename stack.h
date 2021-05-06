@@ -57,9 +57,9 @@ typedef struct stack Stack;
  * \brief Declaração da estrutura de dados Stack
  */
 typedef struct stack {
-    /** */
+    /**Coleção dos mapas */
     ColectionOperationMaps *collec;
-    /** */
+    /**Stack com as variáveis */
     Stack *vars;
     /** Array de Data */
     Data *array;

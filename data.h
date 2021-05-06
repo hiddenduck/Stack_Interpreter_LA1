@@ -35,7 +35,7 @@ typedef enum {
     STRING = 8,
     /**Tipo de um data com o tipo de dado Stack */
     STACK = 16,
-    /** */
+    /**Tipo de um data com tipo de dado Stack */
     BLOCK = 32
 } Tipo;
 
