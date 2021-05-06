@@ -112,11 +112,11 @@ void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
         Push(DataDup(Read(len-ind[i], (DataValSTACK(d2)))), DataValSTACK(d1));
 }
 
-/** \brief Função que ordena um array de acordo com um bloco.
- *  @param d1 Endereço do array/string.
+/** \brief Função auxiliar do SortBy que ordena um array de acordo com um bloco.
+ *  @param d1 Endereço do array.
  *  @param d2 Endereço do bloco.
  */
-void SortBy(Data *d1, Data *d2) {
+void SortByArray(Data *d1, Data *d2) {
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2); //aqui o temp é o data com os valores a comparar
     int ind[(DataValSTACK(&temp))->sp+1];
@@ -129,6 +129,13 @@ void SortBy(Data *d1, Data *d2) {
     //função que, pelo ind, cria um novo Data que vai substituir o d1
 }
 
+/** \brief Função que ordena um array/string de acordo com um bloco.
+ *  @param d1 Endereço do array/string.
+ *  @param d2 Endereço do bloco.
+ */
+void SortBy(Data *d1, Data *d2) {
+    SortByArray(d1, d2);
+}
 //void filterString(Data *d1, Data *d2){
 //
 //}
