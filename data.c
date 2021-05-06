@@ -301,3 +301,8 @@ void swapDataFree(Data *d1, Data *d2) {
     //d1->DATA d2(d1)->DATA
     *d1 = *d2;
 }
+
+void NullifyData(Data *d1) {
+    Free(d1);
+    d1 = NULL;
+}

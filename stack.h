@@ -58,7 +58,7 @@ typedef struct stack Stack;
  */
 typedef struct stack {
     /** */
-    ColectionOperationMaps collec;
+    ColectionOperationMaps *collec;
     /** */
     Stack *vars;
     /** Array de Data */

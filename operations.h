@@ -9,6 +9,7 @@
 #include "string_op.h"
 #include "logic.h"
 #include "array.h"
+#include "block.h"
 
 /**
  * \brief Array com todas as operações implementadas.
@@ -119,6 +120,9 @@
 } \
 
 #define BLOCK_MAP {{" ", 0, HandleOne}, \
+{"~",BLOCK, ExecuteBlock},              \
+{" ", 0, HandleTwoDiff},                \
+{"%", BLOCK | STACK, MapBlock},\
 {0,0,NULL}}\
 
 void DoisArgumentos(Operation operation, Stack *stack);

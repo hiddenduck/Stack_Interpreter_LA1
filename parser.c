@@ -203,7 +203,7 @@ void InputReader(Stack *stack) {
     OperationMap arrayMap[] = ARRAY_MAP;
     OperationMap blockMap[] = BLOCK_MAP;
     ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,stringMap,arrayMap, blockMap};
-    stack->collec = collec;
+    stack->collec = &collec;
     eval(input,stack);
 }
 
@@ -230,7 +230,7 @@ void Omissions(Stack *vars){
  */
 Stack *eval(char *line, Stack *stack_ini) {
     Stack *vars = (stack_ini->vars);
-    ColectionOperationMaps collec = stack_ini->collec;
+    ColectionOperationMaps *collec = stack_ini->collec;
     if (stack_ini->array == NULL) {
         stack_ini = CreateStack(INCREMENTO_STACK);
         stack_ini->collec = collec;
@@ -242,23 +242,25 @@ Stack *eval(char *line, Stack *stack_ini) {
 
         if (token[0] == '\"')
             Push(CreateDataSTRING(++token), stack_ini);
-        else if (token[0] == '[') {
+        else if (token[0] == '[') { //yikessssssss
             Stack *temp = CreateStack(0);
             temp->collec = collec;
             temp->vars = vars;
-            Push(CreateDataSTACK(eval(++token, temp)), stack_ini);
+            temp = (eval(++token, temp));
+            CleanupStack(temp);
+            Push(CreateDataSTACK(temp), stack_ini);
         }
         else if (token[0] == '{')
             Push(CreateDataBLOCK(++token), stack_ini);
         else if (token[0] != '\0' &&
             (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
             InputParser(token, stack_ini, vars) &&
-            Operator(token, stack_ini, collec.Arit) &&
-            Operator(token, stack_ini, collec.StackManip) &&
-            Operator(token, stack_ini, collec.Inteiro) &&
-            Operator(token, stack_ini, collec.String) &&
-            Operator(token, stack_ini, collec.Array) &&
-            Operator(token, stack_ini, collec.Block)) {}
+            Operator(token, stack_ini, collec->Arit) &&
+            Operator(token, stack_ini, collec->StackManip) &&
+            Operator(token, stack_ini, collec->Inteiro) &&
+            Operator(token, stack_ini, collec->String) &&
+            Operator(token, stack_ini, collec->Array) &&
+            Operator(token, stack_ini, collec->Block)) {}
     }
 
     return stack_ini;
