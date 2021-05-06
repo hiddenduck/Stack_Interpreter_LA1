@@ -147,14 +147,12 @@ void SortBy(Data *d1, Data *d2) {
 void filterArray(Data *d1, Data *d2){
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2);
-    Stack *stack = CreateStack(10);
-    for (int i = (DataValSTACK(d1))->sp; i>=0; i--) {
-        if(GetBoolFromData(Read(i, DataValSTACK(&temp))) != 0)
-            Push(DataDup(Read(i, DataValSTACK(d1))), stack);
+    Stack *stack = DumpStack(DataValSTACK(d1));
+    for (int i = stack->sp; i>=0; i--) {
+        if(GetBoolFromData(Read(i, DataValSTACK(&temp))))
+            Push(DataDup(Read(i, stack)), DataValSTACK(d1));
     }
-    Data new = CreateDataSTACK(stack);
-    swapDataFree(d1, &new);
-    Free(&new);
+    CleanupStack(DataValSTACK(d1));
     Free(&temp);
 }
 
