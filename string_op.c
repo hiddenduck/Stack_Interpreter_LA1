@@ -216,8 +216,10 @@ void barAux2(char *str, Stack *stack){
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
-void strBar (Data *d1, Data *d2){
+void strBar (Data *d1, Data *d2, Stack *stack){
     Stack *new = CreateStack(10);
+    new->vars = stack->vars;
+    new->collec = stack->collec;
     char *s = strdup(DataValSTRING(d1));
     char *delim = strdup(DataValSTRING(d2));
     if(strlen(DataValSTRING(d2))!=0)
@@ -235,9 +237,11 @@ void strBar (Data *d1, Data *d2){
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
-void strWhiteSpace (Data *d1){
+void strWhiteSpace (Data *d1, Stack *stack){
     //"abc xyz ola"
     Stack *new = CreateStack(10);
+    new->vars = stack->vars;
+    new->collec = stack->collec;
     //yikes
     char *token = strtok(DataValSTRING(d1), " \n");
     while(token != NULL) {
@@ -253,8 +257,8 @@ void strWhiteSpace (Data *d1){
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
-void strNewLine (Data *d1){
+void strNewLine (Data *d1, Stack *stack){
     Data str = CreateDataSTRING("\n");
-    strBar(d1, &str);
+    strBar(d1, &str, stack);
 }
 
