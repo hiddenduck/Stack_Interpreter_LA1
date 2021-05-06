@@ -46,6 +46,7 @@ void MapBlockString(Data *d1, Data *d2, Stack *stack){
         Push(temp, DataValSTACK(&newStack));
         eval(DataValSTRING(d2), DataValSTACK(&newStack));
     }
+    DataToSTRING(&newStack);
     swapDataFree(d1, &newStack);
 }
 
