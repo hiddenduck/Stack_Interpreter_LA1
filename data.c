@@ -60,6 +60,12 @@ Data CreateDataSTACK(Stack *stack) {
     return op;
 }
 
+Data CreateDataBLOCK(char *val) {
+    char *vp = strdup(val);
+    Data op = {vp, BLOCK};
+    return op;
+}
+
 /**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo DOUBLE.
  * @param d Endereço de um Data.
@@ -214,6 +220,10 @@ Data DataDup(Data *target) {
             data = CreateDataSTACK(stack);
             break;
         }
+        case BLOCK: {
+            data = CreateDataBLOCK(DataValSTRING(target));
+            break;
+        }
     }
     return data;
 }
@@ -239,6 +249,9 @@ void PrintData(Data *data) {
         case STACK:
             PrintStack(DataValSTACK(data));
             break;
+        case BLOCK:
+            printf("{%s}", DataValSTRING(data));
+            break;
     }
 }
 
@@ -258,7 +271,7 @@ void swapData (Data *d1, Data *d2){
  * @return Inteiro booleano.
  */
 int GetBoolFromData (Data *d1) {
-    long r = 0;
+    long r;
     switch (d1->tipo) {
         case LONG:
             r = (*DataValLONG(d1) != 0);
@@ -273,7 +286,10 @@ int GetBoolFromData (Data *d1) {
             r = (strcmp(DataValSTRING(d1), ""));
             break;
         case STACK:
-            r = ((*DataValSTACK(d1)).sp != -1);
+            r = ((DataValSTACK(d1))->sp != -1);
+            break;
+        default:
+            r = 1;
             break;
     }
     return r;
@@ -288,4 +304,9 @@ void swapDataFree(Data *d1, Data *d2) {
     Free(d1);
     //d1->DATA d2(d1)->DATA
     *d1 = *d2;
+}
+
+void NullifyData(Data *d1) {
+    Free(d1);
+    d1 = NULL;
 }

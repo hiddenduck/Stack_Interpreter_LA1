@@ -77,8 +77,10 @@ void strAll (Stack *stack){
 void strRemoveFirst (Data *d1, Stack *stack){ // (
     //tens de criar o Char que vai ser posto na stack
     Data newC = CreateDataCHAR(*DataValSTRING(d1));
-    Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar  strinque é a novag
-    Push(d2, stack);
+    if (*(DataValSTRING(d1)+1) != '\0') {
+        Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar  strinque é a novag
+        Push(d2, stack);
+    }
     swapDataFree(d1, &newC); //metes a char na stack
 }
 

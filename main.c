@@ -10,10 +10,11 @@
  * @return Devolve o valor 0.
  */
 int main(){
-    Stack *stack = CreateStack(INCREMENTO_STACK);
     Stack *vars = CreateStack(VARS_SIZE);
+    Stack *stack = CreateStack(INCREMENTO_STACK);
     Omissions(vars);
-    InputReader(stack, vars);
+    stack->vars = vars;
+    InputReader(stack);
     PrintStack(stack);
     putchar('\n');
     return 0;

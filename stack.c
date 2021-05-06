@@ -14,10 +14,14 @@
  */
 Stack *CreateStack(int size) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
-    assert(s != NULL);
-    s->size = size;
-    s->sp = -1;
-    s->array = (Data *) calloc(s->size, sizeof(Data));
+    assert(s != NULL); //comentário
+    if (s != NULL && size != 0) {
+        s->size = size;
+        s->sp = -1;
+        s->array = (Data *) calloc(s->size, sizeof(Data));
+    } else if (s != NULL)
+        s->array = NULL;
+
     return s;
 }
 

@@ -9,6 +9,7 @@
 #include "string_op.h"
 #include "logic.h"
 #include "array.h"
+#include "block.h"
 
 /**
  * \brief Array com todas as operações implementadas.
@@ -118,38 +119,11 @@
                     {0, 0, NULL} \
 } \
 
-/**
- * \brief Tipo de dados que funciona como apontador para uma função operação.
- */
-typedef void (*Operation)();
-
-/**
- * \brief Tipo de dados que armazena um simbolo (tipo char) e uma função operação (Operation).
- */
-typedef struct {
-    /** char responsável pela identificação da operação*/
-    char *simbolo;
-    /** inteiros responsável pela identificação da máscara */
-    int mask;
-    /** Apontador para uma função*/
-    Operation op;
-}OperationMap;
-
-/**
- *  \brief Tipo que guarda todos os mapas.
- */
-typedef struct COLLEC {
-    /**Mapa de Stacks */
-    OperationMap *StackManip;
-    /**Mapa aritmético */
-    OperationMap *Arit;
-    /**Mapa de inteiros */
-    OperationMap *Inteiro;
-    /**Mapa de strings */
-    OperationMap *String;
-    /**Mapa de arrays */
-    OperationMap *Array;
-} ColectionOperationMaps;
+#define BLOCK_MAP {{" ", 0, HandleOne}, \
+{"~",BLOCK, ExecuteBlock},              \
+{" ", 0, HandleTwoDiff},                \
+{"%", BLOCK | STACK, MapBlock},\
+{0,0,NULL}}\
 
 void DoisArgumentos(Operation operation, Stack *stack);
 void UmArgumento(Operation operation, Stack *stack);
