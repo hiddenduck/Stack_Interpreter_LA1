@@ -50,9 +50,9 @@ Data CreateDataSTRING(char *val) {
 }
 
 /**
- * \brief
- * @param stack
- * @return
+ * \brief Função que cria um Data com o Tipo STACK.
+ * @param stack Endereço da stack.
+ * @return devolve um Data do Tipo STACK.
  */
 Data CreateDataSTACK(Stack *stack) {
     //talvez seja preciso fazer um stack dup, ter cuidado com a existência destas
@@ -60,6 +60,11 @@ Data CreateDataSTACK(Stack *stack) {
     return op;
 }
 
+/**
+ * \brief Função que cria um Data com o Tipo BLOCK.
+ * @param val Endereço da string a se guardar.
+ * @return devolve um Data do Tipo BLOCK.
+ */
 Data CreateDataBLOCK(char *val) {
     char *vp = strdup(val);
     Data op = {vp, BLOCK};
@@ -306,6 +311,9 @@ void swapDataFree(Data *d1, Data *d2) {
     *d1 = *d2;
 }
 
+/** \brief Função que dá free a um data e coloca o apontador a NULL.
+ *  @param d1 Endereço de um data.
+ */
 void NullifyData(Data *d1) {
     Free(d1);
     d1 = NULL;

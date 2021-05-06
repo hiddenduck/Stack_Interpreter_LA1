@@ -119,6 +119,9 @@
                     {0, 0, NULL} \
 } \
 
+/**
+ * \brief Array com todas as operações implementadas.
+ */
 #define BLOCK_MAP {{" ", 0, HandleOne}, \
 {"~",BLOCK, ExecuteBlock},              \
 {" ", 0, HandleTwoDiff},                \
