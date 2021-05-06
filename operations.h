@@ -124,8 +124,8 @@
  */
 #define BLOCK_MAP {{" ", 0, HandleOne}, \
 {"~",BLOCK, ExecuteBlock},              \
-{" ", 0, HandleTwoDiff},                \
-{"%", BLOCK | STACK, MapBlock},\
+{" ", 0, HandleTwo},                \
+{"%", (BLOCK | STACK | STRING), MapBlock},\
 {0,0,NULL}}\
 
 void DoisArgumentos(Operation operation, Stack *stack);
