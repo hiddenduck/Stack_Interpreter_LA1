@@ -117,7 +117,17 @@ void CleanupStack(Stack *stack) {
  */
 Stack *DupStack (Stack *target) {
     Stack *stack = CreateStack(((target)->sp)+1);
+    stack->collec = target->collec;
+    stack->vars = target->vars;
     for(int i=0; i<=(target)->sp; i++)
         Push(DataDup(&(target)->array[i]), stack);
+    return stack;
+}
+
+Stack *DumpStack (Stack *target) {
+    Stack *stack = DupStack(target);
+    for(int i=(target)->sp; i>=0; i--)
+        Free(Read(i,target));
+    target->sp = -1;
     return stack;
 }
