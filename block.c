@@ -112,11 +112,11 @@ void SortArrayByInd(Data *d1, Data *d2, int ind[]) {
         Push(DataDup(Read(len-ind[i], (DataValSTACK(d2)))), DataValSTACK(d1));
 }
 
-/** \brief Função que auxilia o Sortby em arrays.
- *  @param d1 Endereço do array.
+/** \brief Função que ordena um array de acordo com um bloco.
+ *  @param d1 Endereço do array/string.
  *  @param d2 Endereço do bloco.
  */
-void SortByArray(Data *d1, Data *d2) {
+void SortBy(Data *d1, Data *d2) {
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2); //aqui o temp é o data com os valores a comparar
     int ind[(DataValSTACK(&temp))->sp+1];
@@ -129,10 +129,26 @@ void SortByArray(Data *d1, Data *d2) {
     //função que, pelo ind, cria um novo Data que vai substituir o d1
 }
 
-/** \brief Função que ordena um array/string de acordo com um bloco.
- *  @param d1 Endereço do array/string.
- *  @param d2 Endereço do bloco.
- */
-void SortBy(Data *d1, Data *d2) {
-    SortByArray(d1, d2);
+//void filterString(Data *d1, Data *d2){
+//
+//}
+
+void filterArray(Data *d1, Data *d2){
+    Data temp = DataDup(d1);
+    MapBlockArray(&temp, d2);
+    Stack *stack = CreateStack(10);
+    for (int i = (DataValSTACK(d1))->sp; i>=0; i--) {
+        if(GetBoolFromData(Read(i, DataValSTACK(&temp))) != 0)
+            Push(DataDup(Read(i, DataValSTACK(d1))), stack);
+    }
+    Data new = CreateDataSTACK(stack);
+    swapDataFree(d1, &new);
+    Free(&new);
+}
+
+void filter(Data *d1, Data *d2){
+    if(d1->tipo == STACK)
+        filterArray(d1, d2);
+    //else
+    //    filterString(d1, d2);
 }

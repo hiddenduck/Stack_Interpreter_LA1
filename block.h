@@ -9,5 +9,6 @@ void MapBlockArray(Data *d1, Data *d2);
 void MapBlockString(Data *d1, Data *d2, Stack *stack);
 void Fold(Data *d1, Data *d2, Stack *stack);
 void SortBy(Data *d1, Data *d2);
+void filter(Data *d1, Data *d2);
 
 #endif //PROJETOLAI_BLOCK_H
