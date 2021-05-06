@@ -11,7 +11,11 @@ void ExecuteBlock(Data *d1, Stack *stack) {
     swapDataFree(d1, &d2);
 }
 
-
+/** \brief Função que auxilia o MapBlock com arrays.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ *  @param stack Endereço da stack.
+ */
 void MapBlockArray(Data *d1, Data *d2, Stack *stack){
     for (int i = (DataValSTACK(d1))->sp; i>=0; i--) {
         Data temp = DataDup(Read(i, DataValSTACK(d1)));
@@ -22,6 +26,11 @@ void MapBlockArray(Data *d1, Data *d2, Stack *stack){
     swapDataFree(d1, &d3);
 }
 
+/** \brief Função que auxilia o MapBlock com strings.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ *  @param stack Endereço da stack.
+ */
 void MapBlockString(Data *d1, Data *d2, Stack *stack){
     long size = strlen(DataValSTRING(d1));
     for(int i=0; i<size; i++){
@@ -44,3 +53,4 @@ void MapBlock(Data *d1, Data *d2, Stack *stack) {
     else
         MapBlockArray(d1, d2 , stack);
 }
+
