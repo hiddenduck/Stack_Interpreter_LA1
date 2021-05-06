@@ -11,6 +11,6 @@ void multArray(Data *d1, Data *d2);
 void arrayRemoveFirst (Data *d1, Stack *stack);
 void arrayRemoveLast (Data *d1, Stack *stack);
 void arrayGetInd (Data *d1, Data *d2);
-void arrayGetXStart (Data *d1, Data *d2, Stack *stack);
-void arrayGetXEnd (Data *d1, Data *d2, Stack *stack);
+void arrayGetXStart (Data *d1, Data *d2);
+void arrayGetXEnd (Data *d1, Data *d2);
 #endif //ARRAY_H

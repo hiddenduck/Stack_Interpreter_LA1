@@ -66,18 +66,24 @@ void MapBlock(Data *d1, Data *d2, Stack *stack) {
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
  *  @param stack Endereço da stack.
+ *  [[11] 0 1 2 3 4]
+ *  [ 1 1 ] :A ; [ A 5 , ~ ] { ; :A A 2 > ~ + + } *
+ *  [[11] 0 1 2 3 4]
+ *  [[112]
  */
-void Fold(Data *d1, Data *d2, Stack *stack){
+void Fold(Data *d1, Data *d2){
     int i = (DataValSTACK(d1))->sp;
-    Data first = DataDup(Read(i, DataValSTACK(d1)));
-    Push(first, stack);
+    Data newStack = CreateDataSTACK(DumpStack(DataValSTACK(d1)));
+
+    Data first = DataDup(Read(i, DataValSTACK(&newStack)));
+    Push(first, DataValSTACK(d1));
+
     for(i--; i>=0; i--){
-        Data temp = DataDup(Read(i, DataValSTACK(d1)));
-        Push(temp, stack);
-        eval(DataValSTRING(d2), stack);
+        Data temp = DataDup(Read(i, DataValSTACK(&newStack)));
+        Push(temp, DataValSTACK(d1));
+        eval(DataValSTRING(d2), DataValSTACK(d1));
     }
-    Data d3 = Pop(stack);
-    swapDataFree(d1, &d3);
+    Free(&newStack);
 }
 
 //void SortByString(Data *d1, Data *d2, Stack *stack) {

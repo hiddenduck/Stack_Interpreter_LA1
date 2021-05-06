@@ -126,12 +126,12 @@ void arrayGetInd (Data *d1, Data *d2){
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
-void arrayGetXStart (Data *d1, Data *d2, Stack *stack){
+void arrayGetXStart (Data *d1, Data *d2){
     int i;
-    for(i = 0; i<*DataValLONG(d2)-1; i++)
-        Push(DataDup(Read((DataValSTACK(d1))->sp - i, DataValSTACK(d1))), stack);
-    Data d3 = DataDup(Read((DataValSTACK(d1))->sp - i, DataValSTACK(d1)));
-    swapDataFree(d1, &d3);
+    Data temp = CreateDataSTACK(DumpStack(DataValSTACK(d1)));
+    for(i = 0; i<*DataValLONG(d2); i++)
+        Push(DataDup(Read((DataValSTACK(&temp))->sp - i, DataValSTACK(&temp))), DataValSTACK(d1));
+    Free(&temp);
 }
 
 /**
@@ -143,10 +143,10 @@ void arrayGetXStart (Data *d1, Data *d2, Stack *stack){
  * sp = 2, d2 = 2, i = 1
  *
  */
-void arrayGetXEnd (Data *d1, Data *d2, Stack *stack){
+void arrayGetXEnd (Data *d1, Data *d2){
     int i;
-    for(i = (DataValSTACK(d1))->sp - *DataValLONG(d2) + 1; i< (DataValSTACK(d1))->sp; i++)
-        Push(DataDup(Read((DataValSTACK(d1))->sp - i, DataValSTACK(d1))), stack);
-    Data d3 = DataDup(Read(0, DataValSTACK(d1)));
-    swapDataFree(d1, &d3);
+    Data temp = CreateDataSTACK(DumpStack(DataValSTACK(d1)));
+    for(i = (DataValSTACK(&temp))->sp - *DataValLONG(d2) +1 ; i<= (DataValSTACK(&temp))->sp; i++)
+        Push(DataDup(Read((DataValSTACK(&temp))->sp - i, DataValSTACK(&temp))), DataValSTACK(d1));
+    Free(&temp);
 }
