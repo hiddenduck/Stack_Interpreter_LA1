@@ -106,5 +106,6 @@ int GetBoolFromData (Data *d1);
 
 void swapDataFree(Data *d1, Data *d2);
 void NullifyData(Data *d1);
+int CompareDataNUMERO(Data *d1, Data *d2);
 
 #endif
