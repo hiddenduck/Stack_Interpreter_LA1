@@ -261,9 +261,6 @@ Stack *eval(char *line, Stack *stack_ini) {
             Operator(token, stack_ini, collec->String) &&
             Operator(token, stack_ini, collec->Array) &&
             Operator(token, stack_ini, collec->Block)) {}
-
-        PrintStack(stack_ini);
-        putchar('\n');
     }
 
     return stack_ini;
