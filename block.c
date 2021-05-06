@@ -133,6 +133,10 @@ void SortBy(Data *d1, Data *d2) {
 //
 //}
 
+/** \brief Função auxiliar do filter que filtra um array.
+ *  @param d1 Endereço do array.
+ *  @param d2 Endereço do bloco.
+ */
 void filterArray(Data *d1, Data *d2){
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2);
@@ -147,6 +151,10 @@ void filterArray(Data *d1, Data *d2){
     Free(&temp);
 }
 
+/** \brief Função que filtra um array/string.
+ *  @param d1 Endereço do array/string.
+ *  @param d2 Endereço do bloco.
+ */
 void filter(Data *d1, Data *d2){
     if(d1->tipo == STACK)
         filterArray(d1, d2);
