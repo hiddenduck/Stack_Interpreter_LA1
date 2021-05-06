@@ -300,7 +300,9 @@ void DollarSign(Data *d1, Stack *stack) {
 void ReadLine(Stack *stack) {
     char linha[MAX_LENGTH_INPUT];
     assert(fgets(linha, MAX_LENGTH_INPUT, stdin) != NULL);
-    assert(linha[strlen(linha) - 1] == '\n');
+    int len = strlen(linha) - 1;
+    assert(linha[len] == '\n');
+    linha[len] = '\0';
     Push(CreateDataSTRING(linha), stack);
 }
 
