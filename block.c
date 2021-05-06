@@ -73,3 +73,15 @@ void Fold(Data *d1, Data *d2, Stack *stack){
     Data d3 = Pop(stack);
     swapDataFree(d1, &d3);
 }
+
+//void SortByString(Data *d1, Data *d2, Stack *stack) {
+//
+//}
+
+void SortByArray(Data *d1, Data *d2) {
+    
+}
+
+void SortBy(Data *d1, Data *d2, Stack *stack) {
+    SortByArray(d1, d2);
+}
