@@ -124,6 +124,8 @@
  */
 #define BLOCK_MAP {{" ", 0, HandleOne}, \
 {"~",BLOCK, ExecuteBlock},              \
+{" ", 0, HandleTwoDiff},                \
+{"*", (BLOCK | STACK), Fold}, \
 {" ", 0, HandleTwo},                \
 {"%", (BLOCK | STACK | STRING), MapBlock},\
 {0,0,NULL}}\

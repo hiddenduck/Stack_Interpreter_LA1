@@ -54,3 +54,15 @@ void MapBlock(Data *d1, Data *d2, Stack *stack) {
         MapBlockArray(d1, d2 , stack);
 }
 
+void Fold(Data *d1, Data *d2, Stack *stack){
+    int i = (DataValSTACK(d1))->sp;
+    Data first = DataDup(Read(i, DataValSTACK(d1)));
+    Push(first, stack);
+    for(i--; i>=0; i--){
+        Data temp = DataDup(Read(i, DataValSTACK(d1)));
+        Push(temp, stack);
+        eval(DataValSTRING(d2), stack);
+    }
+    Data d3 = Pop(stack);
+    swapDataFree(d1, &d3);
+}
