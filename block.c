@@ -20,7 +20,9 @@ void MapBlockArray(Data *d1, Data *d2) {
     Data newStack = CreateDataSTACK(DumpStack(DataValSTACK(d1)));
     //depositar os elementos todos do d1 no newStack com Pop == limpar o d1
     //função dumpStack que deposita uma stack noutra e ta top com Pops
+    char blockcopy[strlen(DataValSTRING(d2))];
     for (int i = (DataValSTACK(&newStack))->sp; i>=0; i--) {
+        strcpy(blockcopy, DataValSTRING(d2));
         Data temp = DataDup(Read(i, DataValSTACK(&newStack)));
         Push(temp, (DataValSTACK(d1)));
         eval(DataValSTRING(d2), (DataValSTACK(d1)));
@@ -40,8 +42,9 @@ void MapBlockString(Data *d1, Data *d2, Stack *stack){
     Data newStack = CreateDataSTACK(CreateStack(size));
     (DataValSTACK(&newStack))->collec = stack->collec;
     (DataValSTACK(&newStack))->vars = stack->vars;
-
+    char blockcopy[strlen(DataValSTRING(d2))];
     for(int i=0; i<size; i++){
+        strcpy(blockcopy, DataValSTRING(d2));
         Data temp = CreateDataCHAR((DataValSTRING(d1))[i]);
         Push(temp, DataValSTACK(&newStack));
         eval(DataValSTRING(d2), DataValSTACK(&newStack));
@@ -77,11 +80,12 @@ void Fold(Data *d1, Data *d2){
 
     Data first = DataDup(Read(i, DataValSTACK(&newStack)));
     Push(first, DataValSTACK(d1));
-
+    char blockcopy[strlen(DataValSTRING(d2))+1];
     for(i--; i>=0; i--){
+        strcpy(blockcopy, DataValSTRING(d2));
         Data temp = DataDup(Read(i, DataValSTACK(&newStack)));
         Push(temp, DataValSTACK(d1));
-        eval(DataValSTRING(d2), DataValSTACK(d1));
+        eval(blockcopy, DataValSTACK(d1));
     }
     Free(&newStack);
 }
