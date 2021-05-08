@@ -145,7 +145,7 @@ void DataToLONG(Data *d) {
 }
 
 void DataToLONGLONG(Data *d) {
-    long val;
+    long long val;
     switch (d->tipo){
         case CHAR: {
             val = *DataValCHAR(d);

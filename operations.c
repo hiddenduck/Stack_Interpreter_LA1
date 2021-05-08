@@ -368,8 +368,6 @@ int TwoPoints (Stack *stack, Stack *vars, char token){
     Data *letter = Read(64 - token, vars);
     Data *valor = Read(0,stack);
     Data temp = DataDup(valor);
-    PrintData(&temp);
-    putchar('\n');
     swapDataFree(letter, &temp);
     return 1;
 }
