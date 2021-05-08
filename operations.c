@@ -367,6 +367,7 @@ void ReadLine(Stack *stack) {
 int TwoPoints (Stack *stack, Stack *vars, char token){
     Data *letter = Read(64 - token, vars);
     Data *valor = Read(0,stack);
-    *letter = DataDup(valor);
+    Data temp = DataDup(valor);
+    swapDataFree(letter, &temp);
     return 1;
 }
