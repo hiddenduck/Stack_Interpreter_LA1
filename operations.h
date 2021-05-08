@@ -124,6 +124,7 @@
  */
 #define BLOCK_MAP {{" ", 0, HandleOne}, \
 {"~",BLOCK, ExecuteBlock},              \
+{"w",BLOCK, While},              \
 {" ", 0, HandleTwoDiff},                \
 {"*", (BLOCK | STACK), Fold}, \
 {" ", 0, HandleTwo},                    \

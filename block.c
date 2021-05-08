@@ -228,3 +228,18 @@ void filter(Data *d1, Data *d2, Stack *stack){
     else
         filterString(d1, d2, stack);
 }
+
+void While(Data *d1, Stack *stack) {
+    char blockcopy[strlen(DataValSTRING(d1))+1];
+    Data d2;
+    int r;
+    do {
+        strcpy(blockcopy, DataValSTRING(d1));
+        eval(blockcopy, stack);
+        d2 = Pop(stack);
+        r = GetBoolFromData(&d2);
+    }while(r);
+
+    d2 = Pop(stack);
+    swapDataFree(d1, &d2);
+}
