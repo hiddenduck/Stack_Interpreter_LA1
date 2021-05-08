@@ -240,6 +240,7 @@ void filterString(Data *d1, Data *d2, Stack *stack){
 /** \brief Função que filtra um array/string.
  *  @param d1 Endereço do array/string.
  *  @param d2 Endereço do bloco.
+ *  @param stack Endereço da stack.
  */
 void filter(Data *d1, Data *d2, Stack *stack){
     if(d1->tipo == STACK)
