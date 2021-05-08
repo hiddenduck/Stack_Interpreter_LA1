@@ -166,7 +166,7 @@ char *DataToSTRINGaux (char *buffer, Data *d) {
  * @param d Endereço de um data
  */
 void DataToSTRING(Data *d) {
-    char buffer[MAX_LENGTH_INPUT];
+    char buffer[MAX_LENGTH_INPUT] = "\0";
     switch (d->tipo) {
         case LONG: {
             sprintf(buffer, "%ld", *DataValLONG(d));
