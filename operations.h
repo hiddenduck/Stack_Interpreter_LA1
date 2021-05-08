@@ -37,7 +37,7 @@
  *  \brief Array com todas as operações implementadas.
  */
 #define STACK_MAP { \
-{"p",ANY,printTop}, \
+{"p", ANY , printTop}, \
 {" ", 0, HandleNoArgs}, \
 {";", ANY, DecrementaSP}, \
 {"_", ANY, Underscore},\
