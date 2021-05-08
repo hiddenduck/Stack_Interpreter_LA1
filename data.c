@@ -158,8 +158,11 @@ void DataToLONGLONG(Data *d) {
             val = *(DataValLONGLONG(d));
             break;
         }
+        case LONG: {
+            val = *(DataValLONG(d));
+            break;
+        }
         default:
-            d->tipo = LONGLONG;
             return;
     }
     long long *vp = (long long*) realloc(d->value, sizeof(long long));

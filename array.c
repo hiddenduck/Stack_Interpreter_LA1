@@ -19,9 +19,13 @@ void range(Data *d1, Stack *stack){
     Data d2 = CreateDataSTACK(CreateStack(*DataValLONG(d1)));
     (DataValSTACK(&d2))->collec = stack->collec;
     (DataValSTACK(&d2))->vars = stack->vars;
-    int i;
-    for(i=0; i<*DataValLONG(d1); i++)
+    long i;
+    long long a, j;
+    NumTestD1
+    for(i=0; i<LONG_MAX-1 && i<a; i++)
         Push(CreateDataLONG(i), DataValSTACK(&d2));
+    for(j = i; j<a; j++)
+        Push(CreateDataLONGLONG(j), DataValSTACK(&d2));
     //CleanupStack(DataValSTACK(&d2)); Apenas onde necessário
     //precisamos de passar aqui o vars e o collec
     swapDataFree(d1, &d2);

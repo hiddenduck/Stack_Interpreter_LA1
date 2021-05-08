@@ -251,11 +251,10 @@ void filter(Data *d1, Data *d2, Stack *stack){
 void While(Data *d1, Stack *stack) {
     char blockcopy[strlen(DataValSTRING(d1))+1];
     Data d2;
-    int r, teste;
+    int r;
     do {
         strcpy(blockcopy, DataValSTRING(d1));
         eval(blockcopy, stack);
-        teste = *DataValLONG(&(stack->vars)->array[0]);
         d2 = Pop(stack);
         r = GetBoolFromData(&d2);
     }while(r);

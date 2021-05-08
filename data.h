@@ -10,6 +10,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <math.h>
+#include "limits.h"
 
 /**
  * \brief Definição do tamanho máximo da line de input.
@@ -113,6 +114,7 @@ typedef struct data {
     (long long *) (data)->value
 
 Data CreateDataLONG(long val);
+Data CreateDataLONGLONG(long long val);
 Data CreateDataDOUBLE(double val);
 Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
