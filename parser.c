@@ -141,12 +141,11 @@ int InputParser(char *token, Stack *stack, Stack *vars){
     return r;
 }
 
-/**
- *
- * @param line
- * @param seps
- * @param rest
- * @return
+/** \brief Função que efetua parse a arrays, strings e blocos.
+ *  @param line Linha recebida.
+ *  @param seps Separadores do Data.
+ *  @param rest Resto da linha.
+ *  @return Parte da linha que contém o array/string/bloco.
  */
 char *get_delimited(char *line, char *seps, char **resto) {
     //ver este get delimited que não funciona
@@ -164,12 +163,10 @@ char *get_delimited(char *line, char *seps, char **resto) {
     return line;
 }
 
-/**
- *
- * @param linha
- * @param resto
- * @return
- * 3 4
+/** \brief Função que que separa um token do resto do input.
+ *  @param linha Linha de input.
+ *  @param resto Resto da linha.
+ *  @return Token obtido.
  */
 char *getToken(char *linha, char **resto) {
     int i;
@@ -226,11 +223,10 @@ void Omissions(Stack *vars){
     *Read(-26, vars) = CreateDataLONG(2);
 }
 
-/**
- *
- * @param line
- * @param stack_ini
- * @return
+/** \brief Função que avalia uma linha.
+ *  @param line Linha a ser avaliada.
+ *  @param stack_ini Endereço da stack.
+ *  @return Apontador para a stack.
  */
 Stack *eval(char *line, Stack *stack_ini) {
     Stack *vars = (stack_ini->vars);
