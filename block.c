@@ -143,12 +143,12 @@ void SortByArray(Data *d1, Data *d2) {
 
 void createIndSTR(char *string, int ind[]) {
     int i, j, min, tmp, N = strlen(string);
-    for(i=0; i<=N; i++)
+    for(i=0; i<N; i++)
         ind[i] = i;
-    for(i=0; i<=N; i++){
+    for(i=0; i<N; i++){
         min = i;
-        for(j=i+1; j<=N; j++)
-            if(string[j] < string[min])
+        for(j=i+1; j<N; j++)
+            if(string[ind[j]] < string[ind[min]])
                 min = j;
 
         tmp = ind[i]; //swap
@@ -157,24 +157,24 @@ void createIndSTR(char *string, int ind[]) {
     }
 }
 
-void SortStringByInd(Data *d1, int ind[]) {
+void SortStringByInd(Data *d1, char* aux, int ind[]) {
     int len = strlen(DataValSTRING(d1)), i;
-    char temp;
-    for (i = 0; i<=len; i++) {
-        temp = (DataValSTRING(d1))[ind[i]]; //swap
-        (DataValSTRING(d1))[ind[i]] = (DataValSTRING(d1))[i];
-        (DataValSTRING(d1))[i] = temp;
+    for (i = 0; i<len; i++) {
+        aux[i] = (DataValSTRING(d1))[ind[i]];
     }
 }
 
 void SortByString(Data *d1, Data *d2, Stack *stack) {
     Data temp = DataDup(d1);
     MapBlockString(&temp, d2, stack); //aqui o temp é o data com os valores a comparar
-    int ind[strlen(DataValSTRING(&temp))+1];
+    int len = strlen(DataValSTRING(&temp))+1, ind[len];
     createIndSTR(DataValSTRING(&temp), ind); //função que ordene o temp e coloque essa ordenação no ind
     Free(&temp);
 
-    SortStringByInd(d1, ind); //pega nos indices e ordena o d1
+    char aux[len];
+    SortStringByInd(d1, aux, ind); //pega nos indices e ordena o d1
+    Data d3 = CreateDataSTRING(aux);
+    swapDataFree(d1, &d3);
 }
 
 /** \brief Função que ordena um array/string de acordo com um bloco.
