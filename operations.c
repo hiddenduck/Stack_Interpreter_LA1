@@ -93,62 +93,51 @@ void subtr(Data *d1, Data *d2) {
  * @param d1 Endereço de um operando.
  * @param d2 Endereço de um operando.
  */
+
+void multLongLong(Data *d1, Data *d2){
+    long long res = (*DataValLONGLONG(d1)) * (*DataValLONGLONG(d2));
+    *DataValLONGLONG(d1) = res;
+}
+
 void mult(Data *d1, Data *d2) {
-    double a, b, res;
-    switch ((d1->tipo)&(d2->tipo)) {
-        case LONG:
-            a = *DataValLONG(d1);
-            b = *DataValLONG(d2);
-            res = a-b;
-            if (res <= LONG_MAX && res >= LONG_MIN) {
-                *(DataValLONG(d1)) = ((*(DataValLONG(d1))) * (*(DataValLONG(d2))));
-                break;
-            }
-        default:
-            DataToDOUBLE(d1);
-            switch(d2->tipo) {
-                case LONG:
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) * (*(DataValLONG(d2))));
-                    break;
-                case DOUBLE:
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) * (*(DataValDOUBLE(d2))));
-                    break;
-                default:
-                    break;
-            }
-            break;
+    double a,b, res;
+    NumTestD1
+    NumTestD2
+    res = a*b;
+    if ((d1->tipo&d2->tipo) == LONG)
+        *DataValLONG(d1) = res;
+    else if ((d1->tipo&d2->tipo) == LONGLONG)
+        multLongLong(d1, d2);
+    else {
+        DataToDOUBLE(d1);
+        *DataValDOUBLE(d1) = res;
     }
 }
+
 
 /**
  * \brief Função que realiza a divisão de dois Datas.
  * @param d1 Endereço do dividendo.
  * @param d2 Endereço do divisor.
  */
+
+void diviLongLong(Data *d1, Data *d2){
+    long long res = (*DataValLONGLONG(d1)) / (*DataValLONGLONG(d2));
+    *DataValLONGLONG(d1) = res;
+}
+
 void divi(Data *d1, Data *d2) {
-    double a, b, res;
-    switch ((d1->tipo)&(d2->tipo)) {
-        case LONG:
-            a = *DataValLONG(d1);
-            b = *DataValLONG(d2);
-            res = a/b;
-            if (res <= LONG_MAX && res >= LONG_MIN) {
-                *(DataValLONG(d1)) = ((*(DataValLONG(d1))) / (*(DataValLONG(d2))));
-                break;
-            }
-        default:
-            DataToDOUBLE(d1);
-            switch(d2->tipo) {
-                case LONG:
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) / (*(DataValLONG(d2))));
-                    break;
-                case DOUBLE:
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) / (*(DataValDOUBLE(d2))));
-                    break;
-                default:
-                    break;
-            }
-            break;
+    double a,b, res;
+    NumTestD1
+    NumTestD2
+    res = a/b;
+    if ((d1->tipo&d2->tipo) == LONG)
+        *DataValLONG(d1) = res;
+    else if ((d1->tipo&d2->tipo) == LONGLONG)
+        diviLongLong(d1, d2);
+    else {
+        DataToDOUBLE(d1);
+        *DataValDOUBLE(d1) = res;
     }
 }
 
