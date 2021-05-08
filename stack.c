@@ -135,6 +135,9 @@ Stack *DumpStack (Stack *target) {
     return stack;
 }
 
+/** \brief Função que imprime o topo da stack.
+ *  @param stack Endereço da stack.
+ */
 void PrintTop(Stack *stack){
     Data *d1=Read(0,stack);
     PrintData(d1);
