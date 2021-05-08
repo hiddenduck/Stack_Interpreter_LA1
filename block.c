@@ -51,7 +51,7 @@ void MapBlockString(Data *d1, Data *d2, Stack *stack){
         Push(temp, DataValSTACK(&newStack));
         eval(blockcopy, DataValSTACK(&newStack));
     }
-    DataToSTRING(&newStack);
+    DataToSTRING(&newStack); //será que é necessário que um Mapa aplicado a uma string acabe com uma string ou pode acabar com um array com uma string
     swapDataFree(d1, &newStack);
 }
 
@@ -96,7 +96,7 @@ void Fold(Data *d1, Data *d2){
  *  @param stack Endereço do array.
  *  @param ind Endereço do array de indices.
  */
-void createInd (Stack *stack, int ind[]){
+void createIndNUM (Stack *stack, int ind[]){
     int i, j, min, tmp, N = stack->sp;
     for(i=0; i<=N; i++)
         ind[i] = i;
@@ -132,7 +132,7 @@ void SortByArray(Data *d1, Data *d2) {
     Data temp = DataDup(d1);
     MapBlockArray(&temp, d2); //aqui o temp é o data com os valores a comparar
     int ind[(DataValSTACK(&temp))->sp+1];
-    createInd(DataValSTACK(&temp), ind); //função que ordene o temp e coloque essa ordenação no ind
+    createIndNUM(DataValSTACK(&temp), ind); //função que ordene o temp e coloque essa ordenação no ind
     Free(&temp);
 
     Data aux = CreateDataSTACK(DumpStack(DataValSTACK(d1)));
@@ -141,12 +141,51 @@ void SortByArray(Data *d1, Data *d2) {
     //função que, pelo ind, cria um novo Data que vai substituir o d1
 }
 
+void createIndSTR(char *string, int ind[]) {
+    int i, j, min, tmp, N = strlen(string);
+    for(i=0; i<=N; i++)
+        ind[i] = i;
+    for(i=0; i<=N; i++){
+        min = i;
+        for(j=i+1; j<=N; j++)
+            if(string[j] < string[min])
+                min = j;
+
+        tmp = ind[i]; //swap
+        ind[i] = ind[min];
+        ind[min] = tmp;
+    }
+}
+
+void SortStringByInd(Data *d1, int ind[]) {
+    int len = strlen(DataValSTRING(d1)), i;
+    char temp;
+    for (i = 0; i<=len; i++) {
+        temp = (DataValSTRING(d1))[ind[i]]; //swap
+        (DataValSTRING(d1))[ind[i]] = (DataValSTRING(d1))[i];
+        (DataValSTRING(d1))[i] = temp;
+    }
+}
+
+void SortByString(Data *d1, Data *d2, Stack *stack) {
+    Data temp = DataDup(d1);
+    MapBlockString(&temp, d2, stack); //aqui o temp é o data com os valores a comparar
+    int ind[strlen(DataValSTRING(&temp))+1];
+    createIndSTR(DataValSTRING(&temp), ind); //função que ordene o temp e coloque essa ordenação no ind
+    Free(&temp);
+
+    SortStringByInd(d1, ind); //pega nos indices e ordena o d1
+}
+
 /** \brief Função que ordena um array/string de acordo com um bloco.
  *  @param d1 Endereço do array/string.
  *  @param d2 Endereço do bloco.
  */
-void SortBy(Data *d1, Data *d2) {
-    SortByArray(d1, d2);
+void SortBy(Data *d1, Data *d2, Stack *stack) {
+    if(d1->tipo == STACK)
+        SortByArray(d1, d2);
+    else
+        SortByString(d1, d2, stack);
 }
 //void filterString(Data *d1, Data *d2){
 //
@@ -168,13 +207,27 @@ void filterArray(Data *d1, Data *d2){
     Free(&temp);
 }
 
+void filterString(Data *d1, Data *d2, Stack *stack){
+    Data temp = DataDup(d1);
+    MapBlockString(&temp, d2, stack); //nós sabemos que o temp é uma string c:
+    char newString[strlen(DataValSTRING(d1))];
+    int w = 0, i, len = strlen(DataValSTRING(&temp));
+    for (i = 0; i<= len; i++) {
+        if((DataValSTRING(&temp))[i])
+            newString[w++] = (DataValSTRING(d1))[i];//queremos construir a string só com os elementos que interessam
+    }
+    Free(&temp);
+    Data d3 = CreateDataSTRING(newString);
+    swapDataFree(d1, &d3);
+}
+
 /** \brief Função que filtra um array/string.
  *  @param d1 Endereço do array/string.
  *  @param d2 Endereço do bloco.
  */
-void filter(Data *d1, Data *d2){
+void filter(Data *d1, Data *d2, Stack *stack){
     if(d1->tipo == STACK)
         filterArray(d1, d2);
-    //else
-    //    filterString(d1, d2);
+    else
+        filterString(d1, d2, stack);
 }
