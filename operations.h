@@ -127,7 +127,7 @@
 {" ", 0, HandleTwoDiff},                \
 {"*", (BLOCK | STACK), Fold}, \
 {" ", 0, HandleTwo},                    \
-{",", BLOCK | STACK | STRING, filter}, \
+{",", (BLOCK | STACK | STRING), filter}, \
 {"$", (BLOCK | STACK | STRING), SortBy},\
 {"%", (BLOCK | STACK | STRING), MapBlock},\
 {0,0,NULL}}\

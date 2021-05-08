@@ -187,9 +187,6 @@ void SortBy(Data *d1, Data *d2, Stack *stack) {
     else
         SortByString(d1, d2, stack);
 }
-//void filterString(Data *d1, Data *d2){
-//
-//}
 
 /** \brief Função auxiliar do filter que filtra um array.
  *  @param d1 Endereço do array.
@@ -213,7 +210,7 @@ void filterString(Data *d1, Data *d2, Stack *stack){
     char newString[strlen(DataValSTRING(d1))];
     int w = 0, i, len = strlen(DataValSTRING(&temp));
     for (i = 0; i<= len; i++) {
-        if((DataValSTRING(&temp))[i])
+        if((DataValSTRING(&temp))[i]-48)
             newString[w++] = (DataValSTRING(d1))[i];//queremos construir a string só com os elementos que interessam
     }
     Free(&temp);

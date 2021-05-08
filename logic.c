@@ -5,16 +5,19 @@
 #define LogicTestD1 \
     if (d1->tipo == LONG)\
         a = *DataValLONG(d1);\
-    else {\
+    else if (d1->tipo == DOUBLE)\
         a = *DataValDOUBLE(d1);\
-    }               \
+    else            \
+        a = *DataValCHAR(d1);\
 
 /** \brief Macro para conseguir o valor de d2 */
 #define LogicTestD2 \
 if (d2->tipo == LONG)\
     b = *DataValLONG(d2);\
-else\
-    b = *DataValDOUBLE(d2);\
+else if (d2->tipo == DOUBLE) \
+    b = *DataValDOUBLE(d2);  \
+else                \
+    b = *DataValCHAR(d2);\
 
 
 /** \brief Função que verifica se o valor de dois Data é igual.
