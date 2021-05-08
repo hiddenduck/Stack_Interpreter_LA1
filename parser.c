@@ -117,23 +117,25 @@ int InputParser(char *token, Stack *stack, Stack *vars){
     char *resto;
 
     /* Testar se o valor introduzido é do tipo long. */
-    long vall = strtol(token, &resto, 10);
+    long val = strtol(token, &resto, 10);
 
-    if (strlen(resto) == 0 && vall < LONG_MAX && vall > LONG_MIN) {
-        Push(CreateDataLONG(vall), stack);
+    if (strlen(resto) == 0 && val < LONG_MAX && val > LONG_MIN) {
+        Push(CreateDataLONG(val), stack);
         r = 0;
-    else if(){
-
+    } else if (strlen(resto) == 0 && (val == LONG_MAX || val == LONG_MIN)){
+        long long vall = strtoll(token, &resto, 10);
+        Push(CreateDataLONGLONG(vall), stack);
+        r = 0;
     } else {
         /* Testar se o resto contém um double decimal e somar à parte inteira. */
         double vald = strtod(resto, &resto);
         if (strlen(resto) ==  0) {
-            if (vall < 0)
+            if (val < 0)
                 vald = -vald;
-            vald += vall;
+            vald += val;
             Push(CreateDataDOUBLE(vald), stack);
             r = 0;
-        } else 
+        } else
             PaserVars(token, stack, vars, &r);
     }
     return r;
