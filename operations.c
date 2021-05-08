@@ -58,17 +58,28 @@ void somaLongLong(Data *d1, Data *d2) {
  * @param d2 Endereço de um operando.
  */
 void soma(Data *d1, Data *d2) {
-    double a,b, res;
-    NumTestD1
-    NumTestD2
-    res = a+b;
-    if ((d1->tipo&d2->tipo) == LONG && res < LONG_MAX && res > LONG_MIN)
-        *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG || res >= LONG_MAX || res <= LONG_MIN) {
-        somaLongLong(d1, d2);
+    if ((d1->tipo&d2->tipo) == LONG) {
+        long long a,b,res;
+        NumTestD1
+        NumTestD2
+        res = a + b;
+        if (res < LONG_MAX && res > LONG_MIN)
+            *DataValLONG(d1) = (long) res;
+        else {
+            DataToLONGLONG(d1);
+            *DataValLONGLONG(d1) = res;
+        }
     }
+    else if ((d1->tipo|d2->tipo)&LONGLONG)
+        somaLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
+        double a, b, res;
+        NumTestD1
+        NumTestD2
+        res = a + b;
+        if (d1->tipo != DOUBLE)
+            DataToDOUBLE(d1);
         *DataValDOUBLE(d1) = res;
     }
 }
@@ -92,16 +103,28 @@ void subtrLongLong(Data *d1, Data *d2) {
  * @param d2 Endereço de um operando.
  */
 void subtr(Data *d1, Data *d2) {
-    double a,b, res;
-    NumTestD1
-    NumTestD2
-    res = a-b;
-    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
-        *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
+    if ((d1->tipo&d2->tipo) == LONG) {
+        long long a,b,res;
+        NumTestD1
+        NumTestD2
+        res = a - b;
+        if (res < LONG_MAX && res > LONG_MIN)
+            *DataValLONG(d1) = (long) res;
+        else {
+            DataToLONGLONG(d1);
+            *DataValLONGLONG(d1) = res;
+        }
+    }
+    else if ((d1->tipo|d2->tipo)&LONGLONG)
         subtrLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
+        double a, b, res;
+        NumTestD1
+        NumTestD2
+        res = a - b;
+        if (d1->tipo != DOUBLE)
+            DataToDOUBLE(d1);
         *DataValDOUBLE(d1) = res;
     }
 }
@@ -125,16 +148,28 @@ void multLongLong(Data *d1, Data *d2){
  *  @param d2 Endereço de um Data LONG LONG.
  */
 void mult(Data *d1, Data *d2) {
-    double a,b, res;
-    NumTestD1
-    NumTestD2
-    res = a*b;
-    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
-        *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
+    if ((d1->tipo&d2->tipo) == LONG) {
+        long long a,b,res;
+        NumTestD1
+        NumTestD2
+        res = a * b;
+        if (res < LONG_MAX && res > LONG_MIN)
+            *DataValLONG(d1) = (long) res;
+        else {
+            DataToLONGLONG(d1);
+            *DataValLONGLONG(d1) = res;
+        }
+    }
+    else if ((d1->tipo|d2->tipo)&LONGLONG)
         multLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
+        double a, b, res;
+        NumTestD1
+        NumTestD2
+        res = a * b;
+        if (d1->tipo != DOUBLE)
+            DataToDOUBLE(d1);
         *DataValDOUBLE(d1) = res;
     }
 }
@@ -156,16 +191,28 @@ void diviLongLong(Data *d1, Data *d2){
 }
 
 void divi(Data *d1, Data *d2) {
-    double a,b, res;
-    NumTestD1
-    NumTestD2
-    res = a/b;
-    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
-        *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
+    if ((d1->tipo&d2->tipo) == LONG) {
+        long long a,b,res;
+        NumTestD1
+        NumTestD2
+        res = a / b;
+        if (res < LONG_MAX && res > LONG_MIN)
+            *DataValLONG(d1) = (long) res;
+        else {
+            DataToLONGLONG(d1);
+            *DataValLONGLONG(d1) = res;
+        }
+    }
+    else if ((d1->tipo|d2->tipo)&LONGLONG)
         diviLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
+        double a, b, res;
+        NumTestD1
+        NumTestD2
+        res = a / b;
+        if (d1->tipo != DOUBLE)
+            DataToDOUBLE(d1);
         *DataValDOUBLE(d1) = res;
     }
 }
