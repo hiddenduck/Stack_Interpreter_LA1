@@ -51,10 +51,11 @@ void somaLongLong(Data *d1, Data *d2) {
         if (d1->tipo != LONG)
             DataToLONG(d1);
         *DataValLONG(d1) = (long) res;
+    } else {
+        if (d1->tipo != LONGLONG)
+            DataToLONGLONG(d1);
+        *DataValLONGLONG(d1) = res;
     }
-    if (d1->tipo != LONGLONG)
-        DataToLONGLONG(d1);
-    *DataValLONGLONG(d1) = res;
 }
 
 void somaDouble(Data *d1, Data *d2) {
