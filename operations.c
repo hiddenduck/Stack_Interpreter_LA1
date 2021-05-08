@@ -47,7 +47,8 @@ void somaLongLong(Data *d1, Data *d2) {
     NumTestD1
     NumTestD2
     long long res = a + b;
-    DataToLONGLONG(d1);
+    if (d1->tipo != LONGLONG)
+        DataToLONGLONG(d1);
     *DataValLONGLONG(d1) = res;
 }
 
@@ -61,10 +62,11 @@ void soma(Data *d1, Data *d2) {
     NumTestD1
     NumTestD2
     res = a+b;
-    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
+    if ((d1->tipo&d2->tipo) == LONG && res < LONG_MAX && res > LONG_MIN)
         *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
+    else if ((d1->tipo&d2->tipo) == LONGLONG || res >= LONG_MAX || res <= LONG_MIN) {
         somaLongLong(d1, d2);
+    }
     else {
         DataToDOUBLE(d1);
         *DataValDOUBLE(d1) = res;
