@@ -138,4 +138,5 @@ Stack *DumpStack (Stack *target) {
 void PrintTop(Stack *stack){
     Data *d1=Read(0,stack);
     PrintData(d1);
+    putchar('\n');
 }

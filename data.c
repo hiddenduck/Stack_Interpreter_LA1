@@ -71,6 +71,13 @@ Data CreateDataBLOCK(char *val) {
     return op;
 }
 
+Data CreateDataLONGLONG(long long val) {
+    long long *vp = (long long*) malloc(sizeof(long long));
+    *vp = val;
+    Data op = {vp, LONGLONG};
+    return op;
+}
+
 /**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo DOUBLE.
  * @param d Endereço de um Data.
@@ -85,6 +92,10 @@ void DataToDOUBLE(Data *d) {
         }
         case STRING:{
             val = strtod(DataValCHAR(d), NULL);
+            break;
+        }
+        case LONGLONG: {
+            val = (double) *(DataValLONGLONG(d));
             break;
         }
         default:
@@ -113,6 +124,10 @@ void DataToLONG(Data *d) {
         }
         case DOUBLE: {
             val = *(DataValDOUBLE(d));
+            break;
+        }
+        case LONGLONG: {
+            val = *(DataValLONGLONG(d));
             break;
         }
         default:
@@ -184,6 +199,10 @@ void DataToSTRING(Data *d) {
             strcpy(buffer, DataToSTRINGaux(buffer, d));
             break;
         }
+        case LONGLONG: {
+            sprintf(buffer, "%lld", *DataValLONGLONG(d));
+            break;
+        }
         default:
             return;
     }
@@ -229,6 +248,10 @@ Data DataDup(Data *target) {
             data = CreateDataBLOCK(DataValSTRING(target));
             break;
         }
+        case LONGLONG: {
+            data = CreateDataLONGLONG(*DataValLONGLONG(target));
+            break;
+        }
     }
     return data;
 }
@@ -256,6 +279,9 @@ void PrintData(Data *data) {
             break;
         case BLOCK:
             printf("{%s}", DataValSTRING(data));
+            break;
+        case LONGLONG:
+            printf("%lld", *DataValLONGLONG(data));
             break;
     }
 }
@@ -293,6 +319,9 @@ int GetBoolFromData (Data *d1) {
         case STACK:
             r = ((DataValSTACK(d1))->sp != -1);
             break;
+        case LONGLONG:
+            r = (*DataValLONGLONG(d1) != 0);
+            break;
         default:
             r = 1;
             break;
@@ -326,19 +355,8 @@ void NullifyData(Data *d1) {
  */
 int CompareDataNUMERO(Data *d1, Data *d2) {
     double a, b;
-    if (d1->tipo == LONG)\
-        a = *DataValLONG(d1);
-    else if (d1->tipo == DOUBLE){
-        a = *DataValDOUBLE(d1);
-    } else
-        a = *DataValCHAR(d1);
-    if (d2->tipo == LONG)
-        b = *DataValLONG(d2);
-    else if (d2->tipo == DOUBLE)
-        b = *DataValDOUBLE(d2);
-    else
-        b = *DataValCHAR(d2);
-
+    NumTestD1
+    NumTestD2
     return (a-b);
 }
 

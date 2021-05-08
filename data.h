@@ -16,6 +16,28 @@
  */
 #define MAX_LENGTH_INPUT 10240
 
+/** \brief Macro para conseguir o valor de d2*/
+#define NumTestD1 \
+    if (d1->tipo == LONG)\
+        a = *DataValLONG(d1);\
+    else if (d1->tipo == DOUBLE)\
+        a = *DataValDOUBLE(d1);\
+    else if (d1->tipo == CHAR)           \
+        a = *DataValCHAR(d1);\
+    else          \
+        a = *DataValLONGLONG(d1);\
+
+/** \brief Macro para conseguir o valor de d2 */
+#define NumTestD2 \
+if (d2->tipo == LONG)\
+    b = *DataValLONG(d2);\
+else if (d2->tipo == DOUBLE) \
+    b = *DataValDOUBLE(d2);  \
+else if (d2->tipo == CHAR)               \
+    b = *DataValCHAR(d2);\
+else              \
+    b = *DataValLONGLONG(d2);\
+
 /**
  * \brief Declaraçção de um stack.
  */
@@ -35,8 +57,10 @@ typedef enum {
     STRING = 8,
     /**Tipo de um data com o tipo de dado Stack */
     STACK = 16,
-    /**Tipo de um data com tipo de dado Stack */
-    BLOCK = 32
+    /**Tipo de um data com tipo de dado Block */
+    BLOCK = 32,
+    /**Tipo de um data com tipo de dado long long*/
+    LONGLONG = 64
 } Tipo;
 
 /**
@@ -44,11 +68,11 @@ typedef enum {
  */
 typedef enum {
     /**Máscara para NUMEROS, ou seja, LONG, CHAR e DOUBLE */
-    NUMEROS = (LONG | DOUBLE | CHAR),
+    NUMEROS = (LONG | DOUBLE | CHAR | LONGLONG),
     /**Máscara para  INTEIROS, ou seja, LONG e CHAR*/
-    INTEIROS = (LONG | CHAR),
+    INTEIROS = (LONG | CHAR | LONGLONG),
     /**Máscara para todos os Tipos */
-    ANY = (CHAR | LONG | DOUBLE | STRING | STACK)
+    ANY = (CHAR | LONG | DOUBLE | STRING | STACK | LONGLONG)
 } Mask;
 
 //tratar os arrays como "mini-stacks"
@@ -83,6 +107,10 @@ typedef struct data {
 /**\brief Inicialização da função DataValStack*/
 #define DataValSTACK(data) \
     (Stack *) (data)->value
+
+/** */
+#define DataValLONGLONG(data) \
+    (long long *) (data)->value
 
 Data CreateDataLONG(long val);
 Data CreateDataDOUBLE(double val);

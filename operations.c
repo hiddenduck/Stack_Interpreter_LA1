@@ -38,31 +38,24 @@ void DoisArgumentos(Operation operation, Stack *stack) {
     Free(&d2);
 }
 
+void somaLongLong
+
 /**
  * \brief Função que realiza a soma de dois Datas.
  * @param d1 Endereço de um operando.
  * @param d2 Endereço de um operando.
  */
 void soma(Data *d1, Data *d2) {
-    switch ((d1->tipo)&(d2->tipo)) {
-        case LONG:
-            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) + (*(DataValLONG(d2))));
-            break;
-        default:
-            DataToDOUBLE(d1);
-            switch(d2->tipo) {
-                case LONG:
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) + (*(DataValLONG(d2))));
-                    break;
-                case DOUBLE:
-                    *(DataValDOUBLE(d1)) = ((*(DataValDOUBLE(d1))) + (*(DataValDOUBLE(d2))));
-                    break;
-                default:
-                    break;
-            }
-        break;
-    }
+    double a,b, res;
+    NumTestD1
+    NumTestD2
+    res = a+b;
+    if ((d1->tipo&d2->tipo) == LONG)
+        *DataValLONG(d1) = res;
+    else if ((d1->tipo&d2->tipo) == LONGLONG)
 }
+
+
 
 /**
  * \brief Função que realiza a subtração de dois Datas.
@@ -70,10 +63,16 @@ void soma(Data *d1, Data *d2) {
  * @param d2 Endereço de um operando.
  */
 void subtr(Data *d1, Data *d2) {
+    double a, b, res;
     switch ((d1->tipo)&(d2->tipo)) {
         case LONG:
-            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) - (*(DataValLONG(d2))));
-            break;
+            a = *DataValLONG(d1);
+            b = *DataValLONG(d2);
+            res = a-b;
+            if (res <= LONG_MAX && res >= LONG_MIN) {
+                *(DataValLONG(d1)) = res;
+                break;
+            }
         default:
             DataToDOUBLE(d1);
             switch(d2->tipo) {
@@ -96,10 +95,16 @@ void subtr(Data *d1, Data *d2) {
  * @param d2 Endereço de um operando.
  */
 void mult(Data *d1, Data *d2) {
+    double a, b, res;
     switch ((d1->tipo)&(d2->tipo)) {
         case LONG:
-            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) * (*(DataValLONG(d2))));
-            break;
+            a = *DataValLONG(d1);
+            b = *DataValLONG(d2);
+            res = a-b;
+            if (res <= LONG_MAX && res >= LONG_MIN) {
+                *(DataValLONG(d1)) = ((*(DataValLONG(d1))) * (*(DataValLONG(d2))));
+                break;
+            }
         default:
             DataToDOUBLE(d1);
             switch(d2->tipo) {
@@ -122,10 +127,16 @@ void mult(Data *d1, Data *d2) {
  * @param d2 Endereço do divisor.
  */
 void divi(Data *d1, Data *d2) {
+    double a, b, res;
     switch ((d1->tipo)&(d2->tipo)) {
         case LONG:
-            *(DataValLONG(d1)) = ((*(DataValLONG(d1))) / (*(DataValLONG(d2))));
-            break;
+            a = *DataValLONG(d1);
+            b = *DataValLONG(d2);
+            res = a/b;
+            if (res <= LONG_MAX && res >= LONG_MIN) {
+                *(DataValLONG(d1)) = ((*(DataValLONG(d1))) / (*(DataValLONG(d2))));
+                break;
+            }
         default:
             DataToDOUBLE(d1);
             switch(d2->tipo) {
@@ -149,13 +160,13 @@ void divi(Data *d1, Data *d2) {
 void incre(Data *d1) {
     switch (d1->tipo) {
         case LONG:
-            (*DataValLONG(d1))++;
+            (*DataValLONG(d1))+=1;
             break;
         case DOUBLE:
-            (*DataValDOUBLE(d1))++;
+            (*DataValDOUBLE(d1))+=1;
             break;
         case CHAR:
-            (*DataValCHAR(d1))++;
+            (*DataValCHAR(d1))+=1;
         default:
             break;
         }
@@ -168,13 +179,13 @@ void incre(Data *d1) {
 void decre(Data *d1) {
     switch (d1->tipo) {
         case LONG:
-            (*DataValLONG(d1))--;
+            (*DataValLONG(d1))-=1;
             break;
         case DOUBLE:
-            (*DataValDOUBLE(d1))--;
+            (*DataValDOUBLE(d1))-=1;
             break;
         case CHAR:
-            (*DataValCHAR(d1))--;
+            (*DataValCHAR(d1))-=1;
         default:
             break;
     }
