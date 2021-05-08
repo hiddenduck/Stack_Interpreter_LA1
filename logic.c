@@ -1,25 +1,6 @@
 
 #include "logic.h"
 
-///** \brief Macro para conseguir o valor de d2*/
-//#define NumTestD1 \
-//    if (d1->tipo == LONG)\
-//        a = *DataValLONG(d1);\
-//    else if (d1->tipo == DOUBLE)\
-//        a = *DataValDOUBLE(d1);\
-//    else            \
-//        a = *DataValCHAR(d1);\
-//
-///** \brief Macro para conseguir o valor de d2 */
-//#define NumTestD2 \
-//if (d2->tipo == LONG)\
-//    b = *DataValLONG(d2);\
-//else if (d2->tipo == DOUBLE) \
-//    b = *DataValDOUBLE(d2);  \
-//else                \
-//    b = *DataValCHAR(d2);\
-
-
 /** \brief Função que verifica se o valor de dois Data é igual.
  *
  * @param d1 Data que guarda o resultado

@@ -10,8 +10,6 @@
  * @return Devolve o valor 0.
  */
 int main(){
-    printf("%d\n", INT_MAX);
-    printf("%ld\n", LONG_MAX);
     Stack *vars = CreateStack(VARS_SIZE);
     Stack *stack = CreateStack(INCREMENTO_STACK);
     Omissions(vars);
