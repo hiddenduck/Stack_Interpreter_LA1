@@ -119,9 +119,11 @@ int InputParser(char *token, Stack *stack, Stack *vars){
     /* Testar se o valor introduzido é do tipo long. */
     long vall = strtol(token, &resto, 10);
 
-    if (strlen(resto) == 0) {
+    if (strlen(resto) == 0 && vall < LONG_MAX && vall > LONG_MIN) {
         Push(CreateDataLONG(vall), stack);
         r = 0;
+    else if(){
+
     } else {
         /* Testar se o resto contém um double decimal e somar à parte inteira. */
         double vald = strtod(resto, &resto);
