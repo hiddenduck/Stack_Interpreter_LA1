@@ -139,6 +139,35 @@ void DataToLONG(Data *d) {
     d->tipo = LONG;
 }
 
+void DataToLONGLONG(Data *d) {
+    long val;
+    switch (d->tipo){
+        case CHAR: {
+            val = *DataValCHAR(d);
+            break;
+        }
+        case STRING:{
+            val = strtoll(DataValCHAR(d), NULL, 10);
+            break;
+        }
+        case DOUBLE: {
+            val = *(DataValDOUBLE(d));
+            break;
+        }
+        case LONGLONG: {
+            val = *(DataValLONGLONG(d));
+            break;
+        }
+        default:
+            d->tipo = LONGLONG;
+            return;
+    }
+    long long *vp = (long long*) realloc(d->value, sizeof(long long));
+    *vp = val;
+    d->value = vp;
+    d->tipo = LONGLONG;
+}
+
 /**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo CHAR.
  * @param d Endereço de um data

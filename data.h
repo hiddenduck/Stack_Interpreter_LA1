@@ -23,7 +23,7 @@
     else if (d1->tipo == DOUBLE)\
         a = *DataValDOUBLE(d1);\
     else if (d1->tipo == CHAR)           \
-        a = *DataValCHAR(d1);\
+        a = (unsigned char) *DataValCHAR(d1);\
     else          \
         a = *DataValLONGLONG(d1);\
 
@@ -34,7 +34,7 @@ if (d2->tipo == LONG)\
 else if (d2->tipo == DOUBLE) \
     b = *DataValDOUBLE(d2);  \
 else if (d2->tipo == CHAR)               \
-    b = *DataValCHAR(d2);\
+    b = (unsigned char) *DataValCHAR(d2);\
 else              \
     b = *DataValLONGLONG(d2);\
 
@@ -121,6 +121,7 @@ Data CreateDataBLOCK(char *val);
 
 void DataToDOUBLE(Data *d1);
 void DataToLONG(Data *d1);
+void DataToLONGLONG(Data *d1);
 void DataToCHAR(Data *d1);
 void DataToSTRING(Data *d);
 char *DataToSTRINGaux (char *buffer, Data *d);

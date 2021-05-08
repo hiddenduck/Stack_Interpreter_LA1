@@ -39,7 +39,11 @@ void DoisArgumentos(Operation operation, Stack *stack) {
 }
 
 void somaLongLong(Data *d1, Data *d2) {
-    long long res = *DataValLONGLONG(d1) + *DataValLONGLONG(d2);
+    long long a, b;
+    NumTestD1
+    NumTestD2
+    long long res = a + b;
+    DataToLONGLONG(d1);
     *DataValLONGLONG(d1) = res;
 }
 
@@ -53,9 +57,9 @@ void soma(Data *d1, Data *d2) {
     NumTestD1
     NumTestD2
     res = a+b;
-    if ((d1->tipo&d2->tipo) == LONG)
+    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
         *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG)
+    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
         somaLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
@@ -64,7 +68,11 @@ void soma(Data *d1, Data *d2) {
 }
 
 void subtrLongLong(Data *d1, Data *d2) {
-    long long res = *DataValLONGLONG(d1) - *DataValLONGLONG(d2);
+    long long a, b;
+    NumTestD1
+    NumTestD2
+    long long res = a - b;
+    DataToLONGLONG(d1);
     *DataValLONGLONG(d1) = res;
 }
 
@@ -78,9 +86,9 @@ void subtr(Data *d1, Data *d2) {
     NumTestD1
     NumTestD2
     res = a-b;
-    if ((d1->tipo&d2->tipo) == LONG)
+    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
         *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG)
+    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
         subtrLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
@@ -95,7 +103,11 @@ void subtr(Data *d1, Data *d2) {
  */
 
 void multLongLong(Data *d1, Data *d2){
-    long long res = (*DataValLONGLONG(d1)) * (*DataValLONGLONG(d2));
+    long long a, b;
+    NumTestD1
+    NumTestD2
+    long long res = a * b;
+    DataToLONGLONG(d1);
     *DataValLONGLONG(d1) = res;
 }
 
@@ -104,9 +116,9 @@ void mult(Data *d1, Data *d2) {
     NumTestD1
     NumTestD2
     res = a*b;
-    if ((d1->tipo&d2->tipo) == LONG)
+    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
         *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG)
+    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
         multLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
@@ -122,7 +134,11 @@ void mult(Data *d1, Data *d2) {
  */
 
 void diviLongLong(Data *d1, Data *d2){
-    long long res = (*DataValLONGLONG(d1)) / (*DataValLONGLONG(d2));
+    long long a, b;
+    NumTestD1
+    NumTestD2
+    long long res = a / b;
+    DataToLONGLONG(d1);
     *DataValLONGLONG(d1) = res;
 }
 
@@ -131,9 +147,9 @@ void divi(Data *d1, Data *d2) {
     NumTestD1
     NumTestD2
     res = a/b;
-    if ((d1->tipo&d2->tipo) == LONG)
+    if ((d1->tipo&d2->tipo) == LONG && res <= LONG_MAX && res >= LONG_MIN)
         *DataValLONG(d1) = res;
-    else if ((d1->tipo&d2->tipo) == LONGLONG)
+    else if ((d1->tipo&d2->tipo) == LONGLONG || res > LONG_MAX || res < LONG_MIN)
         diviLongLong(d1, d2);
     else {
         DataToDOUBLE(d1);
@@ -152,6 +168,9 @@ void incre(Data *d1) {
             break;
         case DOUBLE:
             (*DataValDOUBLE(d1))+=1;
+            break;
+        case LONGLONG:
+            (*DataValLONGLONG(d1))+=1;
             break;
         case CHAR:
             (*DataValCHAR(d1))+=1;
@@ -172,6 +191,9 @@ void decre(Data *d1) {
         case DOUBLE:
             (*DataValDOUBLE(d1))-=1;
             break;
+        case LONGLONG:
+            (*DataValLONGLONG(d1))-=1;
+            break;
         case CHAR:
             (*DataValCHAR(d1))-=1;
         default:
@@ -185,7 +207,11 @@ void decre(Data *d1) {
  * @param d2 Endereço de um Data.
  */
 void and(Data *d1, Data *d2) {
-    *(DataValLONG(d1)) = (*DataValLONG(d1) & *DataValLONG(d2));
+    long a, b;
+    NumTestD1
+    NumTestD2
+    DataToLONG(d1);
+    *(DataValLONG(d1)) = (a & b);
 }
 /**
  * \brief Função que faz o OU Bitwise.
@@ -193,7 +219,11 @@ void and(Data *d1, Data *d2) {
  * @param d2 Endereço de um Data.
  */
 void or(Data *d1, Data *d2) {
-    *(DataValLONG(d1)) = (*DataValLONG(d1) | *DataValLONG(d2));
+    long a, b;
+    NumTestD1
+    NumTestD2
+    DataToLONG(d1);
+    *(DataValLONG(d1)) = (a | b);
 }
 /**
  * \brief Função que faz o XOR Bitwise.
@@ -201,7 +231,11 @@ void or(Data *d1, Data *d2) {
  * @param d2 Endereço de um Data.
  */
 void xor(Data *d1, Data *d2) {
-    *(DataValLONG(d1)) = (*DataValLONG(d1) ^ *DataValLONG(d2));
+    long a, b;
+    NumTestD1
+    NumTestD2
+    DataToLONG(d1);
+    *(DataValLONG(d1)) = (a ^ b);
 }
 /** \brief Inicialização da função modulo.
  *
@@ -209,7 +243,11 @@ void xor(Data *d1, Data *d2) {
  * @param d2 Endereço do divisor.
  */
 void modulo(Data *d1, Data *d2) {
-    *(DataValLONG(d1)) = (*DataValLONG(d1) % *DataValLONG(d2));
+    long a, b;
+    NumTestD1
+    NumTestD2
+    DataToLONG(d1);
+    *(DataValLONG(d1)) = (a % b);
 }
 
 /**
@@ -244,8 +282,11 @@ void potencia(Data *d1, Data *d2) {
  * \brief Função que inverte os bits de um certo Data do Tipo LONG.
  * @param d Endereço de um Data do Tipo LONG.
 */
-void notBW(Data *d) {
-    *DataValLONG(d) = ~*(DataValLONG(d));
+void notBW(Data *d1) {
+    long a;
+    NumTestD1
+    DataToLONG(d1);
+    *DataValLONG(d1) = ~a;
 }
 
 /**
@@ -287,7 +328,9 @@ void SwapThree(Stack *stack) {
  * @param stack Endereço da \a stack responsável pelo armazenamento.
  */
 void DollarSign(Data *d1, Stack *stack) {
-    Data *x = Read(*(DataValLONG(d1)), stack);
+    long a;
+    NumTestD1
+    Data *x = Read(a, stack);
     Data y = DataDup(x);
     swapDataFree(d1, &y);
 }
