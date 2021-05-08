@@ -82,5 +82,5 @@ void Free (Data *data);
 void CleanupStack(Stack *stack);
 Stack *DupStack(Stack *target);
 Stack *DumpStack (Stack *target);
-void printTop(Stack *stack);
+void PrintTop(Stack *stack);
 #endif
