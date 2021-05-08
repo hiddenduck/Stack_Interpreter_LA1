@@ -104,7 +104,13 @@ void strRemoveLast (Data *d1, Stack *stack){
  */
 void strHashtag (Data *d1, Data *d2){
     int result = -1;
-    char *r = strstr(DataValSTRING(d1), DataValSTRING(d2));
+    char *r;
+    if (d2->tipo == CHAR) {
+        char temp[2];
+        *temp = *DataValCHAR(d2);
+        r = strstr(DataValSTRING(d1), temp);
+    } else
+        r = strstr(DataValSTRING(d1), DataValSTRING(d2));
     if (r != NULL)
         result = r - DataValSTRING(d1);
     Data d3 = CreateDataLONG(result);

@@ -94,7 +94,7 @@
                     {"*", (STRING | INTEIROS), strMult}, \
                     {"+", (STRING | CHAR), strConcat}, \
                     {"/", STRING, strBar}, \
-                    {"#", STRING, strHashtag}, \
+                    {"#", STRING | CHAR, strHashtag}, \
                     {"e<", STRING, strEMenor},  \
                     {"e>", STRING, strEMaior},  \
                     {"+", STRING, strConcat},    \

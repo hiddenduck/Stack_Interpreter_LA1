@@ -39,11 +39,11 @@ int Operator(char *token, Stack *stack, OperationMap *operationMap) {
  * @param r Bool que diz se a operação foi ou não realizada.
  */
 void HandleNoArgs (int mask, Operation op, Stack *stack, int *r){
+    *r = -1;
     if(mask == ANY){
         SemArgumentos(op, stack);
         *r = 0;
     }
-    *r = -1;
 }
 
 /**
