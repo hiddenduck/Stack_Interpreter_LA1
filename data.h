@@ -105,11 +105,11 @@ typedef struct data {
 #define DataValSTRING(data) \
     (char *) (data)->value
 
-/**\brief Inicialização da função DataValStack*/
+/**\brief Inicialização da função DataValSTACK*/
 #define DataValSTACK(data) \
     (Stack *) (data)->value
 
-/** */
+/**\brief Inicialização da função DatavalLONGLONG */
 #define DataValLONGLONG(data) \
     (long long *) (data)->value
 

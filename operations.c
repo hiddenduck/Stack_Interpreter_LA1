@@ -186,6 +186,10 @@ void diviLongLong(Data *d1, Data *d2){
     *DataValLONGLONG(d1) = res;
 }
 
+/** \brief Função que realiza a soma entre dois Datas.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ */
 void divi(Data *d1, Data *d2) {
     if ((d1->tipo&d2->tipo) == LONG) {
         long long a,b,res;

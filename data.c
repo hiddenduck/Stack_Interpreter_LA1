@@ -144,6 +144,10 @@ void DataToLONG(Data *d) {
     d->tipo = LONG;
 }
 
+/**
+ * \brief Função que converte um Data com qualquer Tipo num Data com Tipo LONG LONG.
+ * @param d Endereço de um Data
+ */
 void DataToLONGLONG(Data *d) {
     long long val;
     switch (d->tipo){
