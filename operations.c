@@ -38,6 +38,10 @@ void DoisArgumentos(Operation operation, Stack *stack) {
     Free(&d2);
 }
 
+/** \brief Função que realiza a soma entre dois Datas LONG LONG.
+ *  @param d1 Endereço de um Data LONG LONG.
+ *  @param d2 Endereço de um Data LONG LONG.
+ */
 void somaLongLong(Data *d1, Data *d2) {
     long long a, b;
     NumTestD1
@@ -67,6 +71,10 @@ void soma(Data *d1, Data *d2) {
     }
 }
 
+/** \brief Função que realiza a subtração entre dois Datas LONG LONG.
+ *  @param d1 Endereço de um Data LONG LONG.
+ *  @param d2 Endereço de um Data LONG LONG.
+ */
 void subtrLongLong(Data *d1, Data *d2) {
     long long a, b;
     NumTestD1
@@ -97,11 +105,10 @@ void subtr(Data *d1, Data *d2) {
 }
 
 /**
- * \brief Função que realiza a multiplicação de dois Datas.
+ * \brief Função que realiza a multiplicação de dois Datas LONG LONG.
  * @param d1 Endereço de um operando.
  * @param d2 Endereço de um operando.
  */
-
 void multLongLong(Data *d1, Data *d2){
     long long a, b;
     NumTestD1
@@ -111,6 +118,10 @@ void multLongLong(Data *d1, Data *d2){
     *DataValLONGLONG(d1) = res;
 }
 
+/** \brief Função que realiza a soma entre dois Datas LONG LONG.
+ *  @param d1 Endereço de um Data LONG LONG.
+ *  @param d2 Endereço de um Data LONG LONG.
+ */
 void mult(Data *d1, Data *d2) {
     double a,b, res;
     NumTestD1
@@ -128,7 +139,7 @@ void mult(Data *d1, Data *d2) {
 
 
 /**
- * \brief Função que realiza a divisão de dois Datas.
+ * \brief Função que realiza a divisão de dois Datas LONG LONG.
  * @param d1 Endereço do dividendo.
  * @param d2 Endereço do divisor.
  */

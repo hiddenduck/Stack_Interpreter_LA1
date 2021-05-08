@@ -71,6 +71,11 @@ Data CreateDataBLOCK(char *val) {
     return op;
 }
 
+/**
+ * \brief Função que cria um Data com o Tipo LONG LONG.
+ * @param val Valor long long a colocar no Data.
+ * @return devolve um Data do Tipo LONG LONG.
+ */
 Data CreateDataLONGLONG(long long val) {
     long long *vp = (long long*) malloc(sizeof(long long));
     *vp = val;
