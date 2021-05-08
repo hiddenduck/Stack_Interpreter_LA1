@@ -134,3 +134,8 @@ Stack *DumpStack (Stack *target) {
     target->sp = -1;
     return stack;
 }
+
+void PrintTop(Stack *stack){
+    Data *d1=Read(0,stack);
+    PrintData(d1);
+}
