@@ -319,9 +319,10 @@ void NullifyData(Data *d1) {
     d1 = NULL;
 }
 
-/** \brief Função que compara o valor de dois Datas.
+/** \brief Função que compara o valor de dois Datas NUMEROS.
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
+ *  @return Diferença entre os valores.
  */
 int CompareDataNUMERO(Data *d1, Data *d2) {
     double a, b;
@@ -341,10 +342,20 @@ int CompareDataNUMERO(Data *d1, Data *d2) {
     return (a-b);
 }
 
+/** \brief Função que compara o valor de dois Datas STRING.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ *  @return Diferença entre os valores.
+ */
 int CompareDataSTRING(Data *d1, Data *d2) {
     return strcmp(DataValSTRING(d1), DataValSTRING(d2));
 }
 
+/** \brief Função que compara o valor de dois Datas.
+ *  @param d1 Endereço de um Data.
+ *  @param d2 Endereço de um Data.
+ *  @return Diferença entre os valores.
+ */
 int CompareData(Data *d1, Data *d2) {
     int r = 0;
     if (d1->tipo == STRING)
