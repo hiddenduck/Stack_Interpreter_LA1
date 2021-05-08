@@ -248,6 +248,10 @@ void filter(Data *d1, Data *d2, Stack *stack){
         filterString(d1, d2, stack);
 }
 
+/** \brief Função que executa um bloco enquanto o topo da stack for true.
+ *  @param d1 Endereço do array/string.
+ *  @param stack Endereço da stack.
+ */
 void While(Data *d1, Stack *stack) {
     char blockcopy[strlen(DataValSTRING(d1))+1];
     Data d2;
