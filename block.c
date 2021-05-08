@@ -103,8 +103,8 @@ void createIndNUM (Stack *stack, int ind[]){
     for(i=0; i<=N; i++){
         min = i;
         for(j=i+1; j<=N; j++)
-            if(CompareDataNUMERO(Read(N-ind[j], stack),
-                                 Read(N-ind[min], stack)) < 0)
+            if(CompareData( Read(N-ind[j], stack),
+                            Read(N-ind[min], stack)) < 0)
                 min = j;
 
         tmp = ind[i]; //swap

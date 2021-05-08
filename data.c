@@ -327,12 +327,29 @@ int CompareDataNUMERO(Data *d1, Data *d2) {
     double a, b;
     if (d1->tipo == LONG)\
         a = *DataValLONG(d1);
-    else {
+    else if (d1->tipo == DOUBLE){
         a = *DataValDOUBLE(d1);
-    }
+    } else
+        a = *DataValCHAR(d1);
     if (d2->tipo == LONG)
         b = *DataValLONG(d2);
-    else
+    else if (d2->tipo == DOUBLE)
         b = *DataValDOUBLE(d2);
+    else
+        b = *DataValCHAR(d2);
+
     return (a-b);
+}
+
+int CompareDataSTRING(Data *d1, Data *d2) {
+    return strcmp(DataValSTRING(d1), DataValSTRING(d2));
+}
+
+int CompareData(Data *d1, Data *d2) {
+    int r = 0;
+    if (d1->tipo == STRING)
+        r = CompareDataSTRING(d1, d2);
+    else
+        r = CompareDataNUMERO(d1,d2);
+    return r;
 }

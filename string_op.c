@@ -249,10 +249,10 @@ void strWhiteSpace (Data *d1, Stack *stack){
     new->vars = stack->vars;
     new->collec = stack->collec;
     //yikes
-    char *token = strtok(DataValSTRING(d1), " \n");
+    char *token = strtok(DataValSTRING(d1), " \n\t");
     while(token != NULL) {
         Push(CreateDataSTRING(token), new);
-        token = strtok(NULL, " \n");
+        token = strtok(NULL, " \n\t");
     }
     Data d3 = CreateDataSTACK(new);
     swapDataFree(d1, &d3);
