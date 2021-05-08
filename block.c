@@ -141,6 +141,10 @@ void SortByArray(Data *d1, Data *d2) {
     //função que, pelo ind, cria um novo Data que vai substituir o d1
 }
 
+/** \brief Função que cria os indices ordenados a partir de uma string que teve o bloco aplicado.
+ *  @param stack Endereço da string.
+ *  @param ind Endereço da string de indices.
+ */
 void createIndSTR(char *string, int ind[]) {
     int i, j, min, tmp, N = strlen(string);
     for(i=0; i<N; i++)
@@ -157,6 +161,11 @@ void createIndSTR(char *string, int ind[]) {
     }
 }
 
+/** \brief Função que ordena a string de acordo com o indice.
+ *  @param d1 Endereço do array original que foi destruido.
+ *  @param aux Endereço da cópia dos valores da string original.
+ *  @param ind Endereço da string com os indices ordenados.
+ */
 void SortStringByInd(Data *d1, char* aux, int ind[]) {
     int len = strlen(DataValSTRING(d1)), i;
     for (i = 0; i<len; i++) {
@@ -164,6 +173,11 @@ void SortStringByInd(Data *d1, char* aux, int ind[]) {
     }
 }
 
+/** \brief Função auxiliar do SortBy que ordena uma string de acordo com um bloco.
+ *  @param d1 Endereço da string.
+ *  @param d2 Endereço do bloco.
+ *  @param stack Endereço da stack.
+ */
 void SortByString(Data *d1, Data *d2, Stack *stack) {
     Data temp = DataDup(d1);
     MapBlockString(&temp, d2, stack); //aqui o temp é o data com os valores a comparar
@@ -204,6 +218,11 @@ void filterArray(Data *d1, Data *d2){
     Free(&temp);
 }
 
+/** \brief Função auxiliar do filter que filtra uma string.
+ *  @param d1 Endereço da string.
+ *  @param d2 Endereço do bloco.
+ *  @param stack Endereço da stack.
+ */
 void filterString(Data *d1, Data *d2, Stack *stack){
     Data temp = DataDup(d1);
     MapBlockString(&temp, d2, stack); //nós sabemos que o temp é uma string c:
