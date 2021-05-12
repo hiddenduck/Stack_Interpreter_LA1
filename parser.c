@@ -261,7 +261,7 @@ void Operate (char *token, Stack *stack_ini) {
 Stack *eval(char *line, Stack *stack_ini) {
     Stack *vars = stack_ini->vars;
     ColectionOperationMaps *collec = stack_ini->collec;
-    if (stack_ini->array == NULL) 
+    if (stack_ini->array == NULL)
         stack_ini = CreateStack(INCREMENTO_STACK, collec, vars);
 
     while (*line != '\0') {
