@@ -223,7 +223,9 @@ void barAux2(char *str, Stack *stack){
  * @param d2 Endereço de um Data.
  */
 void strBar (Data *d1, Data *d2, Stack *stack){
-    Stack *new = CreateStack(10, stack->collec, stack->vars);
+    Stack *new = CreateStack(10);
+    new->vars = stack->vars;
+    new->collec = stack->collec;
     char *s = strdup(DataValSTRING(d1));
     char *delim = strdup(DataValSTRING(d2));
     if(strlen(DataValSTRING(d2))!=0)
@@ -243,7 +245,9 @@ void strBar (Data *d1, Data *d2, Stack *stack){
  */
 void strWhiteSpace (Data *d1, Stack *stack){
     //"abc xyz ola"
-    Stack *new = CreateStack(10, stack->collec, stack->vars);
+    Stack *new = CreateStack(10);
+    new->vars = stack->vars;
+    new->collec = stack->collec;
     //yikes
     char *token = strtok(DataValSTRING(d1), " \n\t");
     while(token != NULL) {

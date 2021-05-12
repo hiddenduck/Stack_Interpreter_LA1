@@ -16,7 +16,9 @@ void ArrayLength(Data *d1) {
  * @param d1 Endereço do Data do tipo INTEIRO que gera o array.
  */
 void range(Data *d1, Stack *stack){
-    Data d2 = CreateDataSTACK(CreateStack(*DataValLONG(d1), stack->collec, stack->vars));
+    Data d2 = CreateDataSTACK(CreateStack(*DataValLONG(d1)));
+    (DataValSTACK(&d2))->collec = stack->collec;
+    (DataValSTACK(&d2))->vars = stack->vars;
     long i;
     long long a, j;
     NumTestD1
@@ -56,10 +58,10 @@ void concatArray(Data *d1, Data *d2){
         CleanupStack(DataValSTACK(d1));
     } else {
         if (d1->tipo != STACK) {
-            Stack *temp = CreateStack((DataValSTACK(d2))->sp + 1,
-                                      (DataValSTACK(d2))->collec,
-                                      (DataValSTACK(d2))->vars);
+            Stack *temp = CreateStack((DataValSTACK(d2))->sp + 1);
             Push(DataDup(d1), temp);
+            temp->collec = (DataValSTACK(d2))->collec;
+            temp->vars = (DataValSTACK(d2))->vars;
             Data d3 = CreateDataSTACK(temp);
             swapDataFree(d1, &d3);
         }

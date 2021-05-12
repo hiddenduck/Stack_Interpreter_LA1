@@ -41,7 +41,9 @@ void MapBlockArray(Data *d1, Data *d2) {
  */
 void MapBlockString(Data *d1, Data *d2, Stack *stack){
     long size = strlen(DataValSTRING(d1));
-    Data newStack = CreateDataSTACK(CreateStack(size, stack->collec, stack->vars));
+    Data newStack = CreateDataSTACK(CreateStack(size));
+    (DataValSTACK(&newStack))->collec = stack->collec;
+    (DataValSTACK(&newStack))->vars = stack->vars;
     char blockcopy[strlen(DataValSTRING(d2))+1];
     for(int i=0; i<size; i++){
         strcpy(blockcopy, DataValSTRING(d2));

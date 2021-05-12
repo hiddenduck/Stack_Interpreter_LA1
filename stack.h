@@ -69,7 +69,7 @@ typedef struct stack {
     int sp;
 }Stack;
 
-Stack *CreateStack(int size, ColectionOperationMaps *colec, Stack *vars);
+Stack *CreateStack(int size);
 
 Data Pop(Stack *stack);
 void DecrementaSP(Stack *stack);
