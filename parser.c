@@ -163,42 +163,26 @@ char *get_delimited(char *line, char *seps, char **resto) {
     return line;
 }
 
-/** \brief Função auxiliar do getToken que trata de qualquer caso sem ser as delimitadas
- *
- * @param linha Linha do Input
- * @param resto Resto da Linha
- */
-void getTokenAux(char *linha, char **resto) {
-    int i;
-    for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
-    linha[i] = '\0';
-    *resto = linha+i+1;
-}
-
 /** \brief Função que que separa um token do resto do input.
  *  @param linha Linha de input.
  *  @param resto Resto da linha.
  *  @return Token obtido.
  */
 char *getToken(char *linha, char **resto) {
+    int i;
     for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
-    switch (*linha) {
-        case '\"':
-            linha = get_delimited(linha, "\"\"", resto);
-            break;
-        case '[':
-            linha = get_delimited(linha, "[]", resto);
-            break;
-        case '{':
-            linha = get_delimited(linha, "{}", resto);
-            break;
-        case '\0':
-            *resto = linha;
-            break;
-        default:
-            getTokenAux(linha, resto);
-            break;
-    }
+    if (*linha=='\"') {
+        linha = get_delimited(linha, "\"\"", resto);
+    } else if (*linha == '[') {
+        linha = get_delimited(linha, "[]", resto);
+    } else if (*linha == '{') {
+        linha = get_delimited(linha, "{}", resto);
+    } else if (*linha != '\0'){
+        for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
+        linha[i] = '\0';
+        *resto = linha+i+1;
+    } else
+        *resto = linha;
     return linha;
 }
 
