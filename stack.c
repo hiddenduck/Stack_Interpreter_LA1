@@ -12,7 +12,7 @@
  *
  * @return A Stack inicializada na função.
  */
-Stack *CreateStack(int size) {
+Stack *CreateStack(int size, ColectionOperationMaps *collec, Stack *vars) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
     assert(s != NULL); //comentário
     if (s != NULL && size != 0) {
@@ -21,7 +21,8 @@ Stack *CreateStack(int size) {
         s->array = (Data *) calloc(s->size, sizeof(Data));
     } else if (s != NULL)
         s->array = NULL;
-
+    s->collec = collec;
+    s->vars = vars;
     return s;
 }
 
@@ -116,9 +117,7 @@ void CleanupStack(Stack *stack) {
  * @param target Endereço de uma stack.
  */
 Stack *DupStack (Stack *target) {
-    Stack *stack = CreateStack(((target)->sp)+1);
-    stack->collec = target->collec;
-    stack->vars = target->vars;
+    Stack *stack = CreateStack(((target)->sp)+1, target->collec, target->vars);
     for(int i=0; i<=(target)->sp; i++)
         Push(DataDup(&(target)->array[i]), stack);
     return stack;

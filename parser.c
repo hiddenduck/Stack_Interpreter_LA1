@@ -239,19 +239,30 @@ void Omissions(Stack *vars){
     *Read(-26, vars) = CreateDataLONG(2);
 }
 
+void Operate (char *token, Stack *stack_ini) {
+    Stack *vars = stack_ini->vars;
+    ColectionOperationMaps *collec = stack_ini->collec;
+    if (token[0] != '\0' &&
+        (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
+        InputParser(token, stack_ini, vars) &&
+        Operator(token, stack_ini, collec->Arit) &&
+        Operator(token, stack_ini, collec->StackManip) &&
+        Operator(token, stack_ini, collec->Inteiro) &&
+        Operator(token, stack_ini, collec->String) &&
+        Operator(token, stack_ini, collec->Array) &&
+        Operator(token, stack_ini, collec->Block)) {}
+}
+
 /** \brief Função que avalia uma linha.
  *  @param line Linha a ser avaliada.
  *  @param stack_ini Endereço da stack.
  *  @return Apontador para a stack.
  */
 Stack *eval(char *line, Stack *stack_ini) {
-    Stack *vars = (stack_ini->vars);
+    Stack *vars = stack_ini->vars;
     ColectionOperationMaps *collec = stack_ini->collec;
-    if (stack_ini->array == NULL) {
-        stack_ini = CreateStack(INCREMENTO_STACK);
-        stack_ini->collec = collec;
-        stack_ini->vars = vars;
-    }
+    if (stack_ini->array == NULL)
+        stack_ini = CreateStack(INCREMENTO_STACK, collec, vars);
 
     while (*line != '\0') {
         char *token = getToken(line, &line);
@@ -259,24 +270,15 @@ Stack *eval(char *line, Stack *stack_ini) {
         if (token[0] == '\"')
             Push(CreateDataSTRING(++token), stack_ini);
         else if (token[0] == '[') { //yikessssssss
-            Stack *temp = CreateStack(0);
-            temp->collec = collec;
-            temp->vars = vars;
+            Stack *temp = CreateStack(0, collec, vars);
             temp = (eval(++token, temp));
             CleanupStack(temp);
             Push(CreateDataSTACK(temp), stack_ini);
         }
         else if (token[0] == '{')
             Push(CreateDataBLOCK(++token), stack_ini);
-        else if (token[0] != '\0' &&
-            (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
-            InputParser(token, stack_ini, vars) &&
-            Operator(token, stack_ini, collec->Arit) &&
-            Operator(token, stack_ini, collec->StackManip) &&
-            Operator(token, stack_ini, collec->Inteiro) &&
-            Operator(token, stack_ini, collec->String) &&
-            Operator(token, stack_ini, collec->Array) &&
-            Operator(token, stack_ini, collec->Block)) {}
+        else
+            Operate(token, stack_ini);
     }
 
     return stack_ini;
