@@ -36,8 +36,6 @@ void MapBlockArray(Data *d1, Data *d2) {
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
  *  @param stack Endereço da stack.
- *
- *  l { "ACGT" \ # "TGCA" \ = } %
  */
 void MapBlockString(Data *d1, Data *d2, Stack *stack){
     long size = strlen(DataValSTRING(d1));
