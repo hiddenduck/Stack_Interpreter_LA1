@@ -71,10 +71,6 @@ void MapBlock(Data *d1, Data *d2, Stack *stack) {
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
  *  @param stack Endereço da stack.
- *  [[11] 0 1 2 3 4]
- *  [ 1 1 ] :A ; [ A 5 , ~ ] { ; :A A 2 > ~ + + } *
- *  [[11] 0 1 2 3 4]
- *  [[112]
  */
 void Fold(Data *d1, Data *d2){
     int i = (DataValSTACK(d1))->sp;
