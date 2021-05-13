@@ -4,19 +4,63 @@
 /**
  * @headerfile stack.h
  */
-#include <assert.h>
-#include <math.h>
+
 #include "data.h"
+
+/**
+ * \brief Tipo de dados que funciona como apontador para uma função operação.
+ */
+typedef void (*Operation)();
+
+/**
+ * \brief Tipo de dados que armazena um simbolo (tipo char) e uma função operação (Operation).
+ */
+typedef struct {
+    /** char responsável pela identificação da operação*/
+    char *simbolo;
+    /** inteiros responsável pela identificação da máscara */
+    int mask;
+    /** Apontador para uma função*/
+    Operation op;
+}OperationMap;
+
+/**
+ *  \brief Tipo que guarda todos os mapas.
+ */
+typedef struct COLLEC {
+    /**Mapa de Stacks */
+    OperationMap *StackManip;
+    /**Mapa aritmético */
+    OperationMap *Arit;
+    /**Mapa de inteiros */
+    OperationMap *Inteiro;
+    /**Mapa de strings */
+    OperationMap *String;
+    /**Mapa de arrays */
+    OperationMap *Array;
+    /**Mapa de Blocos */
+    OperationMap *Block;
+} ColectionOperationMaps;
+
+/** forward declaration */
+typedef struct data Data;
+typedef struct stack Stack;
 
 /**
  * \brief Definição do incremento da stack.
  */
-#define INCREMENTO_STACK 100
+#define INCREMENTO_STACK 50
+
+
 
 /**
  * \brief Declaração da estrutura de dados Stack
  */
 typedef struct stack {
+    /**Coleção dos mapas */
+    ColectionOperationMaps *collec;
+    /**Stack com as variáveis */
+    Stack *vars;
     /** Array de Data */
     Data *array;
     /** Tamanho do array da Stack */
@@ -34,9 +78,9 @@ Data *Read(long deslocamento, Stack *stack);
 
 void PrintStack(Stack *stack);
 
-/** */
-#define DataValSTACK(data) \
-    (Stack *) (data)->value
-
-Data CreateDataSTACK(Stack *stack);
+void Free (Data *data);
+void CleanupStack(Stack *stack);
+Stack *DupStack(Stack *target);
+Stack *DumpStack (Stack *target);
+void PrintTop(Stack *stack);
 #endif

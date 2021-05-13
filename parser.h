@@ -1,23 +1,16 @@
-#ifndef PARSER_H
-#define PARSER_H
 
 /**
  * @headerfile parser.h
  */
 #include "operations.h"
 
-int Operator(char *token, Stack  *stack, OperationMap *operationMap, Handle handle);
-int PushTokenParser(char *token, Stack *stack, Stack *vars);
-void InputReader(Stack *stack, Stack *vars);
+int Operator(char *token, Stack  *stack, OperationMap *operationMap);
+void HandleOne(int mask, Operation op, Stack *stack, int *r);
+void HandleTwo(int mask, Operation op, Stack *stack, int *r);
+void HandleTwoDiff(int mask, Operation op, Stack *stack, int *r);
+int InputParser(char *token, Stack *stack, Stack *vars);
+void InputReader(Stack *stack);
 void Omissions(Stack *vars);
 char *getToken(char *linha, char **resto);
-char *get_delimited(char *line, char *seps, char **rest);
-Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *collec);
+Stack *eval(char *line, Stack *stack_ini);
 
-int Handle_Aritm(int n, Stack *stack);
-int Handle_Logic(int n);
-int Handle_String(int n, Stack *stack);
-int Handle_Array(int n, Stack *stack);
-int Handle_Manip(int n);
-
-#endif

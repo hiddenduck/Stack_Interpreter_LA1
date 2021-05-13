@@ -13,17 +13,95 @@
  * @param operationMap Endereço do primeiro elemento do operationMap.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-int Operator(char *token, Stack *stack, OperationMap *operationMap, Handle handle) {
-    Operation operation = operationMap[0].op;
-    int i, manhoso = -1;
-    for (i = 1; operationMap[i].simbolo != 0 && manhoso == -1; i++) {
+int Operator(char *token, Stack *stack, OperationMap *operationMap) {
+    Operation handle = operationMap[0].op;
+    int i, r = 1;
+    for (i = 1; operationMap[i].simbolo != 0 && r; i++) {
         if (operationMap[i].simbolo[0] == ' ')
-            operation = operationMap[i].op;
-        if (strcmp(operationMap[i].simbolo, token) == 0)
-            (operation)(operationMap[i].op, stack, &manhoso, handle);
-    }
+            handle = operationMap[i].op;
+        if (strcmp(operationMap[i].simbolo, token) == 0) {
+            //depois de encontrar tem de chamar uma função que vê se faz sentido essa operação com os
+            //elementos que estão na stack
+            //para tal fazemos diferentes mapas para cada tipo de operação: aritmética, lógica, etc...
 
-    return manhoso;
+            (handle)(operationMap[i].mask, operationMap[i].op, stack, &r);
+            break;
+        }
+    }
+    return r;
+}
+
+/**
+ * \brief Função que auxilia a função sem argumentos.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
+void HandleNoArgs (int mask, Operation op, Stack *stack, int *r){
+    *r = -1;
+    if(mask == ANY){
+        SemArgumentos(op, stack);
+        *r = 0;
+    }
+}
+
+/**
+ * \brief Função que auxilia a função um argumento.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
+void HandleOne(int mask, Operation op, Stack *stack, int *r) {
+    if (Read(0, stack)->tipo & mask) {
+        UmArgumento(op, stack);
+        *r = 0;
+    } else
+        *r = -1;
+}
+
+/**
+ * \brief Função que auxilia a função dois argumentos com tipos diferentes.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
+void HandleTwoDiff(int mask, Operation op, Stack *stack, int *r){
+    if(((mask ^ Read(0, stack)->tipo) ^ Read(1, stack)->tipo) == 0){
+        DoisArgumentos(op, stack);
+        *r = 0;
+    } else
+        *r = -1;
+}
+
+/**
+ * \brief Função que auxilia a função dois argumentos com tipos iguais.
+ * @param mask Tipo de máscara.
+ * @param op Tipo de operador.
+ * @param stack Endereço da \a stack responsável pelo armazenamento.
+ * @param r Bool que diz se a operação foi ou não realizada.
+ */
+void HandleTwo(int mask, Operation op, Stack *stack, int *r) {
+    if ((Read(0, stack)->tipo & mask) && (Read(1, stack)->tipo & mask)) {
+        DoisArgumentos(op, stack);
+        *r = 0;
+    } else
+        *r = -1;
+}
+
+/** \brief Função que ajuda o parser em dar push às vars
+ *  @param token Endereço do token.
+ *  @param stack Endereço da stack.
+ *  @param vars Endereço das vars.
+ *  @param r Endereço do inteiro.
+ */
+void PaserVars(char *token, Stack *stack, Stack *vars, int *r){
+    if(strlen(token)==1 && token[0]>='A' && token[0]<='Z'){
+        Push(DataDup(Read(64 - token[0], vars)), stack);
+        *r = 0;
+    }
 }
 
 /**
@@ -34,65 +112,103 @@ int Operator(char *token, Stack *stack, OperationMap *operationMap, Handle handl
  * @param opMap Mapa com as operações.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-int PushTokenParser(char *token, Stack *stack, Stack *vars) {
+int InputParser(char *token, Stack *stack, Stack *vars){
     int r = 1;
     char *resto;
 
     /* Testar se o valor introduzido é do tipo long. */
-    long vall = strtol(token, &resto, 10);
+    long val = strtol(token, &resto, 10);
 
-    if (strlen(resto) == 0) {
-        Push(CreateDataLONG(vall), stack);
+    if (strlen(resto) == 0 && val < LONG_MAX && val > LONG_MIN) {
+        Push(CreateDataLONG(val), stack);
+        r = 0;
+    } else if (strlen(resto) == 0 && (val == LONG_MAX || val == LONG_MIN)){
+        long long vall = strtoll(token, &resto, 10);
+        Push(CreateDataLONGLONG(vall), stack);
         r = 0;
     } else {
         /* Testar se o resto contém um double decimal e somar à parte inteira. */
         double vald = strtod(resto, &resto);
-        if (strlen(resto) == 0) {
-            if (vall < 0)
+        if (strlen(resto) ==  0) {
+            if (val < 0)
                 vald = -vald;
-            vald += vall;
+            vald += val;
             Push(CreateDataDOUBLE(vald), stack);
             r = 0;
-        } else if (token[1] == '\0' && token[0] >= 'A' && token[0] <= 'Z') {
-            //limpar isto (MI)
-            Data *letter = Read(64 - token[0], vars);
-            Push(DataDup(letter), stack);
-            r = 0;
-        }
+        } else
+            PaserVars(token, stack, vars, &r);
     }
     return r;
 }
+
+/**
+ *
+ * @param line
+ * @param seps
+ * @param rest
+ * @return
+ */
+char *get_delimited(char *line, char *seps, char **resto) {
+    //ver este get delimited que não funciona
+
+    int i, count;
+    for (i = 1, count = 1; count; i++) {
+        if (line[i] == seps[1])
+            count--;
+        else if (line[i] == seps[0])
+            count++;
+    }
+
+    line[i-1] = '\0';
+    *resto = line+i+1;
+    return line;
+}
+
+/**
+ *
+ * @param linha
+ * @param resto
+ * @return
+ * 3 4
+ */
+char *getToken(char *linha, char **resto) {
+    int i;
+    for (; *linha == ' ' || *linha == '\n' || *linha == '\t'; linha++);
+    if (*linha=='\"') {
+        linha = get_delimited(linha, "\"\"", resto);
+    } else if (*linha == '[') {
+        linha = get_delimited(linha, "[]", resto);
+    } else if (*linha == '{') {
+        linha = get_delimited(linha, "{}", resto);
+    } else if (*linha != '\0'){
+        for (i = 0; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
+        linha[i] = '\0';
+        *resto = linha+i+1;
+    } else
+        *resto = linha;
+    return linha;
+}
+
 /**
  * \brief Função que recebe o input do utilizador e invoca o InputParser.
  * @param stack Endereço da stack responsável pelo armazenamento.
  * @param vars Endereço da vars responsável pelo armazenamento de variáveis.
  */
-void InputReader(Stack *stack, Stack *vars) {
+void InputReader(Stack *stack) {
     char input[MAX_LENGTH_INPUT];
 
     assert(fgets(input, MAX_LENGTH_INPUT, stdin) != NULL);
     assert(input[strlen(input) - 1] == '\n');
 
-    OperationMap    stackMap[] = STACK_MANIPULATION,
-                    aritMap[]   = OPERATION_MAP,
-                    logicMap[]  = LOGIC_MAP,
-                    stringMap[] = STRING_MAP,
-                    arrayMap[]  = ARRAY_MAP;
-
-    ColectionOperationMaps collec = {stackMap, aritMap, logicMap, stringMap, arrayMap};
-
-    eval(input, stack, vars, &collec);
-    //char *delims = " \t\n";
-    //for(char *token = strtok(input, delims); token != NULL; token = strtok(NULL, delims)) //tirar isto?
-    //    //char *getToken(linha, resto)
-    //    //recebe a linha e faz sscanf(%s, %[^\n^])
-    //    //fazer um Reader que lê a linha, devolve o token com tudo que esteja entre dois delimitadores
-    //    //ver onde começa um [ e soma 1 a um long quando vê um ] subtrai 1 a um long
-    //    //quando esse long for 0 o array acabou
-//
-    //    //função eval recebe a linha e a stack inicial e cria a stack se não existir (?)
-    //    //funciona como o parser e pode ser chamada recursivamente para os arrays
-    //    InputParser(token, stack, opMap, vars);
+    OperationMap aritMap[] = ARIT_MAP;
+    OperationMap stackMap[] = STACK_MAP;
+    OperationMap inteiroMap[] = INTEIRO_MAP;
+    OperationMap stringMap[] = STRING_MAP;
+    OperationMap arrayMap[] = ARRAY_MAP;
+    OperationMap blockMap[] = BLOCK_MAP;
+    ColectionOperationMaps collec = {stackMap,aritMap,inteiroMap,stringMap,arrayMap, blockMap};
+    stack->collec = &collec;
+    eval(input,stack);
 }
 
 /** \brief Função que atribui os valores por omissão das variáveis.
@@ -112,111 +228,44 @@ void Omissions(Stack *vars){
 
 /**
  *
- * @param linha
- * @param resto
- * @return
- */
-char *getToken(char *linha, char **resto) {
-    int i;
-    for (i = 0; linha[i] == ' ' || linha[i] == '\n' || linha[i] == '\t'; i++);
-    for (; linha[i] != '\0' && linha[i] != ' ' && linha[i] != '\n' && linha[i] != '\t'; i++);
-    if (linha[i] != '\0') {
-        linha[i] = '\0';
-        *resto = linha+i+1;
-    }
-    else
-        *resto = NULL;
-    return linha;
-}
-
-/**
- *
- * @param line
- * @param seps
- * @param rest
- * @return
- */
-char *get_delimited(char *line, char *seps, char **rest) {
-    char end, start = '\0';
-    if (seps[1] != '\0') {
-        start = seps[0];
-        end = seps[1];
-    } else {
-        end = seps[0];
-    }
-
-    int i, count;
-    for (i = 0, count = 1, line++; count; i++) {
-        if (line[i] == end)
-            count--;
-        else if (start != '\0' && line[i] == start)
-            count++;
-    }
-
-    line[i-1] = '\0';
-
-    *rest = line+i+1;
-    return line;
-}
-
-/**
- *
  * @param line
  * @param stack_ini
  * @return
  */
-Stack *eval(char *line, Stack *stack_ini, Stack *vars, ColectionOperationMaps *collec) {
-    if (stack_ini == NULL)
+Stack *eval(char *line, Stack *stack_ini) {
+    Stack *vars = (stack_ini->vars);
+    ColectionOperationMaps *collec = stack_ini->collec;
+    if (stack_ini->array == NULL) {
         stack_ini = CreateStack(INCREMENTO_STACK);
+        stack_ini->collec = collec;
+        stack_ini->vars = vars;
+    }
 
-    while (line[0] != '\0') {
+    while (*line != '\0') {
         char *token = getToken(line, &line);
 
-        if (token[1] == '\0' && token[0] == '\"')
-            Push(CreateDataSTRING(get_delimited(line, "\"", &line)), stack_ini);
-        else if (token[1] == '\0' && token[0] == '[')
-            Push(CreateDataSTACK(eval(get_delimited(line, "[]", &line), NULL, vars, collec)), stack_ini);
-        if ((token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
-            PushTokenParser(token, stack_ini, vars) &&
-            Operator(token, stack_ini, collec->StackManip, Handle_Manip) &&
-            Operator(token, stack_ini, collec->Arit,    Handle_Aritm) &&
-            Operator(token, stack_ini, collec->Logic,   Handle_Logic) &&
-            Operator(token, stack_ini, collec->Array,   Handle_Array) &&
-            Operator(token, stack_ini, collec->String,  Handle_String))
-        {}
+        if (token[0] == '\"')
+            Push(CreateDataSTRING(++token), stack_ini);
+        else if (token[0] == '[') { //yikessssssss
+            Stack *temp = CreateStack(0);
+            temp->collec = collec;
+            temp->vars = vars;
+            temp = (eval(++token, temp));
+            CleanupStack(temp);
+            Push(CreateDataSTACK(temp), stack_ini);
+        }
+        else if (token[0] == '{')
+            Push(CreateDataBLOCK(++token), stack_ini);
+        else if (token[0] != '\0' &&
+            (token[0] != ':' || TwoPoints(stack_ini, vars, token[1])) &&
+            InputParser(token, stack_ini, vars) &&
+            Operator(token, stack_ini, collec->Arit) &&
+            Operator(token, stack_ini, collec->StackManip) &&
+            Operator(token, stack_ini, collec->Inteiro) &&
+            Operator(token, stack_ini, collec->String) &&
+            Operator(token, stack_ini, collec->Array) &&
+            Operator(token, stack_ini, collec->Block)) {}
     }
 
     return stack_ini;
-}
-
-int Handle_Aritm(int n, Stack *stack) {
-    int i;
-    long r = 1;
-    for (i = n; i>0 && r; i--)
-        r = NUMERO & Read(i-1, stack)->tipo;
-    return r;
-}
-
-int Handle_Logic(int n) {
-    return n;
-}
-
-int Handle_String(int n, Stack *stack) {
-    int i;
-    long r = 1;
-    for (i = n; i>0 && r; i--)
-        r = TEXTO & Read(i-1, stack)->tipo;
-    return r;
-}
-
-int Handle_Array(int n, Stack *stack) {
-    int i;
-    long r = 1;
-    for (i = n; i>0 && r; i--)
-        r = STACK & Read(i-1, stack)->tipo;
-    return r;
-}
-
-int Handle_Manip(int n) {
-    return n;
 }

@@ -1,21 +1,6 @@
 
 #include "logic.h"
 
-/** \brief Macro para conseguir o valor de d2*/
-#define LogicTestD1 \
-    if (d1->tipo == LONG)\
-        a = *DataValLONG(d1);\
-    else {\
-        a = *DataValDOUBLE(d1);\
-    }               \
-
-/** \brief Macro para conseguir o valor de d2 */
-#define LogicTestD2 \
-if (d2->tipo == LONG)\
-    b = *DataValLONG(d2);\
-else\
-    b = *DataValDOUBLE(d2);\
-
 /** \brief Função que verifica se o valor de dois Data é igual.
  *
  * @param d1 Data que guarda o resultado
@@ -23,8 +8,8 @@ else\
  */
 void equals(Data *d1, Data *d2) {
     double a,b;
-    LogicTestD1
-    LogicTestD2
+    NumTestD1
+    NumTestD2
     DataToLONG(d1);
     *DataValLONG(d1) = (long) (a == b);
 }
@@ -36,8 +21,8 @@ void equals(Data *d1, Data *d2) {
  */
 void lesser(Data *d1, Data *d2) {
     double a,b;
-    LogicTestD1
-    LogicTestD2
+    NumTestD1
+    NumTestD2
     DataToLONG(d1);
     *DataValLONG(d1) = (long) (a < b);
 }
@@ -49,8 +34,8 @@ void lesser(Data *d1, Data *d2) {
  */
 void greater(Data *d1, Data *d2) {
     double a,b;
-    LogicTestD1
-    LogicTestD2
+    NumTestD1
+    NumTestD2
     DataToLONG(d1);
     *DataValLONG(d1) = (long) (a > b);
 }
@@ -73,13 +58,14 @@ void ifThenElse(Stack *stack){
     Data thenOperator = Pop(stack);
     Data *d1 = Read(0, stack);
     long a = GetBoolFromData(d1);
-    if(a)
-        SwapDataPointers(d1, &thenOperator);
-    else
-        SwapDataPointers(d1, &elseOperator);
-
-    free(elseOperator.value);
-    free(thenOperator.value);
+    if(a) {
+        swapDataFree(d1, &thenOperator);
+        Free(&elseOperator);
+    }
+    else {
+        swapDataFree(d1, &elseOperator);
+        Free(&thenOperator);
+    }
 }
 
 /** \brief Função que coloca o menor dos 2 valores na stack.
@@ -88,10 +74,10 @@ void ifThenElse(Stack *stack){
 */
 void LesserBetweenTwo(Data *d1, Data *d2){
     double a,b;
-    LogicTestD1;
-    LogicTestD2;
+    NumTestD1;
+    NumTestD2;
     if(a>b)
-        SwapDataPointers(d1, d2);
+        swapData(d1,d2);
 }
 
 /** \brief Função que coloca o maior dos 2 valores na stack.
@@ -100,10 +86,10 @@ void LesserBetweenTwo(Data *d1, Data *d2){
 */  
 void GreaterBetweenTwo(Data *d1, Data *d2){
     double a,b;
-    LogicTestD1;
-    LogicTestD2;
+    NumTestD1;
+    NumTestD2;
     if(a<b)
-        SwapDataPointers(d1, d2);
+        swapData(d1,d2);
 }
 
 /** \brief Função que realiza o E lógico com shortcut.
@@ -113,7 +99,7 @@ void GreaterBetweenTwo(Data *d1, Data *d2){
 void andWithShortcut(Data *d1, Data *d2){
     long a = GetBoolFromData(d1);
     if(a)
-        SwapDataPointers(d1, d2);
+        swapData(d1, d2);
 }
 
 /** \brief Função que realiza o OU lógico com shortcut.
@@ -123,32 +109,5 @@ void andWithShortcut(Data *d1, Data *d2){
 void orWithShortcut(Data *d1, Data *d2){
     long a = GetBoolFromData(d1);
     if(!a)
-        SwapDataPointers(d1, d2);
-}
-
-/**
- *
- * @param d1
- * @return
- */
-int GetBoolFromData (Data *d1) {
-    long r = 0;
-    switch (d1->tipo) {
-        case LONG:
-            r = (*DataValLONG(d1) != 0);
-            break;
-        case CHAR:
-            r = (*DataValCHAR(d1) != 0);
-            break;
-        case DOUBLE:
-            r = (*DataValDOUBLE(d1) != 0);
-            break;
-        case STRING:
-            r = (strcmp(DataValSTRING(d1), ""));
-            break;
-        case STACK:
-            r = ((*DataValSTACK(d1)).sp != -1);
-            break;
-    }
-    return r;
+        swapData(d1, d2);
 }
