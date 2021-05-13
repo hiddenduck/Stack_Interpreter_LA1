@@ -126,7 +126,6 @@ void DataToLONG(Data *d1);
 void DataToLONGLONG(Data *d1);
 void DataToCHAR(Data *d1);
 void DataToSTRING(Data *d);
-char *DataToSTRINGaux (char *buffer, Data *d);
 
 Data DataDup(Data *target);
 

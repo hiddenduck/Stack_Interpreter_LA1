@@ -247,11 +247,6 @@ void Omissions(Stack *vars){
 Stack *eval(char *line, Stack *stack_ini) {
     Stack *vars = (stack_ini->vars);
     ColectionOperationMaps *collec = stack_ini->collec;
-    if (stack_ini->array == NULL) {
-        stack_ini = CreateStack(INCREMENTO_STACK);
-        stack_ini->collec = collec;
-        stack_ini->vars = vars;
-    }
 
     while (*line != '\0') {
         char *token = getToken(line, &line);
@@ -259,7 +254,7 @@ Stack *eval(char *line, Stack *stack_ini) {
         if (token[0] == '\"')
             Push(CreateDataSTRING(++token), stack_ini);
         else if (token[0] == '[') { //yikessssssss
-            Stack *temp = CreateStack(0);
+            Stack *temp = CreateStack(10);
             temp->collec = collec;
             temp->vars = vars;
             temp = (eval(++token, temp));

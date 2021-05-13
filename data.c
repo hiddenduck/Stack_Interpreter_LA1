@@ -144,6 +144,18 @@ void DataToLONG(Data *d) {
     d->tipo = LONG;
 }
 
+/** \brief Função auxiliar para terminar o DataToLONGLONG.
+ *
+ * @param val Valor a colocar no apontador.
+ * @param d Data a ser convertido.
+ */
+void DataToLONGLONGaux(long long val, Data *d) {
+    long long *vp = (long long*) realloc(d->value, sizeof(long long));
+    *vp = val;
+    d->value = vp;
+    d->tipo = LONGLONG;
+}
+
 /**
  * \brief Função que converte um Data com qualquer Tipo num Data com Tipo LONG LONG.
  * @param d Endereço de um Data
@@ -174,10 +186,7 @@ void DataToLONGLONG(Data *d) {
         default:
             return;
     }
-    long long *vp = (long long*) realloc(d->value, sizeof(long long));
-    *vp = val;
-    d->value = vp;
-    d->tipo = LONGLONG;
+    DataToLONGLONGaux(val, d);
 }
 
 /**
@@ -207,7 +216,7 @@ void DataToCHAR(Data *d) {
  *  @param buffer Endereço do buffer.
  *  @param d Endereço do Data a ser convertido.
  */
-char *DataToSTRINGaux (char *buffer, Data *d) {
+char *DataToSTRINGSTACK (char *buffer, Data *d) {
     int i;
     for(i=0; i<= (DataValSTACK(d))->sp; i++) {
         Data d1 = (DataValSTACK(d))->array[i];
@@ -215,6 +224,18 @@ char *DataToSTRINGaux (char *buffer, Data *d) {
         strcat(buffer, DataValSTRING(&d1));
     }
     return buffer;
+}
+
+/** \brief Função auxiliar para terminar o DataToSTRINGaux
+ *
+ * @param buffer String a colocar no valor.
+ * @param d Data a converter para STRING.
+ */
+void DataToSTRINGaux (char *buffer, Data *d) {
+    char *value;
+    value = strdup(buffer);
+    d->value = value;
+    d->tipo = STRING;
 }
 
 /**
@@ -237,7 +258,7 @@ void DataToSTRING(Data *d) {
             break;
         }
         case STACK: {
-            strcpy(buffer, DataToSTRINGaux(buffer, d));
+            strcpy(buffer, DataToSTRINGSTACK(buffer, d));
             break;
         }
         case LONGLONG: {
@@ -247,13 +268,8 @@ void DataToSTRING(Data *d) {
         default:
             return;
     }
-    char *value;
-    value = strdup(buffer);
-    d->value = value;
-    d->tipo = STRING;
+    DataToSTRINGaux(buffer, d);
 }
-
-
 
 /**
  * \brief Função que duplica um Data.
@@ -281,8 +297,7 @@ Data DataDup(Data *target) {
             break;
         }
         case STACK: {
-            Stack *stack = DupStack(DataValSTACK(target));
-            data = CreateDataSTACK(stack);
+            data = CreateDataSTACK(DupStack(DataValSTACK(target)));
             break;
         }
         case BLOCK: {
