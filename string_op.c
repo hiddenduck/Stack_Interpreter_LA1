@@ -74,14 +74,14 @@ void strAll (Stack *stack){
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  */
-void strRemoveFirst (Data *d1, Stack *stack){ // (
-    //tens de criar o Char que vai ser posto na stack
+void strRemoveFirst (Data *d1, Stack *stack){
+    //criar o Char que vai ser posto na stack
     Data newC = CreateDataCHAR(*DataValSTRING(d1));
     if (*(DataValSTRING(d1)+1) != '\0') {
-        Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); // tu crias uma auxiliar  strinque é a novag
+        Data d2 = CreateDataSTRING((DataValSTRING(d1)+1)); //criar uma string auxiliar.
         Push(d2, stack);
     }
-    swapDataFree(d1, &newC); //metes a char na stack
+    swapDataFree(d1, &newC); //colocas o char na stack
 }
 
 /**
@@ -244,11 +244,9 @@ void strBar (Data *d1, Data *d2, Stack *stack){
  * @param d2 Endereço de um Data.
  */
 void strWhiteSpace (Data *d1, Stack *stack){
-    //"abc xyz ola"
     Stack *new = CreateStack(10);
     new->vars = stack->vars;
     new->collec = stack->collec;
-    //yikes
     char *token = strtok(DataValSTRING(d1), " \n\t");
     while(token != NULL) {
         Push(CreateDataSTRING(token), new);

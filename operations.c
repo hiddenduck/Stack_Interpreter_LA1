@@ -3,9 +3,6 @@
  */
 #include "operations.h"
 
-//acho que temos de alterar estas funções para serem auxiliares de algébricas
-//criar auxiliares para outros tipos, apesar de que as logicas podem usar estas na mesma
-
 /**
  * \brief Função que auxilia funções sem argumentos.
  * @param operation Endereço de uma função sem argumentos.

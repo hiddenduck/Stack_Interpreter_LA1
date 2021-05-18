@@ -55,7 +55,6 @@ Data CreateDataSTRING(char *val) {
  * @return devolve um Data do Tipo STACK.
  */
 Data CreateDataSTACK(Stack *stack) {
-    //talvez seja preciso fazer um stack dup, ter cuidado com a existência destas
     Data op = {stack, STACK};
     return op;
 }
@@ -392,7 +391,6 @@ int GetBoolFromData (Data *d1) {
  */
 void swapDataFree(Data *d1, Data *d2) {
     Free(d1);
-    //d1->DATA d2(d1)->DATA
     *d1 = *d2;
 }
 

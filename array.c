@@ -12,7 +12,7 @@ void ArrayLength(Data *d1) {
 
 /**
  * \brief Função que cria um array com todos os números de 0 até o valor de d1
- *
+ 
  * @param d1 Endereço do Data do tipo INTEIRO que gera o array.
  */
 void range(Data *d1, Stack *stack){
@@ -26,8 +26,6 @@ void range(Data *d1, Stack *stack){
         Push(CreateDataLONG(i), DataValSTACK(&d2));
     for(j = i; j<a; j++)
         Push(CreateDataLONGLONG(j), DataValSTACK(&d2));
-    //CleanupStack(DataValSTACK(&d2)); Apenas onde necessário
-    //precisamos de passar aqui o vars e o collec
     swapDataFree(d1, &d2);
 }
 
@@ -67,7 +65,6 @@ void concatArray(Data *d1, Data *d2){
         }
         for(int i=0; i<=(DataValSTACK(d2))->sp; i++)
             Push(DataDup(&(DataValSTACK(d2))->array[i]), DataValSTACK(d1));
-        //CleanupStack(DataValSTACK(d2));
     }
 }
 
@@ -143,8 +140,6 @@ void arrayGetXStart (Data *d1, Data *d2){
  * @param d1 Endereço de um Data.
  * @param d2 Endereço de um Data.
  * @param stack Endereço da stack.
- * 012 2 >
- * sp = 2, d2 = 2, i = 1
  *
  */
 void arrayGetXEnd (Data *d1, Data *d2){

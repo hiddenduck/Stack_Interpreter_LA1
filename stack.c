@@ -14,7 +14,7 @@
  */
 Stack *CreateStack(int size) {
     Stack *s = (Stack *) malloc(sizeof(Stack));
-    assert(s != NULL); //comentário
+    assert(s != NULL); //verificação de que existe espaço suficiente na máquina para alocar memória;
     if (s != NULL) {
         s->size = size;
         s->sp = -1;

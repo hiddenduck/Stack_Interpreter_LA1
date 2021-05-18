@@ -148,7 +148,6 @@ int InputParser(char *token, Stack *stack, Stack *vars){
  *  @return Parte da linha que contém o array/string/bloco.
  */
 char *get_delimited(char *line, char *seps, char **resto) {
-    //ver este get delimited que não funciona
 
     int i, count;
     for (i = 1, count = 1; count; i++) {
@@ -253,7 +252,7 @@ Stack *eval(char *line, Stack *stack_ini) {
 
         if (token[0] == '\"')
             Push(CreateDataSTRING(++token), stack_ini);
-        else if (token[0] == '[') { //yikessssssss
+        else if (token[0] == '[') {
             Stack *temp = CreateStack(10);
             temp->collec = collec;
             temp->vars = vars;

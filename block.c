@@ -28,8 +28,6 @@ void MapBlockArray(Data *d1, Data *d2) {
         eval(blockcopy, (DataValSTACK(d1)));
     }
     Free(&newStack);
-    //free ao newStack de alguma maneira
-    //se o newStack fosse um Data talvez ajudasse
 }
 
 /** \brief Função que auxilia o MapBlock com strings.
@@ -37,7 +35,6 @@ void MapBlockArray(Data *d1, Data *d2) {
  *  @param d2 Endereço de um Data.
  *  @param stack Endereço da stack.
  *
- *  l { "ACGT" \ # "TGCA" \ = } %
  */
 void MapBlockString(Data *d1, Data *d2, Stack *stack){
     long size = strlen(DataValSTRING(d1));
@@ -51,7 +48,7 @@ void MapBlockString(Data *d1, Data *d2, Stack *stack){
         Push(temp, DataValSTACK(&newStack));
         eval(blockcopy, DataValSTACK(&newStack));
     }
-    DataToSTRING(&newStack); //será que é necessário que um Mapa aplicado a uma string acabe com uma string ou pode acabar com um array com uma string
+    DataToSTRING(&newStack);
     swapDataFree(d1, &newStack);
 }
 
@@ -71,10 +68,6 @@ void MapBlock(Data *d1, Data *d2, Stack *stack) {
  *  @param d1 Endereço de um Data.
  *  @param d2 Endereço de um Data.
  *  @param stack Endereço da stack.
- *  [[11] 0 1 2 3 4]
- *  [ 1 1 ] :A ; [ A 5 , ~ ] { ; :A A 2 > ~ + + } *
- *  [[11] 0 1 2 3 4]
- *  [[112]
  */
 void Fold(Data *d1, Data *d2){
     int i = (DataValSTACK(d1))->sp;
@@ -225,7 +218,7 @@ void filterArray(Data *d1, Data *d2){
  */
 void filterString(Data *d1, Data *d2, Stack *stack){
     Data temp = DataDup(d1);
-    MapBlockString(&temp, d2, stack); //nós sabemos que o temp é uma string c:
+    MapBlockString(&temp, d2, stack); //o temp é uma string.
     char newString[strlen(DataValSTRING(d1))];
     int w = 0, i, len = strlen(DataValSTRING(&temp));
     for (i = 0; i<= len; i++) {

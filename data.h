@@ -118,7 +118,7 @@ Data CreateDataLONGLONG(long long val);
 Data CreateDataDOUBLE(double val);
 Data CreateDataCHAR(char val);
 Data CreateDataSTRING(char* val);
-Data CreateDataSTACK(Stack *stack); //não funciona até o stack.h estiver aqui
+Data CreateDataSTACK(Stack *stack);
 Data CreateDataBLOCK(char *val);
 
 void DataToDOUBLE(Data *d1);
